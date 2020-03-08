@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const uniqueVaidator = require('mongoose-unique-validator');
 
-// admin schema
-const AdminSchema = mongoose.Schema({
+//user schema
+const UserSchema = mongoose.Schema({
     username: {
         type: String,
         unique: true,
@@ -22,31 +22,31 @@ const AdminSchema = mongoose.Schema({
     }
 });
 
-AdminSchema.plugin(uniqueVaidator);
+UserSchema.plugin(uniqueVaidator);
 
-const Admin = module.exports = mongoose.model('Admin', AdminSchema);
+const User = module.exports = mongoose.model('User', UserSchema);
 
 // find admin by ID
-module.exports.getAdminByID = function (id, callback) {
-    Admin.findById(id, callback);
+module.exports.getUserByID = function (id, callback) {
+    User.findById(id, callback);
 };
 
 // find admin by its username
-module.exports.getAdminByUsername = function (username, callback) {
+module.exports.getUserByUsername = function (username, callback) {
     const query = {
         username: username
     };
-    Admin.findOne(query, callback);
+    User.findOne(query, callback);
 };
 
 // register admin
-module.exports.addAdmin = function (newAdmin, callback) {
+module.exports.addUser = function (newUser, callback) {
     // password encryption
     bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newAdmin.password, salt, (err, hash) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
             if (err) throw err;
-            newAdmin.password = hash;
-            newAdmin.save(callback);
+            newUser.password = hash;
+            newUser.save(callback);
         })
     })
 };

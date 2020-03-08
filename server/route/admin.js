@@ -5,7 +5,6 @@ const passport = require('passport');
 const jwt = require('jsonwebtoken');
 
 const Admin = require('../models/admin'); //admin schema
-const config = require('../models/index'); //database
 
 router.post('/register', (req, res) => {
     let newAdmin = Admin({
@@ -69,6 +68,17 @@ router.post('/login', (req, res) => {
            }
        })
    })
+});
+
+// get authenticated admin profile
+router.get('/profile', passport.authenticate('jwt', { session: false }), async (req, res) => {
+    try {
+        return res.json(
+            "hello world"
+        )
+    } catch (e) {
+
+    }
 });
 
 module.exports = router;

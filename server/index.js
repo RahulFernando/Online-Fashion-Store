@@ -9,22 +9,31 @@ const path = require('path');
 
 //database
 const db = require('./models');
+const check = require('./middleware'); // custom middleware
 
 //initialize the app
 const app = express();
+const checkUserType = require('./middleware'); // custom middleware
 
 //define middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(checkUserType);
 
 //port
 const port = process.env.PORT;
 
-//admin route
+// bring passport authentication
+// require('./config/passport')(passport);
+
 const admin = require('./route/admin');
+const user = require('./route/user');
+
+//admin routes
 app.use('/api/admin', admin);
+app.use('/api/users', user);
 
 //listening to port
 app.listen(port, () => console.log(`Server is running: ${port}`));
