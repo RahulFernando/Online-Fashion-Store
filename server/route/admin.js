@@ -15,7 +15,7 @@ router.post('/register', (req, res) => {
     Admin.addAdmin(newAdmin, (err, admin) => {
         if (err) {
             let message = "";
-            if (err.errors.username) message = "Username is already taken";
+            if (err.errors.username) message = "Username is already taken ";
             if (err.errors.email) message += "Email already exists";
             return res.json({
                 success: false,
@@ -58,6 +58,7 @@ router.post('/login', (req, res) => {
                 );
                return res.json({
                    status: 200,
+                   type: 'admin',
                    token: "JWT " + token
                })
            } else {

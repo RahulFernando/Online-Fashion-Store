@@ -9,10 +9,10 @@ const path = require('path');
 
 //database
 const db = require('./models');
-const check = require('./middleware'); // custom middleware
 
 //initialize the app
 const app = express();
+
 const checkUserType = require('./middleware'); // custom middleware
 
 //define middleware
@@ -24,9 +24,6 @@ app.use(checkUserType);
 
 //port
 const port = process.env.PORT;
-
-// bring passport authentication
-// require('./config/passport')(passport);
 
 const admin = require('./route/admin');
 const user = require('./route/user');

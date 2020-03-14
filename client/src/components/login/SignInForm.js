@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { loginUser } from '../../service/function';
+
 class SignInForm extends Component {
 
   constructor() {
@@ -26,7 +28,12 @@ class SignInForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state);
+    const user = {
+      username: this.state.username,
+      password: this.state.password
+    }
+    loginUser(user).then(res => {})
+
   }
 
     render() {

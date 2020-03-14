@@ -1,20 +1,27 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+
+import { registerUser } from '../../service/function'; // import function
+
+const initailState = {
+  username: '',
+  email: '',
+  password: '',
+  usernameErr: '',
+  emailErr: '',
+  passwordErr: '',
+  serverErr: ''
+}
 
 class SignUpForm extends Component {
 
   constructor() {
     super();
-    this.state = {
-      username: '',
-      email: '',
-      password: ''
-    };
+    this.state = initailState;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  } 
 
   handleChange(e) {
     let target = e.target;
@@ -26,11 +33,55 @@ class SignUpForm extends Component {
     })
   }
 
+  validate = () => {
+    let usernameErr = '';
+    let emailErr = '';
+    let passwordErr = '';
+
+    if (!this.state.username ) {
+      usernameErr = "username cannot be empty!"
+    } else if (!this.state.email.includes('@')) {
+      emailErr = 'invalid email!';
+    } else  if (!this.state.password) {
+      passwordErr = 'password cannot be empty!';
+    }
+
+    if (emailErr) {
+      this.setState({emailErr});
+      return false;
+    }else if (usernameErr) {
+      this.setState({usernameErr});
+      return false;
+    }else if (passwordErr) {
+      this.setState({passwordErr});
+      return false;
+    }
+
+    return true;
+  }
+
   handleSubmit(e) {
     e.preventDefault();
-    axios.post("/admin/register", this.state)
-      .then(res => { console.log(res) })
-      .catch(err => { console.log(err) })
+    const isValid = this.validate();
+    let serverErr = '';
+
+    const newUser = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password
+    }
+
+    if (isValid) {
+      registerUser(newUser).then(res => {
+        if (!res.data.status) {
+              serverErr = res.data.message;
+              this.setState({serverErr});
+            }
+      })
+      
+      // reset form
+      this.setState(initailState);
+    }
   }
 
     render() {
@@ -44,7 +95,11 @@ class SignUpForm extends Component {
                 <label className="FormField__Label" htmlFor="username">Username</label>
 
                 <input type="text" id="username" className="FormField__Input" placeholder="Enter username" name="username" value={this.state.username} onChange={this.handleChange}/>
-
+                
+                <div>{this.state.usernameErr ? (
+                  <span className="ErrorMessage">{this.state.usernameErr}</span>
+                ): null}</div>
+              
               </div>
 
               <div className="FormField">
@@ -52,7 +107,11 @@ class SignUpForm extends Component {
                 <label className="FormField__Label" htmlFor="email">Email</label>
 
                 <input type="email" id="email" className="FormField__Input" placeholder="Enter email" name="email" value={this.state.email} onChange={this.handleChange}/>
-
+                
+                <div>{this.state.emailErr ? (
+                  <span className="ErrorMessage">{this.state.emailErr}</span>
+                ): null}</div>
+              
               </div>
 
               <div className="FormField">
@@ -60,6 +119,10 @@ class SignUpForm extends Component {
                 <label className="FormField__Label" htmlFor="password">Password</label>
 
                 <input type="password" id="password" className="FormField__Input" placeholder="Enter password" name="password" value={this.state.password} onChange={this.handleChange}/>
+
+                <div>{this.state.passwordErr ? (
+                  <span className="ErrorMessage">{this.state.passwordErr}</span>
+                ): null}</div>
 
               </div>
 
@@ -73,6 +136,10 @@ class SignUpForm extends Component {
 
               </div>
 
+              <div>{this.state.serverErr ? (
+                  <span className="ErrorMessage">{this.state.serverErr}</span>
+                ): null}</div> 
+                
             </form>
 
           </div>
