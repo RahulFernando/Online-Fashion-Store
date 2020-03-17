@@ -72,7 +72,7 @@ export default class Navbar extends Component {
                     callback={record => console.log(record)}/>
                   </li>
                   <li>
-                    <Link to="/user">
+                    <Link to="/user/sign-in">
                       <FaUserAlt className="nav-bar-icon"/>
                     </Link>
                   </li>

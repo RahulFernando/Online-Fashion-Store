@@ -16,10 +16,10 @@ import Error from "./pages/Error";
 import UserLogin from "./components/login/Login";
 import AdminLogin from "./components/admin/AdminLogin";
 import DashBoard from "./components/admin/DashBoard";
+import Navbar from "./components/Navbar";
 
 import {Route, Switch} from 'react-router-dom';
 
-import Navbar from "./components/Navbar";
 
 function App() {
   return(
@@ -33,9 +33,9 @@ function App() {
       <Route exact path="/user" component={User}/>
       <Route exact path="/wishlist" component={Wishlist}/>
       <Route exact path="/mybag" component={Mybag}/>
-      <Route path="/user" component={UserLogin}></Route>
-      <Route path="/admin" component={AdminLogin}></Route>
-      <Route path="/dash" component={DashBoard}></Route>
+      <Route path="/user/sign-in" component={UserLogin}/>
+      <Route exact path="/admin" component={AdminLogin}/>
+      <Route path="/dash" component={DashBoard}/>
       <Route component={Error}/>
     </Switch>
   </>

@@ -98,7 +98,7 @@ class SignInForm extends Component {
 
               <Form.Group className="FormField" controlId="formBasicEmail">
 
-                <Button type="submit" className="Form__Button mr-20">Sign In</Button>
+                <Button type="submit" className="Form__Button mr-20">Sign In</Button> &nbsp;
 
                 <Link to="/sign-up" style={{ textDecoration: 'none' }} className="FormField__Link">Don't have an account?</Link>
 
