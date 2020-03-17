@@ -1,50 +1,21 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
-// images
-import Login from "./login.svg";
-import Fashion from "./fashion.svg";
+// bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // components
-import SignInForm from "./components/login/SignInForm";
-import SignUpForm from "./components/login/SignUpForm";
+import UserLogin from "./components/login/Login";
+import AdminLogin from "./components/admin/AdminLogin";
+import DashBoard from "./components/admin/DashBoard";
 
 function App() {
   return (
     <Router>
-      <div className="App">
-        
-        <div className="App__Aside">
-          
-          <div className="Main__Logo">
-            <img src={Fashion}/>
-          </div>
-
-        </div>
-
-        <div className="App__Form">
-
-          <div className="PageSwitcher">
-          
-            <NavLink exact to="/" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sing In</NavLink>
-            <NavLink to="/sign-up" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
-          
-          </div>
-
-          <div className="Form__Logo">
-            <img src={Login}/>
-          </div>
-
-          <Route exact path="/" component={SignInForm}>
-          </Route>
-
-          <Route path="/sign-up" component={SignUpForm}>
-          </Route>
-        
-        </div>
-
-      </div>
+      <Route path="/user" component={UserLogin}></Route>
+      <Route path="/admin" component={AdminLogin}></Route>
+      <Route path="/dash" component={DashBoard}></Route>
     </Router>
   );
 }

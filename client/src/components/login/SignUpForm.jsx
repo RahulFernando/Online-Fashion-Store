@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
+import { Button, Form, Container } from 'react-bootstrap';
+
 import { registerUser } from '../../service/function'; // import function
 
 const initailState = {
@@ -86,13 +88,13 @@ class SignUpForm extends Component {
 
     render() {
         return (
-            <div className="FormCenter">
+          <Container>
 
-            <form className="FormFields" onSubmit={this.handleSubmit}>
+              <Form className="FormFields" onSubmit={this.handleSubmit}>
 
-              <div className="FormField">
+              <Form.Group className="FormField" controlId="formBasicEmail">
 
-                <label className="FormField__Label" htmlFor="username">Username</label>
+                <Form.Label className="FormField__Label">Username</Form.Label>
 
                 <input type="text" id="username" className="FormField__Input" placeholder="Enter username" name="username" value={this.state.username} onChange={this.handleChange}/>
                 
@@ -100,11 +102,11 @@ class SignUpForm extends Component {
                   <span className="ErrorMessage">{this.state.usernameErr}</span>
                 ): null}</div>
               
-              </div>
+              </Form.Group>
 
-              <div className="FormField">
+              <Form.Group className="FormField" controlId="formBasicEmail">
 
-                <label className="FormField__Label" htmlFor="email">Email</label>
+                <Form.Label className="FormField__Label">Email</Form.Label>
 
                 <input type="email" id="email" className="FormField__Input" placeholder="Enter email" name="email" value={this.state.email} onChange={this.handleChange}/>
                 
@@ -112,11 +114,11 @@ class SignUpForm extends Component {
                   <span className="ErrorMessage">{this.state.emailErr}</span>
                 ): null}</div>
               
-              </div>
+              </Form.Group>
 
-              <div className="FormField">
+              <Form.Group className="FormField" controlId="formBasicEmail">
 
-                <label className="FormField__Label" htmlFor="password">Password</label>
+                <Form.Label className="FormField__Label">Password</Form.Label>
 
                 <input type="password" id="password" className="FormField__Input" placeholder="Enter password" name="password" value={this.state.password} onChange={this.handleChange}/>
 
@@ -124,25 +126,23 @@ class SignUpForm extends Component {
                   <span className="ErrorMessage">{this.state.passwordErr}</span>
                 ): null}</div>
 
-              </div>
+              </Form.Group>
 
-              <div className="FormField">
+              <Form.Group className="FormField" controlId="formBasicEmail">
 
-                <button className="FormField__Button mr-20">
-                  Sign Up
-                </button>
+                <Button type="submit" className="Form__Button mr-20">Sign Up</Button>
 
-                <Link to="/sign-up" className="FormField__Link">Already have an account?</Link>
+                <Link to="/user" className="FormField__Link">Already have an account?</Link>
 
-              </div>
+              </Form.Group>
 
               <div>{this.state.serverErr ? (
                   <span className="ErrorMessage">{this.state.serverErr}</span>
                 ): null}</div> 
                 
-            </form>
+            </Form>
 
-          </div>
+          </Container>
         );
     }
 }
