@@ -15,7 +15,7 @@ router.post('/register', (req, res) => {
     User.addUser(newUser, (err, user) => {
         if (err) {
             let message = "";
-            if (err.errors.username) message = "Username is already taken";
+            if (err.errors.username) message = "Username is already taken ";
             if (err.errors.email) message += "Email already exists";
             return res.json({
                 success: false,
@@ -58,7 +58,8 @@ router.post('/login', (req, res) => {
                 );
                 return res.json({
                     status: 200,
-                    token: "JWT " + token
+                    type: 'user',
+                    token: token
                 })
             } else {
                 return res.json({

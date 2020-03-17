@@ -1,6 +1,10 @@
 import React from 'react';
 import './App.css';
 
+// bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// components
 import Home from "./pages/Home";
 import Men from "./pages/Men";
 import Women from "./pages/Women";
@@ -9,6 +13,9 @@ import User from "./pages/User";
 import Wishlist from "./pages/Wishlist";
 import Mybag from "./pages/Mybag";
 import Error from "./pages/Error";
+import UserLogin from "./components/login/Login";
+import AdminLogin from "./components/admin/AdminLogin";
+import DashBoard from "./components/admin/DashBoard";
 
 import {Route, Switch} from 'react-router-dom';
 
@@ -26,9 +33,14 @@ function App() {
       <Route exact path="/user" component={User}/>
       <Route exact path="/wishlist" component={Wishlist}/>
       <Route exact path="/mybag" component={Mybag}/>
+      <Route path="/user" component={UserLogin}></Route>
+      <Route path="/admin" component={AdminLogin}></Route>
+      <Route path="/dash" component={DashBoard}></Route>
       <Route component={Error}/>
     </Switch>
   </>
+
+
   );
 }
 
