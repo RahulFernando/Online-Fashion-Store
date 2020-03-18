@@ -29,7 +29,7 @@ class AdminLogin extends Component {
             
                     <div className="PageSwitcher">
                     
-                        <NavLink exact to="/user" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sing In</NavLink>
+                        <NavLink to="/user" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sing In</NavLink>
                         <NavLink to="/sign-up" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
                     
                     </div>
@@ -38,7 +38,7 @@ class AdminLogin extends Component {
                         <img src={Login}/>
                     </div>
             
-                    <Route exact path="/user" component={SignInForm}>
+                    <Route path="/user" component={SignInForm}>
                     </Route>
             
                     <Route path="/sign-up" component={SignUpForm}>

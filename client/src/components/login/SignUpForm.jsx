@@ -130,7 +130,7 @@ class SignUpForm extends Component {
 
               <Form.Group className="FormField" controlId="formBasicEmail">
 
-                <Button type="submit" className="Form__Button mr-20">Sign Up</Button>
+                <Button type="submit" className="Form__Button mr-20">Sign Up</Button> &nbsp;
 
                 <Link to="/user" className="FormField__Link">Already have an account?</Link>
 
