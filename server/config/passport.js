@@ -20,9 +20,9 @@ module.exports = (userType, passport) => {
             })
         }
         if (userType == 'users') {
-            User.getUserByID(jwt_payload.data._id, (err, admin) => {
+            User.getUserByID(jwt_payload.data._id, (err, user) => {
                 if (err) return done(err, false);
-                if (admin) return done(null, admin);
+                if (user) return done(null, user);
                 return done(null, false);
             })
         }

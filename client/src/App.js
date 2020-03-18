@@ -1,6 +1,14 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
+// bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+// components
+import UserLogin from "./components/login/Login";
+import AdminLogin from "./components/admin/AdminLogin";
+import DashBoard from "./components/admin/DashBoard";
 import Home from "./pages/Home";
 import Men from "./pages/Men";
 import Women from "./pages/Women";
@@ -26,10 +34,13 @@ function App() {
       <Route exact path="/user" component={User}/>
       <Route exact path="/wishlist" component={Wishlist}/>
       <Route exact path="/mybag" component={Mybag}/>
+      <Route path="/user" component={UserLogin}></Route>
+      <Route path="/admin" component={AdminLogin}></Route>
+      <Route path="/dash" component={DashBoard}></Route>
       <Route component={Error}/>
     </Switch>
   </>
-  );
+  )
 }
 
 export default App;
