@@ -178,20 +178,19 @@ h6 {
 }
 .menHero {
   background-image: url("./images/image2.png");
-  height: auto;
-  max-width: 100%;
+  background-size: contain;
+  background-position: top center;
   
 }
 .womenHero {
   background-image: url("./images/image3.png");
-  /* min-height: 90vh; */
-  height: auto;
-  max-width: 100%;
+  background-size: contain;
+  background-position: top center;
 }
 .promotionHero {
   background-image: url("./images/image4.jpg");
-  height: auto;
-  max-width: 100%;
+  background-size: contain;
+  background-position: top center;
 }
 /* End of Hero */
 /* Banner */
