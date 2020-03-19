@@ -6,21 +6,24 @@ import "./style.css"
 // components
 import SignInForm from "./SignInForm";
 import SignUpForm from "./SignUpForm";
+import Navbar from '../Navbar';
 
 // images
-import Login from "../../login.svg";
-import Fashion from "../../fashion.svg";
+import Login from "../../images/login.svg";
+import Fashion from "../../images/fashion.svg";
 
 class AdminLogin extends Component {
     render() {
         return (
             <Router>
+                <Navbar/>
+                
                 <div className="App">
             
                     <div className="App__Aside">
                     
                     <div className="Main__Logo">
-                        <img src={Fashion}/>
+                        <img src={Fashion} alt="fashion"/>
                     </div>
             
                     </div>

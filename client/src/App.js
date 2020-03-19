@@ -16,7 +16,6 @@ import Error from "./pages/Error";
 import UserLogin from "./components/login/Login";
 import AdminLogin from "./components/admin/AdminLogin";
 import DashBoard from "./components/admin/DashBoard";
-import Navbar from "./components/Navbar";
 
 import {Route, Switch} from 'react-router-dom';
 
@@ -24,7 +23,6 @@ import {Route, Switch} from 'react-router-dom';
 function App() {
   return(
   <>
-    <Navbar/>
     <Switch>
       <Route exact path="/" component={Home}/>
       <Route exact path="/men" component={Men}/>

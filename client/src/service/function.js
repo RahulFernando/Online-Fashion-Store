@@ -19,3 +19,14 @@ export const loginUser = user => {
     })
     .catch(err => { console.log(err) })
 }
+
+export const loginAdmin = admin => {
+    return axios.post("admin/login", {
+        username: admin.username,
+        password: admin.password
+    })
+    .then(res => {
+        localStorage.setItem('admintoken', res.data.token)
+        console.log('Successful login')
+    })
+}
