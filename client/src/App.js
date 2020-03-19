@@ -17,9 +17,6 @@ import User from "./pages/User";
 import Wishlist from "./pages/Wishlist";
 import Mybag from "./pages/Mybag";
 import Error from "./pages/Error";
-import UserLogin from "./components/login/Login";
-import AdminLogin from "./components/admin/AdminLogin";
-import DashBoard from "./components/admin/DashBoard";
 
 import {Route, Switch} from 'react-router-dom';
 
