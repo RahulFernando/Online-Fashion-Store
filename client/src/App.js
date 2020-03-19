@@ -1,10 +1,14 @@
 import React from 'react';
 import './App.css';
+import { BrowserRouter as Router } from "react-router-dom";
 
 // bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // components
+import UserLogin from "./components/login/Login";
+import AdminLogin from "./components/admin/AdminLogin";
+import DashBoard from "./components/admin/DashBoard";
 import Home from "./pages/Home";
 import Men from "./pages/Men";
 import Women from "./pages/Women";

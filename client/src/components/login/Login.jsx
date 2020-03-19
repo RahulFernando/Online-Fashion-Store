@@ -26,33 +26,33 @@ class AdminLogin extends Component {
                         <img src={Fashion} alt="fashion"/>
                     </div>
             
-                    </div>
+                     </div>
             
-                    <div className="App__Form">
+                     <div className="App__Form">
             
-                    <div className="PageSwitcher">
+                     <div className="PageSwitcher">
                     
-                        <NavLink to="/user" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sing In</NavLink>
-                        <NavLink to="/sign-up" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
+                         <NavLink to="/user" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sing In</NavLink>
+                         <NavLink to="/sign-up" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
                     
-                    </div>
+                     </div>
             
-                    <div className="Form__Logo">
-                        <img src={Login}/>
-                    </div>
+                     <div className="Form__Logo">
+                         <img src={Login}/>
+                     </div>
             
-                    <Route path="/user" component={SignInForm}>
-                    </Route>
+                     <Route path="/user" component={SignInForm}>
+                     </Route>
             
-                    <Route path="/sign-up" component={SignUpForm}>
-                    </Route>
+                     <Route path="/sign-up" component={SignUpForm}>
+                     </Route>
                     
-                    </div>
+                     </div>
         
-                </div>
-            </Router>
-        );
-    }
-}
+                 </div>
+             </Router>
+         );
+     }
+ }
 
 export default AdminLogin;
