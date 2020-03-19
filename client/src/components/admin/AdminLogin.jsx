@@ -35,7 +35,7 @@ class Login extends Component {
 
     if (!this.state.username ) {
       usernameErr = "username cannot be empty!"
-    } else  if (!this.state.password) {
+    } else if (!this.state.password) {
       passwordErr = 'password cannot be empty!';
     }
 
@@ -90,8 +90,8 @@ class Login extends Component {
 
             <FormControl type="password" id="password" placeholder="Enter password" name="password" value={this.state.password} onChange={this.handleChange}/>
 
-            <div>{this.state.usernameErr ? (
-              <span className="ErrorMessage">{this.state.usernameErr}</span>
+            <div>{this.state.passwordErr ? (
+              <span className="ErrorMessage">{this.state.passwordErr}</span>
             ): null}</div>
 
           </FormGroup>
