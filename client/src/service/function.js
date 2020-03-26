@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+let authenticated = false;
+
 export const registerUser = newUser => {
     return axios.post("/users/register", {
         username: newUser.username,
@@ -14,8 +16,9 @@ export const loginUser = user => {
         password: user.password
     })
     .then(res => {
-      localStorage.setItem('usertoken', res.data.token)
-      console.log('Successful login')
+        authenticated = true;
+        localStorage.setItem('usertoken', res.data.token)
+        console.log('Successful login')
     })
     .catch(err => { console.log(err) })
 }
@@ -26,7 +29,22 @@ export const loginAdmin = admin => {
         password: admin.password
     })
     .then(res => {
+        authenticated = true
         localStorage.setItem('admintoken', res.data.token)
         console.log('Successful login')
     })
+}
+
+export const isAuthenticated = () => {
+   return authenticated
+}
+
+export const createMainCategory = mainCategory => {
+    return axios.post("/mainCategory/mainCategory", {
+        mainCategoryName: mainCategory.mainCategoryName
+    })
+}
+
+export const getMainCategories = () => {
+    return axios.get('/mainCategory/mainCategories')
 }

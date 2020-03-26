@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { loginUser } from '../../service/function';
+import { loginUser, isAuthenticated } from '../../service/function';
 
 import { Button, Form, Container } from 'react-bootstrap';
 
@@ -61,7 +61,11 @@ class SignInForm extends Component {
     }
    
     if (isValid) {
-      loginUser(user).then(res => {})
+      loginUser(user).then(res => { 
+        if (isAuthenticated) {
+          this.props.history.push('/men');
+        }
+      })
     }
 
   }
@@ -70,42 +74,42 @@ class SignInForm extends Component {
         return (
             <Container>
 
-            <Form className="FormFields" onSubmit={this.handleSubmit}>
+              <Form className="FormFields" onSubmit={this.handleSubmit}>
 
-              <Form.Group className="FormField" controlId="formBasicEmail">
+                <Form.Group className="FormField" controlId="formBasicEmail">
 
-                <Form.Label className="FormField__Label">Username</Form.Label>
+                  <Form.Label className="FormField__Label">Username</Form.Label>
 
-                <input type="text" id="username" className="FormField__Input" placeholder="Enter username" name="username" value={this.state.username} onChange={this.handleChange}/>
+                  <input type="text" id="username" className="FormField__Input" placeholder="Enter username" name="username" value={this.state.username} onChange={this.handleChange}/>
 
-                <div>{this.state.usernameErr ? (
-                  <span className="ErrorMessage">{this.state.usernameErr}</span>
-                ): null}</div>
+                  <div>{this.state.usernameErr ? (
+                    <span className="ErrorMessage">{this.state.usernameErr}</span>
+                  ): null}</div>
 
-              </Form.Group>
+                </Form.Group>
 
-              <Form.Group className="FormField" controlId="formBasicEmail">
+                <Form.Group className="FormField" controlId="formBasicEmail">
 
-              <Form.Label className="FormField__Label">Password</Form.Label>
+                <Form.Label className="FormField__Label">Password</Form.Label>
 
-                <input type="password" id="password" className="FormField__Input" placeholder="Enter password" name="password" value={this.state.password} onChange={this.handleChange}/>
+                  <input type="password" id="password" className="FormField__Input" placeholder="Enter password" name="password" value={this.state.password} onChange={this.handleChange}/>
 
-                <div>{this.state.passwordErr ? (
-                  <span className="ErrorMessage">{this.state.passwordErr}</span>
-                ): null}</div>
+                  <div>{this.state.passwordErr ? (
+                    <span className="ErrorMessage">{this.state.passwordErr}</span>
+                  ): null}</div>
 
-              </Form.Group>
+                </Form.Group>
 
-              <Form.Group className="FormField" controlId="formBasicEmail">
+                <Form.Group className="FormField" controlId="formBasicEmail">
 
-                <Button type="submit" className="Form__Button mr-20">Sign In</Button> &nbsp;
+                  <Button type="submit" className="Form__Button mr-20">Sign In</Button> &nbsp;
 
-                <Link to="/sign-up" style={{ textDecoration: 'none' }} className="FormField__Link">Don't have an account?</Link>
+                  <Link to="/sign-up" style={{ textDecoration: 'none' }} className="FormField__Link">Don't have an account?</Link>
 
-              </Form.Group>
+                </Form.Group>
 
-            </Form>
-          </Container>
+              </Form>
+            </Container>
         );
     }
 }

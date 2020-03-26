@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, NavLink } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 
 import "./style.css"
 
@@ -15,9 +15,8 @@ import Fashion from "../../images/fashion.svg";
 class AdminLogin extends Component {
     render() {
         return (
-            <Router>
+            <div>
                 <Navbar/>
-                
                 <div className="App">
             
                     <div className="App__Aside">
@@ -32,25 +31,25 @@ class AdminLogin extends Component {
             
                      <div className="PageSwitcher">
                     
-                         <NavLink to="/user" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sing In</NavLink>
-                         <NavLink to="/sign-up" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
+                         <NavLink exact to="/user/sign-in" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sing In</NavLink>
+                         <NavLink to="/user/sign-up" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
                     
                      </div>
             
                      <div className="Form__Logo">
-                         <img src={Login}/>
+                         <img src={Login} alt="form_logo"/>
                      </div>
             
-                     <Route path="/user" component={SignInForm}>
+                     <Route path="/user/sign-in" component={SignInForm}>
                      </Route>
             
-                     <Route path="/sign-up" component={SignUpForm}>
+                     <Route path="/user/sign-up" component={SignUpForm}>
                      </Route>
                     
                      </div>
         
                  </div>
-             </Router>
+             </div>
          );
      }
  }

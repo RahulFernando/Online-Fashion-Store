@@ -6,7 +6,7 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // component
-import MainCategory from './MainCategory';
+import MainCategory from './MainCategory/MainCategory';
 import SubCategory from './SubCategory';
 
 class SideNavigation extends Component {

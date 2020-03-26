@@ -27,10 +27,14 @@ const port = process.env.PORT;
 
 const admin = require('./route/admin');
 const user = require('./route/user');
+const mainCategory = require('./route/mainCategory');
+const subCategory = require('./route/subCategory')
 
-//admin routes
+// routes
 app.use('/api/admin', admin);
 app.use('/api/users', user);
+app.use('/api/mainCategory', mainCategory);
+app.use('/api/subCategory', subCategory);
 
 //listening to port
 app.listen(port, () => console.log(`Server is running: ${port}`));

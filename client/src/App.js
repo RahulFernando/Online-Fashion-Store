@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router } from "react-router-dom";
 
 // bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,6 +17,9 @@ import Wishlist from "./pages/Wishlist";
 import Mybag from "./pages/Mybag";
 import Error from "./pages/Error";
 
+// protected route
+import { ProtectedRoute } from "./service/protected.route";
+
 import {Route, Switch} from 'react-router-dom';
 
 
@@ -34,7 +36,7 @@ function App() {
       <Route exact path="/mybag" component={Mybag}/>
       <Route path="/user/sign-in" component={UserLogin}/>
       <Route exact path="/admin" component={AdminLogin}/>
-      <Route path="/dash" component={DashBoard}/>
+      <ProtectedRoute exact path="/dash" component={DashBoard}/>
       <Route component={Error}/>
     </Switch>
   </>
