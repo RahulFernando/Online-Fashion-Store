@@ -48,3 +48,13 @@ export const createMainCategory = mainCategory => {
 export const getMainCategories = () => {
     return axios.get('/mainCategory/mainCategories')
 }
+
+export const updateMainCategories = (id, mainCategory) => {
+    return axios.put('/mainCategory/mainCategories/'+id, {
+        mainCategoryName: mainCategory.mainCategoryName
+    }).then(res => {
+        console.log(res.data.message)
+    }).catch(err => {
+        console.log(err)
+    })
+}

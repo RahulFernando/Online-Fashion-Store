@@ -4,10 +4,11 @@ import { ListGroup } from 'react-bootstrap'
 
 export default class MainCategoryItem extends Component {
     render() {
-        const { name } = this.props
+        const { name, handleEdit } = this.props
         return (
-            <ListGroup.Item action variant="light">
+            <ListGroup.Item className="d-flex justify-content-between my-2" action variant="light">
                 {name}
+                <span className="mx-2 text-dark" onClick={handleEdit}><i className="far fa-edit"></i></span>
             </ListGroup.Item>
         )
     }

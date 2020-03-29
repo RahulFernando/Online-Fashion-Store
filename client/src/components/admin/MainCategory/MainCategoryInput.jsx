@@ -6,7 +6,7 @@ export default class MainCategoryInput extends Component {
     
     render() {
         // destructuring
-        const { mainCategoryName, handleChange, handleSubmit, mainCategoryErr } = this.props
+        const { edit, mainCategoryName, handleChange, handleSubmit, mainCategoryErr } = this.props
 
         return (
             <Card bg="light" className="card-body my-3">
@@ -32,7 +32,7 @@ export default class MainCategoryInput extends Component {
                     </Form.Group>
 
                     <Button variant="primary" type="submit">
-                        Create
+                        {edit ? 'Update': 'Create'}
                     </Button>
                     
                 </Form>

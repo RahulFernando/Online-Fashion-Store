@@ -29,3 +29,8 @@ module.exports.getAllMainCategories = function (callback) {
 module.exports.addMainCategory = function (newMainCategory, callback) {
    newMainCategory.save(callback);
 };
+
+// update main category
+module.exports.updateMainCategory = function (id,mainCategory, callback) {
+    MainCategory.findByIdAndUpdate(id, mainCategory, callback);
+}

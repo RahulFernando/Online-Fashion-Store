@@ -8,7 +8,7 @@ import MainCategoryInput from './MainCategoryInput'
 import MainCategoryList from './MainCategoryList'
 
 // services
-import { createMainCategory, getMainCategories } from '../../../service/function';
+import { createMainCategory, getMainCategories, updateMainCategories } from '../../../service/function';
 
 class MainCategory extends Component {
 
@@ -16,9 +16,11 @@ class MainCategory extends Component {
         super(props)
     
         this.state = {
-             mainCategoryName: '',
-             mainCategories: [],
-             mainCategoryErr: ''
+            _id: '',
+            mainCategoryName: '',
+            mainCategories: [],
+            mainCategoryErr: '',
+            edit: false
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -34,15 +36,11 @@ class MainCategory extends Component {
         })
     } 
     
+    // render after state updated
     componentDidUpdate(prevProps, prevState) {
-        getMainCategories().then(res => {
-            this.setState({
-                mainCategories: res.data
-            })
-        })
+        this.componentDidMount()
     }
-    
-    
+       
     // handle change
     handleChange = (e) => {
         let target = e.target;
@@ -80,17 +78,34 @@ class MainCategory extends Component {
         }
 
         if (isValid) {
-            createMainCategory(mainCategory).then(res => {
-                if (res.data.success === false) {
-                    this.setState({
-                        mainCategoryErr: res.data.message
-                    })
-                }
-            })
+            if (!this.state.edit) {
+                createMainCategory(mainCategory).then(res => {
+                    if (res.data.success === false) {
+                        this.setState({
+                            mainCategoryErr: res.data.message
+                        })
+                    }
+                })
+            } else {
+                updateMainCategories(this.state._id, mainCategory).then(res => {
+
+                })
+            }
         }
 
         this.setState({
             mainCategoryName: ''
+        })
+
+    }
+
+    // edit main category
+    handleEdit = (_id) => {
+        const selectedCategory = this.state.mainCategories.filter(category => category._id === _id);
+        this.setState({ 
+            _id: _id,
+            mainCategoryName: selectedCategory[0].mainCategoryName,
+            edit: true
         })
 
     }
@@ -103,8 +118,8 @@ class MainCategory extends Component {
                     <Col md="auto"><h3>New Main Category</h3></Col>
                 </Row>
                 
-                <MainCategoryInput mainCategoryName={this.state.mainCategoryName} mainCategoryErr={this.state.mainCategoryErr} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-                <MainCategoryList mainCategories={this.state.mainCategories}/>
+                <MainCategoryInput edit={this.state.edit} mainCategoryName={this.state.mainCategoryName} mainCategoryErr={this.state.mainCategoryErr} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+                <MainCategoryList mainCategories={this.state.mainCategories} handleEdit={this.handleEdit}/>
                 
             </Container>
         )

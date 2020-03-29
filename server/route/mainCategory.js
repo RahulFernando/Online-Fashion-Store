@@ -1,8 +1,11 @@
 //modules
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
 const MainCategory = require('../models/mainCategory'); //main category schema
+
+// passport.authenticate('jwt', { session: false }),
 
 router.post('/mainCategory', (req, res) => {
     let newMainCategory = MainCategory({
@@ -54,5 +57,14 @@ router.get('/mainCategories/:id', (req, res) => {
         }
     })
 });
+
+router.put('/mainCategories/:id', (req, res) => {
+    const mainCategory = { mainCategoryName: req.body.mainCategoryName}
+    MainCategory.updateMainCategory(req.params.id, mainCategory, (err) => {
+        if (!err) {
+            res.json({ message: 'Updated'})
+        }
+    })
+})
 
 module.exports = router;
