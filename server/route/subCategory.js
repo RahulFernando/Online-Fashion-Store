@@ -1,10 +1,11 @@
 //modules
 const express = require('express');
 const router = express.Router();
+const passport = require('passport');
 
 const SubCategory = require('../models/subCategory'); // sub category schema
 
-router.post('/newSubCategory', (req, res) => {
+router.post('/newSubCategory', passport.authenticate('jwt', { session: false }), (req, res) => {
     let newSubCategory = SubCategory({
         subCategoryName: req.body.subCategoryName,
         main_category: req.body.main_category_id
@@ -27,7 +28,7 @@ router.post('/newSubCategory', (req, res) => {
 
 });
 
-router.get('/subCategories', (req, res) => {
+router.get('/subCategories', passport.authenticate('jwt', { session: false }), (req, res) => {
     SubCategory.getAllSubCategories((err, subCategory) => {
         if (err) {
             return res.json({
@@ -40,7 +41,7 @@ router.get('/subCategories', (req, res) => {
     })
 });
 
-router.get('/subCategories/:id', (req, res) => {
+router.get('/subCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     SubCategory.getSubcategoryByID(req.params.id, (err, subCategory) => {
         if (err) {
             let message = "";
@@ -57,7 +58,7 @@ router.get('/subCategories/:id', (req, res) => {
     })
 });
 
-router.put('/subCategories/:id', (req, res) => {
+router.put('/subCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     const subCategory = { 
         subCategoryName: req.body.subCategoryName,
         main_category: req.body.main_category_id
@@ -69,7 +70,7 @@ router.put('/subCategories/:id', (req, res) => {
     })
 })
 
-router.delete('/subCategories/:id', (req, res) => {
+router.delete('/subCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     SubCategory.deleteSubCategory(req.params.id, (err) => {
         if (!err) {
             res.send({ message: req.params.id + ' deleted' })

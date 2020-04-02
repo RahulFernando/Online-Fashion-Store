@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+let token = ''
+
 export const registerUser = newUser => {
     return axios.post("/users/register", {
         username: newUser.username,
@@ -14,7 +16,7 @@ export const loginUser = user => {
         password: user.password
     })
     .then(res => {
-        const {token} = res.data
+        token = res.data.token
         localStorage.setItem('usertoken',token)
     })
     .catch(err => { console.log(err) })
@@ -26,27 +28,27 @@ export const loginAdmin = admin => {
         password: admin.password
     })
     .then(res => {
-        const {token} = res.data
+        token = res.data.token
         localStorage.setItem('admintoken',token)
     })
 }
 
 export const createMainCategory = mainCategory => {
-    return axios.post("/mainCategory/mainCategory", {
+    return axios.post("/admin/mainCategory/mainCategory", { headers: {"Authorization":token}}, {
         mainCategoryName: mainCategory.mainCategoryName
     })
 }
 
 export const getMainCategories = () => {
-    return axios.get("/mainCategory/mainCategories")
+    return axios.get("/admin/mainCategory/mainCategories", { headers: {"Authorization":token}})
 }
 
 export const getMainCategory = (id) => {
-    return axios.get("/mainCategory/mainCategories/"+id)
+    return axios.get("/admin/mainCategory/mainCategories/"+id, { headers: {"Authorization":token}})
 }
 
 export const updateMainCategories = (id, mainCategory) => {
-    return axios.put("/mainCategory/mainCategories/"+id, {
+    return axios.put("/admin/mainCategory/mainCategories/"+id, { headers: {"Authorization":token}},  {
         mainCategoryName: mainCategory.mainCategoryName
     }).then(res => {
         console.log(res.data.message)
@@ -56,24 +58,24 @@ export const updateMainCategories = (id, mainCategory) => {
 }
 
 export const deleteMainCategories = (id) => {
-    return axios.delete("/mainCategory/mainCategories/"+id)
+    return axios.delete("/admin/mainCategory/mainCategories/"+id, { headers: {"Authorization":token}})
     .then(res => { console.log(res.data.message) })
     .catch(err => { console.log(err) })
 }
 
 export const createSubCategory = (subCategory) => {
-    return axios.post("/subCategory/newSubCategory", {
+    return axios.post("/admin/subCategory/newSubCategory", { headers: {"Authorization":token}}, {
         subCategoryName: subCategory.subCategoryName,
         main_category_id: subCategory.main_category_id
     })
 }
 
 export const getSubCategories = () => {
-    return axios.get("/subCategory/subCategories")
+    return axios.get("/admin/subCategory/subCategories",{ headers: {"Authorization":token}} )
 }
 
 export const updateSubCategory = (id, subCategory) => {
-    return axios.put("/subCategory/subCategories/" + id, {
+    return axios.put("/admin/subCategory/subCategories/"+id, { headers: {"Authorization":token}}, {
         subCategoryName: subCategory.subCategoryName,
         main_category_id: subCategory.main_category_id
     })
@@ -86,7 +88,7 @@ export const updateSubCategory = (id, subCategory) => {
 }
 
 export const deleteSubCategories = (id) => {
-    return axios.delete("/subCategory/subCategories/"+id)
+    return axios.delete("/admin/subCategory/subCategories/"+id, { headers: {"Authorization":token}})
     .then(res => { console.log(res.data.message) })
     .catch(err => { console.log(err) })
 }

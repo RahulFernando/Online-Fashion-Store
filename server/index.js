@@ -33,8 +33,8 @@ const subCategory = require('./route/subCategory')
 // routes
 app.use('/api/admin', admin);
 app.use('/api/users', user);
-app.use('/api/mainCategory', mainCategory);
-app.use('/api/subCategory', subCategory);
+app.use('/api/admin/mainCategory', mainCategory);
+app.use('/api/admin/subCategory', subCategory);
 
 //listening to port
 app.listen(port, () => console.log(`Server is running: ${port}`));

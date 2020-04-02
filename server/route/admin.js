@@ -59,7 +59,7 @@ router.post('/login', (req, res) => {
                return res.json({
                    status: 200,
                    type: 'admin',
-                   token: token
+                   token: 'Bearer '+token
                })
            } else {
                return res.json({

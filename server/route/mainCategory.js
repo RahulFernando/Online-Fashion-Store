@@ -5,9 +5,8 @@ const passport = require('passport');
 
 const MainCategory = require('../models/mainCategory'); //main category schema
 
-// passport.authenticate('jwt', { session: false }),
 
-router.post('/mainCategory', (req, res) => {
+router.post('/mainCategory', passport.authenticate('jwt', { session: false }), (req, res) => {
     let newMainCategory = MainCategory({
         mainCategoryName: req.body.mainCategoryName,
     });
@@ -28,7 +27,7 @@ router.post('/mainCategory', (req, res) => {
     })
 });
 
-router.get('/mainCategories', (req, res) => {
+router.get('/mainCategories', passport.authenticate('jwt', { session: false }),(req, res) => {
         MainCategory.getAllMainCategories((err, mainCategory) => {
             if (err) {
                 return res.json({
@@ -42,7 +41,7 @@ router.get('/mainCategories', (req, res) => {
 
 });
 
-router.get('/mainCategories/:id', (req, res) => {
+router.get('/mainCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     MainCategory.getMainCategoryByID(req.params.id, (err, mainCategory) => {
         if (err) {
             let message = "";
@@ -59,7 +58,7 @@ router.get('/mainCategories/:id', (req, res) => {
     })
 });
 
-router.put('/mainCategories/:id', (req, res) => {
+router.put('/mainCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     const mainCategory = { mainCategoryName: req.body.mainCategoryName}
     MainCategory.updateMainCategory(req.params.id, mainCategory, (err) => {
         if (!err) {
@@ -68,7 +67,7 @@ router.put('/mainCategories/:id', (req, res) => {
     })
 })
 
-router.delete('/mainCategories/:id', (req, res) => {
+router.delete('/mainCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
     MainCategory.deleteMainCategory(req.params.id, (err) => {
         if (!err) {
             res.send({ message: req.params.id + ' deleted' })
