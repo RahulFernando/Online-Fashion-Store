@@ -53,7 +53,7 @@ router.post('/login', (req, res) => {
                         email: admin.email
                     }
                 }, process.env.SECRET, {
-                        expiresIn: 300 // for 3 min
+                        expiresIn: 50000 // for 5 min
                     }
                 );
                return res.json({

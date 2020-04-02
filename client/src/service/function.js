@@ -31,14 +31,13 @@ export const loginAdmin = admin => {
     .then(res => {
         token = res.data.token
         isAuthenticate = true
-        // localStorage.setItem('admintoken',token)
     })
 }
 
 export const createMainCategory = mainCategory => {
-    return axios.post("/admin/mainCategory/mainCategory", { headers: {"Authorization":token}}, {
+    return axios.post("/admin/mainCategory/mainCategory", {
         mainCategoryName: mainCategory.mainCategoryName
-    })
+    }, { headers: {"Authorization":token}})
 }
 
 export const getMainCategories = () => {
@@ -50,9 +49,9 @@ export const getMainCategory = (id) => {
 }
 
 export const updateMainCategories = (id, mainCategory) => {
-    return axios.put("/admin/mainCategory/mainCategories/"+id, { headers: {"Authorization":token}},  {
+    return axios.put("/admin/mainCategory/mainCategories/"+id, {
         mainCategoryName: mainCategory.mainCategoryName
-    }).then(res => {
+    }, { headers: {"Authorization":token}}).then(res => {
         console.log(res.data.message)
     }).catch(err => {
         console.log(err)
@@ -66,10 +65,10 @@ export const deleteMainCategories = (id) => {
 }
 
 export const createSubCategory = (subCategory) => {
-    return axios.post("/admin/subCategory/newSubCategory", { headers: {"Authorization":token}}, {
+    return axios.post("/admin/subCategory/newSubCategory", {
         subCategoryName: subCategory.subCategoryName,
         main_category_id: subCategory.main_category_id
-    })
+    }, { headers: {"Authorization":token}})
 }
 
 export const getSubCategories = () => {
@@ -77,10 +76,10 @@ export const getSubCategories = () => {
 }
 
 export const updateSubCategory = (id, subCategory) => {
-    return axios.put("/admin/subCategory/subCategories/"+id, { headers: {"Authorization":token}}, {
+    return axios.put("/admin/subCategory/subCategories/"+id, {
         subCategoryName: subCategory.subCategoryName,
         main_category_id: subCategory.main_category_id
-    })
+    }, { headers: {"Authorization":token}})
     .then(res => {
         console.log(res.data.message);
     })
