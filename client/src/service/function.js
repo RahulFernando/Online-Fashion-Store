@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 let token = ''
+let isAuthenticate = false
 
 export const registerUser = newUser => {
     return axios.post("/users/register", {
@@ -29,7 +30,8 @@ export const loginAdmin = admin => {
     })
     .then(res => {
         token = res.data.token
-        localStorage.setItem('admintoken',token)
+        isAuthenticate = true
+        // localStorage.setItem('admintoken',token)
     })
 }
 
@@ -91,4 +93,11 @@ export const deleteSubCategories = (id) => {
     return axios.delete("/admin/subCategory/subCategories/"+id, { headers: {"Authorization":token}})
     .then(res => { console.log(res.data.message) })
     .catch(err => { console.log(err) })
+}
+
+export const isAuthenticated = () => {
+    if (isAuthenticate) {
+        return isAuthenticate
+    }
+    return false
 }
