@@ -3,7 +3,7 @@ import { Button, FormGroup, FormControl, FormLabel, Form } from "react-bootstrap
 import "./style.css";
 
 // service
-import { loginAdmin, isAuthenticated } from '../../service/function';
+import { loginAdmin } from '../../service/function';
 
 class Login extends Component {
   constructor() {
@@ -19,6 +19,7 @@ class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  // handle changes in input
   handleChange(e) {
     let target = e.target;
     let value = target.value;
@@ -29,6 +30,7 @@ class Login extends Component {
     })
   }
 
+  // validate form
   validate = () => {
     let usernameErr = '';
     let passwordErr = '';
@@ -50,6 +52,7 @@ class Login extends Component {
     return true;
   }
 
+  // handle form submit
   handleSubmit(e) {
     e.preventDefault();
     const isValid = this.validate();
@@ -60,8 +63,10 @@ class Login extends Component {
    
     if (isValid) {
       loginAdmin(admin).then(res => {
-        if (isAuthenticated) {
+        if (localStorage.getItem('admintoken')) {
           this.props.history.push('/dash');
+        } else {
+          this.props.history.push('/');
         }
       })
     }

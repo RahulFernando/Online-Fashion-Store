@@ -11,14 +11,14 @@ router.post('/mainCategory', (req, res) => {
     let newMainCategory = MainCategory({
         mainCategoryName: req.body.mainCategoryName,
     });
-    MainCategory.addMainCategory(newMainCategory, (err, mainCategory) => {
+    MainCategory.addMainCategory(newMainCategory, (err) => {
         if (err) {
             let message = "";
             if (err.errors.mainCategoryName) message = "Category is already taken ";
             return res.json({
                 success: false,
                 message
-            })
+        })
         } else {
             return res.json({
                 status: 200,
@@ -29,16 +29,17 @@ router.post('/mainCategory', (req, res) => {
 });
 
 router.get('/mainCategories', (req, res) => {
-    MainCategory.getAllMainCategories((err, mainCategory) => {
-        if (err) {
-            return res.json({
-                success: false,
-                message
-            });
-        } else {
-            return res.send(mainCategory)
-        }
-    })
+        MainCategory.getAllMainCategories((err, mainCategory) => {
+            if (err) {
+                return res.json({
+                    success: false,
+                    message
+                });
+            } else {
+                return res.send(mainCategory)
+            }
+        })
+
 });
 
 router.get('/mainCategories/:id', (req, res) => {
@@ -63,6 +64,14 @@ router.put('/mainCategories/:id', (req, res) => {
     MainCategory.updateMainCategory(req.params.id, mainCategory, (err) => {
         if (!err) {
             res.json({ message: 'Updated'})
+        }
+    })
+})
+
+router.delete('/mainCategories/:id', (req, res) => {
+    MainCategory.deleteMainCategory(req.params.id, (err) => {
+        if (!err) {
+            res.send({ message: req.params.id + ' deleted' })
         }
     })
 })

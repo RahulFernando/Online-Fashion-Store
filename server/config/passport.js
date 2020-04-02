@@ -9,7 +9,7 @@ const User = require('../models/user');
 // authenticate user by JWTStrategy
 module.exports = (userType, passport) => {
     let opts = {};
-    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme('jwt');
+    opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken('jwt');
     opts.secretOrKey = process.env.SECRET;
     passport.use(new jwtStrategy(opts, (jwt_payload, done) => {
         if (userType == 'admin') {

@@ -53,13 +53,13 @@ router.post('/login', (req, res) => {
                         email: admin.email
                     }
                 }, process.env.SECRET, {
-                        expiresIn: 604800 // for 1 weeks
+                        expiresIn: 300 // for 3 min
                     }
                 );
                return res.json({
                    status: 200,
                    type: 'admin',
-                   token: "JWT " + token
+                   token: token
                })
            } else {
                return res.json({

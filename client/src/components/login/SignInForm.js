@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { loginUser, isAuthenticated } from '../../service/function';
+import { loginUser } from '../../service/function';
 
 import { Button, Form, Container } from 'react-bootstrap';
 
@@ -62,7 +62,7 @@ class SignInForm extends Component {
    
     if (isValid) {
       loginUser(user).then(res => { 
-        if (isAuthenticated) {
+        if (localStorage.getItem('usertoken')) {
           this.props.history.push('/men');
         }
       })

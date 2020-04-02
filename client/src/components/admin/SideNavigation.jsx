@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 // component
 import MainCategory from './MainCategory/MainCategory';
-import SubCategory from './SubCategory';
+import SubCategory from './SubCategory/SubCategory';
 
 class SideNavigation extends Component {
     render() {

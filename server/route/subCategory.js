@@ -6,13 +6,13 @@ const SubCategory = require('../models/subCategory'); // sub category schema
 
 router.post('/newSubCategory', (req, res) => {
     let newSubCategory = SubCategory({
-        name: req.body.name,
-        main_category: req.body.main_category
+        subCategoryName: req.body.subCategoryName,
+        main_category: req.body.main_category_id
     });
     SubCategory.addSubCategory(newSubCategory, (err, subCategory) => {
         if (err) {
             let message = "";
-            if (err.errors.name) message = "Category is already taken ";
+            if (err.errors.subCategoryName) message = "Category is already taken ";
             return res.json({
                 success: false,
                 message
@@ -24,17 +24,18 @@ router.post('/newSubCategory', (req, res) => {
             })
         }
     })
+
 });
 
 router.get('/subCategories', (req, res) => {
-    SubCategory.getAllMainCategories((err, subCategory) => {
+    SubCategory.getAllSubCategories((err, subCategory) => {
         if (err) {
             return res.json({
                 success: false,
                 message
             });
         } else {
-            return res.send(SubCategory)
+            return res.send(subCategory)
         }
     })
 });
@@ -55,5 +56,25 @@ router.get('/subCategories/:id', (req, res) => {
         }
     })
 });
+
+router.put('/subCategories/:id', (req, res) => {
+    const subCategory = { 
+        subCategoryName: req.body.subCategoryName,
+        main_category: req.body.main_category_id
+    }
+    SubCategory.updateSubCategory(req.params.id, subCategory, (err) => {
+        if (!err) {
+            res.json({ message: 'Updated'})
+        }
+    })
+})
+
+router.delete('/subCategories/:id', (req, res) => {
+    SubCategory.deleteSubCategory(req.params.id, (err) => {
+        if (!err) {
+            res.send({ message: req.params.id + ' deleted' })
+        }
+    })
+})
 
 module.exports = router;

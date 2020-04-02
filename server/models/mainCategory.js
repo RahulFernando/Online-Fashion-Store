@@ -2,6 +2,8 @@
 const mongoose = require('mongoose');
 const uniqueVaidator = require('mongoose-unique-validator');
 
+const SubCategory = require('./subCategory')
+
 // main category schema
 const MainCategorySchema = mongoose.Schema({
     mainCategoryName: {
@@ -33,4 +35,11 @@ module.exports.addMainCategory = function (newMainCategory, callback) {
 // update main category
 module.exports.updateMainCategory = function (id,mainCategory, callback) {
     MainCategory.findByIdAndUpdate(id, mainCategory, callback);
+}
+
+// delete main category by id
+module.exports.deleteMainCategory = function (id, callback) {
+    MainCategory.findByIdAndDelete(id, res => {
+        SubCategory.findOneAndDelete({ main_category: id}, callback)
+    });
 }
