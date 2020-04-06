@@ -17,7 +17,6 @@ class SubCategory extends Component {
             _id: '',
             mainCategories: [],
             subCategoryName: '',
-            selectedmainCategory: '',
             main_category_id: '',
             subCategoryErr: '',
             subCategories: [],
@@ -53,6 +52,7 @@ class SubCategory extends Component {
     this.setState({
         [name] : value
     })
+
     }
 
     // validate form
@@ -79,10 +79,12 @@ class SubCategory extends Component {
         e.preventDefault();
 
         const isValid = this.validate();
+
         const subCategory = {
             subCategoryName: this.state.subCategoryName,
             main_category_id: this.state.main_category_id
         }
+        console.log(this.main_category_id)
 
         if (isValid) {
             if (!this.state.edit) {
@@ -107,27 +109,23 @@ class SubCategory extends Component {
                     getSubCategories().then(res => {
                         this.setState({
                             subCategories: res.data,
-                            selectedmainCategory: '',
-                            edit: false
+                            subCategoryName: '',
+                            main_category_id: '',
+                            edit: false 
                         })
                     })
                 })
             }
         }
 
-        this.setState({ subCategoryName: '' })
     }
 
     // edit sub category
     handleEdit = (_id) => {
         const selectedCategory = this.state.subCategories.filter(category => category._id === _id);
-        getMainCategory(selectedCategory[0].main_category).then(res => { // get main category related to sub category
-            this.setState({
-                selectedmainCategory: res.data.mainCategoryName
-            })
-        })
         this.setState({ 
             _id: _id,
+            main_category_id: selectedCategory[0].main_category._id,
             subCategoryName: selectedCategory[0].subCategoryName,
             edit: true
         })
@@ -135,7 +133,7 @@ class SubCategory extends Component {
 
     // handle sub category deletion
     handleDelete = (_id) => {
-        deleteSubCategories(_id).then(resp => {
+        deleteSubCategories(_id).then(res => {
             getSubCategories().then(res => {
                 this.setState({
                     subCategories: res.data
@@ -152,7 +150,7 @@ class SubCategory extends Component {
                     <Col md="auto"><h3>New Sub Category</h3></Col>
                 </Row>
 
-                <SubCategoryInput subCategoryName={this.state.subCategoryName} subCategoryErr={this.state.subCategoryErr} selectedmainCategory={this.state.selectedmainCategory}  mainCategories={this.state.mainCategories} main_category_id={this.state.main_category_id} edit={this.state.edit} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+                <SubCategoryInput subCategoryName={this.state.subCategoryName} subCategoryErr={this.state.subCategoryErr}  mainCategories={this.state.mainCategories} main_category_id={this.state.main_category_id} edit={this.state.edit} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
                 <SubCategoryList subCategories={this.state.subCategories} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
 
             </Container>

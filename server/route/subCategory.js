@@ -31,6 +31,7 @@ router.post('/newSubCategory', passport.authenticate('jwt', { session: false }),
 router.get('/subCategories', passport.authenticate('jwt', { session: false }), (req, res) => {
     SubCategory.getAllSubCategories((err, subCategory) => {
         if (err) {
+            let message = "No category";
             return res.json({
                 success: false,
                 message
@@ -66,6 +67,8 @@ router.put('/subCategories/:id', passport.authenticate('jwt', { session: false }
     SubCategory.updateSubCategory(req.params.id, subCategory, (err) => {
         if (!err) {
             res.json({ message: 'Updated'})
+        } else {
+            res.json({ err: err })
         }
     })
 })

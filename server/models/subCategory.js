@@ -26,8 +26,8 @@ module.exports.getSubcategoryByID = function (id, callback) {
 
 // get all sub categories
 module.exports.getAllSubCategories = function (callback) {
-    SubCategory.find(callback)
-}
+    SubCategory.find().populate('main_category').exec(callback)
+};
 
 // create new sub category
 module.exports.addSubCategory = function (newSubCategory, callback) {
@@ -35,11 +35,11 @@ module.exports.addSubCategory = function (newSubCategory, callback) {
 };
 
 // update main category
-module.exports.updateSubCategory = function (id,mainCategory, callback) {
-    SubCategory.findByIdAndUpdate(id, mainCategory, callback);
-}
+module.exports.updateSubCategory = function (id, subCategory, callback) {
+    SubCategory.findByIdAndUpdate(id, subCategory, callback)
+};
 
 // delete main category by id
 module.exports.deleteSubCategory = function (id, callback) {
     SubCategory.findByIdAndDelete(id, callback);
-}
+};
