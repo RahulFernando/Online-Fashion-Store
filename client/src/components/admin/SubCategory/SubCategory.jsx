@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 // bootstrap
 import { Container, Row, Col } from 'react-bootstrap';
 
-import { getMainCategories, createSubCategory, getSubCategories, updateSubCategory, getMainCategory, deleteSubCategories } from '../../../service/function'
+import { getMainCategories, createSubCategory, getSubCategories, updateSubCategory, deleteSubCategories } from '../../../service/function'
 
 // components
 import SubCategoryInput from './SubCategoryInput';

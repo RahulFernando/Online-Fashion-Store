@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // component
 import MainCategory from './MainCategory/MainCategory';
 import SubCategory from './SubCategory/SubCategory';
+import Home from './Home';
 
 class SideNavigation extends Component {
     render() {
@@ -54,6 +55,8 @@ class SideNavigation extends Component {
                 </SideNav.Nav>
             </SideNav>
             <main>
+                <Route path="/" exact component={Home} />
+                <Route path="/home" exact component={Home}/>
                 <Route path="/category/main_category" exact component={MainCategory} />
                 <Route path="/category/sub_category" exact component={SubCategory} />
             </main>
