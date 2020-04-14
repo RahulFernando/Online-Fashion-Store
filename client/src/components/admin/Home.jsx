@@ -32,8 +32,8 @@ export default class Home extends Component {
     render() {
         return (
             <Container>
-                <h6 className="text-center">Main Categories</h6>
-                <Table striped bordered hover variant="dark">
+                <h5 className="text-secondary">Main Categories</h5>
+                <Table striped bordered hover>
                     <tbody>
                         {/* <tr> */}
                         {this.state.mainCategories.map(mainCategory => {
@@ -42,8 +42,8 @@ export default class Home extends Component {
                         {/* </tr> */}
                     </tbody>
                 </Table>
-                <h6 className="text-center">Sub Categories</h6>
-                <Table striped bordered hover variant="dark">
+                <h5 className="text-secondary">Sub Categories</h5>
+                <Table striped bordered hover>
                     <thead>
                         <tr>
                         <th>Sub category</th>

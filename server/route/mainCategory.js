@@ -31,8 +31,7 @@ router.get('/mainCategories', passport.authenticate('jwt', { session: false }),(
         MainCategory.getAllMainCategories((err, mainCategory) => {
             if (err) {
                 return res.json({
-                    success: false,
-                    message
+                    success: false
                 });
             } else {
                 return res.send(mainCategory)

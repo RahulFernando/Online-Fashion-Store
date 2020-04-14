@@ -5,6 +5,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 // models
 const Admin = require('../models/admin');
 const User = require('../models/user');
+const StoreManager = require('../models/storeManager');
 
 // authenticate user by JWTStrategy
 module.exports = (userType, passport) => {
@@ -23,6 +24,13 @@ module.exports = (userType, passport) => {
             User.getUserByID(jwt_payload.data._id, (err, user) => {
                 if (err) return done(err, false);
                 if (user) return done(null, user);
+                return done(null, false);
+            })
+        }
+        if (userType == 'storeManager') {
+            StoreManager.getStoreManagerByID(jwt_payload.data._id, (err, storeManager) => {
+                if (err) return done(err, false);
+                if (user) return done(null, storeManager);
                 return done(null, false);
             })
         }

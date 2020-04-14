@@ -18,7 +18,7 @@ import Mybag from "./pages/Mybag";
 import Error from "./pages/Error";
 
 // protected route
-import { ProtectedRoute } from "./service/protected.route";
+import { AdminProtectedRoute } from "./service/adminprotected.route";
 
 import {Route, Switch} from 'react-router-dom';
 
@@ -36,7 +36,7 @@ function App() {
       <Route exact path="/mybag" component={Mybag}/>
       <Route path="/user/sign-in" component={UserLogin}/>
       <Route exact path="/admin" component={AdminLogin}/>
-      <ProtectedRoute exact path="/dash" component={DashBoard}/>
+      <AdminProtectedRoute exact path="/dash" component={DashBoard}/>
       <Route component={Error}/>
     </Switch>
   </>

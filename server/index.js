@@ -1,11 +1,9 @@
 //modules
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
-const path = require('path');
 
 //database
 const db = require('./models');
@@ -28,13 +26,15 @@ const port = process.env.PORT;
 const admin = require('./route/admin');
 const user = require('./route/user');
 const mainCategory = require('./route/mainCategory');
-const subCategory = require('./route/subCategory')
+const subCategory = require('./route/subCategory');
+const storeManager = require('./route/storeManager');
 
 // routes
 app.use('/api/admin', admin);
 app.use('/api/users', user);
 app.use('/api/admin/mainCategory', mainCategory);
 app.use('/api/admin/subCategory', subCategory);
+app.use('/api/admin/storeManager', storeManager);
 
 //listening to port
 app.listen(port, () => console.log(`Server is running: ${port}`));

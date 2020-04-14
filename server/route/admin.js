@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 
 const Admin = require('../models/admin'); //admin schema
 
+// register admin
 router.post('/register', (req, res) => {
     let newAdmin = Admin({
         username: req.body.username,
@@ -30,15 +31,16 @@ router.post('/register', (req, res) => {
     })
 });
 
+// admin login
 router.post('/login', (req, res) => {
    const username = req.body.username;
    const password = req.body.password;
    Admin.getAdminByUsername(username, (err, admin) => {
        if (err) throw err;
        if (!admin) {
-           res.json({
+           return res.json({
                status: 400,
-               message: "Invalid"
+               message: "Invalid username"
            })
        }
 
@@ -53,7 +55,7 @@ router.post('/login', (req, res) => {
                         email: admin.email
                     }
                 }, process.env.SECRET, {
-                        expiresIn: 50000 // for 5 min
+                        expiresIn: 5000 // for 5 min
                     }
                 );
                return res.json({

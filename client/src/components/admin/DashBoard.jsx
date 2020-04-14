@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 // component
 import MainCategory from './MainCategory/MainCategory';
 import SubCategory from './SubCategory/SubCategory';
+import StoreManager from './StoreManager/StoreManager';
 import Home from './Home';
 
 class DashBoard extends Component {
@@ -52,6 +53,14 @@ class DashBoard extends Component {
                                     </NavText>
                                 </NavItem>
                             </NavItem>
+                            <NavItem eventKey="storemanager">
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-user" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    New Store Manager
+                                </NavText>
+                            </NavItem>
                         </SideNav.Nav>
                     </SideNav>
                     <main>
@@ -59,6 +68,7 @@ class DashBoard extends Component {
                         <Route path="/home" exact component={Home}/>
                         <Route path="/category/main_category" exact component={MainCategory} />
                         <Route path="/category/sub_category" exact component={SubCategory} />
+                        <Route path="/storemanager" exact component={StoreManager} />
                     </main>
                 </React.Fragment>
             )}

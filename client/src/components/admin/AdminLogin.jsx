@@ -3,7 +3,7 @@ import { Button, FormGroup, FormControl, FormLabel, Form } from "react-bootstrap
 import "./style.css";
 
 // service
-import { loginAdmin, isAuthenticated } from '../../service/function';
+import { loginAdmin, isAdminAuthenticated } from '../../service/function';
 
 class Login extends Component {
   constructor() {
@@ -63,7 +63,7 @@ class Login extends Component {
    
     if (isValid) {
       loginAdmin(admin).then(res => {
-        if (isAuthenticated) {
+        if (isAdminAuthenticated) {
           this.props.history.push('/dash');
         } else {
           this.props.history.push('/');

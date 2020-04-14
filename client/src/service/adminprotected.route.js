@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-import { isAuthenticated } from './function'
+import { isAdminAuthenticated } from './function'
 
-export const ProtectedRoute = ({ component: Component, ...rest }) => {
+export const AdminProtectedRoute = ({ component: Component, ...rest }) => {
     return (
         <Route {...rest} render={
             (props) => {
-                const auth = isAuthenticated()
+                const auth = isAdminAuthenticated()
                 if (auth) {
                     return <Component {...props}/>
                 } else {
