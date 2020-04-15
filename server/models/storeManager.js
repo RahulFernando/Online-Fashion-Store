@@ -2,6 +2,8 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const uniqueVaidator = require('mongoose-unique-validator');
+const nodemailer = require('nodemailer');
+const smtpTransport = require('nodemailer-smtp-transport');
 
 // storeManager schema
 const storeManagerSchema = mongoose.Schema({
@@ -58,6 +60,32 @@ module.exports.comparePassword = function (password, hash, callback) {
         callback(null, isMatch);
     })
 }
+
+// send email 
+module.exports.sendEmail = function (receiver, callback) {
+    const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        secure: false,
+        port: 587,
+        auth: {
+          user: 'urbanrunes@gmail.com',
+          pass: 'urbanrunes504'
+        },
+        tls: {
+            rejectUnauthorized: false
+        }
+    });
+    const mailOptions = {
+        from: 'urbanrunes@gmail.com',
+        to: receiver,
+        subject: 'Welcome to Urban Runes',
+        text: 'You are registered as a store manager in Urban Runes'
+    }
+
+    transporter.sendMail(mailOptions, callback)
+    
+}
+
 
 // get all store managers
 module.exports.getAllStoreManagers = function (callback) {

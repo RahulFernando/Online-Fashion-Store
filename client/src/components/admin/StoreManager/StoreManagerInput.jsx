@@ -5,7 +5,7 @@ import { Button, Form, Card, InputGroup, FormControl, Alert } from 'react-bootst
 
 export default class StoreManagerInput extends Component {
     render() {
-        const { username, email, password, usernameErr, emailErr, passwordErr, edit, handleChange, handleSubmit } = this.props
+        const { username, email, password, errors, edit, handleChange, handleSubmit } = this.props
         return (
             <Card bg="light" className="card-body my-3">
                 <Form onSubmit={handleSubmit}>
@@ -24,7 +24,7 @@ export default class StoreManagerInput extends Component {
                             >
                             </FormControl>
                         </InputGroup>
-                        {usernameErr ? <Alert variant="danger" className="text-center"> {usernameErr}</Alert> : ''}
+                        {errors.username.length > 0 ? <Alert variant="danger" className="text-center"> {errors.username}</Alert> : ''}
 
                         <InputGroup className="mb-3">
                             <InputGroup.Prepend>
@@ -40,7 +40,7 @@ export default class StoreManagerInput extends Component {
                             >
                             </FormControl>
                         </InputGroup>
-                        {emailErr ? <Alert variant="danger" className="text-center"> {emailErr}</Alert> : ''}
+                        {errors.email.length > 0 ? <Alert variant="danger" className="text-center"> {errors.email}</Alert> : ''}
 
 
                         <InputGroup className="mb-3">
@@ -57,7 +57,7 @@ export default class StoreManagerInput extends Component {
                             >
                             </FormControl>
                         </InputGroup>
-                        {passwordErr ? <Alert variant="danger" className="text-center"> {passwordErr}</Alert> : ''}
+                        {errors.password.length > 0 ? <Alert variant="danger" className="text-center"> {errors.password}</Alert> : ''}
 
                     </Form.Group>
                     <Button variant="primary" type="submit">

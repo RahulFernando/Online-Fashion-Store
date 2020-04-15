@@ -10,6 +10,9 @@ import StoreManagerList from './StoreManagerList'
 // service
 import { addNewStoreManager, getAllStoreManagers, updateStoreManager, deleteStoreManagers } from '../../../service/function'
 
+// check email
+const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
+
 export default class StoreManager extends Component {
     constructor(props) {
         super(props)
@@ -19,12 +22,14 @@ export default class StoreManager extends Component {
             username: '',
             email: '',
             password: '',
-            usernameErr: '',
-            emailErr: '',
-            passwordErr: '',
-            serverErr: '',
             storeManagers: [],
-            edit: false
+            edit: false,
+            errors: {
+                username: '',
+                email: '',
+                password: '',
+                server: ''
+            }
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -44,59 +49,47 @@ export default class StoreManager extends Component {
         let target = e.target;
         let value = target.value;
         let name = target.name;
+        let errors = this.state.errors;
+
+        // check validation
+        switch(name) {
+            case 'username':
+                errors.username = value.length < 3 ? 'Username must be 3 character long!' : '';
+                break;
+            case 'email':
+                errors.email = validEmailRegex.test(value) ? '' : 'Email is not valid';
+                break;
+            case 'password':
+                errors.password = value.length < 3 ? 'Password must be 3 character long!' : '';
+                break;
+            default:
+                break;
+        }
     
         this.setState({
+            errors,
             [name] : value
         })
     }
     
     // validate form
-    validate = () => {
-        let usernameErr = '';
-        let emailErr = '';
-        let passwordErr = '';
-    
-        if (!this.state.username) {
-            usernameErr = 'You need to provide valid username';
-        }else if (!this.state.email) {
-            emailErr = 'You need to provide valid email address';
-        }else if (!this.state.password) {
-            passwordErr = 'Password cannot be empty';
-        }
-    
-        if (usernameErr) {
-            this.setState({usernameErr});
-            setTimeout(() => {
-                this.setState({ usernameErr: '' })
-            }, 2000); // set time interval for error message
-            return false;
-        }else if (emailErr) {
-            this.setState({emailErr});
-            setTimeout(() => {
-                this.setState({ emailErr: '' })
-            }, 2000); // set time interval for error message
-            return false;
-        }else if (passwordErr) {
-            this.setState({usernameErr});
-            setTimeout(() => {
-                this.setState({ passwordErr: '' })
-            }, 2000); // set time interval for error message
-            return false;
-        }
-    
-        return true;
+    validate = (errors) => {
+        let valid = true;
+        Object.values(errors).forEach((val) => {
+            val.length > 0 && (valid = false)
+        });
+        return valid;
     }
     
     // handle submit
     handleSubmit = (e) => {
         e.preventDefault();
-        const isValid = this.validate();
         const storeManager = {
             username: this.state.username,
             email: this.state.email,
             password: this.state.password
         }
-        if (isValid) {
+        if (this.validate(this.state.errors)) {
             if (!this.state.edit) {
                 addNewStoreManager(storeManager).then(res => {
                     if (res.data.success === false) {
@@ -161,7 +154,7 @@ export default class StoreManager extends Component {
                 <Row className="justify-content-md-center">
                     <Col md="auto"><h3>New Store Manager</h3></Col>
                 </Row>
-                <StoreManagerInput username={this.state.username} email={this.state.email} password={this.state.password} usernameErr={this.state.usernameErr} emailErr={this.emailErr} passwordErr={this.passwordErr} edit={this.state.edit} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+                <StoreManagerInput username={this.state.username} email={this.state.email} password={this.state.password} errors={this.state.errors} edit={this.state.edit} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
                 <StoreManagerList storeManagers={this.state.storeManagers} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
             </Container>
         )

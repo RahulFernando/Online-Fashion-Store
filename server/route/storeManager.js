@@ -23,6 +23,13 @@ router.post('/register', passport.authenticate('jwt', { session: false }), (req,
                 message
             })
         } else {
+            StoreManager.sendEmail(newStoreManager.email, (err) => {
+                if (err) {
+                    console.log(err)
+                }else {
+                    console.log("Mail send")
+                }
+            })
             return res.json({
                 status: 200,
                 message: 'New storeManager registered'
