@@ -24,11 +24,11 @@ export default class StoreManager extends Component {
             password: '',
             storeManagers: [],
             edit: false,
+            serverErr: '',
             errors: {
                 username: '',
                 email: '',
-                password: '',
-                server: ''
+                password: ''
             }
         }
 
@@ -154,7 +154,7 @@ export default class StoreManager extends Component {
                 <Row className="justify-content-md-center">
                     <Col md="auto"><h3>New Store Manager</h3></Col>
                 </Row>
-                <StoreManagerInput username={this.state.username} email={this.state.email} password={this.state.password} errors={this.state.errors} edit={this.state.edit} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+                <StoreManagerInput username={this.state.username} email={this.state.email} password={this.state.password} errors={this.state.errors} serverErr={this.state.serverErr} edit={this.state.edit} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
                 <StoreManagerList storeManagers={this.state.storeManagers} handleEdit={this.handleEdit} handleDelete={this.handleDelete}/>
             </Container>
         )

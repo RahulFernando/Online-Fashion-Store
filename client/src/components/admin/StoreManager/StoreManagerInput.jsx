@@ -5,7 +5,7 @@ import { Button, Form, Card, InputGroup, FormControl, Alert } from 'react-bootst
 
 export default class StoreManagerInput extends Component {
     render() {
-        const { username, email, password, errors, edit, handleChange, handleSubmit } = this.props
+        const { username, email, password, errors, serverErr, edit, handleChange, handleSubmit } = this.props
         return (
             <Card bg="light" className="card-body my-3">
                 <Form onSubmit={handleSubmit}>
@@ -63,6 +63,7 @@ export default class StoreManagerInput extends Component {
                     <Button variant="primary" type="submit">
                         {edit ? 'Update': 'Create'}
                     </Button>
+                    {serverErr ? <Alert variant="warning" className="text-center"> {serverErr}</Alert> : ''}
                 </Form>
             </Card>
         )
