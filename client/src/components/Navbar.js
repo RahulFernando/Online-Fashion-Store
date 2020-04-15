@@ -63,7 +63,7 @@ export default class Navbar extends Component {
                       <Link to="/women">Women</Link>
                   </li>
                   <li>
-                      <Link to="/promotion">Promotion</Link>
+                      <Link to="/kids">Kids</Link>
                   </li>
                   <li>
                   <ReactSearchBox placeholder="Search"

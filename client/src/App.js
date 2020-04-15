@@ -11,7 +11,7 @@ import DashBoard from "./components/admin/DashBoard";
 import Home from "./pages/Home";
 import Men from "./pages/Men";
 import Women from "./pages/Women";
-import Promotion from "./pages/Promotion";
+import Kids from "./pages/Kids";
 import User from "./pages/User";
 import Wishlist from "./pages/Wishlist";
 import Mybag from "./pages/Mybag";
@@ -30,7 +30,7 @@ function App() {
       <Route exact path="/" component={Home}/>
       <Route exact path="/men" component={Men}/>
       <Route exact path="/women" component={Women}/>
-      <Route exact path="/promotion" component={Promotion}/>
+      <Route exact path="/kids" component={Kids}/>
       <Route exact path="/user" component={User}/>
       <Route exact path="/wishlist" component={Wishlist}/>
       <Route exact path="/mybag" component={Mybag}/>

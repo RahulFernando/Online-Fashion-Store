@@ -169,7 +169,7 @@ h6 {
 .defaultHero,
 .menHero,
 .womenHero,
-.promotionHero {
+.kidsHero {
   min-height: calc(150vh - 66px);
   background: url("./images/defaultBcg.jpg") center/cover no-repeat;
   display: flex;
@@ -177,17 +177,16 @@ h6 {
   justify-content: center;
 }
 .menHero {
-  background-image: url("./images/image2.png");
+  background-image: url("./images/image2.jpg");
   background-size: contain;
   background-position: top center;
-  
 }
 .womenHero {
-  background-image: url("./images/image3.png");
+  background-image: url("./images/image3.jpg");
   background-size: contain;
   background-position: top center;
 }
-.promotionHero {
+.kidsHero {
   background-image: url("./images/image4.jpg");
   background-size: contain;
   background-position: top center;
