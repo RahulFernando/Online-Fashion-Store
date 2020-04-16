@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import UserLogin from "./components/login/Login";
 import AdminLogin from "./components/admin/AdminLogin";
 import DashBoard from "./components/admin/DashBoard";
+import StoreDashboard from "./components/store_manager/StoreDashboard"
 import Home from "./pages/Home";
 import Men from "./pages/Men";
 import Women from "./pages/Women";
@@ -37,6 +38,7 @@ function App() {
       <Route path="/user/sign-in" component={UserLogin}/>
       <Route exact path="/admin" component={AdminLogin}/>
       <AdminProtectedRoute exact path="/dash" component={DashBoard}/>
+      <Route exact path="/store" component={StoreDashboard}/>
       <Route component={Error}/>
     </Switch>
   </>
