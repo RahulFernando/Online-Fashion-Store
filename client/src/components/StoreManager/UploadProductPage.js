@@ -1,7 +1,7 @@
 import React from 'react'
 import {Form} from 'react-bootstrap';
 import {Button} from 'react-bootstrap';
-import FileUpload from './utils/FileUpload';
+import FileUpload from '../../service/FileUpload';
 
 function UploadProductPage() {
     return (
@@ -11,6 +11,7 @@ function UploadProductPage() {
             </div>
             <Form>
             <FileUpload/>
+            <br/>
     <Form.Group controlId="exampleForm.ControlSelect1">
     <Form.Label>Main Category</Form.Label>
     <Form.Control as="select">
