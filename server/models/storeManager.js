@@ -79,7 +79,7 @@ module.exports.sendEmail = function (receiver, callback) {
         from: 'urbanrunes@gmail.com',
         to: receiver,
         subject: 'Welcome to Urban Runes',
-        text: 'You are registered as a store manager in Urban Runes'
+        text: 'We are almost done creating your account. You can use this account to log in to urbanrunes as a store manager. Your password is 12345'
     }
 
     transporter.sendMail(mailOptions, callback)

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let usertoken = ''
-let admintoken = localStorage.getItem('admintoken')
+let admintoken = ''
 
 // register new user
 export const registerUser = newUser => {
@@ -21,7 +21,6 @@ export const loginUser = user => {
     .then(res => {
         if (res.data.type === 'user') {
             usertoken = res.data.token
-            localStorage.setItem('usertoken', usertoken)
         }
     })
     .catch(err => { console.log(err) })
@@ -36,7 +35,6 @@ export const loginAdmin = admin => {
     .then(res => {
         if (res.data.type === 'admin') {
             admintoken = res.data.token
-            localStorage.setItem('admintoken', admintoken)
         }
     })
     .catch(err => { console.log(err) })
@@ -144,14 +142,14 @@ export const deleteStoreManagers = (id) => {
 
 // check authentication
 export const isAdminAuthenticated = () => {
-    if (localStorage.getItem('admintoken')) {
+    if (admintoken) {
         return true
     }
     return false
 }
 
 export const isUserAuthenticated = () => {
-    if (localStorage.getItem('usertoken')) {
+    if (usertoken) {
         return true
     }
     return false
