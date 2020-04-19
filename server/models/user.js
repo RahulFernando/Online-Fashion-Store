@@ -19,8 +19,22 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String,
         required: true
+    },
+    addToCart : {
+        type: Array,
+        default: []
+    },
+    addToWishList : {
+        type: Array,
+        default: []
+    },
+    history : {
+        type: Array,
+        default: []
     }
 });
+
+//check
 
 UserSchema.plugin(uniqueVaidator);
 
