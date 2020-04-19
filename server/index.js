@@ -36,6 +36,8 @@ app.use('/api/admin/mainCategory', mainCategory);
 app.use('/api/admin/subCategory', subCategory);
 app.use('/api/admin/storeManager', storeManager);
 
+// init
+
 //listening to port
 app.listen(port, () => console.log(`Server is running: ${port}`));
 
