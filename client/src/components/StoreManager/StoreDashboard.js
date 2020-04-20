@@ -5,7 +5,7 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import UploadProduct from './UploadProductPage';
+import NewItem from './NewItem'
 
 class StoreDashboard extends Component {
     render() {
@@ -42,8 +42,8 @@ class StoreDashboard extends Component {
                         </SideNav.Nav>
                     </SideNav>
                     <main>
-                        <Route path="/storedash" exact component={UploadProduct} />
-                        <Route path="/storehome" exact component={UploadProduct} />
+                        <Route path="/storedash" exact component={NewItem} />
+                        <Route path="/storehome" exact component={NewItem} />
                     </main>
                 </React.Fragment>
             )}
