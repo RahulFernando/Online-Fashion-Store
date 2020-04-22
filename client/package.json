@@ -23,7 +23,8 @@
     "react-search-box": "^2.0.2",
     "redux": "^4.0.5",
     "redux-promise": "^0.6.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "superagent": "^5.2.2"
   },
   "scripts": {
     "start": "react-scripts start",
