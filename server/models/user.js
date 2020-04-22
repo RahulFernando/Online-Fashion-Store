@@ -34,6 +34,8 @@ const UserSchema = mongoose.Schema({
     }
 });
 
+//check
+
 UserSchema.plugin(uniqueVaidator);
 
 const User = module.exports = mongoose.model('User', UserSchema);
