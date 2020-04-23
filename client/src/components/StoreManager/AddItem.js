@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Container,Form,Button} from 'react-bootstrap';
+import {Container,Form,Button, Image, Col} from 'react-bootstrap';
 import {upload} from '../../service/FileUpload';
 
 class AddItem extends Component {
@@ -45,6 +45,12 @@ class AddItem extends Component {
     }
 
     render() {
+
+      let imgPreview;
+        if (this.state.file) {
+            imgPreview = <img src={this.state.file} alt='' />;
+        }
+
         return (
             <div style={{ maxWidth:'700px', margin:'2rem auto'}}>
             <div style={{ textAlign:'center', marginBottom:'2rem'}}>
@@ -53,6 +59,11 @@ class AddItem extends Component {
             <Container>
             <Form onSubmit={this.handleSubmit} enctype="multipart/form-data">
               <br/>
+              <Form.Group controlId="formImagePreview">
+                <Col xs={8} md={6}>
+                  <Image src={imgPreview} thumbnail />
+                </Col>
+              </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Control type="file" id="file" name="file" onChange={this.onFileChange} placeholder="Enter description" />
               </Form.Group>

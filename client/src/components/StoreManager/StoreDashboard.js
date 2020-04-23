@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import AddItem from './AddItem';
 
+
 class StoreDashboard extends Component {
     render() {
         return (
@@ -51,7 +52,7 @@ class StoreDashboard extends Component {
                     </SideNav>
                     <main>
                         <Route path="/storedash" exact component={AddItem} />
-                        {/* <Route path="/storehome" exact component={AddItem} /> */}
+                        {/* <Route path="/storehome" exact component={} /> */}
                         <Route path="/storeadd" exact component={AddItem} />
                     </main>
                 </React.Fragment>
