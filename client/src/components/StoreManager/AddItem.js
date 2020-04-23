@@ -8,6 +8,7 @@ class AddItem extends Component {
         super(props)
 
         this.state = {
+          img: null,
           file: null,
           description: ''
         }
@@ -22,6 +23,7 @@ class AddItem extends Component {
         let value = target.files[0];
 
         this.setState({
+          img: URL.createObjectURL(value),
           file: value
         })
     }
@@ -46,25 +48,20 @@ class AddItem extends Component {
 
     render() {
 
-      let imgPreview;
-        if (this.state.file) {
-            imgPreview = <img src={this.state.file} alt='' />;
-        }
-
         return (
             <div style={{ maxWidth:'700px', margin:'2rem auto'}}>
             <div style={{ textAlign:'center', marginBottom:'2rem'}}>
                 <h2>Upload Product</h2>
             </div>
             <Container>
-            <Form onSubmit={this.handleSubmit} enctype="multipart/form-data">
+            <Form onSubmit={this.handleSubmit} encType="multipart/form-data">
               <br/>
               <Form.Group controlId="formImagePreview">
                 <Col xs={8} md={6}>
-                  <Image src={imgPreview} thumbnail />
+                <Image src={this.state.img} alt='' />
                 </Col>
               </Form.Group>
-              <Form.Group controlId="formBasicEmail">
+              <Form.Group>
                 <Form.Control type="file" id="file" name="file" onChange={this.onFileChange} placeholder="Enter description" />
               </Form.Group>
               <Form.Group controlId="formMainCategory">
