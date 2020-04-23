@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import logo from '../images/logo.gif'
-import {FaAlignRight} from 'react-icons/fa'
+import {FaAlignRight, FaHistory} from 'react-icons/fa'
 import {FaUserAlt} from 'react-icons/fa'
 import {FaHeart} from 'react-icons/fa'
 import {FaShoppingBag} from 'react-icons/fa'
@@ -84,6 +84,11 @@ export default class Navbar extends Component {
                   <li>
                     <Link to="/mybag">
                       <FaShoppingBag className="nav-bar-icon"/>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/purchasehistory">
+                      <FaHistory className="nav-bar-icon"/>
                     </Link>
                   </li>
               </ul>

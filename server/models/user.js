@@ -35,6 +35,7 @@ const UserSchema = mongoose.Schema({
 });
 
 //check
+//check 01 in user model
 
 UserSchema.plugin(uniqueVaidator);
 
