@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import {Container,Form,Button, Image, Col} from 'react-bootstrap';
 import {upload} from '../../service/FileUpload';
+import { getMainCategories, getSubCategories } from '../../service/function'
+
 
 class AddItem extends Component {
 
@@ -15,18 +17,33 @@ class AddItem extends Component {
           size: '',
           quantity: '',
           description: '',
-          price: ''
+          price: '',
+          mainCategories: [],
+          subCategories: []
         }
 
         this.onFileChange = this.onFileChange.bind(this);
-        // this.onMainCategoryChange = this.onMainCategoryChange(this);
-        // this.onSubCategoryChange = this.onSubCategoryChange(this);
-        this.onSizeChange = this.onSizeChange(this);
-        this.onQuantityChange = this.onQuantityChange(this);
+        this.onMainCategoryChange = this.onMainCategoryChange.bind(this);
+        this.onSubCategoryChange = this.onSubCategoryChange.bind(this);
+        this.onSizeChange = this.onSizeChange.bind(this);
+        this.onQuantityChange = this.onQuantityChange.bind(this);
         this.onDescriptionChange = this.onDescriptionChange.bind(this);
-        // this.onPriceChange = this.onPriceChange(this);
+        this.onPriceChange = this.onPriceChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    componentDidMount() {
+      getMainCategories().then(res => {
+          this.setState({
+              mainCategories: res.data
+          })
+      })
+      getSubCategories().then(res => {
+          this.setState({
+              subCategories: res.data
+          })
+      })
+  }
 
     onFileChange = (e) => {
         let target = e.target;
@@ -49,7 +66,7 @@ class AddItem extends Component {
 
     onSubCategoryChange = (e) => {
       let target = e.target;
-      let value = e.value;
+      let value = target.value;
 
       this.setState({
         subCategory: value
@@ -58,7 +75,7 @@ class AddItem extends Component {
 
     onSizeChange = (e) => {
       let target = e.target;
-      let value = e.value;
+      let value = target.value;
 
       this.setState({
         size: value
@@ -67,7 +84,7 @@ class AddItem extends Component {
 
     onQuantityChange = (e) => {
       let target = e.target;
-      let value = e.value;
+      let value = target.value;
 
       this.setState({
         quantity: value
@@ -87,6 +104,7 @@ class AddItem extends Component {
       let target = e.target;
       let value = target.value;
 
+
       this.setState({
         price: value
       })
@@ -99,7 +117,7 @@ class AddItem extends Component {
         data.append('mainCategory', this.state.mainCategory);
         data.append('subCategory', this.state.subCategory);
         data.append('size', this.state.size);
-        data.append('quantity', this.state.quantity);
+        data.append('qty', this.state.quantity);
         data.append('description', this.state.description);
         data.append('price', this.state.price);
 
@@ -127,21 +145,19 @@ class AddItem extends Component {
               <Form.Group controlId="formMainCategory">
                 <Form.Label>Main Category</Form.Label>
                   <Form.Control as="select" onChange={this.onMainCategoryChange}>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option>Select Main Category</option>
+                  {this.state.mainCategories.map(mainCategory => {
+                            return <option key={mainCategory._id}>{mainCategory.mainCategoryName}</option>
+                        })}
                   </Form.Control>
               </Form.Group>
               <Form.Group controlId="formSubCategory">
                 <Form.Label>Sub Category</Form.Label>
                   <Form.Control as="select" onChange={this.onSubCategoryChange}>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                    <option>Select Sub Category</option>
+                  {this.state.subCategories.map(subCategory => {
+                            return <option key={subCategory._id}>{subCategory.subCategoryName}</option>
+                        })}
                   </Form.Control>
               </Form.Group>
               {['checkbox'].map((type) => (
@@ -185,7 +201,7 @@ class AddItem extends Component {
               ))}
               <Form.Group controlId="formQuantity">
                 <Form.Label>Quantity</Form.Label>
-                  <Form.Control type="number" onChange={this.onQuantityChange} placeholder="" />
+                  <Form.Control type="number" id="quantity" name="quantity" onChange={this.onQuantityChange} placeholder="" />
               </Form.Group>
               <Form.Group controlId="formDescription">
                 <Form.Label>Description</Form.Label>
@@ -193,7 +209,7 @@ class AddItem extends Component {
               </Form.Group>
               <Form.Group controlId="formPrice">
                 <Form.Label>Price(Rs)</Form.Label>
-                  <Form.Control type="number" onChange={this.onPriceChange} placeholder="Rs.xxxx" />
+                  <Form.Control type="number" id="price" name="price" onChange={this.onPriceChange} placeholder="Rs.xxxx" />
               </Form.Group>
               <Button className="btn btn-primary btn-large centerButton" type="submit">Submit</Button>
           </Form>
