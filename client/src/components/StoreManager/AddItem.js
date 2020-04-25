@@ -12,6 +12,7 @@ class AddItem extends Component {
         this.state = {
           img: null,
           file: null,
+          itemName: '',
           mainCategory: '',
           subCategory: '',
           size: '',
@@ -23,6 +24,7 @@ class AddItem extends Component {
         }
 
         this.onFileChange = this.onFileChange.bind(this);
+        this.onItemNameChange = this.onItemNameChange.bind(this);
         this.onMainCategoryChange = this.onMainCategoryChange.bind(this);
         this.onSubCategoryChange = this.onSubCategoryChange.bind(this);
         this.onSizeChange = this.onSizeChange.bind(this);
@@ -53,6 +55,15 @@ class AddItem extends Component {
           img: URL.createObjectURL(value),
           file: value
         })
+    }
+
+    onItemNameChange = (e) => {
+      let target = e.target;
+      let value = target.value;
+
+      this.setState({
+        itemName: value
+      })
     }
 
     onMainCategoryChange = (e) => {
@@ -114,6 +125,7 @@ class AddItem extends Component {
         e.preventDefault()
         const data = new FormData();
         data.append('file', this.state.file);
+        data.append('itemName', this.state.itemName);
         data.append('mainCategory', this.state.mainCategory);
         data.append('subCategory', this.state.subCategory);
         data.append('size', this.state.size);
@@ -141,6 +153,10 @@ class AddItem extends Component {
               </Form.Group>
               <Form.Group>
                 <Form.Control type="file" id="file" name="file" onChange={this.onFileChange} placeholder="Enter description" />
+              </Form.Group>
+              <Form.Group controlId="formItemName">
+                <Form.Label>Item Name</Form.Label>
+                  <Form.Control type="text" id="itemName" name="itemName" onChange={this.onItemNameChange} placeholder="Enter Item Name" />
               </Form.Group>
               <Form.Group controlId="formMainCategory">
                 <Form.Label>Main Category</Form.Label>

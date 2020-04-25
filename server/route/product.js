@@ -33,6 +33,7 @@ router.post('/uploadItem', (req, res) => {
         console.log(req.file.path)
         product.image.data = fs.readFileSync(req.file.path)
         product.image.contentType = "image/png"
+        product.itemName = req.body.itemName
         product.mainCategory = req.body.mainCategory
         product.subCategory = req.body.subCategory
         product.size = req.body.size

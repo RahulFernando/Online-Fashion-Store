@@ -6,6 +6,9 @@ const itemSchema = mongoose.Schema({
         data: Buffer,
         contentType: String
     },
+    itemName: {
+        type: String,
+    },
     mainCategory: {
         type: String,
         maxlength: 50
