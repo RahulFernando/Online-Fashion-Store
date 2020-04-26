@@ -28,7 +28,7 @@ router.post('/newSubCategory', passport.authenticate('jwt', { session: false }),
 
 });
 
-router.get('/subCategories', passport.authenticate('jwt', { session: false }), (req, res) => {
+router.get('/subCategories', (req, res) => {
     SubCategory.getAllSubCategories((err, subCategory) => {
         if (err) {
             let message = "No category";

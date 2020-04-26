@@ -16,7 +16,7 @@ import Women from "./pages/Women";
 import Kids from "./pages/Kids";
 import User from "./pages/User";
 import Wishlist from "./pages/Wishlist";
-import Mybag from "./pages/Mybag";
+import Mybag from "./components/cart/Mybag";
 import PurchaseHistory from "./pages/PurchaseHistory";
 import Error from "./pages/Error";
 

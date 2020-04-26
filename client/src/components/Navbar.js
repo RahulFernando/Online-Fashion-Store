@@ -54,16 +54,16 @@ export default class Navbar extends Component {
               <ul className={this.state.isOpen ? 
               "nav-links show-nav" : "nav-links"}>
                   <li>
-                      <Link to="/">Home</Link>
+                      <Link to="/">HOME</Link>
                   </li>
                   <li>
-                      <Link to="/men">Men</Link>
+                      <Link to="/men">MEN</Link>
                   </li>
                   <li>
-                      <Link to="/women">Women</Link>
+                      <Link to="/women">WOMEN</Link>
                   </li>
                   <li>
-                      <Link to="/kids">Kids</Link>
+                      <Link to="/kids">KIDS</Link>
                   </li>
                   <li>
                   <ReactSearchBox placeholder="Search"
