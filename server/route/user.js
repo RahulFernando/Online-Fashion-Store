@@ -36,7 +36,7 @@ router.post('/login', (req, res) => {
     User.getUserByUsername(username, (err, user) => {
         if (err) throw err;
         if (!user) {
-            res.json({
+            return res.json({
                 status: 400,
                 message: "Invalid user"
             })
@@ -59,7 +59,8 @@ router.post('/login', (req, res) => {
                 return res.json({
                     status: 200,
                     type: 'user',
-                    token: token
+                    _id: user._id,
+                    token: 'Bearer ' + token
                 })
             } else {
                 return res.json({

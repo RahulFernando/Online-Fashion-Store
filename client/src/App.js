@@ -39,6 +39,7 @@ function App() {
       <Route exact path="/mybag" component={Mybag}/>
       <Route exact path="/purchasehistory" component={PurchaseHistory}/>
       <Route path="/user/sign-in" component={UserLogin}/>
+      <Route path="/user/sign-up" component={UserLogin}/>
       <Route exact path="/admin" component={AdminLogin}/>
       <AdminProtectedRoute exact path="/dash" component={DashBoard}/>
       <Route exact path="/store" component={StoreDashboard}/>
