@@ -3,11 +3,33 @@ import{ Table,Container } from 'react-bootstrap'
 import{ Card } from 'react-bootstrap'
 import MybagItem from './MybagItem'
 import Navbar from '../../components/Navbar'
+import Payment from './Payment'
+import{ Button } from 'react-bootstrap'
 
 
 
 
 export default class Mybag extends Component {
+
+    constructor(props){
+        super(props);
+
+        this.changePaymentState = this.changePaymentState.bind(this);
+
+        this.state = {
+
+            payment : false
+
+        };
+    }
+
+    changePaymentState(){
+
+        this.setState({
+            payment: true
+        });
+    }
+
     render() {
         return (
 
@@ -34,6 +56,10 @@ export default class Mybag extends Component {
                               </tbody>
                    </Table>
 
+                <Button onClick={this.changePaymentState}>Proceed</Button>
+
+                {this.state.payment ? <Payment/> : ""}
+                   
                    </Container>
 
 
