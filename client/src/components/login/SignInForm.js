@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { loginUser } from '../../service/function';
+import { loginUser, isUserAuthenticated } from '../../service/function';
 
 import { Button, Form, Container } from 'react-bootstrap';
 
@@ -14,7 +14,8 @@ class SignInForm extends Component {
       username: '',
       password: '',
       usernameErr: '',
-      passwordErr: ''
+      passwordErr: '',
+      serverError: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -62,8 +63,12 @@ class SignInForm extends Component {
    
     if (isValid) {
       loginUser(user).then(res => { 
-        if (localStorage.getItem('usertoken')) {
+        if (isUserAuthenticated) {
           this.props.history.push('/men');
+        } else {
+            this.setState({
+              serverError: 'Username or Password incorrect!'
+            })
         }
       })
     }
@@ -104,11 +109,15 @@ class SignInForm extends Component {
 
                   <Button type="submit" className="Form__Button mr-20">Sign In</Button> &nbsp;
 
-                  <Link to="/sign-up" style={{ textDecoration: 'none' }} className="FormField__Link">Don't have an account?</Link>
+                  <Link to="sign-up" style={{ textDecoration: 'none' }} className="FormField__Link">Don't have an account?</Link>
 
                 </Form.Group>
 
               </Form>
+
+              <div>{this.state.serverError ? (
+                    <span className="ErrorMessage">{this.state.serverError}</span>
+                  ): null}</div>              
             </Container>
         );
     }
