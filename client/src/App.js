@@ -17,7 +17,7 @@ import Kids from "./pages/Kids";
 import User from "./pages/User";
 import Wishlist from "./components/wishList/Wishlist";
 import Mybag from "./components/cart/Mybag";
-import PurchaseHistory from "./pages/PurchaseHistory";
+import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 import Error from "./pages/Error";
 
 // protected route

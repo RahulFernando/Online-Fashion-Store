@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import{ Table,Container } from 'react-bootstrap'
 import{ Card } from 'react-bootstrap'
 import MybagItem from './MybagItem'
+import Navbar from '../../components/Navbar'
 
 
 
@@ -9,6 +10,9 @@ import MybagItem from './MybagItem'
 export default class Mybag extends Component {
     render() {
         return (
+
+            <>
+            <Navbar/>
 
         <Container>
 
@@ -33,7 +37,7 @@ export default class Mybag extends Component {
                    </Container>
 
 
-          
+          </>
         )
     }
 }
