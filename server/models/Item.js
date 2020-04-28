@@ -18,7 +18,7 @@ const itemSchema = mongoose.Schema({
         maxlength: 50
     },
     size: {
-        type: Number,
+        type: String,
     },
     qty: {
         type: Number,

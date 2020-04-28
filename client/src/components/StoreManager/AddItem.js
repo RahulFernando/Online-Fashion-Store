@@ -15,7 +15,7 @@ class AddItem extends Component {
           itemName: '',
           mainCategory: '',
           subCategory: '',
-          size: '',
+          size: false,
           quantity: '',
           description: '',
           price: '',
@@ -84,13 +84,14 @@ class AddItem extends Component {
       })
     }
 
-    onSizeChange = (e) => {
-      let target = e.target;
-      let value = target.value;
+    onSizeChange = () => {
+      // let target = e.target;
+      // let value = target.value;
 
-      this.setState({
-        size: value
-      })
+      this.setState(prevState => ({
+        // [e.target.label]: e.target.checked
+        size: !prevState.size
+      }))
     }
 
     onQuantityChange = (e) => {
@@ -124,6 +125,13 @@ class AddItem extends Component {
     handleSubmit = (e) => {
         e.preventDefault()
         const data = new FormData();
+        let arr = [];
+        for (var key in this.state.size) {
+          if(this.state.size[key] === true) {
+            arr.push(key);
+          }
+        }
+        size: arr.toString()
         data.append('file', this.state.file);
         data.append('itemName', this.state.itemName);
         data.append('mainCategory', this.state.mainCategory);
@@ -177,7 +185,7 @@ class AddItem extends Component {
                   </Form.Control>
               </Form.Group>
               {['checkbox'].map((type) => (
-                <div key={`custom-inline-${type}`} className="mb-3" onChange={this.onSizeChange}>
+                <div key={`custom-inline-${type}`} className="mb-3" checked={this.state.size} onChange={this.onSizeChange}>
                   <Form.Check
                     custom
                     inline

@@ -295,9 +295,14 @@ h6 {
 /*end of services */
 /* featured rooms */
 
-.featured-rooms {
+.popular-products {
   padding: 5rem 0;
 }
+
+.card-block {
+  min-height: 220px;
+}
+
 .featured-rooms-center {
   width: 80vw;
   margin: 0 auto;
@@ -534,3 +539,5 @@ h6 {
   }
 }
 /* end of rooms fitler*/
+
+
