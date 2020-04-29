@@ -165,7 +165,6 @@ export const getItemDetails = () => {
 }
 
 //Return user id
-
 export const getUserId = () => {
 
     if (usertoken) {
