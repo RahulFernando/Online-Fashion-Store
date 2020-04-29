@@ -21,7 +21,7 @@ export const loginUser = user => {
     })
     .then(res => {
         if (res.data.type === 'user') {
-            console.log(res.data._id) // udin varaible ekak hadala ekata userge id eke assign karaganin. eeta passe function ekakin eka return karapn
+            console.log(res.data._id) 
             usertoken = res.data.token
             userid = res.data._id;
         }
@@ -162,6 +162,7 @@ export const isUserAuthenticated = () => {
 //get Item Details
 export const getItemDetails = () => {
     return axios.get("/product/getItem")
+}
 
 //Return user id
 
