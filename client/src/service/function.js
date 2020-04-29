@@ -156,3 +156,8 @@ export const isUserAuthenticated = () => {
     }
     return false
 }
+
+//get Item Details
+export const getItemDetails = () => {
+    return axios.get("/product/getItem")
+}

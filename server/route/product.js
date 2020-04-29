@@ -48,6 +48,14 @@ router.post('/uploadItem', (req, res) => {
     })
 });
 
+router.get('/getItem', (req, res) => {
+    Item.find()
+    .exec((err, products) => {
+        if (err) return res.status(400).json({success: false, err})
+        res.status(200).json({success: true, products})
+    })
+});
+
 
 
 module.exports = router;
