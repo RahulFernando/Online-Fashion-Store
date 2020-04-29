@@ -162,7 +162,7 @@ export const isUserAuthenticated = () => {
 //get Item Details
 export const getItemDetails = () => {
     return axios.get("/product/getItem")
-
+}
 //Return user id
 
 export const getUserId = () => {
