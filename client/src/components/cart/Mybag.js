@@ -7,6 +7,9 @@ import Payment from './Payment'
 import{ Button } from 'react-bootstrap'
 
 
+import {getUserId} from '../../service/function'
+
+
 
 
 export default class Mybag extends Component {
@@ -18,9 +21,17 @@ export default class Mybag extends Component {
 
         this.state = {
 
-            payment : false
+            payment : false,
+            userID:''
 
         };
+    }
+
+    componentDidMount(){
+        
+        this.state.userID = getUserId();
+        console.log(this.state.userID);
+        
     }
 
     changePaymentState(){

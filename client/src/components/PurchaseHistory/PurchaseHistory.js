@@ -3,8 +3,33 @@ import{ Table,Container } from 'react-bootstrap'
 import{ Card } from 'react-bootstrap'
 import PurchaseHistoryListItem from './PuchaseHistoryListItem'
 import Navbar from '../../components/Navbar'
+import {getUserId} from '../../service/function'
 
 export default class PurchaseHistory extends Component {
+    
+    constructor(props){
+        super(props);
+
+
+        this.state = {
+
+            userID:''
+
+        };
+    }
+
+    componentDidMount(){
+        
+        this.state.userID = getUserId();
+        console.log(this.state.userID);
+        
+    }
+
+
+
+
+
+
     render() {
         return (
             <>
