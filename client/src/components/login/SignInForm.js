@@ -63,7 +63,8 @@ class SignInForm extends Component {
    
     if (isValid) {
       loginUser(user).then(res => { 
-        if (isUserAuthenticated) {
+        const auth = isUserAuthenticated()
+        if (auth) {
           this.props.history.push('/men');
         } else {
             this.setState({
