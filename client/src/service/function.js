@@ -2,6 +2,7 @@ import axios from 'axios';
 
 let usertoken = ''
 let admintoken = ''
+let userid = ''
 
 // register new user
 export const registerUser = newUser => {
@@ -22,6 +23,7 @@ export const loginUser = user => {
         if (res.data.type === 'user') {
             console.log(res.data._id) // udin varaible ekak hadala ekata userge id eke assign karaganin. eeta passe function ekakin eka return karapn
             usertoken = res.data.token
+            userid = res.data._id;
         }
     })
     .catch(err => { console.log(err) })
@@ -160,4 +162,13 @@ export const isUserAuthenticated = () => {
 //get Item Details
 export const getItemDetails = () => {
     return axios.get("/product/getItem")
+
+//Return user id
+
+export const getUserId = () => {
+
+    if (usertoken) {
+        return userid;
+    }
+    return null
 }
