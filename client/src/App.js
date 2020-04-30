@@ -15,8 +15,9 @@ import Men from "./pages/Men";
 import Women from "./pages/Women";
 import Kids from "./pages/Kids";
 import User from "./pages/User";
-import Wishlist from "./pages/Wishlist";
-import Mybag from "./pages/Mybag";
+import Wishlist from "./components/wishList/Wishlist";
+import Mybag from "./components/cart/Mybag";
+import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 import Error from "./pages/Error";
 
 // protected route
@@ -36,7 +37,9 @@ function App() {
       <Route exact path="/user" component={User}/>
       <Route exact path="/wishlist" component={Wishlist}/>
       <Route exact path="/mybag" component={Mybag}/>
+      <Route exact path="/purchasehistory" component={PurchaseHistory}/>
       <Route path="/user/sign-in" component={UserLogin}/>
+      <Route path="/user/sign-up" component={UserLogin}/>
       <Route exact path="/admin" component={AdminLogin}/>
       <AdminProtectedRoute exact path="/dash" component={DashBoard}/>
       <Route exact path="/store" component={StoreDashboard}/>

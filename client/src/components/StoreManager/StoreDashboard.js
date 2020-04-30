@@ -5,7 +5,8 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
-import NewItem from './NewItem'
+import AddItem from './AddItem';
+
 
 class StoreDashboard extends Component {
     render() {
@@ -31,6 +32,14 @@ class StoreDashboard extends Component {
                                     Home
                                 </NavText>
                             </NavItem>
+                            <NavItem eventKey="storeadd">
+                                <NavIcon>
+                                    <i className="fa fa-fw fa-plus" style={{ fontSize: '1.75em' }} />
+                                </NavIcon>
+                                <NavText>
+                                    Add Product
+                                </NavText>
+                            </NavItem>
                             <NavItem eventKey="storeupload">
                                 <NavIcon>
                                     <i className="fa fa-fw fa-upload" style={{ fontSize: '1.75em' }} />
@@ -42,13 +51,14 @@ class StoreDashboard extends Component {
                         </SideNav.Nav>
                     </SideNav>
                     <main>
-                        <Route path="/storedash" exact component={NewItem} />
-                        <Route path="/storehome" exact component={NewItem} />
+                        <Route path="/storedash" exact component={AddItem} />
+                        {/* <Route path="/storehome" exact component={} /> */}
+                        <Route path="/storeadd" exact component={AddItem} />
                     </main>
                 </React.Fragment>
             )}
             />
-        </Router>
+            </Router>
         )
     }
 }

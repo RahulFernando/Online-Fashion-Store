@@ -132,7 +132,7 @@ class SignUpForm extends Component {
 
                 <Button type="submit" className="Form__Button mr-20">Sign Up</Button> &nbsp;
 
-                <Link to="/user" className="FormField__Link">Already have an account?</Link>
+                <Link to="sign-in" className="FormField__Link">Already have an account?</Link>
 
               </Form.Group>
 

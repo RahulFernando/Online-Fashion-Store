@@ -2,6 +2,7 @@ import axios from 'axios';
 
 let usertoken = ''
 let admintoken = ''
+let userid = ''
 
 // register new user
 export const registerUser = newUser => {
@@ -20,7 +21,9 @@ export const loginUser = user => {
     })
     .then(res => {
         if (res.data.type === 'user') {
+            console.log(res.data._id) // udin varaible ekak hadala ekata userge id eke assign karaganin. eeta passe function ekakin eka return karapn
             usertoken = res.data.token
+            userid = res.data._id;
         }
     })
     .catch(err => { console.log(err) })
@@ -33,6 +36,7 @@ export const loginAdmin = admin => {
         password: admin.password
     })
     .then(res => {
+        console.log(res)
         if (res.data.type === 'admin') {
             admintoken = res.data.token
         }
@@ -49,7 +53,7 @@ export const createMainCategory = mainCategory => {
 
 // get all main categories
 export const getMainCategories = () => {
-    return axios.get("/admin/mainCategory/mainCategories", { headers: {"Authorization":admintoken}})
+    return axios.get("/admin/mainCategory/mainCategories")
 }
 
 // get main category by id
@@ -85,7 +89,7 @@ export const createSubCategory = (subCategory) => {
 
 // get sub categories
 export const getSubCategories = () => {
-    return axios.get("/admin/subCategory/subCategories",{ headers: {"Authorization":admintoken}} )
+    return axios.get("/admin/subCategory/subCategories")
 }
 
 // update sub category by an id 
@@ -153,4 +157,18 @@ export const isUserAuthenticated = () => {
         return true
     }
     return false
+}
+
+//get Item Details
+export const getItemDetails = () => {
+    return axios.get("/product/getItem")
+}
+//Return user id
+
+export const getUserId = () => {
+
+    if (usertoken) {
+        return userid;
+    }
+    return null
 }

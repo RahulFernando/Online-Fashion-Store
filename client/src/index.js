@@ -5,11 +5,6 @@ import {BrowserRouter as Router} from 'react-router-dom';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import {Provider} from 'react-redux';
-import {CreateStore, applyMiddleware} from 'redux';
-import PromiseMiddleware from 'redux-promise';
-import ReduxThunk from 'redux-thunk';
-
 ReactDOM.render(
 <Router>
 <App/>

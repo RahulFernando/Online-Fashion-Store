@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import logo from '../images/logo.gif'
-import {FaAlignRight} from 'react-icons/fa'
+import logo from '../images/logo.svg'
+import {FaAlignRight, FaHistory} from 'react-icons/fa'
 import {FaUserAlt} from 'react-icons/fa'
 import {FaHeart} from 'react-icons/fa'
 import {FaShoppingBag} from 'react-icons/fa'
@@ -54,16 +54,16 @@ export default class Navbar extends Component {
               <ul className={this.state.isOpen ? 
               "nav-links show-nav" : "nav-links"}>
                   <li>
-                      <Link to="/">Home</Link>
+                      <Link to="/">HOME</Link>
                   </li>
                   <li>
-                      <Link to="/men">Men</Link>
+                      <Link to="/men">MEN</Link>
                   </li>
                   <li>
-                      <Link to="/women">Women</Link>
+                      <Link to="/women">WOMEN</Link>
                   </li>
                   <li>
-                      <Link to="/kids">Kids</Link>
+                      <Link to="/kids">KIDS</Link>
                   </li>
                   <li>
                   <ReactSearchBox placeholder="Search"
@@ -84,6 +84,11 @@ export default class Navbar extends Component {
                   <li>
                     <Link to="/mybag">
                       <FaShoppingBag className="nav-bar-icon"/>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/purchasehistory">
+                      <FaHistory className="nav-bar-icon"/>
                     </Link>
                   </li>
               </ul>

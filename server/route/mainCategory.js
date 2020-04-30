@@ -27,7 +27,7 @@ router.post('/mainCategory', passport.authenticate('jwt', { session: false }), (
     })
 });
 
-router.get('/mainCategories', passport.authenticate('jwt', { session: false }),(req, res) => {
+router.get('/mainCategories',(req, res) => {
         MainCategory.getAllMainCategories((err, mainCategory) => {
             if (err) {
                 return res.json({
