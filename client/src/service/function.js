@@ -186,3 +186,11 @@ export const wishList = (id,itemid) => {
     )
     .catch(err => { console.log(err) })
 }
+
+//Display user's Wish list
+
+export const displayWishList = (id) => {
+
+    return axios.get("/users/wishlist/display/"+id)
+
+}
