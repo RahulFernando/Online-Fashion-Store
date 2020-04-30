@@ -16,7 +16,7 @@ export default class Home extends Component {
         super(props)
     
         this.state = {
-        
+            img: '',
             items: []
         }
     }
@@ -26,14 +26,27 @@ export default class Home extends Component {
         
         getItemDetails()
         .then(res => {
+            console.log(res.data.products[0].image)
+            var base64Flag = 'data:image/png;base64,';
+            var imageStr = this.arrayBufferToBase64(res.data.products[0].image.data.data);
             this.setState({
                 items: res.data.products,
+                img: base64Flag + imageStr
             })
 
         })
         .catch (() => {
             alert('Error retreving data')
         })
+    }
+
+    arrayBufferToBase64 = (buffer) => {
+        let binary = ''
+        let bytes = [].slice.call(new Uint8Array(buffer))
+
+        bytes.forEach(b => binary += String.fromCharCode(b))
+
+        return window.btoa(binary)
     }
 
     render() {
@@ -67,7 +80,8 @@ export default class Home extends Component {
                     return <div class="col-12 col-sm-6 col-md-4 col-lg-3">
                     <div class="card card-block" style={useStyles.background}>
                         <div className="overflow">
-                            <img src={`http://localhost:3000/${product.image}`} alt="" className="card-img-top"/>
+                            
+                            <img src={this.state.img} alt="" className="card-img-top"/>
                         </div>
                         <div className="card-body text-dark">
                             <h5 className="card-title">{product.itemName}</h5>
