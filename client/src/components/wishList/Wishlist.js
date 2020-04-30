@@ -5,11 +5,14 @@ import WishListItem from './WishlistItem';
 import Navbar from '../../components/Navbar'
 import {getUserId} from '../../service/function'
 import {displayWishList} from '../../service/function'
+import {DeleteWishListItem} from '../../service/function'
 
 export default class Wishlist extends Component {
 
     constructor(props){
         super(props);
+
+        this.deleteWishedItem = this.deleteWishedItem.bind(this);
 
 
         this.state = {
@@ -42,12 +45,21 @@ export default class Wishlist extends Component {
 
         
     }
-
+    
 
     wishItemList() {
 
         return this.state.Items.map(wishListItem => {
-            return <WishListItem wishedItem={wishListItem} />;
+            return <WishListItem wishedItem={wishListItem} deleteItem={this.deleteWishedItem} userID = {this.state.userID} />;
+          })
+    }
+
+    deleteWishedItem(userid,itemid) {
+
+        DeleteWishListItem(userid,itemid);
+
+        this.setState({
+            Items: this.state.Items.filter(item => item.id !== itemid)
           })
     }
 

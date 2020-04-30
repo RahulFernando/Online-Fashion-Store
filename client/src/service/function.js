@@ -194,3 +194,19 @@ export const displayWishList = (id) => {
     return axios.get("/users/wishlist/display/"+id)
 
 }
+
+
+//Delete user's Wish List Items
+
+export const DeleteWishListItem = (userId,itemId) => {
+
+    return axios.post("/users/wishlist/delete/"+userId, {
+       
+        itemID: itemId
+      
+    })
+    .then(res => console.log(res.data)
+    )
+    .catch(err => { console.log(err) })
+
+}

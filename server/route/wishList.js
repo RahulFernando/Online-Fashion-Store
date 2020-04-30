@@ -70,4 +70,29 @@ router.route('/display/:id').get((req,res) => {
     .catch(err => res.status(400).json('Error : '  +err));
 })
 
+//Delete Wishlist Items
+
+router.route('/delete/:id').post((req,res) => {
+
+     User.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+            $pull: {
+                WishList: {
+                    id: req.body.itemID
+                }
+            }
+
+            },
+
+        {new: true },
+
+         (err, userInfo) => {
+             if (err) return res.json({ success: false, err });
+             res.status(200).json(userInfo. WishList)
+        }    
+        
+    )
+})
+
 module.exports = router;

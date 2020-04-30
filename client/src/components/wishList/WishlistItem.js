@@ -19,13 +19,13 @@ export default class WishlistItem extends Component {
     
     
     render() {
-        const {wishedItem} = this.props
+        const {wishedItem,deleteItem,userID} = this.props
         return (
             <tr>
              {this.getItemDetails(wishedItem.id)}
             <td>{wishedItem.id}</td>
             <td>Long Sleeve tshirt</td>
-            <td><span className="mx-2 text-danger"><i className="fa fa-trash"></i></span></td>
+            <td><span className="mx-2 text-danger" onClick={() => {deleteItem(userID,wishedItem.id) }}><i className="fa fa-trash"></i></span></td>
          </tr>
         )
     }
