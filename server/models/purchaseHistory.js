@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-const itemSchema = mongoose.Schema({
+const purchaseHistorySchema = mongoose.Schema({
     userId: {
         type: String,
         required: true
@@ -22,6 +22,6 @@ const itemSchema = mongoose.Schema({
 }, {timestamps: true})
 
 
-const History = mongoose.model('History', itemSchema);
+const History = mongoose.model('History', purchaseHistorySchema);
 
 module.exports = {History}
