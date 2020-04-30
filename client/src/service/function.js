@@ -172,3 +172,17 @@ export const getUserId = () => {
     }
     return null
 }
+
+//Add items to user's wish list
+
+export const wishList = (id,itemid) => {
+
+     return axios.post("/users/wishlist/add/"+id, {
+       
+         itemID: itemid
+       
+     })
+    .then(res => console.log(res.data)
+    )
+    .catch(err => { console.log(err) })
+}
