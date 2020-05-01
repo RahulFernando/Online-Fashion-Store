@@ -81,9 +81,6 @@ export default class Mybag extends Component {
 
     render() {
 
-        this.state.Items.forEach((item) => {
-            console.log(item.id);
-        })
 
         return (
 <>
