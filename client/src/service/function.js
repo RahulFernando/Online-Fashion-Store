@@ -271,3 +271,18 @@ export const DisplayCart = (id) => {
     return axios.get("/users/cart/display/"+id)
 
 }
+
+//Delete items from the user's cart
+
+export const DeleteCartListItem = (userId,itemId) => {
+
+    return axios.post("/users/cart/delete/"+userId, {
+       
+        itemID: itemId
+      
+    })
+    .then(res => console.log(res.data)
+    )
+    .catch(err => { console.log(err) })
+
+}

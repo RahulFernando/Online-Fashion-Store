@@ -32,17 +32,19 @@ export default class MybagItem extends Component {
     }
 
     render() {
-        const {cartItem} = this.props
+        const {cartItem,deleteItem,userId} = this.props
         return (
            
                 <tr>
                     {this.getItemDetails(cartItem.id)}
+                    <td></td>
                     <td>{this.state.name}</td>
                     <td>{this.state.unitPrice}</td>
                     <td>{cartItem.quantity}</td>
                     <td>{this.state.unitPrice * cartItem.quantity}</td>
-                    <td><span className="mx-2 text-danger"><i className="fa fa-trash"></i></span></td>
+                    <td><span  className="mx-2 text-danger" onClick={() => {deleteItem(userId,cartItem.id) }}><i className="fa fa-trash"></i></span></td>
                  </tr>
+
         )
            
         

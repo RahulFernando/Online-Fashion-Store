@@ -10,6 +10,7 @@ import{ Button } from 'react-bootstrap'
 import {getUserId} from '../../service/function'
 import {DisplayCart} from '../../service/function'
 import {FindItem} from '../../service/function'
+import {DeleteCartListItem} from '../../service/function'
 
 
 
@@ -20,6 +21,7 @@ export default class Mybag extends Component {
         super(props);
 
         this.changePaymentState = this.changePaymentState.bind(this);
+        this.deleteCartItem = this.deleteCartItem.bind(this);
       
 
         this.state = {
@@ -75,8 +77,19 @@ export default class Mybag extends Component {
     cartItemList() {
 
         return this.state.Items.map(cartListItem => {
-            return <MybagItem cartItem={cartListItem} calculate={this.calculateTotalPrice} />;
+            return <MybagItem cartItem={cartListItem} deleteItem={this.deleteCartItem} userId={this.state.userID}/>;
           })
+    }
+
+
+    deleteCartItem(userId,itemId){
+
+        DeleteCartListItem(userId,itemId);
+
+        this.setState({
+            Items: this.state.Items.filter(item => item.id !== itemId)
+          })
+
     }
 
     render() {
