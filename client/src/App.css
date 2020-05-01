@@ -178,13 +178,14 @@ h6 {
 }
 .menHero {
   background-image: url("./images/image2.jpg");
-  background-size: contain;
-  background-position: top center;
+  /* background-size: contain; */
+  /* background-position: top center; */
+  
 }
 .womenHero {
   background-image: url("./images/image3.jpg");
-  background-size: contain;
-  background-position: top center;
+  /* background-size: contain; */
+  /* background-position: top center; */
 }
 .kidsHero {
   background-image: url("./images/image4.jpg");
@@ -301,6 +302,10 @@ h6 {
 
 .card-block {
   min-height: 220px;
+}
+
+.card-img-top {
+  max-height: 640px;
 }
 
 .featured-rooms-center {

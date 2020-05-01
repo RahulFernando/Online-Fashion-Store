@@ -163,6 +163,25 @@ export const isUserAuthenticated = () => {
 export const getItemDetails = () => {
     return axios.get("/product/getItem")
 }
+
+//get Men Details
+export const getMenDetails = () => {
+    return axios.get("/product/getMen")
+}
+
+//get Women Details
+export const getWomenDetails = () => {
+    return axios.get("/product/getWomen")
+}
+
+//get Kids Details
+export const getKidsDetails = () => {
+    return axios.get("/product/getKids")
+}
+
+// export const getImages = () => {
+//     return axios.get("/product/getImage")
+// }
 //Return user id
 
 export const getUserId = () => {

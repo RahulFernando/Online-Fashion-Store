@@ -56,6 +56,48 @@ router.get('/getItem', (req, res) => {
     })
 });
 
+// router.get('/getImage', (req, res) => {
+//     Item.find()
+//     .exec((err, images) => {
+//         if (err) return res.status(400).json({success: false, err})
+//         res.status(200).json({success: true, images})
+//     })
+// });
+
+router.get('/getMen', (req, res) => {
+
+    const query = { "mainCategory": "Men" }
+
+    Item.find(query)
+    .exec((err, men) => {
+        if (err) return res.status(400).json({success: false, err})
+        res.status(200).json({success: true, men})
+    })
+});
+
+
+router.get('/getWomen', (req, res) => {
+
+    const query = { "mainCategory": "Women" }
+
+    Item.find(query)
+    .exec((err, women) => {
+        if (err) return res.status(400).json({success: false, err})
+        res.status(200).json({success: true, women})
+    })
+});
+
+
+router.get('/getKids', (req, res) => {
+
+    const query = { "mainCategory": "Kid" }
+
+    Item.find(query)
+    .exec((err, kids) => {
+        if (err) return res.status(400).json({success: false, err})
+        res.status(200).json({success: true, kids})
+    })
+});
 
 
 module.exports = router;

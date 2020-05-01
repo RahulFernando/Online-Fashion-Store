@@ -17,7 +17,7 @@ export default class Home extends Component {
     
         this.state = {
         
-            items: []
+            items: [],
         }
     }
 
@@ -43,7 +43,7 @@ export default class Home extends Component {
                 marginBottom:"1rem",
             },
             btn: {
-                marginLeft:"1rem",
+                marginLeft:"1.5rem",
             }
         };
 
@@ -58,16 +58,16 @@ export default class Home extends Component {
         </Hero>
         <Services/>
 
-        <div class="container-fluid">
+        <div className="container-fluid">
             <section className="popular-products">
                 <Title title="Popular Products"/>
-            <div class="row flex-row flex-rap">
+            <div className="row flex-row flex-rap">
                 
                 {this.state.items.map(product => {
-                    return <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-                    <div class="card card-block" style={useStyles.background}>
+                    return <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                    <div className="card card-block" style={useStyles.background}>
                         <div className="overflow">
-                            <img src={`http://localhost:3000/${product.image}`} alt="" className="card-img-top"/>
+                            <img src={null} alt="" className="card-img-top"/>
                         </div>
                         <div className="card-body text-dark">
                             <h5 className="card-title">{product.itemName}</h5>
