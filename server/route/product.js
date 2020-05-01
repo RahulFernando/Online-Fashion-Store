@@ -63,6 +63,18 @@ router.route('/getItem/:id').get((req,res) => {
         .catch(err => res.status(400).json('Error : '  +err));
 });
 
+router.route('/decrement/:id').post((req,res) => {
+   
+    Item.findOneAndUpdate(
+        { _id: req.params.id},
+        { $inc: { "qty": -1 } },
+        { new: true },
+
+    )
+
+
+});
+
 
 
 module.exports = router;

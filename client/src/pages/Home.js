@@ -10,6 +10,7 @@ import {getItemDetails} from '../service/function'
 import {getUserId} from '../service/function'
 import {wishList} from '../service/function'
 import {AddToCart} from '../service/function'
+import {QuantityDecrement} from '../service/function'
 
 
 
@@ -61,6 +62,8 @@ export default class Home extends Component {
         console.log(itemId);
 
         AddToCart(userId,itemId);
+        QuantityDecrement(itemId);
+        
     }
 
     render() {
