@@ -7,6 +7,10 @@ import Title from "../components/Title"
 import CardImage from '../images/cardimage1.jpg'
 import Axios from 'axios';
 import {getItemDetails} from '../service/function'
+import {getUserId} from '../service/function'
+import {wishList} from '../service/function'
+import {AddToCart} from '../service/function'
+import {QuantityDecrement} from '../service/function'
 
 
 
@@ -14,10 +18,14 @@ export default class Home extends Component {
 
     constructor(props) {
         super(props)
+
+        this.addToWishList = this.addToWishList.bind(this);
+        this.addToCart = this.addToCart.bind(this);
     
         this.state = {
         
             items: [],
+            userId:''
         }
     }
 
@@ -34,6 +42,28 @@ export default class Home extends Component {
         .catch (() => {
             alert('Error retreving data')
         })
+
+        this.state.userID = getUserId();
+        console.log(this.state.userID);
+    }
+
+    addToWishList(userId,itemId){
+
+        console.log(userId);
+        console.log(itemId);
+
+        wishList(userId,itemId);
+
+    }
+
+    addToCart(userId,itemId){
+
+        console.log(userId);
+        console.log(itemId);
+
+        AddToCart(userId,itemId);
+        QuantityDecrement(itemId,1);
+        
     }
 
     render() {
@@ -74,8 +104,8 @@ export default class Home extends Component {
                             <p className="card-text text-secondary">
                                 {`Rs.${product.price}`}
                             </p> 
-                            <a href="" className="btn btn-outline-success" role="button">Add to Wishlist</a>
-                            <a href="" className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a>
+                            <a href="#" onClick={() => { this.addToWishList(this.state.userID,product._id) }} className="btn btn-outline-success" role="button">Add to Wishlist</a>
+                            <a href="#" onClick={() => { this.addToCart(this.state.userID,product._id) }} className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a>
                         </div>
                     </div>
                 </div>

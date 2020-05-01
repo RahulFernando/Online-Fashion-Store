@@ -8,6 +8,7 @@ import{ Button } from 'react-bootstrap'
 
 
 import {getUserId} from '../../service/function'
+import {DisplayCart} from '../../service/function'
 
 
 
@@ -22,7 +23,8 @@ export default class Mybag extends Component {
         this.state = {
 
             payment : false,
-            userID:''
+            userID:'',
+            Items: []
 
         };
     }
@@ -32,13 +34,34 @@ export default class Mybag extends Component {
         this.state.userID = getUserId();
         console.log(this.state.userID);
         
-    }
+        DisplayCart(this.state.userID)
+        .then(res => {
+            this.setState({
+                Items: res.data.Cart
+               
+            })
+        })
+            .catch(function(error){
+           
+                console.log(error);
+            })
+    
+        
+   
+}
 
     changePaymentState(){
 
         this.setState({
             payment: true
         });
+    }
+
+    cartItemList() {
+
+        return this.state.Items.map(cartListItem => {
+            return <MybagItem cartItem={cartListItem} />;
+          })
     }
 
     render() {
@@ -63,7 +86,7 @@ export default class Mybag extends Component {
                                 </tr>
                         </thead>
                                 <tbody>
-                                <MybagItem/>
+                                {this.cartItemList()}
                               </tbody>
                    </Table>
 

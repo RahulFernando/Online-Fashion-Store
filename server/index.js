@@ -28,7 +28,9 @@ const user = require('./route/user');
 const mainCategory = require('./route/mainCategory');
 const subCategory = require('./route/subCategory');
 const storeManager = require('./route/storeManager');
-const product = require('./route/product')
+const product = require('./route/product');
+const wishlist = require('./route/wishList');
+const cart = require('./route/cart');
 
 // routes
 app.use('/api/admin', admin);
@@ -37,6 +39,8 @@ app.use('/api/admin/mainCategory', mainCategory);
 app.use('/api/admin/subCategory', subCategory);
 app.use('/api/admin/storeManager', storeManager);
 app.use('/api/product', product);
+app.use('/api/users/wishList',wishlist);
+app.use('/api/users/cart',cart);
 
 
 

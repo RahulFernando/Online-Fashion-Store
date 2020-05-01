@@ -4,16 +4,21 @@ import{ Card } from 'react-bootstrap'
 import WishListItem from './WishlistItem';
 import Navbar from '../../components/Navbar'
 import {getUserId} from '../../service/function'
+import {displayWishList} from '../../service/function'
+import {DeleteWishListItem} from '../../service/function'
 
 export default class Wishlist extends Component {
 
     constructor(props){
         super(props);
 
+        this.deleteWishedItem = this.deleteWishedItem.bind(this);
+
 
         this.state = {
 
-            userID:''
+            userID:'',
+            Items: []
 
         };
     }
@@ -22,11 +27,41 @@ export default class Wishlist extends Component {
         
         this.state.userID = getUserId();
         console.log(this.state.userID);
+
+        displayWishList(this.state.userID)
+        .then(res => {
+            this.setState({
+                Items: res.data.WishList
+               
+            })
+
+            
+           
+        })
+        .catch(function(error){
+           
+            console.log(error);
+        })
+
         
     }
+    
 
+    wishItemList() {
 
+        return this.state.Items.map(wishListItem => {
+            return <WishListItem wishedItem={wishListItem} deleteItem={this.deleteWishedItem} userID = {this.state.userID} />;
+          })
+    }
 
+    deleteWishedItem(userid,itemid) {
+
+        DeleteWishListItem(userid,itemid);
+
+        this.setState({
+            Items: this.state.Items.filter(item => item.id !== itemid)
+          })
+    }
 
 
     render() {
@@ -47,7 +82,7 @@ export default class Wishlist extends Component {
                             </tr>
                     </thead>
                             <tbody>
-                            <WishListItem/>
+                            {this.wishItemList()}
                           </tbody>
                </Table>
 

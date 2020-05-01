@@ -98,6 +98,27 @@ router.get('/getKids', (req, res) => {
         res.status(200).json({success: true, kids})
     })
 });
+router.route('/getItem/:id').get((req,res) => {
+   
+    Item.findById(req.params.id)
+        .then(product => res.json(product))
+        .catch(err => res.status(400).json('Error : '  +err));
+});
+
+router.route('/decrement/:id').post((req,res) => {
+   
+    Item.findOneAndUpdate(
+        { _id: req.params.id},
+        { $inc: { "qty": -1 } },
+        { new: true },
+        () => {
+            res.status(200).json({success: true})
+        }
+    )
+
+
+});
+
 
 
 module.exports = router;

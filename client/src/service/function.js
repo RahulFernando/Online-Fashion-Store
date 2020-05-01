@@ -21,7 +21,7 @@ export const loginUser = user => {
     })
     .then(res => {
         if (res.data.type === 'user') {
-            console.log(res.data._id) // udin varaible ekak hadala ekata userge id eke assign karaganin. eeta passe function ekakin eka return karapn
+            console.log(res.data._id) 
             usertoken = res.data.token
             userid = res.data._id;
         }
@@ -184,10 +184,90 @@ export const getKidsDetails = () => {
 // }
 //Return user id
 
+//Return user id
 export const getUserId = () => {
 
     if (usertoken) {
         return userid;
     }
     return null
+}
+
+//Add items to user's wish list
+
+export const wishList = (id,itemid) => {
+
+     return axios.post("/users/wishlist/add/"+id, {
+       
+         itemID: itemid
+       
+     })
+    .then(res => console.log(res.data)
+    )
+    .catch(err => { console.log(err) })
+}
+
+//Display user's Wish list
+
+export const displayWishList = (id) => {
+
+    return axios.get("/users/wishlist/display/"+id)
+
+}
+
+
+//Delete user's Wish List Items
+
+export const DeleteWishListItem = (userId,itemId) => {
+
+    return axios.post("/users/wishlist/delete/"+userId, {
+       
+        itemID: itemId
+      
+    })
+    .then(res => console.log(res.data)
+    )
+    .catch(err => { console.log(err) })
+
+}
+
+//Get Item details for a given Id
+
+export const FindItem = (id) => {
+
+    return axios.get("/product/getItem/"+id)
+}
+
+//add to items to user' cart
+
+export const AddToCart = (id,itemid) => {
+
+    return axios.post("/users/cart/add/"+id, {
+      
+        itemID: itemid
+      
+    })
+   .then(res => console.log(res.data)
+   )
+   .catch(err => { console.log(err) })
+}
+
+//Decrement Item store quantity
+
+export const QuantityDecrement = (id,quantity) => {
+
+    return axios.post("/product/decrement/"+id,{
+        qty : quantity
+    })
+   .then(res => console.log(res.data)
+   )
+   .catch(err => { console.log(err) })
+}
+
+//Display User's Cart item list
+
+export const DisplayCart = (id) => {
+
+    return axios.get("/users/cart/display/"+id)
+
 }
