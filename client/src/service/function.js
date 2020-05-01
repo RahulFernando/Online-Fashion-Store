@@ -234,9 +234,11 @@ export const AddToCart = (id,itemid) => {
 
 //Decrement Item store quantity
 
-export const QuantityDecrement = (id,itemid) => {
+export const QuantityDecrement = (id,quantity) => {
 
-    return axios.post("/product/decrement/"+id)
+    return axios.post("/product/decrement/"+id,{
+        qty : quantity
+    })
    .then(res => console.log(res.data)
    )
    .catch(err => { console.log(err) })

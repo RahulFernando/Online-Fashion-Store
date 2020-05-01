@@ -62,7 +62,7 @@ export default class Home extends Component {
         console.log(itemId);
 
         AddToCart(userId,itemId);
-        QuantityDecrement(itemId);
+        QuantityDecrement(itemId,1);
         
     }
 

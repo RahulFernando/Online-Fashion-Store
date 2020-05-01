@@ -69,7 +69,9 @@ router.route('/decrement/:id').post((req,res) => {
         { _id: req.params.id},
         { $inc: { "qty": -1 } },
         { new: true },
-
+        () => {
+            res.status(200).json({success: true})
+        }
     )
 
 
