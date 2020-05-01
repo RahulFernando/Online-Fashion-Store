@@ -15,6 +15,8 @@ export default class MybagItem extends Component {
     }
 
     getItemDetails(id) {
+
+       
         FindItem(id)
         .then(response =>{
         this.setState({
@@ -26,7 +28,7 @@ export default class MybagItem extends Component {
         })
       .catch(function(error){
           console.log(error);
-      })
+    })
     }
 
     render() {
@@ -35,7 +37,6 @@ export default class MybagItem extends Component {
            
                 <tr>
                     {this.getItemDetails(cartItem.id)}
-                    <td></td>
                     <td>{this.state.name}</td>
                     <td>{this.state.unitPrice}</td>
                     <td>{cartItem.quantity}</td>

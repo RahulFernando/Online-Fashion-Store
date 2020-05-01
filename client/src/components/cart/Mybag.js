@@ -9,6 +9,7 @@ import{ Button } from 'react-bootstrap'
 
 import {getUserId} from '../../service/function'
 import {DisplayCart} from '../../service/function'
+import {FindItem} from '../../service/function'
 
 
 
@@ -19,12 +20,15 @@ export default class Mybag extends Component {
         super(props);
 
         this.changePaymentState = this.changePaymentState.bind(this);
+      
 
         this.state = {
 
             payment : false,
             userID:'',
-            Items: []
+            Items: [],
+            Total:0,
+            price:0
 
         };
     }
@@ -36,18 +40,29 @@ export default class Mybag extends Component {
         
         DisplayCart(this.state.userID)
         .then(res => {
+            console.log(res.data.Cart)
             this.setState({
                 Items: res.data.Cart
                
             })
+
+        this.state.Items.forEach((item) => {
+            FindItem(item.id)
+            .then(response =>{
+                this.setState({
+                    Total : this.state.Total + (response.data.price*item.quantity)
+                });
+            })
+        })
+    
         })
             .catch(function(error){
            
                 console.log(error);
             })
     
-        
-   
+           
+      
 }
 
     changePaymentState(){
@@ -60,14 +75,18 @@ export default class Mybag extends Component {
     cartItemList() {
 
         return this.state.Items.map(cartListItem => {
-            return <MybagItem cartItem={cartListItem} />;
+            return <MybagItem cartItem={cartListItem} calculate={this.calculateTotalPrice} />;
           })
     }
 
     render() {
-        return (
 
-            <>
+        this.state.Items.forEach((item) => {
+            console.log(item.id);
+        })
+
+        return (
+<>
             <Navbar/>
 
         <Container>
@@ -89,6 +108,8 @@ export default class Mybag extends Component {
                                 {this.cartItemList()}
                               </tbody>
                    </Table>
+
+                   {`Rs.${this.state.Total}`}
 
                 <Button onClick={this.changePaymentState}>Proceed</Button>
 
