@@ -243,3 +243,11 @@ export const QuantityDecrement = (id,quantity) => {
    )
    .catch(err => { console.log(err) })
 }
+
+//Display User's Cart item list
+
+export const DisplayCart = (id) => {
+
+    return axios.get("/users/cart/display/"+id)
+
+}

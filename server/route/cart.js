@@ -3,6 +3,7 @@ const router = express.Router();
 
 const User = require('../models/user'); //user schema
 
+//Add items to the Cart
 router.route('/add/:id').post((req,res) => {
 
 
@@ -68,6 +69,14 @@ router.route('/add/:id').post((req,res) => {
 
 })
 
+//Display Cart Items
+
+router.route('/display/:id').get((req,res) => {
+
+    User.findById(req.params.id)
+    .then(user=> res.json(user))
+    .catch(err => res.status(400).json('Error : '  +err));
+})
 
 
 
