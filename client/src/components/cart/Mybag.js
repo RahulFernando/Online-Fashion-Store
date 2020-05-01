@@ -11,6 +11,7 @@ import {getUserId} from '../../service/function'
 import {DisplayCart} from '../../service/function'
 import {FindItem} from '../../service/function'
 import {DeleteCartListItem} from '../../service/function'
+import {QuantityIncrement} from '../../service/function'
 
 
 
@@ -82,13 +83,15 @@ export default class Mybag extends Component {
     }
 
 
-    deleteCartItem(userId,itemId){
+    deleteCartItem(userId,itemId,quantity){
 
         DeleteCartListItem(userId,itemId);
 
         this.setState({
             Items: this.state.Items.filter(item => item.id !== itemId)
           })
+
+          QuantityIncrement(itemId,quantity)
 
     }
 

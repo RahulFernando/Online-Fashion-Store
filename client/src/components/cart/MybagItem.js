@@ -42,7 +42,7 @@ export default class MybagItem extends Component {
                     <td>{this.state.unitPrice}</td>
                     <td>{cartItem.quantity}</td>
                     <td>{this.state.unitPrice * cartItem.quantity}</td>
-                    <td><span  className="mx-2 text-danger" onClick={() => {deleteItem(userId,cartItem.id) }}><i className="fa fa-trash"></i></span></td>
+                    <td><span  className="mx-2 text-danger" onClick={() => {deleteItem(userId,cartItem.id,cartItem.quantity) }}><i className="fa fa-trash"></i></span></td>
                  </tr>
 
         )

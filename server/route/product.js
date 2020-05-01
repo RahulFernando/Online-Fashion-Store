@@ -120,5 +120,22 @@ router.route('/decrement/:id').post((req,res) => {
 });
 
 
+router.route('/increment/:id').post((req,res) => {
+   
+    Item.findOneAndUpdate(
+        { _id: req.params.id},
+        { $inc: { "qty": req.body.qty } },
+        { new: true },
+        () => {
+            res.status(200).json({success: true})
+        }
+    )
+
+
+});
+
+
+
+
 
 module.exports = router;

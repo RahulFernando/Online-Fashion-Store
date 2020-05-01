@@ -286,3 +286,15 @@ export const DeleteCartListItem = (userId,itemId) => {
     .catch(err => { console.log(err) })
 
 }
+
+//Increment Item store quantity
+
+export const QuantityIncrement = (id,quantity) => {
+
+    return axios.post("/product/increment/"+id,{
+        qty : quantity
+    })
+   .then(res => console.log(res.data)
+   )
+   .catch(err => { console.log(err) })
+}
