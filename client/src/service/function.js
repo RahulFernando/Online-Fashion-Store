@@ -210,3 +210,10 @@ export const DeleteWishListItem = (userId,itemId) => {
     .catch(err => { console.log(err) })
 
 }
+
+//Get Item details for a given Id
+
+export const FindItem = (id) => {
+
+    return axios.get("/product/getItem/"+id)
+}
