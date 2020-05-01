@@ -217,3 +217,18 @@ export const FindItem = (id) => {
 
     return axios.get("/product/getItem/"+id)
 }
+
+//add to items to user' cart
+
+export const AddToCart = (id,itemid) => {
+
+    return axios.post("/users/cart/add/"+id, {
+      
+        itemID: itemid
+      
+    })
+   .then(res => console.log(res.data)
+   )
+   .catch(err => { console.log(err) })
+}
+

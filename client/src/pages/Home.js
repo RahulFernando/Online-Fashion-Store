@@ -9,6 +9,7 @@ import Axios from 'axios';
 import {getItemDetails} from '../service/function'
 import {getUserId} from '../service/function'
 import {wishList} from '../service/function'
+import {AddToCart} from '../service/function'
 
 
 
@@ -18,6 +19,7 @@ export default class Home extends Component {
         super(props)
 
         this.addToWishList = this.addToWishList.bind(this);
+        this.addToCart = this.addToCart.bind(this);
     
         this.state = {
         
@@ -51,6 +53,14 @@ export default class Home extends Component {
 
         wishList(userId,itemId);
 
+    }
+
+    addToCart(userId,itemId){
+
+        console.log(userId);
+        console.log(itemId);
+
+        AddToCart(userId,itemId);
     }
 
     render() {
@@ -92,7 +102,7 @@ export default class Home extends Component {
                                 {`Rs.${product.price}`}
                             </p> 
                             <a href="#" onClick={() => { this.addToWishList(this.state.userID,product._id) }} className="btn btn-outline-success" role="button">Add to Wishlist</a>
-                            <a href="" className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a>
+                            <a href="#" onClick={() => { this.addToCart(this.state.userID,product._id) }} className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a>
                         </div>
                     </div>
                 </div>
