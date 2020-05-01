@@ -5,14 +5,64 @@ import {Row} from 'react-bootstrap'
 import {Col} from 'react-bootstrap'
 import {Card} from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
+import {ConfirmPayment} from '../../service/function'
 
 export default class Payment extends Component {
+
+    constructor(props){
+        super(props);
+
+        this.handleOptionChange = this.handleOptionChange.bind(this);
+        this.onsubmit = this.onsubmit.bind(this);
+
+        this.state ={
+            selectedOption: 'Cash'
+
+        }
+    }
+
+    handleOptionChange(e) {
+
+        this.setState({
+          selectedOption: e.target.value
+        });
+
+      }
+
+    onsubmit(e){
+
+        e.preventDefault();
+
+        console.log('You have selected:', this.state.selectedOption);
+        console.log(this.props.Items);
+        console.log(this.props.userId);
+        console.log(new Date());
+
+        
+
+        console.log('You have selected:', this.state.selectedOption);
+
+          const payment = {
+            userId: this.props.userId,
+            paymentMethod:this.state.selectedOption,
+            date: Date.now()
+        }
+
+        ConfirmPayment(payment);
+
+        
+    }
+    
     render() {
+
+        const {userId,Items} = this.props
+        
         return (
             <Card>
   <Card.Header>Payment Form</Card.Header>
   <Card.Body>
-  <Form>
+
+  <Form onSubmit={this.onsubmit}>
             <fieldset>
             <Form.Group as={Row}>
                 <Form.Label as="legend" column sm={2}>
@@ -24,20 +74,26 @@ export default class Payment extends Component {
                                     label="Pay By cash"
                                     name="formHorizontalRadios"
                                      id="formHorizontalRadios1"
-                                     checked = "checked"
+                                     checked = {this.state.selectedOption === 'Cash'}
+                                     value ="Cash"
+                                     onChange={this.handleOptionChange}
                              />
                             <Form.Check
                                      type="radio"
                                      label="Pay By card"
-                                    name="formHorizontalRadios"
+                                     name="formHorizontalRadios"
                                     id="formHorizontalRadios2"
+                                    checked = {this.state.selectedOption === 'Card'}
+                                    value ="Card"
+                                    onChange={this.handleOptionChange}
                             />
         
                              </Col>
                 </Form.Group>
             </fieldset>
+            <Button variant="success" type="submit">Confirm Payment</Button>
         </Form>
-    <Button variant="success">Confirm Payment</Button>
+
   </Card.Body>
 </Card>
            

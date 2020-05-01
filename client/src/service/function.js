@@ -298,3 +298,20 @@ export const QuantityIncrement = (id,quantity) => {
    )
    .catch(err => { console.log(err) })
 }
+
+//Store Payment Id, userId , payment method and Date
+
+export const ConfirmPayment = (payment) => {
+
+    return axios.post("/users/payment/add", {
+       
+        paymentMethod: payment.paymentMethod,
+        userId: payment. userId,
+        date: payment.date
+
+      
+    })
+   .then(res => console.log(res.data)
+   )
+   .catch(err => { console.log(err) })
+}

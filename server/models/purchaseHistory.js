@@ -11,8 +11,9 @@ const purchaseHistorySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    date: {type : Date, 
-        required : true},
+    date: {
+        type : Date, 
+       },
 
      purchasedItems : {
             type: Array,

@@ -118,7 +118,7 @@ export default class Mybag extends Component {
                                 </tr>
                         </thead>
                                 <tbody>
-                                {this.cartItemList()}
+                                {/* {this.cartItemList()} */}
                               </tbody>
                    </Table>
 
@@ -126,7 +126,7 @@ export default class Mybag extends Component {
 
                 <Button onClick={this.changePaymentState}>Proceed</Button>
 
-                {this.state.payment ? <Payment/> : ""}
+                {this.state.payment ? <Payment userId={this.state.userID} Items={this.state.Items}/> : ""}
                    
                    </Container>
 
