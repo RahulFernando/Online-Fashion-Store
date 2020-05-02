@@ -19,6 +19,7 @@ import Wishlist from "./components/wishList/Wishlist";
 import Mybag from "./components/cart/Mybag";
 import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 import Error from "./pages/Error";
+import PaymentReciept from "./components/PurchaseHistory/PaymentReciept"
 
 // protected route
 import { AdminProtectedRoute } from "./service/adminprotected.route";
@@ -43,6 +44,7 @@ function App() {
       <Route exact path="/admin" component={AdminLogin}/>
       <AdminProtectedRoute exact path="/dash" component={DashBoard}/>
       <Route exact path="/store" component={StoreDashboard}/>
+      <Route exact path="/displayReciept/:id" component={PaymentReciept}/>
       <Route component={Error}/>
     </Switch>
   </>

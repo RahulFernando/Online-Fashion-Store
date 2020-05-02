@@ -8,8 +8,9 @@ export default class PuchaseHistoryListItem extends Component {
             <tr>
             <td>{HistoryDetail._id}</td>
             <td>{HistoryDetail.paymentMethod}</td>
-            <td> <Link to={"/"}> Display Reciept</Link> </td>
+            <td> <Link to={"/displayReciept/"+HistoryDetail._id}> Display Reciept</Link> </td>
             </tr>
+            
         )
     }
 }

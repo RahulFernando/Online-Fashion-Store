@@ -346,3 +346,12 @@ export const DisplayPurchaseHistory = (id) => {
     return axios.get("/users/payment/displayPurchaseHistory/"+id)
 
 }
+
+
+//Display Specific Reciept 
+
+export const DisplayReciept = (id) => {
+
+    return axios.get("/users/reciept/displayReciept/"+id)
+    
+}

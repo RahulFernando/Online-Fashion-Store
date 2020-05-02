@@ -32,6 +32,7 @@ const product = require('./route/product');
 const wishlist = require('./route/wishList');
 const cart = require('./route/cart');
 const payment = require('./route/payment')
+const reciept = require('./route/reciept')
 
 // routes
 app.use('/api/admin', admin);
@@ -43,6 +44,8 @@ app.use('/api/product', product);
 app.use('/api/users/wishList',wishlist);
 app.use('/api/users/cart',cart);
 app.use('/api/users/payment',payment);
+app.use('/api/users/reciept',reciept)
+
 
 
 
