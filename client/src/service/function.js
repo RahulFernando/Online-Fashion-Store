@@ -312,11 +312,6 @@ export const ConfirmPayment = (payment) => {
 
       
     })
-   .then(res => {console.log(res.data._id)
-
-            paymentId = res.data._id;
-   } )
-   .catch(err => { console.log(err) })
 }
 
 

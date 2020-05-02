@@ -54,19 +54,17 @@ export default class Payment extends Component {
         }
 
         ConfirmPayment(payment)
-    //     .then(res=>{
-        
-    //         console.log("hi",res._id);
-    //     }
-    //   )
-    //     .catch(err => { console.log(err) })
+        .then(res => {console.log(res.data._id)
 
-    this.props.Items.forEach((item) => {
+            this.props.Items.forEach((item) => {
         
-        AddToPurchaseHistory("5eacd18e0bd4fd34f03b2e8e",item.id,item.quantity)
-        DeleteCartListItem(this.props.userId,item.id)
-       
-    })
+                AddToPurchaseHistory(res.data._id,item.id,item.quantity)
+                DeleteCartListItem(this.props.userId,item.id)
+               
+            })
+   } )
+   .catch(err => { console.log(err) })
+   
               
             
         
