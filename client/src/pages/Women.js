@@ -57,7 +57,7 @@ export default class Women extends Component {
             <div className="row flex-row flex-rap">
                 
                 {this.state.womenItems.map(product => {
-                    return <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                    return <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={product._id}>
                     <div className="card card-block" style={useStyles.background}>
                         <div className="overflow">
                             <img src={null} alt="" className="card-img-top"/>
