@@ -17,8 +17,40 @@ router.post('/add', (req, res) => {
     });
 
     newPayment.save()
-        .then(() => res.json('Payment Done!'))
+        .then(() => res.json({status: 200,_id: newPayment._id,}))
         .catch(err => res.status(400).json('Error : ' + err));
 })
+
+
+router.post('/addPurchaseHistory/:id', (req, res) => {
+
+
+    History.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+            $push: {
+
+                purchasedItems: {
+                    id: req.body.itemID,
+                    quantity: req.body.quantity
+
+                }
+            }
+
+            },
+
+        {new: true },
+
+        () => {
+            res.status(200).json({success: true})
+        }
+        
+    )
+
+
+    
+})
+
+
 
 module.exports = router;

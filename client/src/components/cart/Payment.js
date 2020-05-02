@@ -6,6 +6,10 @@ import {Col} from 'react-bootstrap'
 import {Card} from 'react-bootstrap'
 import {Button} from 'react-bootstrap'
 import {ConfirmPayment} from '../../service/function'
+import {getPaymentId} from '../../service/function'
+import {AddToPurchaseHistory} from '../../service/function'
+import {DeleteCartListItem} from '../../service/function'
+ 
 
 export default class Payment extends Component {
 
@@ -16,7 +20,8 @@ export default class Payment extends Component {
         this.onsubmit = this.onsubmit.bind(this);
 
         this.state ={
-            selectedOption: 'Cash'
+            selectedOption: 'Cash',
+            paymentId:''
 
         }
     }
@@ -48,7 +53,23 @@ export default class Payment extends Component {
             date: Date.now()
         }
 
-        ConfirmPayment(payment);
+        ConfirmPayment(payment)
+    //     .then(res=>{
+        
+    //         console.log("hi",res._id);
+    //     }
+    //   )
+    //     .catch(err => { console.log(err) })
+
+    this.props.Items.forEach((item) => {
+        
+        AddToPurchaseHistory("5eacd18e0bd4fd34f03b2e8e",item.id,item.quantity)
+        DeleteCartListItem(this.props.userId,item.id)
+       
+    })
+              
+            
+        
 
         
     }

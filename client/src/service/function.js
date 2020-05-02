@@ -3,6 +3,7 @@ import axios from 'axios';
 let usertoken = ''
 let admintoken = ''
 let userid = ''
+let paymentId = ''
 
 // register new user
 export const registerUser = newUser => {
@@ -311,7 +312,35 @@ export const ConfirmPayment = (payment) => {
 
       
     })
+   .then(res => {console.log(res.data._id)
+
+            paymentId = res.data._id;
+   } )
+   .catch(err => { console.log(err) })
+}
+
+
+// return paymentId
+
+export const getPaymentId = () => {
+
+        return paymentId;
+   
+}
+
+//Enter the Array of item details to the PurchasedItems in Purchase History Model
+
+export const AddToPurchaseHistory = (id,itemid,qty) => {
+
+    return axios.post("/users/payment/addPurchaseHistory/"+id, {
+      
+        itemID: itemid,
+        quantity:qty
+      
+    })
    .then(res => console.log(res.data)
    )
    .catch(err => { console.log(err) })
 }
+
+
