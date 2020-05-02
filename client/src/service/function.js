@@ -339,3 +339,10 @@ export const AddToPurchaseHistory = (id,itemid,qty) => {
 }
 
 
+//Display Purchased History List
+
+export const DisplayPurchaseHistory = (id) => {
+
+    return axios.get("/users/payment/displayPurchaseHistory/"+id)
+
+}

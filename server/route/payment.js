@@ -51,6 +51,12 @@ router.post('/addPurchaseHistory/:id', (req, res) => {
     
 })
 
+router.route('/displayPurchaseHistory/:id').get((req,res) => {
+   
+    History.find({"userId":req.params.id})
+        .then(history => res.json(history))
+        .catch(err => res.status(400).json('Error : '  +err));
+})
 
 
 module.exports = router;
