@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom';
 
 export default class PuchaseHistoryListItem extends Component {
     render() {
+        const {HistoryDetail} = this.props
         return (
             <tr>
-            <td>506894984</td>
-            <td>Pay by Cash</td>
-            <td>2019/08/23</td>
-            <td> <Link to={"/"}> Display Reciept</Link> </td>
-         </tr>
+            <td>{HistoryDetail._id}</td>
+            <td>{HistoryDetail.paymentMethod}</td>
+            <td> <Link to={"/displayReciept/"+HistoryDetail._id}> Display Reciept</Link> </td>
+            </tr>
+            
         )
     }
 }

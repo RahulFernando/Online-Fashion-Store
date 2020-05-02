@@ -118,7 +118,7 @@ export default class Mybag extends Component {
                                 </tr>
                         </thead>
                                 <tbody>
-                                {/* {this.cartItemList()} */}
+                                {this.cartItemList()}
                               </tbody>
                    </Table>
 

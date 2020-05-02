@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
-const Payment = require('../models/purchaseHistory'); //purchse History schema
+const {History} = require('../models/purchaseHistory'); //purchse History schema
 
 router.post('/add', (req, res) => {
-
 
     const userId = req.body.userId;
     const paymentMethod = req.body.paymentMethod;
@@ -12,11 +11,52 @@ router.post('/add', (req, res) => {
    
     console.log(userId,paymentMethod,date)
 
-    //const newPayment = new Payment();
+    const newPayment = new History({
+        userId,
+        paymentMethod
+    });
 
-    // newPayment.save()
-    //     .then(() => res.json('Payment Done!'))
-    //     .catch(err => res.status(400).json('Error : ' + err));
+    newPayment.save()
+        .then(() => res.json({status: 200,_id: newPayment._id,}))
+        .catch(err => res.status(400).json('Error : ' + err));
 })
+
+
+router.post('/addPurchaseHistory/:id', (req, res) => {
+
+
+    History.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+            $push: {
+
+                purchasedItems: {
+                    id: req.body.itemID,
+                    quantity: req.body.quantity
+
+                }
+            }
+
+            },
+
+        {new: true },
+
+        () => {
+            res.status(200).json({success: true})
+        }
+        
+    )
+
+
+    
+})
+
+router.route('/displayPurchaseHistory/:id').get((req,res) => {
+   
+    History.find({"userId":req.params.id})
+        .then(history => res.json(history))
+        .catch(err => res.status(400).json('Error : '  +err));
+})
+
 
 module.exports = router;
