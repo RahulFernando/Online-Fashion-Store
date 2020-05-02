@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import {Container} from 'react-bootstrap'
 import PaymentRecieptItem from './PaymentRecieptItem'
 import {DisplayReciept} from '../../service/function'
-import {Table} from 'react-bootstrap'
+import {Table,Card} from 'react-bootstrap'
+
 
 export default class PaymentReciept extends Component {
 
@@ -49,6 +50,14 @@ export default class PaymentReciept extends Component {
         return (
             <>
             <Container>
+                
+            <Card border="primary"  header><center><h1>Reciept</h1></center></Card>
+
+                <ul>
+                        <li><b>Payment ID :-</b> {this.state.PaymentId}</li>
+                        <li><b>Payment Method :-</b>{this.state.PaymentMethod}</li>
+                </ul>  
+
             <Table striped bordered hover size="sm">
                         <thead>
                                 <tr>
