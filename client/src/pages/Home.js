@@ -11,6 +11,7 @@ import {getUserId} from '../service/function'
 import {wishList} from '../service/function'
 import {AddToCart} from '../service/function'
 import {QuantityDecrement} from '../service/function'
+import {isUserAuthenticated} from '../service/function'
 
 
 
@@ -94,7 +95,7 @@ export default class Home extends Component {
             <div className="row flex-row flex-rap">
                 
                 {this.state.items.map(product => {
-                    return <div className="col-12 col-sm-6 col-md-4 col-lg-3">
+                    return <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={product._id}>
                     <div className="card card-block" style={useStyles.background}>
                         <div className="overflow">
                             <img src={null} alt="" className="card-img-top"/>
@@ -104,8 +105,8 @@ export default class Home extends Component {
                             <p className="card-text text-secondary">
                                 {`Rs.${product.price}`}
                             </p> 
-                            <a href="#" onClick={() => { this.addToWishList(this.state.userID,product._id) }} className="btn btn-outline-success" role="button">Add to Wishlist</a>
-                            <a href="#" onClick={() => { this.addToCart(this.state.userID,product._id) }} className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a>
+                            {isUserAuthenticated() ? <a href="#" onClick={() => { this.addToWishList(this.state.userID,product._id) }} className="btn btn-outline-success" role="button">Add to Wishlist</a> : " "}
+                            {isUserAuthenticated() ? <a href="#" onClick={() => { this.addToCart(this.state.userID,product._id) }} className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a> : " "}
                         </div>
                     </div>
                 </div>
