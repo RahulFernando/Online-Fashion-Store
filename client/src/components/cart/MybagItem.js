@@ -19,6 +19,9 @@ export default class MybagItem extends Component {
        
         FindItem(id)
         .then(response =>{
+            if(this.state.name && this.state.unitPrice){
+                return;
+            }
         this.setState({
               
             name: response.data.itemName,
