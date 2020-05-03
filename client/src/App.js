@@ -8,6 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // components
 import UserLogin from "./components/login/Login";
 import AdminLogin from "./components/admin/AdminLogin";
+import StoreManagerLogin from './components/StoreManager/StoreManagerLogin'
 import DashBoard from "./components/admin/DashBoard";
 import StoreDashboard from "./components/StoreManager/StoreDashboard"
 import Home from "./pages/Home";
@@ -42,6 +43,7 @@ function App() {
       <Route path="/user/sign-in" component={UserLogin}/>
       <Route path="/user/sign-up" component={UserLogin}/>
       <Route exact path="/admin" component={AdminLogin}/>
+      <Route exact path="/storeManager" component={StoreManagerLogin}/>
       <AdminProtectedRoute exact path="/dash" component={DashBoard}/>
       <Route exact path="/store" component={StoreDashboard}/>
       <Route exact path="/displayReciept/:id" component={PaymentReciept}/>
