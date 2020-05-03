@@ -11,6 +11,7 @@ import {getUserId} from '../service/function'
 import {wishList} from '../service/function'
 import {AddToCart} from '../service/function'
 import {QuantityDecrement} from '../service/function'
+import {isUserAuthenticated} from '../service/function'
 
 
 
@@ -104,8 +105,8 @@ export default class Home extends Component {
                             <p className="card-text text-secondary">
                                 {`Rs.${product.price}`}
                             </p> 
-                            <a href="#" onClick={() => { this.addToWishList(this.state.userID,product._id) }} className="btn btn-outline-success" role="button">Add to Wishlist</a>
-                            <a href="#" onClick={() => { this.addToCart(this.state.userID,product._id) }} className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a>
+                            {isUserAuthenticated() ? <a href="#" onClick={() => { this.addToWishList(this.state.userID,product._id) }} className="btn btn-outline-success" role="button">Add to Wishlist</a> : " "}
+                            {isUserAuthenticated() ? <a href="#" onClick={() => { this.addToCart(this.state.userID,product._id) }} className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a> : " "}
                         </div>
                     </div>
                 </div>

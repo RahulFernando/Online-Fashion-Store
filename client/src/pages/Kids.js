@@ -4,16 +4,26 @@ import Navbar from "../components/Navbar";
 import Banner from "../components/Banner"
 import Title from "../components/Title"
 import {getKidsDetails} from '../service/function'
+import {getUserId} from '../service/function'
+import {wishList} from '../service/function'
+import {AddToCart} from '../service/function'
+import {QuantityDecrement} from '../service/function'
+import {isUserAuthenticated} from '../service/function'
+
 
 
 export default class Kids extends Component {
 
     constructor(props) {
         super(props)
+
+        this.addToWishList = this.addToWishList.bind(this);
+        this.addToCart = this.addToCart.bind(this);
     
         this.state = {
         
             kidsItems: [],
+            userId:''
         }
     }
 
@@ -29,6 +39,28 @@ export default class Kids extends Component {
         .catch (() => {
             alert('Error retreving data')
         })
+
+        this.state.userID = getUserId();
+        console.log(this.state.userID);
+    }
+
+    addToCart(userId,itemId){
+
+        console.log(userId);
+        console.log(itemId);
+
+        AddToCart(userId,itemId);
+        QuantityDecrement(itemId,1);
+        
+    }
+
+    addToWishList(userId,itemId){
+
+        console.log(userId);
+        console.log(itemId);
+
+        wishList(userId,itemId);
+
     }
 
     render() {
@@ -67,8 +99,8 @@ export default class Kids extends Component {
                             <p className="card-text text-secondary">
                                 {`Rs.${product.price}`}
                             </p> 
-                            <a href="" className="btn btn-outline-success" role="button">Add to Wishlist</a>
-                            <a href="" className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a>
+                            {isUserAuthenticated() ? <a href="#" onClick={() => { this.addToWishList(this.state.userID,product._id) }} className="btn btn-outline-success" role="button">Add to Wishlist</a> : " "}
+                            {isUserAuthenticated() ? <a href="#" onClick={() => { this.addToCart(this.state.userID,product._id) }} className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a> : " "}
                         </div>
                     </div>
                 </div>
