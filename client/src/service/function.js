@@ -213,7 +213,7 @@ export const updateMenDetails = (id, menDetails) => {
         qty: menDetails.qty,
         description: menDetails.description,
         price: menDetails.price,
-    })
+    },menDetails)
     .then(res => {
         console.log(res.data.message);
     })

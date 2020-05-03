@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Container, Table, ButtonGroup, Button } from "react-bootstrap";
 import {getMenDetails, getWomenDetails, getKidsDetails} from '../../service/function'
+import EditItem from './EditItem'
 
 export default class StoreHome extends Component {
 
@@ -12,6 +13,7 @@ export default class StoreHome extends Component {
         menItems: [],
         womenItems: [],
         kidsItems: [],
+        addModalShow: false,
     }
 }
 
@@ -53,6 +55,9 @@ export default class StoreHome extends Component {
   }
 
   render() {
+
+     let addModalClose = () => this.setState({addModalShow:false});
+
     return (
       <>
       {/* Men */}
@@ -84,7 +89,10 @@ export default class StoreHome extends Component {
             <td>{men.description}</td>
             <td>{`Rs.${men.price}`}</td>
             <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success"><i className="fas fa-edit"></i></Button>
+                <Button variant="success" onClick={() => this.setState({addModalShow: true}) }>
+                  <i className="fas fa-edit"></i>
+                  <EditItem/>
+                  </Button>
                 <Button variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>

@@ -120,13 +120,13 @@ router.put('/getMen/:id', (req, res) => {
 })
 
 
-router.delete('/subCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-    SubCategory.deleteSubCategory(req.params.id, (err) => {
-        if (!err) {
-            res.send({ message: req.params.id + ' deleted' })
-        }
-    })
-})
+// router.delete('/subCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+//     SubCategory.deleteSubCategory(req.params.id, (err) => {
+//         if (!err) {
+//             res.send({ message: req.params.id + ' deleted' })
+//         }
+//     })
+// })
 
 
 router.route('/getItem/:id').get((req,res) => {
