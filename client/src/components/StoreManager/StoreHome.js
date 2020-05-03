@@ -84,8 +84,8 @@ export default class StoreHome extends Component {
             <td>{men.description}</td>
             <td>{`Rs.${men.price}`}</td>
             <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success">Edit</Button>
-                <Button variant="danger">Delete</Button>
+                <Button variant="success"><i className="fas fa-edit"></i></Button>
+                <Button variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
           </tr>

@@ -98,6 +98,37 @@ router.get('/getKids', (req, res) => {
         res.status(200).json({success: true, kids})
     })
 });
+
+router.put('/getMen/:id', (req, res) => {
+    const men = { 
+        
+        itemName : req.body.itemName,
+        mainCategory : req.body.mainCategory,
+        subCategory : req.body.subCategory,
+        size : req.body.size,
+        qty : req.body.qty,
+        description : req.body.description,
+        price : req.body.price
+    }
+    Men.updateMen(req.params.id, men, (err) => {
+        if (!err) {
+            res.json({ message: 'Updated'})
+        } else {
+            res.json({ err: err })
+        }
+    })
+})
+
+
+router.delete('/subCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    SubCategory.deleteSubCategory(req.params.id, (err) => {
+        if (!err) {
+            res.send({ message: req.params.id + ' deleted' })
+        }
+    })
+})
+
+
 router.route('/getItem/:id').get((req,res) => {
    
     Item.findById(req.params.id)

@@ -180,6 +180,25 @@ export const getKidsDetails = () => {
     return axios.get("/product/getKids")
 }
 
+// update sub category by an id 
+export const updateMenDetails = (id, menDetails) => {
+    return axios.put("/product/getMen"+id, {
+        itemName: menDetails.itemName,
+        mainCategory: menDetails.mainCategory,
+        subCategory: menDetails.subCategory,
+        size: menDetails.size,
+        qty: menDetails.qty,
+        description: menDetails.description,
+        price: menDetails.price,
+    })
+    .then(res => {
+        console.log(res.data.message);
+    })
+    .catch(err => {
+        console.log(err)
+    })
+}
+
 // export const getImages = () => {
 //     return axios.get("/product/getImage")
 // }
