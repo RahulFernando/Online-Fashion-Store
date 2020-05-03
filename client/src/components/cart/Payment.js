@@ -9,6 +9,7 @@ import {ConfirmPayment} from '../../service/function'
 import {getPaymentId} from '../../service/function'
 import {AddToPurchaseHistory} from '../../service/function'
 import {DeleteCartListItem} from '../../service/function'
+import {FindItem} from '../../service/function'
  
 
 export default class Payment extends Component {
@@ -50,16 +51,19 @@ export default class Payment extends Component {
           const payment = {
             userId: this.props.userId,
             paymentMethod:this.state.selectedOption,
-            date: Date.now()
+            date: new Date()
         }
 
         ConfirmPayment(payment)
-        .then(res => {console.log(res.data._id)
+        .then(res => {
 
             this.props.Items.forEach((item) => {
-        
-                AddToPurchaseHistory(res.data._id,item.id,item.quantity)
-                DeleteCartListItem(this.props.userId,item.id)
+                FindItem(item.id)
+                .then(response => {
+                    AddToPurchaseHistory(res.data._id,item.id,item.quantity,response.data.itemName,response.data.price)
+                    DeleteCartListItem(this.props.userId,item.id)
+                })
+                
                
             })
    } )

@@ -3,6 +3,8 @@ import {Container} from 'react-bootstrap'
 import PaymentRecieptItem from './PaymentRecieptItem'
 import {DisplayReciept} from '../../service/function'
 import {Table,Card} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
+import {Link} from 'react-router-dom'
 
 
 export default class PaymentReciept extends Component {
@@ -15,7 +17,8 @@ export default class PaymentReciept extends Component {
 
             PaymentId:'',
             PaymentMethod:'',
-            Items: []
+            Items: [],
+            Total:0,
 
         };
     }
@@ -27,13 +30,21 @@ export default class PaymentReciept extends Component {
             this.setState({
                 PaymentId: response.data._id,
                 PaymentMethod: response.data.paymentMethod,
-                Items: response.data.purchasedItems
+                Items: response.data.purchasedItems,
         
             })
-        })
+            this.state.Items.forEach((item) => {
+                
+                    this.setState({
+                        Total : this.state.Total + (item.price*item.quantity)
+                    })
+                })
+            })
+      
         .catch(function(error){
             console.log(error);
         })
+
     }
 
     DisplayRecieptItems(){
@@ -49,9 +60,10 @@ export default class PaymentReciept extends Component {
     render() {
         return (
             <>
+             
             <Container>
-                
-            <Card border="primary"  header><center><h1>Reciept</h1></center></Card>
+            
+            <Card border="primary"  header><center><h2>Reciept</h2></center></Card>
 
                 <ul>
                         <li><b>Payment ID :-</b> {this.state.PaymentId}</li>
@@ -61,16 +73,21 @@ export default class PaymentReciept extends Component {
             <Table striped bordered hover size="sm">
                         <thead>
                                 <tr>
-                                    <th>Item ID</th>
-                                    <th>quantity</th>
+                                    <th>Item Name</th>
+                                    <th>Unit Price</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
                                 </tr>
                         </thead>
                                 <tbody>
                                 {this.DisplayRecieptItems()}
                               </tbody>
                    </Table>
-
+                    { `Total Price : Rs.${this.state.Total}` }
+                    <br/>
+                   <Link to={"/purchasehistory"}> <Button > Go back </Button></Link>
                
+     
             </Container>
             </>
         )

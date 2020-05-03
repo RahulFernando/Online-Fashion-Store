@@ -9,8 +9,10 @@ export default class PaymentRecieptItem extends Component {
             <>
              <tr>
                    
-                    <td>{recieptItem.id}</td>
+                    <td>{recieptItem.itemname}</td>
+                    <td>{recieptItem.price}</td>
                     <td>{recieptItem.quantity}</td>
+                    <td>{recieptItem.quantity * recieptItem.price}</td>
                     
                  </tr>
             </>

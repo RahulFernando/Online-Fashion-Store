@@ -348,12 +348,14 @@ export const getPaymentId = () => {
 
 //Enter the Array of item details to the PurchasedItems in Purchase History Model
 
-export const AddToPurchaseHistory = (id,itemid,qty) => {
+export const AddToPurchaseHistory = (id,itemid,qty,name,price) => {
 
     return axios.post("/users/payment/addPurchaseHistory/"+id, {
       
         itemID: itemid,
-        quantity:qty
+        quantity:qty,
+        itemName:name,
+        price:price
       
     })
    .then(res => console.log(res.data)
