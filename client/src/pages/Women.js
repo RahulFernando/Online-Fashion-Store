@@ -9,6 +9,7 @@ import {wishList} from '../service/function'
 import {AddToCart} from '../service/function'
 import {QuantityDecrement} from '../service/function'
 import {isUserAuthenticated} from '../service/function'
+import { Link } from 'react-router-dom';
 
 
 
@@ -100,7 +101,7 @@ export default class Women extends Component {
                             <img src={null} alt="" className="card-img-top"/>
                         </div>
                         <div className="card-body text-dark">
-                            <h5 className="card-title">{product.itemName}</h5>
+                        <Link to={"/displayProduct/"+product._id}> <h5 className="card-title">{product.itemName}</h5> </Link>
                             <p className="card-text text-secondary">
                                 {`Rs.${product.price}`}
                             </p> 

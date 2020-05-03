@@ -24,7 +24,8 @@ import Wishlist from "./components/wishList/Wishlist";
 import Mybag from "./components/cart/Mybag";
 import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 import Error from "./pages/Error";
-import PaymentReciept from "./components/PurchaseHistory/PaymentReciept"
+import PaymentReciept from "./components/PurchaseHistory/PaymentReciept";
+import DisplayProduct from "./pages/DisplayProduct"
 
 // protected route
 import { AdminProtectedRoute } from "./service/adminprotected.route";
@@ -50,6 +51,7 @@ function App() {
       <AdminProtectedRoute exact path="/dash" component={DashBoard}/>
       <Route exact path="/store" component={StoreDashboard}/>
       <Route exact path="/displayReciept/:id" component={PaymentReciept}/>
+      <Route exact path="/displayProduct/:id" component={DisplayProduct}/>
       <Route component={Error}/>
     </Switch>
   </>
