@@ -85,8 +85,16 @@ export default class Mybag extends Component {
 
     deleteCartItem(userId,itemId,quantity){
 
-        DeleteCartListItem(userId,itemId);
-
+        DeleteCartListItem(userId,itemId)
+            .then(
+                    FindItem(itemId)
+                    .then(response =>{
+                        this.setState({
+                            Total : this.state.Total - (response.data.price*quantity)
+                        });
+                    })
+               
+            )
         this.setState({
             Items: this.state.Items.filter(item => item.id !== itemId)
           })
