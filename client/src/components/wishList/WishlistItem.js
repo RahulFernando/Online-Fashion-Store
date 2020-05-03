@@ -16,6 +16,9 @@ export default class WishlistItem extends Component {
     getItemDetails(id) {
         FindItem(id)
         .then(response =>{
+            if(this.state.name){
+                return;
+            }
         this.setState({
               
             name: response.data.itemName
