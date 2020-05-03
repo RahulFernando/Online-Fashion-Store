@@ -86,6 +86,8 @@ export default class Wishlist extends Component {
                           </tbody>
                </Table>
 
+               {this.state.Items.length == 0 ? <h1 style={{textAlign: "center"}}><b> Wish List is Empty! </b></h1>  : ""}
+
                </Container>
                </>
         )

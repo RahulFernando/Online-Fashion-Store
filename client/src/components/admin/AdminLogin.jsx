@@ -12,7 +12,8 @@ class Login extends Component {
       username: '',
       password: '',
       usernameErr: '',
-      passwordErr: ''
+      passwordErr: '',
+      serverError: ''
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -63,10 +64,18 @@ class Login extends Component {
    
     if (isValid) {
       loginAdmin(admin).then(res => {
-        if (isAdminAuthenticated) {
+        const auth = isAdminAuthenticated()
+        if (auth) {
           this.props.history.push('/dash');
         } else {
-          this.props.history.push('/');
+          this.setState({
+            serverError: 'Username or Password Invalid!'
+          })
+          setTimeout(() => {
+            this.setState({
+              serverError: ''
+            })
+          }, 3000);
         }
       })
     }
@@ -107,6 +116,12 @@ class Login extends Component {
             Login
           </Button>
         
+          <div className="text-center">
+            {this.state.serverError ? (
+                <span className="ErrorMessage">{this.state.serverError}</span>
+              ): null}
+          </div>
+
         </Form>
       
       </div>

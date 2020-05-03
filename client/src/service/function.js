@@ -2,6 +2,7 @@ import axios from 'axios';
 
 let usertoken = ''
 let admintoken = ''
+let storeManagertoken = ''
 let userid = ''
 let paymentId = ''
 
@@ -40,6 +41,21 @@ export const loginAdmin = admin => {
         console.log(res)
         if (res.data.type === 'admin') {
             admintoken = res.data.token
+        }
+    })
+    .catch(err => { console.log(err) })
+}
+
+// log store manager
+export const loginStoreManager = manager => {
+    return axios.post("admin/storeManager/login", {
+        username: manager.username,
+        password: manager.password
+    })
+    .then(res => {
+        console.log(res.data)
+        if (res.data.type === 'storeManager') {
+            storeManagertoken = res.data.token
         }
     })
     .catch(err => { console.log(err) })
@@ -155,6 +171,13 @@ export const isAdminAuthenticated = () => {
 
 export const isUserAuthenticated = () => {
     if (usertoken) {
+        return true
+    }
+    return false
+}
+
+export const isStoreManagerAuthenticated = () => {
+    if (storeManagertoken) {
         return true
     }
     return false
@@ -344,12 +367,14 @@ export const getPaymentId = () => {
 
 //Enter the Array of item details to the PurchasedItems in Purchase History Model
 
-export const AddToPurchaseHistory = (id,itemid,qty) => {
+export const AddToPurchaseHistory = (id,itemid,qty,name,price) => {
 
     return axios.post("/users/payment/addPurchaseHistory/"+id, {
       
         itemID: itemid,
-        quantity:qty
+        quantity:qty,
+        itemName:name,
+        price:price
       
     })
    .then(res => console.log(res.data)

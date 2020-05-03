@@ -11,6 +11,8 @@ import {getUserId} from '../service/function'
 import {wishList} from '../service/function'
 import {AddToCart} from '../service/function'
 import {QuantityDecrement} from '../service/function'
+import {isUserAuthenticated} from '../service/function'
+import { Link } from 'react-router-dom';
 
 
 
@@ -100,12 +102,12 @@ export default class Home extends Component {
                             <img src={null} alt="" className="card-img-top"/>
                         </div>
                         <div className="card-body text-dark">
-                            <h5 className="card-title">{product.itemName}</h5>
+                            <Link to={"/displayProduct/"+product._id}> <h5 className="card-title">{product.itemName}</h5> </Link>
                             <p className="card-text text-secondary">
                                 {`Rs.${product.price}`}
                             </p> 
-                            <a href="#" onClick={() => { this.addToWishList(this.state.userID,product._id) }} className="btn btn-outline-success" role="button">Add to Wishlist</a>
-                            <a href="#" onClick={() => { this.addToCart(this.state.userID,product._id) }} className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a>
+                            {isUserAuthenticated() ? <a href="#" onClick={() => { this.addToWishList(this.state.userID,product._id) }} className="btn btn-outline-success" role="button">Add to Wishlist</a> : " "}
+                            {isUserAuthenticated() ? <a href="#" onClick={() => { this.addToCart(this.state.userID,product._id) }} className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a> : " "}
                         </div>
                     </div>
                 </div>

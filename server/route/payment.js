@@ -13,7 +13,8 @@ router.post('/add', (req, res) => {
 
     const newPayment = new History({
         userId,
-        paymentMethod
+        paymentMethod,
+        date
     });
 
     newPayment.save()
@@ -32,7 +33,9 @@ router.post('/addPurchaseHistory/:id', (req, res) => {
 
                 purchasedItems: {
                     id: req.body.itemID,
-                    quantity: req.body.quantity
+                    quantity: req.body.quantity,
+                    itemname:req.body.itemName,
+                    price: req.body.price
 
                 }
             }

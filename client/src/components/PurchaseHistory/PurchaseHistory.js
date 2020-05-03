@@ -48,9 +48,6 @@ export default class PurchaseHistory extends Component {
     }
 
 
-
-
-
     render() {
         return (
             <>
@@ -64,6 +61,7 @@ export default class PurchaseHistory extends Component {
                             <tr>
                                 <th>Payment ID</th>
                                 <th>Payment Method</th>
+                                <th>Date</th>
                                 <th></th>
                             </tr>
                     </thead>
