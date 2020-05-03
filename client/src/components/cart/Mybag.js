@@ -16,6 +16,7 @@ import {QuantityIncrement} from '../../service/function'
 
 
 
+
 export default class Mybag extends Component {
 
     constructor(props){
@@ -23,6 +24,7 @@ export default class Mybag extends Component {
 
         this.changePaymentState = this.changePaymentState.bind(this);
         this.deleteCartItem = this.deleteCartItem.bind(this);
+        this.bringBackToInitialState = this.bringBackToInitialState.bind(this);
       
 
         this.state = {
@@ -31,7 +33,9 @@ export default class Mybag extends Component {
             userID:'',
             Items: [],
             Total:0,
-            price:0
+            price:0,
+            paymentHaveNotDoneYet: true,
+            paymentHaveCompleted:false
 
         };
     }
@@ -64,7 +68,6 @@ export default class Mybag extends Component {
                 console.log(error);
             })
     
-           
       
 }
 
@@ -78,10 +81,21 @@ export default class Mybag extends Component {
     cartItemList() {
 
         return this.state.Items.map(cartListItem => {
-            return <MybagItem cartItem={cartListItem} deleteItem={this.deleteCartItem} userId={this.state.userID}/>;
+            return <MybagItem cartItem={cartListItem} deleteItem={this.deleteCartItem} userId={this.state.userID} />;
           })
     }
 
+    bringBackToInitialState() {
+
+        this.setState({
+            payment : false,
+            Items:[],
+            Total:0,
+            paymentHaveNotDoneYet:false,
+            paymentHaveCompleted:true
+
+        })
+    }
 
     deleteCartItem(userId,itemId,quantity){
 
@@ -105,6 +119,7 @@ export default class Mybag extends Component {
 
     render() {
 
+        
 
         return (
 <>
@@ -112,7 +127,7 @@ export default class Mybag extends Component {
 
         <Container>
 
-                <Card border="primary"  header><center><h1>My Cart</h1></center></Card>
+                <Card border="primary"  header><center><h2>My Cart</h2></center></Card>
 
                 <Table striped bordered hover size="sm">
                         <thead>
@@ -130,11 +145,19 @@ export default class Mybag extends Component {
                               </tbody>
                    </Table>
 
-                   {`Rs.${this.state.Total}`}
+                   
+                   
+                {this.state.Items.length ==  0 && this.state.paymentHaveNotDoneYet ? <h1 style={{textAlign: "center"}}><b>Cart is empty ! </b></h1>  : ""}
 
-                <Button onClick={this.changePaymentState}>Proceed</Button>
+                {this.state.Items.length == 0 && this.state.paymentHaveCompleted ? <h1 style={{textAlign: "center"}}><b>Payment has been Successfully Done! </b></h1>  : ""}
 
-                {this.state.payment ? <Payment userId={this.state.userID} Items={this.state.Items}/> : ""}
+                {this.state.Items.length >0 ? `Total Price : Rs.${this.state.Total}` : ""}
+
+                <br/>
+
+                {this.state.Items.length >0 ? <Button onClick={this.changePaymentState}>Proceed</Button> : ""}
+
+                {this.state.payment  ? <Payment userId={this.state.userID} Items={this.state.Items} bringBackToInitialState={this.bringBackToInitialState}/> : ""}
                    
                    </Container>
 

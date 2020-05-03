@@ -67,14 +67,14 @@ export default class Payment extends Component {
    
               
             
-        
+        this.props.bringBackToInitialState();
 
         
     }
     
     render() {
 
-        const {userId,Items} = this.props
+        const {userId,Items,bringBackToInitialState} = this.props
         
         return (
             <Card>
