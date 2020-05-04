@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {Modal, Button, Row, Col, Form, Container, Image} from 'react-bootstrap'
-import { getMainCategories, getSubCategories } from '../../service/function'
-import {updateMenDetails, getItemDetails} from '../../service/function';
+import { getMainCategories, getSubCategories, updateItemDetails } from '../../service/function'
+
 
 export default class EditItem extends Component {
 
@@ -21,7 +21,7 @@ export default class EditItem extends Component {
             price: '',
             mainCategories: [],
             subCategories: [],
-            items: [],
+          
           }
 
         this.onFileChange = this.onFileChange.bind(this);
@@ -47,16 +47,6 @@ export default class EditItem extends Component {
             })
         })
 
-        getItemDetails()
-        .then(res => {
-            this.setState({
-                items: res.data.products,
-            })
-
-        })
-        .catch (() => {
-            alert('Error retreving data')
-        })
     }
   
       onFileChange = (e) => {
@@ -152,8 +142,8 @@ export default class EditItem extends Component {
           data.append('qty', this.state.quantity);
           data.append('description', this.state.description);
           data.append('price', this.state.price);
-  
-          updateMenDetails(data)
+          
+          updateItemDetails(data)
       }
   
     render() {
@@ -171,8 +161,7 @@ export default class EditItem extends Component {
       </Modal.Header>
       <Modal.Body>
       <Container>
-      {this.state.items.map(product => {
-            return <Form onSubmit={this.handleSubmit} encType="multipart/form-data" key={product._id} defaultValue={this.props._id1}>
+           <Form onSubmit={this.handleSubmit} encType="multipart/form-data" defaultValue={this.props._id}>
               <br/>
               <Form.Group controlId="formImagePreview">
                 <Col xs={8} md={6}>
@@ -180,36 +169,36 @@ export default class EditItem extends Component {
                 </Col>
               </Form.Group>
               <Form.Group>
-                <Form.Control type="file" id="file" name="file" onChange={this.onFileChange} placeholder="Enter description" />
+                <Form.Control type="file" name="file" onChange={this.onFileChange} placeholder="Enter description" />
               </Form.Group>
               <Form.Group controlId="formItemName">
                 <Form.Label></Form.Label>
-                  <Form.Control type="text" id="itemName" name={product.itemName} onChange={this.onItemNameChange} placeholder="Enter Item Name" defaultValue={this.props.itemName1} />
+                  <Form.Control type="text" name="itemName" onChange={this.onItemNameChange} placeholder="Enter Item Name" defaultValue={this.props.itemname} />
               </Form.Group>
               <Form.Group controlId="formMainCategory">
                 <Form.Label>Main Category</Form.Label>
-                  <Form.Control as="select" onChange={this.onMainCategoryChange} defaultValue={this.props.mainCategory1}>
-                    <option>{product.mainCategory}</option>
-                  {/* {this.state.mainCategories.map(mainCategory => {
+                  <Form.Control as="select" onChange={this.onMainCategoryChange} defaultValue={this.props.maincategory}>
+                    <option>Select Main Category</option>
+                  {this.state.mainCategories.map(mainCategory => {
                             return <option key={mainCategory._id}>{mainCategory.mainCategoryName}</option>
-                        })} */}
+                        })}
                   </Form.Control>
               </Form.Group>
               <Form.Group controlId="formSubCategory">
                 <Form.Label>Sub Category</Form.Label>
-                  <Form.Control as="select" onChange={this.onSubCategoryChange} defaultValue={this.props.subCategory1}>
-                    <option>{product.subCategory}</option>
-                  {/* {this.state.subCategories.map(subCategory => {
+                  <Form.Control as="select" onChange={this.onSubCategoryChange} defaultValue={this.props.subcategory}>
+                    <option>Select Sub Category</option>
+                  {this.state.subCategories.map(subCategory => {
                             return <option key={subCategory._id}>{subCategory.subCategoryName}</option>
-                        })} */}
+                        })}
                   </Form.Control>
               </Form.Group>
               {['checkbox'].map((type) => (
-                <div key={`custom-inline-${type}`} className="mb-3" checked={this.state.size} onChange={this.onSizeChange} defaultValue={this.props.size1}>
+                <div key={`custom-inline-${type}`} className="mb-3" checked={this.state.size} onChange={this.onSizeChange} defaultValue={this.props.size}>
                   <Form.Check
                     custom
                     inline
-                    label={product.size}
+                    labe="XS"
                     type={type}
                     id={`custom-inline-${type}-1`}
                   />
@@ -245,19 +234,17 @@ export default class EditItem extends Component {
               ))}
               <Form.Group controlId="formQuantity">
                 <Form.Label>Quantity</Form.Label>
-                  <Form.Control type="number" id="quantity" name={product.qty} onChange={this.onQuantityChange} placeholder="" defaultValue={this.props.qty1}/>
+                  <Form.Control type="number"  name="quantity" onChange={this.onQuantityChange} placeholder="" defaultValue={this.props.qty}/>
               </Form.Group>
               <Form.Group controlId="formDescription">
                 <Form.Label>Description</Form.Label>
-                  <Form.Control as="textarea" name={product.description} rows="3" onChange={this.onDescriptionChange} defaultValue={this.props.description1}/>
+                  <Form.Control as="textarea" name="description" rows="3" onChange={this.onDescriptionChange} defaultValue={this.props.description}/>
               </Form.Group>
               <Form.Group controlId="formPrice">
                 <Form.Label>Price(Rs)</Form.Label>
-                  <Form.Control type="number" id="price" name={product.price} onChange={this.onPriceChange} placeholder="Rs.xxxx" defaultValue={this.props.price1}/>
+                  <Form.Control type="number"  name="price" onChange={this.onPriceChange} placeholder="Rs.xxxx" defaultValue={this.props.price}/>
               </Form.Group>
-              
           </Form>
-        })}
           </Container>
       </Modal.Body>
       <Modal.Footer>
@@ -265,7 +252,6 @@ export default class EditItem extends Component {
         <Button variant="danger" >Close</Button>
       </Modal.Footer>
     </Modal>
-
         )
     }
 }

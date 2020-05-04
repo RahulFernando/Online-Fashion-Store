@@ -216,17 +216,9 @@ export const getKidsDetails = () => {
     return axios.get("/product/getKids")
 }
 
-// update sub category by an id 
-export const updateMenDetails = (id, menDetails) => {
-    return axios.put("/product/uploadItem"+id, {
-        itemName: menDetails.itemName,
-        mainCategory: menDetails.mainCategory,
-        subCategory: menDetails.subCategory,
-        size: menDetails.size,
-        qty: menDetails.qty,
-        description: menDetails.description,
-        price: menDetails.price,
-    },menDetails)
+// update Item Details 
+export const updateItemDetails = (id,data) => {
+    return axios.put("/product/uploadItem"+id,data)
     .then(res => {
         console.log(res.data.message);
     })

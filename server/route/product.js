@@ -99,22 +99,33 @@ router.get('/getKids', (req, res) => {
     })
 });
 
-router.put('/UploadItem/:id', (req, res) => {
-    const men = { 
-        image:req.file.path,
-        itemName : req.body.itemName,
-        mainCategory : req.body.mainCategory,
-        subCategory : req.body.subCategory,
-        size : req.body.size,
-        qty : req.body.qty,
-        description : req.body.description,
-        price : req.body.price
-    }
-    Men.updateMen(req.params.id, men, (err) => {
-        if (!err) {
-            res.json({ message: 'Updated'})
-        } else {
-            res.json({ err: err })
+router.route('/editItem/:id').get((req,res) => {
+   
+    Item.findById(req.params.id)
+        .then(product => res.json(product))
+        .catch(err => res.status(400).json('Error : '  +err));
+});
+
+router.route('/updateItem/:id').post((req, res) => {
+    Item.findById(req.params.id, function(error, item){
+        if(!item)
+        res.status(404).send("data is not found");
+        else {
+        item.image = req.file.path,
+        item.itemName = req.body.itemName,
+        item.mainCategory = req.body.mainCategory,
+        item.subCategory = req.body.subCategory,
+        item.size = req.body.size,
+        item.qty = req.body.qty,
+        item.description = req.body.description,
+        item.price = req.body.price
+
+        item.save().then(item => {
+            res.json('Update complete');
+        })
+        .catch(err => {
+            res.status(400).send("unable to update the database");
+        })
         }
     })
 })

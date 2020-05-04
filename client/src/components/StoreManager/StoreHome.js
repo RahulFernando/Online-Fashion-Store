@@ -66,7 +66,7 @@ export default class StoreHome extends Component {
 
   render() {
 
-    const {_id1, itemName1, mainCategory1, subCategory1, size1, qty1, description1, price1} = this.state;
+    const {_id, itemname, maincategory, subcategory, size, qty, description, price} = this.state;
 
     return (
       <>
@@ -102,20 +102,20 @@ export default class StoreHome extends Component {
             <td>{men.description}</td>
             <td>{`Rs.${men.price}`}</td>
             <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id1:men._id, itemName1:men.itemName, 
-                  mainCategory1:men.mainCategory, subCategory1:men.subCategory, size1:men.size, qty1:men.qty, 
-                  description1:men.description, price1:men.price}) }>
+                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id:men._id, itemname:men.itemName, 
+                  maincategory:men.mainCategory, subcategory:men.subCategory, size:men.size, qty:men.qty, 
+                  description:men.description, price:men.price}) }>
                   <i className="fas fa-pen"></i>
                   </Button>
                   <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
-                  _id1 = {_id1}
-                  itemName1 = {itemName1}
-                  mainCategory1 = {mainCategory1}
-                  subCategory1 = {subCategory1}
-                  size1 = {size1}
-                  qty1 = {qty1}
-                  description1 = {description1}
-                  price1 = {price1}
+                  _id = {_id}
+                  itemname = {itemname}
+                  maincategory = {maincategory}
+                  subcategory = {subcategory}
+                  size = {size}
+                  qty = {qty}
+                  description = {description}
+                  price = {price}
                   />
                 <Button variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
@@ -158,20 +158,20 @@ export default class StoreHome extends Component {
               <td>{women.description}</td>
               <td>{`Rs.${women.price}`}</td>
               <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id1:women._id, itemName1:women.itemName, 
-                  mainCategory1:women.mainCategory, subCategory1:women.subCategory, size1:women.size, qty1:women.qty, 
-                  description1:women.description, price1:women.price}) }>
+                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id:women._id, itemname:women.itemName, 
+                  maincategory:women.mainCategory, subcategory:women.subCategory, size:women.size, qty:women.qty, 
+                  description:women.description, price:women.price}) }>
                   <i className="fas fa-pen"></i>
                   </Button>
                   <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
-                  _id1 = {_id1}
-                  itemName1 = {itemName1}
-                  mainCategory1 = {mainCategory1}
-                  subCategory1 = {subCategory1}
-                  size1 = {size1}
-                  qty1 = {qty1}
-                  description1 = {description1}
-                  price1 = {price1}
+                  _id = {_id}
+                  itemname = {itemname}
+                  maincategory = {maincategory}
+                  subcategory = {subcategory}
+                  size = {size}
+                  qty = {qty}
+                  description = {description}
+                  price = {price}
                   />
                 <Button variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
@@ -214,20 +214,20 @@ export default class StoreHome extends Component {
               <td>{kids.description}</td>
               <td>{`Rs.${kids.price}`}</td>
               <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id1:kids._id, itemName1:kids.itemName, 
-                  mainCategory1:kids.mainCategory, subCategory1:kids.subCategory, size1:kids.size, qty1:kids.qty, 
-                  description1:kids.description, price1:kids.price}) }>
+                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id:kids._id, itemname:kids.itemName, 
+                  maincategory:kids.mainCategory, subcategory:kids.subCategory, size:kids.size, qty:kids.qty, 
+                  description:kids.description, price:kids.price}) }>
                   <i className="fas fa-pen"></i>
                   </Button>
                   <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
-                  _id1 = {_id1}
-                  itemName1 = {itemName1}
-                  mainCategory1 = {mainCategory1}
-                  subCategory1 = {subCategory1}
-                  size1 = {size1}
-                  qty1 = {qty1}
-                  description1 = {description1}
-                  price1 = {price1}
+                  _id = {_id}
+                  itemname = {itemname}
+                  maincategory = {maincategory}
+                  subcategory = {subcategory}
+                  size = {size}
+                  qty = {qty}
+                  description = {description}
+                  price = {price}
                   />
                 <Button variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
