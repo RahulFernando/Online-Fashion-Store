@@ -6,11 +6,20 @@ import {FaHeart} from 'react-icons/fa'
 import {FaShoppingBag} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import ReactSearchBox from 'react-search-box'
+import {isUserAuthenticated} from '../service/function'
+import {getUserId} from '../service/function'
+import {DisplayPurchaseHistory} from '../service/function'
+import {displayWishList} from '../service/function'
+import {DisplayCart} from '../service/function'
+
 
 
 export default class Navbar extends Component {
     state={
-        isOpen:false
+        isOpen:false,
+        cart:[],
+        wishList:[],
+        purchaseHistory:[]
     }
     handleToggle = () =>{
         this.setState({isOpen:!this.state.isOpen})
@@ -38,6 +47,60 @@ export default class Navbar extends Component {
           value: 'Karius',
         },
       ]
+
+      componentDidMount(){
+
+        this.state.userID = getUserId();
+        console.log(this.state.userID);
+
+        if(this.state.userID){
+
+          
+        DisplayPurchaseHistory(this.state.userID)
+        .then(res => {
+            console.log(res.data)
+            this.setState({
+              purchaseHistory: res.data
+               
+            })    
+    })
+    .catch(err => { console.log(err) })
+
+
+
+    DisplayCart(this.state.userID)
+    .then(res => {
+        console.log(res.data.Cart)
+        this.setState({
+          cart: res.data.Cart
+           
+        })
+    })
+        .catch(function(error){
+       
+            console.log(error);
+        })
+
+
+        displayWishList(this.state.userID)
+        .then(res => {
+            this.setState({
+              wishList: res.data.WishList
+               
+            })
+
+            
+           
+        })
+        .catch(function(error){
+           
+            console.log(error);
+        })
+
+        }
+
+
+      }
 
     render() {
         return <nav className="navbar">
@@ -78,17 +141,20 @@ export default class Navbar extends Component {
                   </li>
                   <li>
                     <Link to="/wishlist">
-                      <FaHeart className="nav-bar-icon"/>
+                      <FaHeart className="nav-bar-icon"/> 
+              {isUserAuthenticated() ? <sup style={{color:"red"}}>{this.state.wishList.length}</sup> : ""}
                     </Link>
                   </li>
                   <li>
                     <Link to="/mybag">
                       <FaShoppingBag className="nav-bar-icon"/>
+                      {isUserAuthenticated() ? <sup style={{color:"red"}}>{this.state.cart.length}</sup> : ""}
                     </Link>
                   </li>
                   <li>
                     <Link to="/purchasehistory">
                       <FaHistory className="nav-bar-icon"/>
+                      {isUserAuthenticated() ? <sup style={{color:"red"}}>{this.state.purchaseHistory.length}</sup> : ""}
                     </Link>
                   </li>
                   <li>
