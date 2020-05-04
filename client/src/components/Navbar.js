@@ -10,9 +10,7 @@ import {isUserAuthenticated} from '../service/function'
 import {getUserId} from '../service/function'
 import {DisplayPurchaseHistory} from '../service/function'
 import {displayWishList} from '../service/function'
-import {DisplayCart} from '../service/function'
-
-
+import {DisplayCart, logoutUser} from '../service/function'
 
 export default class Navbar extends Component {
     state={
@@ -102,6 +100,11 @@ export default class Navbar extends Component {
 
       }
 
+    // logout user
+    handleLogout = () => {
+      logoutUser()
+    }
+
     render() {
         return <nav className="navbar">
           <div className="nav-center">
@@ -158,8 +161,8 @@ export default class Navbar extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/logout">
-                      <FaSignOutAlt className="nav-bar-icon"/>
+                    <Link>
+                      <FaSignOutAlt className="nav-bar-icon" onClick={this.handleLogout}/>
                     </Link>
                   </li>
               </ul>
