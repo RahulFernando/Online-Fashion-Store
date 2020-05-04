@@ -183,6 +183,19 @@ export const isStoreManagerAuthenticated = () => {
     return false
 }
 
+//add Item Details
+export const upload = (data) => {
+    return axios.post('/product/uploadItem', data)
+    .then(res => {
+        if(res.data.success) {
+            alert('Product Successfully Uploaded')
+        } else {
+            alert('Failed to upload Product')
+        }
+    })
+    
+}
+
 //get Item Details
 export const getItemDetails = () => {
     return axios.get("/product/getItem")
@@ -205,7 +218,7 @@ export const getKidsDetails = () => {
 
 // update sub category by an id 
 export const updateMenDetails = (id, menDetails) => {
-    return axios.put("/product/getMen"+id, {
+    return axios.put("/product/uploadItem"+id, {
         itemName: menDetails.itemName,
         mainCategory: menDetails.mainCategory,
         subCategory: menDetails.subCategory,
@@ -221,6 +234,24 @@ export const updateMenDetails = (id, menDetails) => {
         console.log(err)
     })
 }
+
+// export const updateMenDetails = (id, menDetails) => {
+//     return axios.put("/product/uploadItem"+id, {
+//         itemName: menDetails.itemName,
+//         mainCategory: menDetails.mainCategory,
+//         subCategory: menDetails.subCategory,
+//         size: menDetails.size,
+//         qty: menDetails.qty,
+//         description: menDetails.description,
+//         price: menDetails.price,
+//     },menDetails)
+//     .then(res => {
+//         console.log(res.data.message);
+//     })
+//     .catch(err => {
+//         console.log(err)
+//     })
+// }
 
 // export const getImages = () => {
 //     return axios.get("/product/getImage")

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Table, ButtonGroup, Button } from "react-bootstrap";
+import { Container, Table, ButtonGroup, Button, Col, Image } from "react-bootstrap";
 import {getMenDetails, getWomenDetails, getKidsDetails} from '../../service/function'
 import EditItem from './EditItem'
 
@@ -15,6 +15,8 @@ export default class StoreHome extends Component {
         kidsItems: [],
         addModalShow: false,
     }
+
+    this.addModalClose = this.addModalClose.bind(this)
 }
 
   componentDidMount = () => {
@@ -54,9 +56,17 @@ export default class StoreHome extends Component {
 
   }
 
+  addModalClose = () => {
+
+    this.setState({
+      addModalShow:false
+    })
+
+  }
+
   render() {
 
-     let addModalClose = () => this.setState({addModalShow:false});
+    const {_id1, itemName1, mainCategory1, subCategory1, size1, qty1, description1, price1} = this.state;
 
     return (
       <>
@@ -66,7 +76,7 @@ export default class StoreHome extends Component {
       <Table striped bordered hover>
         <thead>
           <tr>
-            {/* <th>Image</th> */}
+            <th>Image</th>
             <th>Item Name</th>
             <th>Main Category</th>
             <th>Sub Category</th>
@@ -80,7 +90,10 @@ export default class StoreHome extends Component {
         <tbody>
         {this.state.menItems.map(men => {
           return <tr key={men._id}>
-            {/* <td>{men.image}</td> */}
+            <td><Col xs={6} md={4}>
+                <Image src={men.image} alt='' />
+                </Col>
+            </td>
             <td>{men.itemName}</td>
             <td>{men.mainCategory}</td>
             <td>{men.subCategory}</td>
@@ -89,10 +102,21 @@ export default class StoreHome extends Component {
             <td>{men.description}</td>
             <td>{`Rs.${men.price}`}</td>
             <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success" onClick={() => this.setState({addModalShow: true}) }>
-                  <i className="fas fa-edit"></i>
-                  <EditItem/>
+                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id1:men._id, itemName1:men.itemName, 
+                  mainCategory1:men.mainCategory, subCategory1:men.subCategory, size1:men.size, qty1:men.qty, 
+                  description1:men.description, price1:men.price}) }>
+                  <i className="fas fa-pen"></i>
                   </Button>
+                  <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
+                  _id1 = {_id1}
+                  itemName1 = {itemName1}
+                  mainCategory1 = {mainCategory1}
+                  subCategory1 = {subCategory1}
+                  size1 = {size1}
+                  qty1 = {qty1}
+                  description1 = {description1}
+                  price1 = {price1}
+                  />
                 <Button variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
@@ -108,7 +132,7 @@ export default class StoreHome extends Component {
       <Table striped bordered hover>
         <thead>
           <tr>
-            {/* <th>Image</th> */}
+            <th>Image</th>
             <th>Item Name</th>
             <th>Main Category</th>
             <th>Sub Category</th>
@@ -122,7 +146,10 @@ export default class StoreHome extends Component {
         <tbody>
           {this.state.womenItems.map(women => {
           return <tr key={women._id}>
-            {/* <td>{women.image}</td> */}
+              <td><Col xs={6} md={4}>
+                <Image src={women.image} alt='' />
+                </Col>
+              </td>
               <td>{women.itemName}</td>
               <td>{women.mainCategory}</td>
               <td>{women.subCategory}</td>
@@ -131,8 +158,22 @@ export default class StoreHome extends Component {
               <td>{women.description}</td>
               <td>{`Rs.${women.price}`}</td>
               <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success">Edit</Button>
-                <Button variant="danger">Delete</Button>
+                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id1:women._id, itemName1:women.itemName, 
+                  mainCategory1:women.mainCategory, subCategory1:women.subCategory, size1:women.size, qty1:women.qty, 
+                  description1:women.description, price1:women.price}) }>
+                  <i className="fas fa-pen"></i>
+                  </Button>
+                  <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
+                  _id1 = {_id1}
+                  itemName1 = {itemName1}
+                  mainCategory1 = {mainCategory1}
+                  subCategory1 = {subCategory1}
+                  size1 = {size1}
+                  qty1 = {qty1}
+                  description1 = {description1}
+                  price1 = {price1}
+                  />
+                <Button variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
           </tr>
@@ -147,7 +188,7 @@ export default class StoreHome extends Component {
       <Table striped bordered hover>
         <thead>
           <tr>
-            {/* <th>Image</th> */}
+            <th>Image</th>
             <th>Item Name</th>
             <th>Main Category</th>
             <th>Sub Category</th>
@@ -161,7 +202,10 @@ export default class StoreHome extends Component {
         <tbody>
           {this.state.kidsItems.map(kids => {
           return <tr key={kids._id}>
-            {/* <td>{kids.image}</td> */}
+              <td><Col xs={6} md={4}>
+                <Image src={kids.image} alt='' />
+                </Col>
+              </td>
               <td>{kids.itemName}</td>
               <td>{kids.mainCategory}</td>
               <td>{kids.subCategory}</td>
@@ -170,8 +214,22 @@ export default class StoreHome extends Component {
               <td>{kids.description}</td>
               <td>{`Rs.${kids.price}`}</td>
               <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success">Edit</Button>
-                <Button variant="danger">Delete</Button>
+                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id1:kids._id, itemName1:kids.itemName, 
+                  mainCategory1:kids.mainCategory, subCategory1:kids.subCategory, size1:kids.size, qty1:kids.qty, 
+                  description1:kids.description, price1:kids.price}) }>
+                  <i className="fas fa-pen"></i>
+                  </Button>
+                  <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
+                  _id1 = {_id1}
+                  itemName1 = {itemName1}
+                  mainCategory1 = {mainCategory1}
+                  subCategory1 = {subCategory1}
+                  size1 = {size1}
+                  qty1 = {qty1}
+                  description1 = {description1}
+                  price1 = {price1}
+                  />
+                <Button variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
           </tr>

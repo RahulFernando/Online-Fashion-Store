@@ -99,9 +99,9 @@ router.get('/getKids', (req, res) => {
     })
 });
 
-router.put('/getMen/:id', (req, res) => {
+router.put('/UploadItem/:id', (req, res) => {
     const men = { 
-        
+        image:req.file.path,
         itemName : req.body.itemName,
         mainCategory : req.body.mainCategory,
         subCategory : req.body.subCategory,
