@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar'
 import {getUserId} from '../../service/function'
 import {displayWishList} from '../../service/function'
 import {DeleteWishListItem} from '../../service/function'
+import {AddToCart,QuantityDecrement} from '../../service/function'
 
 export default class Wishlist extends Component {
 
@@ -13,6 +14,7 @@ export default class Wishlist extends Component {
         super(props);
 
         this.deleteWishedItem = this.deleteWishedItem.bind(this);
+        this.addToCart = this.addToCart.bind(this);
 
 
         this.state = {
@@ -50,7 +52,7 @@ export default class Wishlist extends Component {
     wishItemList() {
 
         return this.state.Items.map(wishListItem => {
-            return <WishListItem wishedItem={wishListItem} deleteItem={this.deleteWishedItem} userID = {this.state.userID} />;
+            return <WishListItem wishedItem={wishListItem} deleteItem={this.deleteWishedItem} userID = {this.state.userID} addToCart={this.addToCart}/>;
           })
     }
 
@@ -63,6 +65,17 @@ export default class Wishlist extends Component {
           })
     }
 
+    addToCart(userId,itemId){
+
+        AddToCart(userId,itemId);
+        QuantityDecrement(itemId,1);
+        DeleteWishListItem(userId,itemId);
+
+        this.setState({
+            Items: this.state.Items.filter(item => item.id !== itemId)
+          })
+
+    }
 
     render() {
         return (
@@ -78,6 +91,7 @@ export default class Wishlist extends Component {
                             <tr>
                                 <th>Image</th>
                                 <th>Name</th>
+                                <th></th>
                                 <th></th>
                             </tr>
                     </thead>
