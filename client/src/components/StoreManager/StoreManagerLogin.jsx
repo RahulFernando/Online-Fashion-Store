@@ -6,7 +6,6 @@ import './style.css'
 
 // function
 import { loginStoreManager, isStoreManagerAuthenticated } from '../../service/function'
-import { FaThinkPeaks } from 'react-icons/fa'
 
 export default class StoreManagerLogin extends Component {
     constructor(props) {

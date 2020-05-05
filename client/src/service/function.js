@@ -183,6 +183,13 @@ export const isStoreManagerAuthenticated = () => {
     return false
 }
 
+export const logoutUser = () => {
+    if (usertoken != null) {
+        usertoken = ''
+        return true
+    }
+}
+
 //add Item Details
 export const upload = (data) => {
     return axios.post('/product/uploadItem', data)
