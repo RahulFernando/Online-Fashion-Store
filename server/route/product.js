@@ -106,12 +106,14 @@ router.route('/editItem/:id').get((req,res) => {
         .catch(err => res.status(400).json('Error : '  +err));
 });
 
-router.route('/updateItem/:id').post((req, res) => {
+
+router.route('/updateItem/:id').put((req, res) => {
+  console.log(req.body)
     Item.findById(req.params.id, function(error, item){
         if(!item)
         res.status(404).send("data is not found");
         else {
-        item.image = req.file.path,
+        // item.image = req.file.path,
         item.itemName = req.body.itemName,
         item.mainCategory = req.body.mainCategory,
         item.subCategory = req.body.subCategory,
@@ -129,6 +131,8 @@ router.route('/updateItem/:id').post((req, res) => {
         }
     })
 })
+
+
 
 
 // router.delete('/subCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {

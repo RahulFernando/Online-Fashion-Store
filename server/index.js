@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(checkUserType);
-
+app.use(express.json())
 //port
 const port = process.env.PORT;
 

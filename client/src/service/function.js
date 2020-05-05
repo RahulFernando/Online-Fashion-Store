@@ -218,7 +218,16 @@ export const getKidsDetails = () => {
 
 // update Item Details 
 export const updateItemDetails = (id,data) => {
-    return axios.put("/product/uploadItem"+id,data)
+    console.log(id,data)
+    return axios.put("/product/uploadItem"+id, {
+                itemName: data.itemName,
+                mainCategory: data.mainCategory,
+                subCategory: data.subCategory,
+                size: data.size,
+                qty: data.qty,
+                description: data.description,
+                price: data.price,
+            },data)
     .then(res => {
         console.log(res.data.message);
     })

@@ -5,9 +5,11 @@ import { getMainCategories, getSubCategories, updateItemDetails } from '../../se
 
 export default class EditItem extends Component {
 
+
     constructor(props) {
         super(props)
-    
+
+
         // this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             img: null,
@@ -46,7 +48,6 @@ export default class EditItem extends Component {
                 subCategories: res.data
             })
         })
-
     }
   
       onFileChange = (e) => {
@@ -99,7 +100,7 @@ export default class EditItem extends Component {
       onQuantityChange = (e) => {
         let target = e.target;
         let value = target.value;
-  
+        console.log(value)
         this.setState({
           quantity: value
         })
@@ -126,6 +127,7 @@ export default class EditItem extends Component {
   
       handleSubmit = (e) => {
           e.preventDefault()
+          console.log(this.state.itemName)
           const data = new FormData();
           let arr = [];
           for (var key in this.state.size) {
@@ -134,16 +136,28 @@ export default class EditItem extends Component {
             }
           }
           size: arr.toString()
-          data.append('file', this.state.file);
-          data.append('itemName', this.state.itemName);
-          data.append('mainCategory', this.state.mainCategory);
-          data.append('subCategory', this.state.subCategory);
-          data.append('size', this.state.size);
-          data.append('qty', this.state.quantity);
-          data.append('description', this.state.description);
-          data.append('price', this.state.price);
+          // data.append('file', this.state.file);
+          // data.append('itemName', this.props.itemName);
+          // data.append('mainCategory', this.state.mainCategory);
+          // data.append('subCategory', this.state.subCategory);
+          // data.append('size', this.state.size);
+          // data.append('qty', this.state.quantity);
+          // data.append('description', this.state.description);
+          // data.append('price', this.state.price);
           
-          updateItemDetails(data)
+
+          const d = {
+            itemName: this.state.itemName,
+            mainCategory: this.state.mainCategory,
+            subCategory: this.state.subCategory,
+            size: this.state.size,
+            qty:this.state.quantity,
+            description:this.state.description,
+            price:this.state.price
+          }
+
+          updateItemDetails(this.props._id,d)
+        
       }
   
     render() {
@@ -169,7 +183,7 @@ export default class EditItem extends Component {
                 </Col>
               </Form.Group>
               <Form.Group>
-                <Form.Control type="file" name="file" onChange={this.onFileChange} placeholder="Enter description" />
+                <Form.Control type="file" name="file" onChange={this.onFileChange}  placeholder="Enter description" />
               </Form.Group>
               <Form.Group controlId="formItemName">
                 <Form.Label></Form.Label>
@@ -244,13 +258,13 @@ export default class EditItem extends Component {
                 <Form.Label>Price(Rs)</Form.Label>
                   <Form.Control type="number"  name="price" onChange={this.onPriceChange} placeholder="Rs.xxxx" defaultValue={this.props.price}/>
               </Form.Group>
+              <Modal.Footer>
+                <Button variant="success" type="submit">Save</Button>
+                {/* <Button variant="danger" >Close</Button> */}
+              </Modal.Footer>
           </Form>
           </Container>
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="success" type="submit">Save</Button>
-        <Button variant="danger" >Close</Button>
-      </Modal.Footer>
     </Modal>
         )
     }
