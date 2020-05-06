@@ -7,6 +7,7 @@ import {getUserId} from '../../service/function'
 import {displayWishList} from '../../service/function'
 import {DeleteWishListItem} from '../../service/function'
 import {AddToCart,QuantityDecrement} from '../../service/function'
+import {FaHeartBroken} from 'react-icons/fa'
 
 export default class Wishlist extends Component {
 
@@ -100,7 +101,7 @@ export default class Wishlist extends Component {
                           </tbody>
                </Table>
 
-               {this.state.Items.length == 0 ? <h1 style={{textAlign: "center"}}><b> Wish List is Empty! </b></h1>  : ""}
+               {this.state.Items.length == 0 ? <h1 style={{textAlign: "center", color:"red"}}><b> Wish List is Empty! <FaHeartBroken/> </b></h1>  : ""}
 
                </Container>
                </>

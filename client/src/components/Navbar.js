@@ -161,7 +161,7 @@ export default class Navbar extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link to="">
+                    <Link>
                       <FaSignOutAlt className="nav-bar-icon" onClick={this.handleLogout}/>
                     </Link>
                   </li>

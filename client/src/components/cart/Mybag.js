@@ -5,6 +5,8 @@ import MybagItem from './MybagItem'
 import Navbar from '../../components/Navbar'
 import Payment from './Payment'
 import{ Button } from 'react-bootstrap'
+import {FaShoppingCart} from 'react-icons/fa'
+import {FaCheckCircle} from 'react-icons/fa'
 
 
 import {getUserId} from '../../service/function'
@@ -147,9 +149,9 @@ export default class Mybag extends Component {
 
                    
                    
-                {this.state.Items.length ==  0 && this.state.paymentHaveNotDoneYet ? <h1 style={{textAlign: "center"}}><b>Cart is empty ! </b></h1>  : ""}
+                {this.state.Items.length ==  0 && this.state.paymentHaveNotDoneYet ? <h1 style={{textAlign: "center",color:"red"}}><b>Cart is empty ! <FaShoppingCart/> </b></h1>  : ""}
 
-                {this.state.Items.length == 0 && this.state.paymentHaveCompleted ? <h1 style={{textAlign: "center"}}><b>Payment has been Successfully Done! </b></h1>  : ""}
+                {this.state.Items.length == 0 && this.state.paymentHaveCompleted ? <h1 style={{textAlign: "center",color:"green"}}><b>Payment has been Successfully Done! <FaCheckCircle/></b></h1>  : ""}
 
                 {this.state.Items.length >0 ? `Total Price : Rs.${this.state.Total}` : ""}
 
