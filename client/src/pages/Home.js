@@ -111,12 +111,8 @@ export default class Home extends Component {
                     return <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={product._id}>
                     <div className="card card-block" style={useStyles.background}>
                         <div className="overflow">
-<<<<<<< HEAD
                             
                             <img src={this.state.img} alt="" className="card-img-top"/>
-=======
-                            <img src={null} alt="" className="card-img-top"/>
->>>>>>> master
                         </div>
                         <div className="card-body text-dark">
                             <Link to={"/displayProduct/"+product._id}> <h5 className="card-title">{product.itemName}</h5> </Link>
