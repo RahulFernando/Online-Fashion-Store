@@ -23,7 +23,7 @@ router.post('/register', passport.authenticate('jwt', { session: false }), (req,
                 message
             })
         } else {
-            StoreManager.sendEmail(newStoreManager.email, (err) => {
+            StoreManager.sendEmail(newStoreManager.email, newStoreManager.username, (err) => {
                 if (err) {
                     console.log(err)
                 }else {
