@@ -8,7 +8,16 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import AddItem from './AddItem';
 import Home from './StoreHome';
 
+// service 
+import { logoutStoreManager } from '../../service/function'
+
 class StoreDashboard extends Component {
+    // handleLogout
+    handleLogout = () => {
+        if (logoutStoreManager()) {
+            this.props.history.push('/storeManager')
+        }
+    }
     render() {
         return (
             <Router>
@@ -47,6 +56,11 @@ class StoreDashboard extends Component {
                                 <NavText>
                                     Upload
                                 </NavText>
+                            </NavItem>
+                            <NavItem eventKey="logout">
+                                <NavIcon>
+                                    <i className="fa fa-sign-out-alt" style={{ fontSize: '1.75em' }} onClick={this.handleLogout} />
+                                </NavIcon>
                             </NavItem>
                         </SideNav.Nav>
                     </SideNav>

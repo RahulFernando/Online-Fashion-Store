@@ -11,7 +11,18 @@ import SubCategory from './SubCategory/SubCategory';
 import StoreManager from './StoreManager/StoreManager';
 import Home from './Home';
 
+// service
+import { logoutAdmin } from '../../service/function'
+
 class DashBoard extends Component {
+
+    // handleLogout
+    handleLogout = () => {
+        if (logoutAdmin()) {
+            this.props.history.push('/admin')
+        }
+    }
+
     render() {
         return (
             <Router>
@@ -60,6 +71,11 @@ class DashBoard extends Component {
                                 <NavText>
                                     New Store Manager
                                 </NavText>
+                            </NavItem>
+                            <NavItem eventKey="logout">
+                                <NavIcon>
+                                    <i className="fa fa-sign-out-alt" style={{ fontSize: '1.75em' }} onClick={this.handleLogout} />
+                                </NavIcon>
                             </NavItem>
                         </SideNav.Nav>
                     </SideNav>
