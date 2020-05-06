@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Modal, Button, Row, Col, Form, Container, Image} from 'react-bootstrap'
-import { getMainCategories, getSubCategories, updateItemDetails } from '../../service/function'
+import { getMainCategories, getSubCategories, updateItemDetails} from '../../service/function'
 
 
 export default class EditItem extends Component {
@@ -48,6 +48,7 @@ export default class EditItem extends Component {
                 subCategories: res.data
             })
         })
+
     }
   
       onFileChange = (e) => {
@@ -136,27 +137,27 @@ export default class EditItem extends Component {
             }
           }
           size: arr.toString()
-          // data.append('file', this.state.file);
-          // data.append('itemName', this.props.itemName);
-          // data.append('mainCategory', this.state.mainCategory);
-          // data.append('subCategory', this.state.subCategory);
-          // data.append('size', this.state.size);
-          // data.append('qty', this.state.quantity);
-          // data.append('description', this.state.description);
-          // data.append('price', this.state.price);
+          data.append('file', this.state.file);
+          data.append('itemName', this.state.itemName);
+          data.append('mainCategory', this.state.mainCategory);
+          data.append('subCategory', this.state.subCategory);
+          data.append('size', this.state.size);
+          data.append('qty', this.state.quantity);
+          data.append('description', this.state.description);
+          data.append('price', this.state.price);
           
 
-          const d = {
-            itemName: this.state.itemName,
-            mainCategory: this.state.mainCategory,
-            subCategory: this.state.subCategory,
-            size: this.state.size,
-            qty:this.state.quantity,
-            description:this.state.description,
-            price:this.state.price
-          }
+          // const d = {
+          //   itemName: this.state.itemName,
+          //   mainCategory: this.state.mainCategory,
+          //   subCategory: this.state.subCategory,
+          //   size: this.state.size,
+          //   qty:this.state.quantity,
+          //   description:this.state.description,
+          //   price:this.state.price
+          // }
 
-          updateItemDetails(this.props._id,d)
+          updateItemDetails(this.props._id,data)
         
       }
   

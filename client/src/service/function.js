@@ -239,10 +239,10 @@ export const getKidsDetails = () => {
     return axios.get("/product/getKids")
 }
 
+
 // update Item Details 
 export const updateItemDetails = (id,data) => {
-    console.log(id,data)
-    return axios.put("/product/uploadItem"+id, {
+    return axios.put("/product/updateItem/"+id, {
                 itemName: data.itemName,
                 mainCategory: data.mainCategory,
                 subCategory: data.subCategory,
@@ -252,35 +252,15 @@ export const updateItemDetails = (id,data) => {
                 price: data.price,
             },data)
     .then(res => {
+        alert("successfully updated product")
         console.log(res.data.message);
     })
     .catch(err => {
         console.log(err)
+        alert("failed to update product")
     })
 }
 
-// export const updateMenDetails = (id, menDetails) => {
-//     return axios.put("/product/uploadItem"+id, {
-//         itemName: menDetails.itemName,
-//         mainCategory: menDetails.mainCategory,
-//         subCategory: menDetails.subCategory,
-//         size: menDetails.size,
-//         qty: menDetails.qty,
-//         description: menDetails.description,
-//         price: menDetails.price,
-//     },menDetails)
-//     .then(res => {
-//         console.log(res.data.message);
-//     })
-//     .catch(err => {
-//         console.log(err)
-//     })
-// }
-
-// export const getImages = () => {
-//     return axios.get("/product/getImage")
-// }
-//Return user id
 
 //Return user id
 export const getUserId = () => {
