@@ -4,6 +4,7 @@ import{ Card } from 'react-bootstrap'
 import PurchaseHistoryListItem from './PuchaseHistoryListItem'
 import Navbar from '../../components/Navbar'
 import {getUserId} from '../../service/function'
+import {DisplayPurchaseHistory} from '../../service/function'
 
 export default class PurchaseHistory extends Component {
     
@@ -13,7 +14,8 @@ export default class PurchaseHistory extends Component {
 
         this.state = {
 
-            userID:''
+            userID:'',
+            PaymentHistory:[]
 
         };
     }
@@ -22,12 +24,28 @@ export default class PurchaseHistory extends Component {
         
         this.state.userID = getUserId();
         console.log(this.state.userID);
+
+        DisplayPurchaseHistory(this.state.userID)
+        .then(res => {
+            console.log(res.data)
+            this.setState({
+                PaymentHistory: res.data
+               
+            })    
+    })
+    .catch(err => { console.log(err) })
+}
+
+    DisplayPaymentHistory(){
+
         
+
+        return this.state.PaymentHistory.map(PaymentHistoryDetail => {
+            return <PurchaseHistoryListItem HistoryDetail={PaymentHistoryDetail}/>;
+          })
+
+           
     }
-
-
-
-
 
 
     render() {
@@ -48,7 +66,7 @@ export default class PurchaseHistory extends Component {
                             </tr>
                     </thead>
                             <tbody>
-                            <PurchaseHistoryListItem/> 
+                            {this.DisplayPaymentHistory()}
                           </tbody>
                </Table>
 

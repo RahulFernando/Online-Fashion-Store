@@ -4,10 +4,16 @@ import './App.css';
 // bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+//mdbreact
+// import '@fortawesome/fontawesome-free/css/all.min.css'; 
+// import 'bootstrap-css-only/css/bootstrap.min.css';
+// import 'mdbreact/dist/css/mdb.css';
+
 
 // components
 import UserLogin from "./components/login/Login";
 import AdminLogin from "./components/admin/AdminLogin";
+import StoreManagerLogin from './components/StoreManager/StoreManagerLogin'
 import DashBoard from "./components/admin/DashBoard";
 import StoreDashboard from "./components/StoreManager/StoreDashboard"
 import Home from "./pages/Home";
@@ -19,9 +25,12 @@ import Wishlist from "./components/wishList/Wishlist";
 import Mybag from "./components/cart/Mybag";
 import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 import Error from "./pages/Error";
+import PaymentReciept from "./components/PurchaseHistory/PaymentReciept";
+import DisplayProduct from "./pages/DisplayProduct"
 
 // protected route
 import { AdminProtectedRoute } from "./service/adminprotected.route";
+import { StoreManagerProtectedRoute } from './service/storemanagerprotected.route'
 
 import {Route, Switch} from 'react-router-dom';
 
@@ -41,8 +50,11 @@ function App() {
       <Route path="/user/sign-in" component={UserLogin}/>
       <Route path="/user/sign-up" component={UserLogin}/>
       <Route exact path="/admin" component={AdminLogin}/>
+      <Route exact path="/storeManager" component={StoreManagerLogin}/>
       <AdminProtectedRoute exact path="/dash" component={DashBoard}/>
-      <Route exact path="/store" component={StoreDashboard}/>
+      <StoreManagerProtectedRoute exact path="/store" component={StoreDashboard}/>
+      <Route exact path="/displayReciept/:id" component={PaymentReciept}/>
+      <Route exact path="/displayProduct/:id" component={DisplayProduct}/>
       <Route component={Error}/>
     </Switch>
   </>

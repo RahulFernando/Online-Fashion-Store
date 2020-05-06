@@ -6,9 +6,18 @@ import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import AddItem from './AddItem';
+import Home from './StoreHome';
 
+// service 
+import { logoutStoreManager } from '../../service/function'
 
 class StoreDashboard extends Component {
+    // handleLogout
+    handleLogout = () => {
+        if (logoutStoreManager()) {
+            this.props.history.push('/storeManager')
+        }
+    }
     render() {
         return (
             <Router>
@@ -48,11 +57,16 @@ class StoreDashboard extends Component {
                                     Upload
                                 </NavText>
                             </NavItem>
+                            <NavItem eventKey="logout">
+                                <NavIcon>
+                                    <i className="fa fa-sign-out-alt" style={{ fontSize: '1.75em' }} onClick={this.handleLogout} />
+                                </NavIcon>
+                            </NavItem>
                         </SideNav.Nav>
                     </SideNav>
                     <main>
-                        <Route path="/storedash" exact component={AddItem} />
-                        {/* <Route path="/storehome" exact component={} /> */}
+                        <Route path="/storedash" exact component={Home} />
+                        <Route path="/storehome" exact component={Home} />
                         <Route path="/storeadd" exact component={AddItem} />
                     </main>
                 </React.Fragment>

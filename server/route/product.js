@@ -56,6 +56,132 @@ router.get('/getItem', (req, res) => {
     })
 });
 
+// router.get('/getImage', (req, res) => {
+//     Item.find()
+//     .exec((err, images) => {
+//         if (err) return res.status(400).json({success: false, err})
+//         res.status(200).json({success: true, images})
+//     })
+// });
+
+router.get('/getMen', (req, res) => {
+
+    const query = { "mainCategory": "Men" }
+
+    Item.find(query)
+    .exec((err, men) => {
+        if (err) return res.status(400).json({success: false, err})
+        res.status(200).json({success: true, men})
+    })
+});
+
+
+router.get('/getWomen', (req, res) => {
+
+    const query = { "mainCategory": "Women" }
+
+    Item.find(query)
+    .exec((err, women) => {
+        if (err) return res.status(400).json({success: false, err})
+        res.status(200).json({success: true, women})
+    })
+});
+
+
+router.get('/getKids', (req, res) => {
+
+    const query = { "mainCategory": "Kid" }
+
+    Item.find(query)
+    .exec((err, kids) => {
+        if (err) return res.status(400).json({success: false, err})
+        res.status(200).json({success: true, kids})
+    })
+});
+
+router.route('/editItem/:id').get((req,res) => {
+   
+    Item.findById(req.params.id)
+        .then(product => res.json(product))
+        .catch(err => res.status(400).json('Error : '  +err));
+});
+
+
+router.route('/updateItem/:id').put((req, res) => {
+  console.log(req.body)
+    Item.findById(req.params.id, function(error, item){
+        if(!item)
+        res.status(404).send("data is not found");
+        else {
+        // item.image = req.file.path,
+        item.itemName = req.body.itemName,
+        item.mainCategory = req.body.mainCategory,
+        item.subCategory = req.body.subCategory,
+        item.size = req.body.size,
+        item.qty = req.body.qty,
+        item.description = req.body.description,
+        item.price = req.body.price
+
+        item.save().then(item => {
+            res.json('Update complete');
+        })
+        .catch(err => {
+            res.status(400).send("unable to update the database");
+        })
+        }
+    })
+})
+
+
+
+
+// router.delete('/subCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+//     SubCategory.deleteSubCategory(req.params.id, (err) => {
+//         if (!err) {
+//             res.send({ message: req.params.id + ' deleted' })
+//         }
+//     })
+// })
+
+
+router.route('/getItem/:id').get((req,res) => {
+   
+    Item.findById(req.params.id)
+        .then(product => res.json(product))
+        .catch(err => res.status(400).json('Error : '  +err));
+});
+
+router.route('/decrement/:id').post((req,res) => {
+   
+    Item.findOneAndUpdate(
+        { _id: req.params.id},
+        { $inc: { "qty": -1 } },
+        { new: true },
+        () => {
+            res.status(200).json({success: true})
+        }
+    )
+
+
+});
+
+
+router.route('/increment/:id').post((req,res) => {
+   
+    Item.findOneAndUpdate(
+        { _id: req.params.id},
+        { $inc: { "qty": req.body.qty } },
+        { new: true },
+        () => {
+            res.status(200).json({success: true})
+        }
+    )
+
+
+});
+
+
+
 
 
 module.exports = router;

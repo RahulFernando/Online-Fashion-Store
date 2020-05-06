@@ -1,16 +1,24 @@
 import React, { Component } from 'react'
 import logo from '../images/logo.svg'
-import {FaAlignRight, FaHistory} from 'react-icons/fa'
+import {FaAlignRight, FaHistory, FaSignOutAlt} from 'react-icons/fa'
+import Badge from '@material-ui/core/Badge';
 import {FaUserAlt} from 'react-icons/fa'
 import {FaHeart} from 'react-icons/fa'
 import {FaShoppingBag} from 'react-icons/fa'
 import {Link} from 'react-router-dom'
 import ReactSearchBox from 'react-search-box'
-
+import {isUserAuthenticated} from '../service/function'
+import {getUserId} from '../service/function'
+import {DisplayPurchaseHistory} from '../service/function'
+import {displayWishList} from '../service/function'
+import {DisplayCart, logoutUser} from '../service/function'
 
 export default class Navbar extends Component {
     state={
-        isOpen:false
+        isOpen:false,
+        cart:[],
+        wishList:[],
+        purchaseHistory:[]
     }
     handleToggle = () =>{
         this.setState({isOpen:!this.state.isOpen})
@@ -38,6 +46,117 @@ export default class Navbar extends Component {
           value: 'Karius',
         },
       ]
+
+      componentDidMount(){
+
+        setInterval(() => {
+
+          this.state.userID = getUserId();
+          console.log(this.state.userID);
+  
+          if(this.state.userID){
+  
+            
+          DisplayPurchaseHistory(this.state.userID)
+          .then(res => {
+              console.log(res.data)
+              this.setState({
+                purchaseHistory: res.data
+                 
+              })    
+      })
+      .catch(err => { console.log(err) })
+  
+  
+  
+      DisplayCart(this.state.userID)
+      .then(res => {
+          console.log(res.data.Cart)
+          this.setState({
+            cart: res.data.Cart
+             
+          })
+      })
+          .catch(function(error){
+         
+              console.log(error);
+          })
+  
+  
+          displayWishList(this.state.userID)
+          .then(res => {
+              this.setState({
+                wishList: res.data.WishList
+                 
+              })
+  
+              
+             
+          })
+          .catch(function(error){
+             
+              console.log(error);
+          })
+  
+          }
+
+        }, 500);
+    //     this.state.userID = getUserId();
+    //     console.log(this.state.userID);
+
+    //     if(this.state.userID){
+
+          
+    //     DisplayPurchaseHistory(this.state.userID)
+    //     .then(res => {
+    //         console.log(res.data)
+    //         this.setState({
+    //           purchaseHistory: res.data
+               
+    //         })    
+    // })
+    // .catch(err => { console.log(err) })
+
+
+
+    // DisplayCart(this.state.userID)
+    // .then(res => {
+    //     console.log(res.data.Cart)
+    //     this.setState({
+    //       cart: res.data.Cart
+           
+    //     })
+    // })
+    //     .catch(function(error){
+       
+    //         console.log(error);
+    //     })
+
+
+    //     displayWishList(this.state.userID)
+    //     .then(res => {
+    //         this.setState({
+    //           wishList: res.data.WishList
+               
+    //         })
+
+            
+           
+    //     })
+    //     .catch(function(error){
+           
+    //         console.log(error);
+    //     })
+
+    //     }
+
+
+      }
+
+    // logout user
+    handleLogout = () => {
+      logoutUser()
+    }
 
     render() {
         return <nav className="navbar">
@@ -78,17 +197,28 @@ export default class Navbar extends Component {
                   </li>
                   <li>
                     <Link to="/wishlist">
-                      <FaHeart className="nav-bar-icon"/>
+                      <Badge badgeContent={this.state.wishList.length} color="primary">
+                        <FaHeart className="nav-bar-icon"/> 
+                      </Badge>
                     </Link>
                   </li>
                   <li>
                     <Link to="/mybag">
-                      <FaShoppingBag className="nav-bar-icon"/>
+                    <Badge badgeContent={this.state.cart.length} color="primary">
+                        <FaShoppingBag className="nav-bar-icon" color="secondary"/>
+                    </Badge>
                     </Link>
                   </li>
                   <li>
                     <Link to="/purchasehistory">
-                      <FaHistory className="nav-bar-icon"/>
+                      <Badge badgeContent={this.state.purchaseHistory.length} color="primary">
+                        <FaHistory className="nav-bar-icon"/>
+                      </Badge>
+                    </Link>
+                  </li>
+                  <li>
+                  <Link to="">
+                      <FaSignOutAlt className="nav-bar-icon" onClick={this.handleLogout}/>
                     </Link>
                   </li>
               </ul>

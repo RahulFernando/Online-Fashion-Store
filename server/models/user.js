@@ -20,18 +20,15 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    addToCart : {
+    Cart : {
         type: Array,
         default: []
     },
-    addToWishList : {
+   WishList : {
         type: Array,
         default: []
     },
-    history : {
-        type: Array,
-        default: []
-    }
+    
 });
 
 //check

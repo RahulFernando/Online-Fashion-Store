@@ -5,9 +5,16 @@ import MybagItem from './MybagItem'
 import Navbar from '../../components/Navbar'
 import Payment from './Payment'
 import{ Button } from 'react-bootstrap'
+import {FaShoppingCart} from 'react-icons/fa'
+import {FaCheckCircle} from 'react-icons/fa'
 
 
 import {getUserId} from '../../service/function'
+import {DisplayCart} from '../../service/function'
+import {FindItem} from '../../service/function'
+import {DeleteCartListItem} from '../../service/function'
+import {QuantityIncrement} from '../../service/function'
+
 
 
 
@@ -18,11 +25,19 @@ export default class Mybag extends Component {
         super(props);
 
         this.changePaymentState = this.changePaymentState.bind(this);
+        this.deleteCartItem = this.deleteCartItem.bind(this);
+        this.bringBackToInitialState = this.bringBackToInitialState.bind(this);
+      
 
         this.state = {
 
             payment : false,
-            userID:''
+            userID:'',
+            Items: [],
+            Total:0,
+            price:0,
+            paymentHaveNotDoneYet: true,
+            paymentHaveCompleted:false
 
         };
     }
@@ -32,7 +47,31 @@ export default class Mybag extends Component {
         this.state.userID = getUserId();
         console.log(this.state.userID);
         
-    }
+        DisplayCart(this.state.userID)
+        .then(res => {
+            console.log(res.data.Cart)
+            this.setState({
+                Items: res.data.Cart
+               
+            })
+
+        this.state.Items.forEach((item) => {
+            FindItem(item.id)
+            .then(response =>{
+                this.setState({
+                    Total : this.state.Total + (response.data.price*item.quantity)
+                });
+            })
+        })
+    
+        })
+            .catch(function(error){
+           
+                console.log(error);
+            })
+    
+      
+}
 
     changePaymentState(){
 
@@ -41,15 +80,56 @@ export default class Mybag extends Component {
         });
     }
 
-    render() {
-        return (
+    cartItemList() {
 
-            <>
+        return this.state.Items.map(cartListItem => {
+            return <MybagItem cartItem={cartListItem} deleteItem={this.deleteCartItem} userId={this.state.userID} />;
+          })
+    }
+
+    bringBackToInitialState() {
+
+        this.setState({
+            payment : false,
+            Items:[],
+            Total:0,
+            paymentHaveNotDoneYet:false,
+            paymentHaveCompleted:true
+
+        })
+    }
+
+    deleteCartItem(userId,itemId,quantity){
+
+        DeleteCartListItem(userId,itemId)
+            .then(
+                    FindItem(itemId)
+                    .then(response =>{
+                        this.setState({
+                            Total : this.state.Total - (response.data.price*quantity)
+                        });
+                    })
+               
+            )
+        this.setState({
+            Items: this.state.Items.filter(item => item.id !== itemId)
+          })
+
+          QuantityIncrement(itemId,quantity)
+
+    }
+
+    render() {
+
+        
+
+        return (
+<>
             <Navbar/>
 
         <Container>
 
-                <Card border="primary"  header><center><h1>My Cart</h1></center></Card>
+                <Card border="primary"  header><center><h2>My Cart</h2></center></Card>
 
                 <Table striped bordered hover size="sm">
                         <thead>
@@ -63,13 +143,23 @@ export default class Mybag extends Component {
                                 </tr>
                         </thead>
                                 <tbody>
-                                <MybagItem/>
+                                {this.cartItemList()}
                               </tbody>
                    </Table>
 
-                <Button onClick={this.changePaymentState}>Proceed</Button>
+                   
+                   
+                {this.state.Items.length ==  0 && this.state.paymentHaveNotDoneYet ? <h1 style={{textAlign: "center",color:"red"}}><b>Cart is empty ! <FaShoppingCart/> </b></h1>  : ""}
 
-                {this.state.payment ? <Payment/> : ""}
+                {this.state.Items.length == 0 && this.state.paymentHaveCompleted ? <h1 style={{textAlign: "center",color:"green"}}><b>Payment has been Successfully Done! <FaCheckCircle/></b></h1>  : ""}
+
+                {this.state.Items.length >0 ? `Total Price : Rs.${this.state.Total}` : ""}
+
+                <br/>
+
+                {this.state.Items.length >0 ? <Button onClick={this.changePaymentState}>Proceed</Button> : ""}
+
+                {this.state.payment  ? <Payment userId={this.state.userID} Items={this.state.Items} bringBackToInitialState={this.bringBackToInitialState}/> : ""}
                    
                    </Container>
 

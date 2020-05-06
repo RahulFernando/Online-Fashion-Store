@@ -62,7 +62,7 @@ module.exports.comparePassword = function (password, hash, callback) {
 }
 
 // send email 
-module.exports.sendEmail = function (receiver, callback) {
+module.exports.sendEmail = function (receiver, username ,callback) {
     const transporter = nodemailer.createTransport({
         host: 'smtp.gmail.com',
         secure: false,
@@ -79,7 +79,7 @@ module.exports.sendEmail = function (receiver, callback) {
         from: 'urbanrunes@gmail.com',
         to: receiver,
         subject: 'Welcome to Urban Runes',
-        text: 'We are almost done creating your account. You can use this account to log in to urbanrunes as a store manager. Your password is 12345'
+        text: `We are almost done creating your account. You can use this account to log in to urbanrunes as a store manager. Use ${username} as your username 12345 as your password`
     }
 
     transporter.sendMail(mailOptions, callback)

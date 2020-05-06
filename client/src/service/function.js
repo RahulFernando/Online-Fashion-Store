@@ -2,7 +2,9 @@ import axios from 'axios';
 
 let usertoken = ''
 let admintoken = ''
+let storeManagertoken = ''
 let userid = ''
+let paymentId = ''
 
 // register new user
 export const registerUser = newUser => {
@@ -21,7 +23,7 @@ export const loginUser = user => {
     })
     .then(res => {
         if (res.data.type === 'user') {
-            console.log(res.data._id) // udin varaible ekak hadala ekata userge id eke assign karaganin. eeta passe function ekakin eka return karapn
+            console.log(res.data._id) 
             usertoken = res.data.token
             userid = res.data._id;
         }
@@ -39,6 +41,21 @@ export const loginAdmin = admin => {
         console.log(res)
         if (res.data.type === 'admin') {
             admintoken = res.data.token
+        }
+    })
+    .catch(err => { console.log(err) })
+}
+
+// log store manager
+export const loginStoreManager = manager => {
+    return axios.post("admin/storeManager/login", {
+        username: manager.username,
+        password: manager.password
+    })
+    .then(res => {
+        console.log(res.data)
+        if (res.data.type === 'storeManager') {
+            storeManagertoken = res.data.token
         }
     })
     .catch(err => { console.log(err) })
@@ -159,16 +176,261 @@ export const isUserAuthenticated = () => {
     return false
 }
 
+export const isStoreManagerAuthenticated = () => {
+    if (storeManagertoken) {
+        return true
+    }
+    return false
+}
+
+// session destroy
+export const logoutUser = () => {
+    if (usertoken != null) {
+        usertoken = ''
+        return true
+    }
+}
+
+export const logoutAdmin = () => {
+    if (admintoken != null) {
+        admintoken = ''
+        return true
+    }
+}
+
+export const logoutStoreManager = () => {
+    if (storeManagertoken != null) {
+        storeManagertoken = ''
+        return true
+    }
+}
+
+
+//add Item Details
+export const upload = (data) => {
+    return axios.post('/product/uploadItem', data)
+    .then(res => {
+        if(res.data.success) {
+            alert('Product Successfully Uploaded')
+        } else {
+            alert('Failed to upload Product')
+        }
+    })
+    
+}
+
 //get Item Details
 export const getItemDetails = () => {
     return axios.get("/product/getItem")
 }
-//Return user id
 
+//get Men Details
+export const getMenDetails = () => {
+    return axios.get("/product/getMen")
+}
+
+//get Women Details
+export const getWomenDetails = () => {
+    return axios.get("/product/getWomen")
+}
+
+//get Kids Details
+export const getKidsDetails = () => {
+    return axios.get("/product/getKids")
+}
+
+
+// update Item Details 
+export const updateItemDetails = (id,data) => {
+    return axios.put("/product/updateItem/"+id, {
+                itemName: data.itemName,
+                mainCategory: data.mainCategory,
+                subCategory: data.subCategory,
+                size: data.size,
+                qty: data.qty,
+                description: data.description,
+                price: data.price,
+            },data)
+    .then(res => {
+        alert("successfully updated product")
+        console.log(res.data.message);
+    })
+    .catch(err => {
+        console.log(err)
+        alert("failed to update product")
+    })
+}
+
+
+//Return user id
 export const getUserId = () => {
 
     if (usertoken) {
         return userid;
     }
     return null
+}
+
+//Add items to user's wish list
+
+export const wishList = (id,itemid) => {
+
+     return axios.post("/users/wishlist/add/"+id, {
+       
+         itemID: itemid
+       
+     })
+    .then(res => console.log(res.data)
+    )
+    .catch(err => { console.log(err) })
+}
+
+//Display user's Wish list
+
+export const displayWishList = (id) => {
+
+    return axios.get("/users/wishlist/display/"+id)
+
+}
+
+
+//Delete user's Wish List Items
+
+export const DeleteWishListItem = (userId,itemId) => {
+
+    return axios.post("/users/wishlist/delete/"+userId, {
+       
+        itemID: itemId
+      
+    })
+    .then(res => console.log(res.data)
+    )
+    .catch(err => { console.log(err) })
+
+}
+
+//Get Item details for a given Id
+
+export const FindItem = (id) => {
+
+    return axios.get("/product/getItem/"+id)
+}
+
+//add to items to user' cart
+
+export const AddToCart = (id,itemid) => {
+
+    return axios.post("/users/cart/add/"+id, {
+      
+        itemID: itemid
+      
+    })
+   .then(res => console.log(res.data)
+   )
+   .catch(err => { console.log(err) })
+}
+
+//Decrement Item store quantity
+
+export const QuantityDecrement = (id,quantity) => {
+
+    return axios.post("/product/decrement/"+id,{
+        qty : quantity
+    })
+   .then(res => console.log(res.data)
+   )
+   .catch(err => { console.log(err) })
+}
+
+//Display User's Cart item list
+
+export const DisplayCart = (id) => {
+
+    return axios.get("/users/cart/display/"+id)
+
+}
+
+//Delete items from the user's cart
+
+export const DeleteCartListItem = (userId,itemId) => {
+
+    return axios.post("/users/cart/delete/"+userId, {
+       
+        itemID: itemId
+      
+    })
+    .then(res => console.log(res.data)
+    )
+    .catch(err => { console.log(err) })
+
+}
+
+//Increment Item store quantity
+
+export const QuantityIncrement = (id,quantity) => {
+
+    return axios.post("/product/increment/"+id,{
+        qty : quantity
+    })
+   .then(res => console.log(res.data)
+   )
+   .catch(err => { console.log(err) })
+}
+
+//Store Payment Id, userId , payment method and Date
+
+export const ConfirmPayment = (payment) => {
+
+    return axios.post("/users/payment/add", {
+       
+        paymentMethod: payment.paymentMethod,
+        userId: payment. userId,
+        date: payment.date
+
+      
+    })
+}
+
+
+// return paymentId
+
+export const getPaymentId = () => {
+
+        return paymentId;
+   
+}
+
+//Enter the Array of item details to the PurchasedItems in Purchase History Model
+
+export const AddToPurchaseHistory = (id,itemid,qty,name,price) => {
+
+    return axios.post("/users/payment/addPurchaseHistory/"+id, {
+      
+        itemID: itemid,
+        quantity:qty,
+        itemName:name,
+        price:price
+      
+    })
+   .then(res => console.log(res.data)
+   )
+   .catch(err => { console.log(err) })
+}
+
+
+//Display Purchased History List
+
+export const DisplayPurchaseHistory = (id) => {
+
+    return axios.get("/users/payment/displayPurchaseHistory/"+id)
+
+}
+
+
+//Display Specific Reciept 
+
+export const DisplayReciept = (id) => {
+
+    return axios.get("/users/reciept/displayReciept/"+id)
+    
 }
