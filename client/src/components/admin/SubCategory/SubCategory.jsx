@@ -133,18 +133,20 @@ class SubCategory extends Component {
 
     // handle sub category deletion
     handleDelete = (_id) => {
-        deleteSubCategories(_id).then(res => {
-            getSubCategories().then(res => {
-                this.setState({
-                    subCategories: res.data
+        if (window.confirm("Do you need to remove this category? This category may contain some products")) {
+            deleteSubCategories(_id).then(res => {
+                getSubCategories().then(res => {
+                    this.setState({
+                        subCategories: res.data
+                    })
                 })
-            })
-        });
+            });
+        }
     }
 
     render() {
         return (
-            <Container>
+            <Container className="sub-category">
                 
                 <Row className="justify-content-md-center">
                     <Col md="auto"><h3>New Sub Category</h3></Col>

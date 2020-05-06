@@ -136,7 +136,7 @@ class MainCategory extends Component {
 
     render() {
         return (
-            <Container>
+            <Container className="main-category">
                 
                 <Row className="justify-content-md-center">
                     <Col md="auto"><h3>New Main Category</h3></Col>

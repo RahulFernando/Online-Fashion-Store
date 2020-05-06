@@ -63,9 +63,9 @@ export default class PaymentReciept extends Component {
              
             <Container>
             
-            <Card border="primary"  header><center><h2>Reciept</h2></center></Card>
+            <Card border="primary"  header><center><h2><u>Reciept</u></h2></center>
 
-                <ul>
+                <ul style={{listStyleType:"none"}}>
                         <li><b>Payment ID :-</b> {this.state.PaymentId}</li>
                         <li><b>Payment Method :-</b>{this.state.PaymentMethod}</li>
                 </ul>  
@@ -83,7 +83,9 @@ export default class PaymentReciept extends Component {
                                 {this.DisplayRecieptItems()}
                               </tbody>
                    </Table>
-                    { `Total Price : Rs.${this.state.Total}` }
+                   <b> { `Total Price : Rs.${this.state.Total}` }</b>
+                   
+                    </Card>
                     <br/>
                    <Link to={"/purchasehistory"}> <Button > Go back </Button></Link>
                

@@ -183,12 +183,28 @@ export const isStoreManagerAuthenticated = () => {
     return false
 }
 
+// session destroy
 export const logoutUser = () => {
     if (usertoken != null) {
         usertoken = ''
         return true
     }
 }
+
+export const logoutAdmin = () => {
+    if (admintoken != null) {
+        admintoken = ''
+        return true
+    }
+}
+
+export const logoutStoreManager = () => {
+    if (storeManagertoken != null) {
+        storeManagertoken = ''
+        return true
+    }
+}
+
 
 //add Item Details
 export const upload = (data) => {

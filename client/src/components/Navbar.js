@@ -48,54 +48,106 @@ export default class Navbar extends Component {
 
       componentDidMount(){
 
-        this.state.userID = getUserId();
-        console.log(this.state.userID);
+        setInterval(() => {
 
-        if(this.state.userID){
+          this.state.userID = getUserId();
+          console.log(this.state.userID);
+  
+          if(this.state.userID){
+  
+            
+          DisplayPurchaseHistory(this.state.userID)
+          .then(res => {
+              console.log(res.data)
+              this.setState({
+                purchaseHistory: res.data
+                 
+              })    
+      })
+      .catch(err => { console.log(err) })
+  
+  
+  
+      DisplayCart(this.state.userID)
+      .then(res => {
+          console.log(res.data.Cart)
+          this.setState({
+            cart: res.data.Cart
+             
+          })
+      })
+          .catch(function(error){
+         
+              console.log(error);
+          })
+  
+  
+          displayWishList(this.state.userID)
+          .then(res => {
+              this.setState({
+                wishList: res.data.WishList
+                 
+              })
+  
+              
+             
+          })
+          .catch(function(error){
+             
+              console.log(error);
+          })
+  
+          }
+
+        }, 500);
+    //     this.state.userID = getUserId();
+    //     console.log(this.state.userID);
+
+    //     if(this.state.userID){
 
           
-        DisplayPurchaseHistory(this.state.userID)
-        .then(res => {
-            console.log(res.data)
-            this.setState({
-              purchaseHistory: res.data
+    //     DisplayPurchaseHistory(this.state.userID)
+    //     .then(res => {
+    //         console.log(res.data)
+    //         this.setState({
+    //           purchaseHistory: res.data
                
-            })    
-    })
-    .catch(err => { console.log(err) })
+    //         })    
+    // })
+    // .catch(err => { console.log(err) })
 
 
 
-    DisplayCart(this.state.userID)
-    .then(res => {
-        console.log(res.data.Cart)
-        this.setState({
-          cart: res.data.Cart
+    // DisplayCart(this.state.userID)
+    // .then(res => {
+    //     console.log(res.data.Cart)
+    //     this.setState({
+    //       cart: res.data.Cart
            
-        })
-    })
-        .catch(function(error){
+    //     })
+    // })
+    //     .catch(function(error){
        
-            console.log(error);
-        })
+    //         console.log(error);
+    //     })
 
 
-        displayWishList(this.state.userID)
-        .then(res => {
-            this.setState({
-              wishList: res.data.WishList
+    //     displayWishList(this.state.userID)
+    //     .then(res => {
+    //         this.setState({
+    //           wishList: res.data.WishList
                
-            })
+    //         })
 
             
            
-        })
-        .catch(function(error){
+    //     })
+    //     .catch(function(error){
            
-            console.log(error);
-        })
+    //         console.log(error);
+    //     })
 
-        }
+    //     }
 
 
       }
@@ -161,7 +213,7 @@ export default class Navbar extends Component {
                     </Link>
                   </li>
                   <li>
-                    <Link to="">
+                  <Link to="">
                       <FaSignOutAlt className="nav-bar-icon" onClick={this.handleLogout}/>
                     </Link>
                   </li>
