@@ -31,7 +31,7 @@ export default class Home extends Component {
     
     render() {
         return (
-            <Container>
+            <Container className="home">
                 <h5 className="text-secondary">Main Categories</h5>
                 <Table striped bordered hover>
                     <tbody>

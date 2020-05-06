@@ -146,7 +146,7 @@ class SubCategory extends Component {
 
     render() {
         return (
-            <Container>
+            <Container className="sub-category">
                 
                 <Row className="justify-content-md-center">
                     <Col md="auto"><h3>New Sub Category</h3></Col>

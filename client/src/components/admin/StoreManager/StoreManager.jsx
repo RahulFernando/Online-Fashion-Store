@@ -150,7 +150,7 @@ export default class StoreManager extends Component {
     
     render() {
         return (
-            <Container>
+            <Container className="manager">
                 <Row className="justify-content-md-center">
                     <Col md="auto"><h3>New Store Manager</h3></Col>
                 </Row>

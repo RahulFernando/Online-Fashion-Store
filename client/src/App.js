@@ -30,6 +30,7 @@ import DisplayProduct from "./pages/DisplayProduct"
 
 // protected route
 import { AdminProtectedRoute } from "./service/adminprotected.route";
+import { StoreManagerProtectedRoute } from './service/storemanagerprotected.route'
 
 import {Route, Switch} from 'react-router-dom';
 
@@ -51,7 +52,7 @@ function App() {
       <Route exact path="/admin" component={AdminLogin}/>
       <Route exact path="/storeManager" component={StoreManagerLogin}/>
       <AdminProtectedRoute exact path="/dash" component={DashBoard}/>
-      <Route exact path="/store" component={StoreDashboard}/>
+      <StoreManagerProtectedRoute exact path="/store" component={StoreDashboard}/>
       <Route exact path="/displayReciept/:id" component={PaymentReciept}/>
       <Route exact path="/displayProduct/:id" component={DisplayProduct}/>
       <Route component={Error}/>
