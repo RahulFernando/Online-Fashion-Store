@@ -132,16 +132,15 @@ router.route('/updateItem/:id').put((req, res) => {
     })
 })
 
-
-
-
-// router.delete('/subCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-//     SubCategory.deleteSubCategory(req.params.id, (err) => {
-//         if (!err) {
-//             res.send({ message: req.params.id + ' deleted' })
-//         }
-//     })
-// })
+router.route('/deleteItem/:id').get((req,res) => {
+    Item.findByIdAndRemove({_id: req.params.id}, function(err, item) {
+        if (err) {
+            res.json(err)
+        } else {
+            res.json('Successfully removed')
+        }
+    })
+})
 
 
 router.route('/getItem/:id').get((req,res) => {

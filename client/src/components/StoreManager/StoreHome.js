@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Table, ButtonGroup, Button, Col, Image } from "react-bootstrap";
-import {getMenDetails, getWomenDetails, getKidsDetails} from '../../service/function'
+import {getMenDetails, getWomenDetails, getKidsDetails, deleteItemDetails} from '../../service/function'
 import EditItem from './EditItem'
 
 export default class StoreHome extends Component {
@@ -10,7 +10,7 @@ export default class StoreHome extends Component {
 
     this.state = {
     
-        menItems: [],
+        menItems: [], 
         womenItems: [],
         kidsItems: [],
         addModalShow: false,
@@ -117,7 +117,7 @@ export default class StoreHome extends Component {
                   description = {description}
                   price = {price}
                   />
-                <Button variant="danger"><i className="fas fa-trash"></i></Button>
+                <Button onClick={() => deleteItemDetails(men._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
           </tr>
@@ -173,7 +173,7 @@ export default class StoreHome extends Component {
                   description = {description}
                   price = {price}
                   />
-                <Button variant="danger"><i className="fas fa-trash"></i></Button>
+                <Button onClick={() => deleteItemDetails(women._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
           </tr>
@@ -229,7 +229,7 @@ export default class StoreHome extends Component {
                   description = {description}
                   price = {price}
                   />
-                <Button variant="danger"><i className="fas fa-trash"></i></Button>
+                <Button onClick={() => deleteItemDetails(kids._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
           </tr>

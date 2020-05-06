@@ -253,12 +253,19 @@ export const updateItemDetails = (id,data) => {
             },data)
     .then(res => {
         alert("successfully updated product")
-        console.log(res.data.message);
+        console.log(res.data.itemName);
     })
     .catch(err => {
         console.log(err)
         alert("failed to update product")
     })
+}
+
+// delete Item Details
+export const deleteItemDetails = (id) => {
+    return axios.get("/product/deleteItem/"+id)
+    .then(res => { console.log(res.data.message) })
+    .catch(err => { console.log(err) })
 }
 
 
