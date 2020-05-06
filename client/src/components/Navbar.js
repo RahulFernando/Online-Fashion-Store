@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import logo from '../images/logo.svg'
 import {FaAlignRight, FaHistory, FaSignOutAlt} from 'react-icons/fa'
+import Badge from '@material-ui/core/Badge';
 import {FaUserAlt} from 'react-icons/fa'
 import {FaHeart} from 'react-icons/fa'
 import {FaShoppingBag} from 'react-icons/fa'
@@ -196,20 +197,23 @@ export default class Navbar extends Component {
                   </li>
                   <li>
                     <Link to="/wishlist">
-                      <FaHeart className="nav-bar-icon"/> 
-              {isUserAuthenticated() ? <sup style={{color:"red"}}>{this.state.wishList.length}</sup> : ""}
+                      <Badge badgeContent={this.state.wishList.length} color="primary">
+                        <FaHeart className="nav-bar-icon"/> 
+                      </Badge>
                     </Link>
                   </li>
                   <li>
                     <Link to="/mybag">
-                      <FaShoppingBag className="nav-bar-icon"/>
-                      {isUserAuthenticated() ? <sup style={{color:"red"}}>{this.state.cart.length}</sup> : ""}
+                    <Badge badgeContent={this.state.cart.length} color="primary">
+                        <FaShoppingBag className="nav-bar-icon" color="secondary"/>
+                    </Badge>
                     </Link>
                   </li>
                   <li>
                     <Link to="/purchasehistory">
-                      <FaHistory className="nav-bar-icon"/>
-                      {isUserAuthenticated() ? <sup style={{color:"red"}}>{this.state.purchaseHistory.length}</sup> : ""}
+                      <Badge badgeContent={this.state.purchaseHistory.length} color="primary">
+                        <FaHistory className="nav-bar-icon"/>
+                      </Badge>
                     </Link>
                   </li>
                   <li>
