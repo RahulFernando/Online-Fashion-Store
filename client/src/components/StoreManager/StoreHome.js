@@ -56,6 +56,7 @@ export default class StoreHome extends Component {
 
   }
 
+
   addModalClose = () => {
 
     this.setState({
@@ -63,6 +64,47 @@ export default class StoreHome extends Component {
     })
 
   }
+
+  handleDelete = (_id) => {
+    if (window.confirm("Do you need to remove this item?")) {
+        deleteItemDetails(_id).then(res => {
+          getMenDetails()
+          .then(res => {
+            this.setState({
+                menItems: res.data.men,
+            })
+      
+          })
+        .catch (() => {
+            alert('Error retreving data')
+        })
+      
+          getWomenDetails()
+          .then(res => {
+            this.setState({
+                womenItems: res.data.women,
+            })
+      
+          })
+        .catch (() => {
+            alert('Error retreving data')
+        })
+      
+          getKidsDetails()
+          .then(res => {
+            this.setState({
+                kidsItems: res.data.kids,
+            })
+      
+          })
+        .catch (() => {
+            alert('Error retreving data')
+        })
+      
+        });
+    }
+}
+
 
   render() {
 
@@ -117,7 +159,7 @@ export default class StoreHome extends Component {
                   description = {description}
                   price = {price}
                   />
-                <Button onClick={() => deleteItemDetails(men._id)} variant="danger"><i className="fas fa-trash"></i></Button>
+                <Button onClick={() => this.handleDelete(men._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
           </tr>
@@ -173,7 +215,7 @@ export default class StoreHome extends Component {
                   description = {description}
                   price = {price}
                   />
-                <Button onClick={() => deleteItemDetails(women._id)} variant="danger"><i className="fas fa-trash"></i></Button>
+                <Button onClick={() => this.handleDelete(women._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
           </tr>
@@ -229,7 +271,7 @@ export default class StoreHome extends Component {
                   description = {description}
                   price = {price}
                   />
-                <Button onClick={() => deleteItemDetails(kids._id)} variant="danger"><i className="fas fa-trash"></i></Button>
+                <Button onClick={() => this.handleDelete(kids._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
           </tr>
