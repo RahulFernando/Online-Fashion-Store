@@ -17,6 +17,7 @@ export default class PaymentReciept extends Component {
 
             PaymentId:'',
             PaymentMethod:'',
+            date: '',
             Items: [],
             Total:0,
 
@@ -30,6 +31,7 @@ export default class PaymentReciept extends Component {
             this.setState({
                 PaymentId: response.data._id,
                 PaymentMethod: response.data.paymentMethod,
+                date:response.data.date,
                 Items: response.data.purchasedItems,
         
             })
@@ -72,6 +74,8 @@ export default class PaymentReciept extends Component {
                 <ul style={{listStyleType:"none"}}>
                         <li><b>Payment ID :-</b> {this.state.PaymentId}</li>
                         <li><b>Payment Method :-</b>{this.state.PaymentMethod}</li>
+                        <li><b>Payment Date :-</b>{new Date(this.state.date).toDateString()}</li>
+                        
                 </ul>  
 
             <Table bordered hover >
