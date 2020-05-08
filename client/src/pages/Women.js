@@ -10,6 +10,7 @@ import {AddToCart} from '../service/function'
 import {QuantityDecrement} from '../service/function'
 import {isUserAuthenticated} from '../service/function'
 import { Link } from 'react-router-dom';
+import {FindItem} from '../service/function'
 
 
 
@@ -65,8 +66,24 @@ export default class Women extends Component {
         console.log(userId);
         console.log(itemId);
 
-        AddToCart(userId,itemId);
-        QuantityDecrement(itemId,1);
+        FindItem(itemId)
+        .then(res=>{
+
+            if(res.data.qty == 0){
+
+               
+
+                alert( `${res.data.itemName} is out of stock`);
+            }
+
+            else{
+
+            AddToCart(userId,itemId);
+            QuantityDecrement(itemId,1);
+
+            }
+           
+        })
         
     }
 
