@@ -242,23 +242,24 @@ export const getKidsDetails = () => {
 
 // update Item Details 
 export const updateItemDetails = (id,data) => {
-    return axios.put("/product/updateItem/"+id, {
-                itemName: data.itemName,
-                mainCategory: data.mainCategory,
-                subCategory: data.subCategory,
-                size: data.size,
-                qty: data.qty,
-                description: data.description,
-                price: data.price,
-            },data)
-    .then(res => {
-        alert("successfully updated product")
-        console.log(res.data.itemName);
-    })
-    .catch(err => {
-        console.log(err)
-        alert("failed to update product")
-    })
+    console.log(data)
+    // return axios.put("/product/updateItem/"+id, {
+    //             itemName: data.itemName,
+    //             mainCategory: data.mainCategory,
+    //             subCategory: data.subCategory,
+    //             size: data.size,
+    //             qty: data.qty,
+    //             description: data.description,
+    //             price: data.price,
+    //         },data)
+    // .then(res => {
+    //     alert("successfully updated product")
+    //     console.log(res.data.itemName);
+    // })
+    // .catch(err => {
+    //     console.log(err)
+    //     alert("failed to update product")
+    // })
 }
 
 // delete Item Details
