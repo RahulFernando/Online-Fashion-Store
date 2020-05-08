@@ -63,14 +63,18 @@ export default class PaymentReciept extends Component {
              
             <Container>
             
-            <Card border="primary"  header><center><h2><u>Reciept</u></h2></center>
+            <Card border="primary">
+                
+            <Card.Header><center><h2><u>Reciept</u></h2></center></Card.Header>
 
+
+            <Card.Body>
                 <ul style={{listStyleType:"none"}}>
                         <li><b>Payment ID :-</b> {this.state.PaymentId}</li>
                         <li><b>Payment Method :-</b>{this.state.PaymentMethod}</li>
                 </ul>  
 
-            <Table striped bordered hover size="sm">
+            <Table bordered hover >
                         <thead>
                                 <tr>
                                     <th>Item Name</th>
@@ -83,7 +87,11 @@ export default class PaymentReciept extends Component {
                                 {this.DisplayRecieptItems()}
                               </tbody>
                    </Table>
-                   <b> { `Total Price : Rs.${this.state.Total}` }</b>
+
+                   </Card.Body>
+
+                   <Card.Footer> <b> { `Total Price : Rs.${this.state.Total}` }</b></Card.Footer>
+                  
                    
                     </Card>
                     <br/>
