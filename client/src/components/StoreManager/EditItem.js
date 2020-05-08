@@ -9,12 +9,13 @@ export default class EditItem extends Component {
     constructor(props) {
         super(props)
 
+        const { itemname } = this.props
 
         // this.handleSubmit = this.handleSubmit.bind(this);
         this.state = {
             img: null,
             file: null,
-            itemName: '',
+            itemName: itemname,
             mainCategory: '',
             subCategory: '',
             size: false,
@@ -35,6 +36,31 @@ export default class EditItem extends Component {
         this.onDescriptionChange = this.onDescriptionChange.bind(this);
         this.onPriceChange = this.onPriceChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        
+    }
+
+    checkStates = () => {
+      if(this.state.itemName === null) {
+          this.setState({itemName: this.props.itemname})
+        }
+        if(this.state.mainCategory === null) {
+          this.setState({mainCategory: this.props.maincategory})
+        }
+        if(this.state.subCategory === null) {
+          this.setState({subCategory: this.props.subcategory})
+        }
+        if(this.state.size === null) {
+          this.setState({size: this.props.size})
+        }
+        if(this.state.quantity === null) {
+          this.setState({qty: this.props.qty})
+        }
+        if(this.state.description === null) {
+          this.setState({description: this.props.description})
+        }
+        if(this.state.price === null) {
+          this.setState({price: this.props.price})
+        }
     }
 
     componentDidMount() {
@@ -48,6 +74,8 @@ export default class EditItem extends Component {
                 subCategories: res.data
             })
         })
+
+        
 
     }
   
@@ -128,7 +156,7 @@ export default class EditItem extends Component {
   
       handleSubmit = (e) => {
           e.preventDefault()
-          console.log(this.state.itemName)
+
           const data = new FormData();
           let arr = [];
           for (var key in this.state.size) {
@@ -137,27 +165,27 @@ export default class EditItem extends Component {
             }
           }
           size: arr.toString()
-          data.append('file', this.state.file);
-          data.append('itemName', this.state.itemName);
-          data.append('mainCategory', this.state.mainCategory);
-          data.append('subCategory', this.state.subCategory);
-          data.append('size', this.state.size);
-          data.append('qty', this.state.quantity);
-          data.append('description', this.state.description);
-          data.append('price', this.state.price);
+          // data.append('file', this.state.file);
+          // data.append('itemName', this.state.itemName);
+          // data.append('mainCategory', this.state.mainCategory);
+          // data.append('subCategory', this.state.subCategory);
+          // data.append('size', this.state.size);
+          // data.append('qty', this.state.quantity);
+          // data.append('description', this.state.description);
+          // data.append('price', this.state.price);
           
 
-          // const d = {
-          //   itemName: this.state.itemName,
-          //   mainCategory: this.state.mainCategory,
-          //   subCategory: this.state.subCategory,
-          //   size: this.state.size,
-          //   qty:this.state.quantity,
-          //   description:this.state.description,
-          //   price:this.state.price
-          // }
+          const d = {
+            itemName: this.state.itemName,
+            mainCategory: this.state.mainCategory,
+            subCategory: this.state.subCategory,
+            size: this.state.size,
+            qty:this.state.quantity,
+            description:this.state.description,
+            price:this.state.price
+          }
 
-          updateItemDetails(this.props._id,data)
+          updateItemDetails(this.props._id,d)
         
       }
   
