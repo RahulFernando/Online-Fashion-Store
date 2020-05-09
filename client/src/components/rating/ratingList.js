@@ -25,7 +25,7 @@ class RatingList extends React.Component
             });
 
             return(
-                <div className="dd">
+                <div className="ddvdxv">
                     {item}
                 </div>
 
