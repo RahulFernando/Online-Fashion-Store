@@ -1,12 +1,21 @@
-const mongoose = require('mongoose');
+const express = require('express');
+const router = express.Router();
+const mongoose =  require('mongoose');
+const Model = require('../models/rating');
 
-const schema = mongoose.Schema({
 
-    _id: mongoose.Schema.Types.ObjectId,
-    userId : {type:String,required:true},
-    productId : {type:String,required:true},
-    comment : {type:String,required:true},
-    rate : {type:Number,required:true}
+router.get('/', (req, res) => {
+    //getting all the ratings
+    Model
+        .find()
+        .then(list => {
+            //sending the list
+            res.status(200).json(list)
+        })
+        .catch(error => {
+            //sending error code 400 and attach the error occured as a json to the response.
+            res.status(400).json(error)
+        });
 });
 
-module.exports = mongoose.model('Rating', schema);
+module.exports = router;
