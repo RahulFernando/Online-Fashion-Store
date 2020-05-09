@@ -59,20 +59,20 @@ export default class StoreHome extends Component {
   }
 
   replaceModalItem = (index, type) => {
-    if (type === 'women') {
+    if (type === 'men') {
         this.setState({
             addModalShow: true,
-            selected: this.state.women[index]
+            selected: this.state.menItems[index]
         })
-    } else if(type === 'men') {
+    } else if(type === 'women') {
         this.setState({
             addModalShow: true,
-            selected: this.state.men[index]
+            selected: this.state.womenItems[index]
         })
     } else {
         this.setState({
             addModalShow: true,
-            selected: this.state.kids[index]
+            selected: this.state.kidsItems[index]
         })
     }
 

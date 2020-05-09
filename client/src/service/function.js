@@ -21,14 +21,14 @@ export const loginUser = user => {
         username: user.username,
         password: user.password
     })
-    .then(res => {
-        if (res.data.type === 'user') {
-            console.log(res.data._id) 
-            usertoken = res.data.token
-            userid = res.data._id;
-        }
-    })
-    .catch(err => { console.log(err) })
+        .then(res => {
+            if (res.data.type === 'user') {
+                console.log(res.data._id)
+                usertoken = res.data.token
+                userid = res.data._id;
+            }
+        })
+        .catch(err => { console.log(err) })
 }
 
 // log admin
@@ -37,12 +37,12 @@ export const loginAdmin = admin => {
         username: admin.username,
         password: admin.password
     })
-    .then(res => {
-        if (res.data.type === 'admin') {
-            admintoken = res.data.token
-        }
-    })
-    .catch(err => { console.log(err) })
+        .then(res => {
+            if (res.data.type === 'admin') {
+                admintoken = res.data.token
+            }
+        })
+        .catch(err => { console.log(err) })
 }
 
 // log store manager
@@ -51,19 +51,19 @@ export const loginStoreManager = manager => {
         username: manager.username,
         password: manager.password
     })
-    .then(res => {
-        if (res.data.type === 'storeManager') {
-            storeManagertoken = res.data.token
-        }
-    })
-    .catch(err => { console.log(err) })
+        .then(res => {
+            if (res.data.type === 'storeManager') {
+                storeManagertoken = res.data.token
+            }
+        })
+        .catch(err => { console.log(err) })
 }
 
 // add new main category
 export const createMainCategory = mainCategory => {
     return axios.post("/admin/mainCategory/mainCategory", {
         mainCategoryName: mainCategory.mainCategoryName
-    }, { headers: {"Authorization":admintoken}})
+    }, { headers: { "Authorization": admintoken } })
 }
 
 // get all main categories
@@ -73,19 +73,19 @@ export const getMainCategories = () => {
 
 // get main category by id
 export const getMainCategory = (id) => {
-    return axios.get("/admin/mainCategory/mainCategories/"+id, { headers: {"Authorization":admintoken}})
+    return axios.get("/admin/mainCategory/mainCategories/" + id, { headers: { "Authorization": admintoken } })
 }
 
 // update main category by an id
 export const updateMainCategories = (id, mainCategory) => {
-    return axios.put("/admin/mainCategory/mainCategories/"+id, {
+    return axios.put("/admin/mainCategory/mainCategories/" + id, {
         mainCategoryName: mainCategory.mainCategoryName
-    }, { headers: {"Authorization":admintoken}})
+    }, { headers: { "Authorization": admintoken } })
 }
 
 // delete main category by an id
 export const deleteMainCategories = (id) => {
-    return axios.delete("/admin/mainCategory/mainCategories/"+id, { headers: {"Authorization":admintoken}})
+    return axios.delete("/admin/mainCategory/mainCategories/" + id, { headers: { "Authorization": admintoken } })
 }
 
 // add new sub category
@@ -93,7 +93,7 @@ export const createSubCategory = (subCategory) => {
     return axios.post("/admin/subCategory/newSubCategory", {
         subCategoryName: subCategory.subCategoryName,
         main_category_id: subCategory.main_category_id
-    }, { headers: {"Authorization":admintoken}})
+    }, { headers: { "Authorization": admintoken } })
 }
 
 // get sub categories
@@ -103,15 +103,15 @@ export const getSubCategories = () => {
 
 // update sub category by an id 
 export const updateSubCategory = (id, subCategory) => {
-    return axios.put("/admin/subCategory/subCategories/"+id, {
+    return axios.put("/admin/subCategory/subCategories/" + id, {
         subCategoryName: subCategory.subCategoryName,
         main_category_id: subCategory.main_category_id
-    }, { headers: {"Authorization":admintoken}})
+    }, { headers: { "Authorization": admintoken } })
 }
 
 // delete sub category by an id
 export const deleteSubCategories = (id) => {
-    return axios.delete("/admin/subCategory/subCategories/"+id, { headers: {"Authorization":admintoken}})
+    return axios.delete("/admin/subCategory/subCategories/" + id, { headers: { "Authorization": admintoken } })
 }
 
 // add new store manager 
@@ -120,26 +120,26 @@ export const addNewStoreManager = (storeManager) => {
         username: storeManager.username,
         email: storeManager.email,
         password: storeManager.password
-    }, { headers: {"Authorization":admintoken}})
+    }, { headers: { "Authorization": admintoken } })
 }
 
 // get all store managers
 export const getAllStoreManagers = () => {
-    return axios.get("/admin/storeManager/storeManagers", { headers: {"Authorization":admintoken}})
+    return axios.get("/admin/storeManager/storeManagers", { headers: { "Authorization": admintoken } })
 }
 
 // update store managers
 export const updateStoreManager = (id, storeManager) => {
-    return axios.put("/admin/storeManager/storeManagers/"+id, {
+    return axios.put("/admin/storeManager/storeManagers/" + id, {
         username: storeManager.username,
         email: storeManager.email,
         password: storeManager.password
-    }, { headers: {"Authorization":admintoken}})
+    }, { headers: { "Authorization": admintoken } })
 }
 
 // delete store managers
 export const deleteStoreManagers = (id) => {
-    return axios.delete("/admin/storeManager/storeManagers/"+id, { headers: {"Authorization":admintoken}}).then(res => console.log(res))
+    return axios.delete("/admin/storeManager/storeManagers/" + id, { headers: { "Authorization": admintoken } }).then(res => console.log(res))
 }
 
 // check authentication
@@ -190,14 +190,14 @@ export const logoutStoreManager = () => {
 //add Item Details
 export const upload = (data) => {
     return axios.post('/product/uploadItem', data)
-    .then(res => {
-        if(res.data.success) {
-            alert('Product Successfully Uploaded')
-        } else {
-            alert('Failed to upload Product')
-        }
-    })
-    
+        .then(res => {
+            if (res.data.success) {
+                alert('Product Successfully Uploaded')
+            } else {
+                alert('Failed to upload Product')
+            }
+        })
+
 }
 
 //get Item Details
@@ -222,31 +222,31 @@ export const getKidsDetails = () => {
 
 
 // update Item Details 
-export const updateItemDetails = (id,data) => {
-    return axios.put("/product/updateItem/"+id, {
-                itemName: data.itemName,
-                mainCategory: data.mainCategory,
-                subCategory: data.subCategory,
-                size: data.size,
-                qty: data.qty,
-                description: data.description,
-                price: data.price,
-            },data)
-    .then(res => {
-        alert("successfully updated product")
-        console.log(res.data.itemName);
-    })
-    .catch(err => {
-        console.log(err)
-        alert("failed to update product")
-    })
+export const updateItemDetails = (id, data) => {
+    return axios.put("/product/updateItem/" + id, {
+        itemName: data.itemName,
+        mainCategory: data.mainCategory,
+        subCategory: data.subCategory,
+        size: data.size,
+        qty: data.qty,
+        description: data.description,
+        price: data.price,
+    }, data)
+        .then(res => {
+            alert("successfully updated product")
+            console.log(res.data.itemName);
+        })
+        .catch(err => {
+            console.log(err)
+            alert("failed to update product")
+        })
 }
 
 // delete Item Details
 export const deleteItemDetails = (id) => {
-    return axios.get("/product/deleteItem/"+id)
-    .then(res => { console.log(res.data.message) })
-    .catch(err => { console.log(err) })
+    return axios.get("/product/deleteItem/" + id)
+        .then(res => { console.log(res.data.message) })
+        .catch(err => { console.log(err) })
 }
 
 
@@ -261,39 +261,39 @@ export const getUserId = () => {
 
 //Add items to user's wish list
 
-export const wishList = (id,itemid) => {
+export const wishList = (id, itemid) => {
 
-     return axios.post("/users/wishlist/add/"+id, {
-       
-         itemID: itemid
-       
-     })
-    .then(res => console.log(res.data)
-    )
-    .catch(err => { console.log(err) })
+    return axios.post("/users/wishlist/add/" + id, {
+
+        itemID: itemid
+
+    })
+        .then(res => console.log(res.data)
+        )
+        .catch(err => { console.log(err) })
 }
 
 //Display user's Wish list
 
 export const displayWishList = (id) => {
 
-    return axios.get("/users/wishlist/display/"+id)
+    return axios.get("/users/wishlist/display/" + id)
 
 }
 
 
 //Delete user's Wish List Items
 
-export const DeleteWishListItem = (userId,itemId) => {
+export const DeleteWishListItem = (userId, itemId) => {
 
-    return axios.post("/users/wishlist/delete/"+userId, {
-       
+    return axios.post("/users/wishlist/delete/" + userId, {
+
         itemID: itemId
-      
+
     })
-    .then(res => console.log(res.data)
-    )
-    .catch(err => { console.log(err) })
+        .then(res => console.log(res.data)
+        )
+        .catch(err => { console.log(err) })
 
 }
 
@@ -301,68 +301,68 @@ export const DeleteWishListItem = (userId,itemId) => {
 
 export const FindItem = (id) => {
 
-    return axios.get("/product/getItem/"+id)
+    return axios.get("/product/getItem/" + id)
 }
 
 //add to items to user' cart
 
-export const AddToCart = (id,itemid) => {
+export const AddToCart = (id, itemid) => {
 
-    return axios.post("/users/cart/add/"+id, {
-      
+    return axios.post("/users/cart/add/" + id, {
+
         itemID: itemid
-      
+
     })
-   .then(res => console.log(res.data)
-   )
-   .catch(err => { console.log(err) })
+        .then(res => console.log(res.data)
+        )
+        .catch(err => { console.log(err) })
 }
 
 //Decrement Item store quantity
 
-export const QuantityDecrement = (id,quantity) => {
+export const QuantityDecrement = (id, quantity) => {
 
-    return axios.post("/product/decrement/"+id,{
-        qty : quantity
+    return axios.post("/product/decrement/" + id, {
+        qty: quantity
     })
-   .then(res => console.log(res.data)
-   )
-   .catch(err => { console.log(err) })
+        .then(res => console.log(res.data)
+        )
+        .catch(err => { console.log(err) })
 }
 
 //Display User's Cart item list
 
 export const DisplayCart = (id) => {
 
-    return axios.get("/users/cart/display/"+id)
+    return axios.get("/users/cart/display/" + id)
 
 }
 
 //Delete items from the user's cart
 
-export const DeleteCartListItem = (userId,itemId) => {
+export const DeleteCartListItem = (userId, itemId) => {
 
-    return axios.post("/users/cart/delete/"+userId, {
-       
+    return axios.post("/users/cart/delete/" + userId, {
+
         itemID: itemId
-      
+
     })
-    .then(res => console.log(res.data)
-    )
-    .catch(err => { console.log(err) })
+        .then(res => console.log(res.data)
+        )
+        .catch(err => { console.log(err) })
 
 }
 
 //Increment Item store quantity
 
-export const QuantityIncrement = (id,quantity) => {
+export const QuantityIncrement = (id, quantity) => {
 
-    return axios.post("/product/increment/"+id,{
-        qty : quantity
+    return axios.post("/product/increment/" + id, {
+        qty: quantity
     })
-   .then(res => console.log(res.data)
-   )
-   .catch(err => { console.log(err) })
+        .then(res => console.log(res.data)
+        )
+        .catch(err => { console.log(err) })
 }
 
 //Store Payment Id, userId , payment method and Date
@@ -370,12 +370,12 @@ export const QuantityIncrement = (id,quantity) => {
 export const ConfirmPayment = (payment) => {
 
     return axios.post("/users/payment/add", {
-       
+
         paymentMethod: payment.paymentMethod,
-        userId: payment. userId,
+        userId: payment.userId,
         date: payment.date
 
-      
+
     })
 }
 
@@ -384,25 +384,25 @@ export const ConfirmPayment = (payment) => {
 
 export const getPaymentId = () => {
 
-        return paymentId;
-   
+    return paymentId;
+
 }
 
 //Enter the Array of item details to the PurchasedItems in Purchase History Model
 
-export const AddToPurchaseHistory = (id,itemid,qty,name,price) => {
+export const AddToPurchaseHistory = (id, itemid, qty, name, price) => {
 
-    return axios.post("/users/payment/addPurchaseHistory/"+id, {
-      
+    return axios.post("/users/payment/addPurchaseHistory/" + id, {
+
         itemID: itemid,
-        quantity:qty,
-        itemName:name,
-        price:price
-      
+        quantity: qty,
+        itemName: name,
+        price: price
+
     })
-   .then(res => console.log(res.data)
-   )
-   .catch(err => { console.log(err) })
+        .then(res => console.log(res.data)
+        )
+        .catch(err => { console.log(err) })
 }
 
 
@@ -410,7 +410,7 @@ export const AddToPurchaseHistory = (id,itemid,qty,name,price) => {
 
 export const DisplayPurchaseHistory = (id) => {
 
-    return axios.get("/users/payment/displayPurchaseHistory/"+id)
+    return axios.get("/users/payment/displayPurchaseHistory/" + id)
 
 }
 
@@ -419,6 +419,6 @@ export const DisplayPurchaseHistory = (id) => {
 
 export const DisplayReciept = (id) => {
 
-    return axios.get("/users/reciept/displayReciept/"+id)
-    
+    return axios.get("/users/reciept/displayReciept/" + id)
+
 }

@@ -14,6 +14,7 @@ export default class EditItem extends Component {
       // file: null,
       id: '',
       itemname: '',
+      itemName: '',
       mainCategory: '',
       subCategory: '',
       size: false,
@@ -59,7 +60,7 @@ export default class EditItem extends Component {
       mainCategory: nextProps.selected.mainCategory,
       subCategory: nextProps.selected.subCategory,
       size: nextProps.selected.size,
-      qty: nextProps.selected.qty,
+      quantity: nextProps.selected.qty,
       description: nextProps.selected.description,
       price: nextProps.selected.price,    
     })
@@ -75,11 +76,10 @@ export default class EditItem extends Component {
   //     })
   // }
 
-  onChange = (e) => {
-
+  onChange = (e) =>{
     let target = e.target
-      let name = e.name
-      let value = e.value
+    let name = e.name
+    let value = e.value
 
     this.setState({
       [name]: value
@@ -135,7 +135,7 @@ export default class EditItem extends Component {
     e.preventDefault()
 
     const data = {
-      itemName: this.state.itemname,
+      itemname: this.state.itemname,
       mainCategory: this.state.mainCategory,
       subCategory: this.state.subCategory,
       size: this.state.size,
@@ -168,7 +168,7 @@ export default class EditItem extends Component {
               <br />
               <Form.Group controlId="formItemName">
                 <Form.Label></Form.Label>
-                <Form.Control type="text"  name="itemName" placeholder="Enter Item Name" defaultValue={this.state.itemName} onChange={this.onChange} />
+                <Form.Control type="text"  name="itemName" placeholder="Enter Item Name" defaultValue={this.state.itemname} onChange={this.onChange} />
               </Form.Group>
               <Form.Group controlId="formMainCategory">
                 <Form.Label>Main Category</Form.Label>
