@@ -4,8 +4,6 @@ import Banner from "../components/Banner"
 import Services from "../components/Services"
 import Navbar from "../components/Navbar";
 import Title from "../components/Title"
-import CardImage from '../images/cardimage1.jpg'
-import Axios from 'axios';
 import {getItemDetails} from '../service/function'
 import {getUserId} from '../service/function'
 import {wishList} from '../service/function'
@@ -25,7 +23,7 @@ export default class Home extends Component {
         this.addToCart = this.addToCart.bind(this);
     
         this.state = {
-            img: '',
+            img: [],
             items: []
         }
     }
@@ -35,14 +33,10 @@ export default class Home extends Component {
         
         getItemDetails()
         .then(res => {
-            console.log(res.data.products[0].image)
-            var base64Flag = 'data:image/png;base64,';
-            var imageStr = this.arrayBufferToBase64(res.data.products[0].image.data.data);
             this.setState({
                 items: res.data.products,
-                img: base64Flag + imageStr
             })
-
+            this.getImage()
         })
         .catch (() => {
             alert('Error retreving data')
@@ -71,6 +65,19 @@ export default class Home extends Component {
         
     }
 
+    getImage = () => {
+        let arr = []
+        for (let index = 0; index < this.state.items.length; index++) {
+            var base64Flag = 'data:image/png;base64,';
+            var imageStr = this.arrayBufferToBase64(this.state.items[index].image.data.data);
+            arr.push(base64Flag + imageStr)
+
+        }
+        this.setState({
+            img: arr
+        })
+    }
+
     arrayBufferToBase64 = (buffer) => {
         let binary = ''
         let bytes = [].slice.call(new Uint8Array(buffer))
@@ -81,7 +88,6 @@ export default class Home extends Component {
     }
 
     render() {
-
         const useStyles = {
             background: {
                 marginBottom:"1rem",
@@ -107,12 +113,12 @@ export default class Home extends Component {
                 <Title title="Popular Products"/>
             <div className="row flex-row flex-rap">
                 
-                {this.state.items.map(product => {
+                {this.state.items.map((product, index) => {
                     return <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={product._id}>
                     <div className="card card-block" style={useStyles.background}>
                         <div className="overflow">
                             
-                            <img src={this.state.img} alt="" className="card-img-top"/>
+                            <img src={this.state.img[index]} alt="" className="card-img-top"/>
                         </div>
                         <div className="card-body text-dark">
                             <Link to={"/displayProduct/"+product._id}> <h5 className="card-title">{product.itemName}</h5> </Link>
@@ -123,6 +129,7 @@ export default class Home extends Component {
                             {isUserAuthenticated() ? <a href="#" onClick={() => { this.addToCart(this.state.userID,product._id) }} className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a> : " "}
                         </div>
                     </div>
+                    
                 </div>
                 })} 
                 

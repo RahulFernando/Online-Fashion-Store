@@ -47,60 +47,7 @@ export default class Navbar extends Component {
         },
       ]
 
-      componentDidMount(){
 
-        setInterval(() => {
-
-          this.state.userID = getUserId();
-          console.log(this.state.userID);
-  
-          if(this.state.userID){
-  
-            
-          DisplayPurchaseHistory(this.state.userID)
-          .then(res => {
-              console.log(res.data)
-              this.setState({
-                purchaseHistory: res.data
-                 
-              })    
-      })
-      .catch(err => { console.log(err) })
-  
-  
-  
-      DisplayCart(this.state.userID)
-      .then(res => {
-          console.log(res.data.Cart)
-          this.setState({
-            cart: res.data.Cart
-             
-          })
-      })
-          .catch(function(error){
-         
-              console.log(error);
-          })
-  
-  
-          displayWishList(this.state.userID)
-          .then(res => {
-              this.setState({
-                wishList: res.data.WishList
-                 
-              })
-  
-              
-             
-          })
-          .catch(function(error){
-             
-              console.log(error);
-          })
-  
-          }
-
-        }, 500);
     //     this.state.userID = getUserId();
     //     console.log(this.state.userID);
 
@@ -150,8 +97,6 @@ export default class Navbar extends Component {
 
     //     }
 
-
-      }
 
     // logout user
     handleLogout = () => {
