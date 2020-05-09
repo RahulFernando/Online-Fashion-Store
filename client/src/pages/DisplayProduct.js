@@ -9,11 +9,7 @@ import {AddToCart} from '../service/function'
 import {QuantityDecrement} from '../service/function'
 import {isUserAuthenticated} from '../service/function'
 
-import {getUserId} from '../service/function'
-import {wishList} from '../service/function'
-import {AddToCart} from '../service/function'
-import {QuantityDecrement} from '../service/function'
-import {isUserAuthenticated} from '../service/function'
+import RatingComponent from '../components/rating/ratingMain';
 
 export default class DisplayProduct extends Component {
 
@@ -63,8 +59,8 @@ export default class DisplayProduct extends Component {
                 console.log(error);
             })
 
-            this.state.userID = getUserId();
-            console.log(this.state.userID);
+            this.state.userId = getUserId();
+            console.log(this.state.userId);
 
     }
 
@@ -191,6 +187,9 @@ export default class DisplayProduct extends Component {
                 </div>
 
 
+                <div id="ratingContainer" className="container-fliud">
+                     <RatingComponent productId = {this.props.match.params.id} userId = {this.state.userId}/>
+                </div>
 
             </>
         )

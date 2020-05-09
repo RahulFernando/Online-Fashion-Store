@@ -3,10 +3,11 @@ import axios from "axios";
 
 class RatingMain extends React.Component
 {
+
     constructor(props) {
         super(props);
 
-        this.state = ({rateList : []});
+        this.state = ({rateList : [],comment : ''});
 
         //getting required props to proceed
         const userId = this.props.userId;
@@ -16,8 +17,19 @@ class RatingMain extends React.Component
     }
     render() {
         return(
-            <h1>{this.props.userId}</h1>
+            <div>
+                <div className="input">
+                    {this.props.userId != null &&
+                        <input type="text" onChange={(e) => this.onStartTyping(e)} value={this.state.comment}/>
+                    }
+                </div>
+
+            </div>
         )
+    }
+    onStartTyping = (e) => {
+
+        this.setState({comment : e.target.value});
     }
     getRatingsFromApi = (userId,productId) => {
 
