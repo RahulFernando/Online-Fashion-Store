@@ -6,7 +6,7 @@ const schema = mongoose.Schema({
     userId : {type:String,required:true},
     productId :  {type:String,required:true},
     comment :  {type:String,required:true},
-    rate :  {type:Number,required:true}
+    numberOfStars :  {type:Number,required:true}
 
 });
 
