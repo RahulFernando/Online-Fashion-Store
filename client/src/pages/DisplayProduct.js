@@ -3,11 +3,19 @@ import Navbar from '../components/Navbar'
 import { Container, Card, ListGroup } from 'react-bootstrap'
 import { FindItem } from '../service/function'
 import './product.css'
+import {getUserId} from '../service/function'
+import {wishList} from '../service/function'
+import {AddToCart} from '../service/function'
+import {QuantityDecrement} from '../service/function'
+import {isUserAuthenticated} from '../service/function'
 
 export default class DisplayProduct extends Component {
 
     constructor(props) {
         super(props);
+
+        this.addToWishList = this.addToWishList.bind(this);
+        this.addToCart = this.addToCart.bind(this);
 
         this.state = {
 
@@ -17,7 +25,8 @@ export default class DisplayProduct extends Component {
             qty: 0,
             description: '',
             price: 0,
-            img:''
+            img:'',
+            userId:''
 
 
 
@@ -48,7 +57,46 @@ export default class DisplayProduct extends Component {
                 console.log(error);
             })
 
+            this.state.userID = getUserId();
+            console.log(this.state.userID);
+
     }
+
+    addToWishList(userId,itemId){
+
+        console.log(userId);
+        console.log(itemId);
+
+        wishList(userId,itemId);
+
+    }
+
+    addToCart(userId,itemId){
+
+        console.log(userId);
+        console.log(itemId);
+
+        FindItem(itemId)
+        .then(res=>{
+
+            if(res.data.qty == 0){
+
+        
+                alert( `${res.data.itemName} is out of stock`);
+            }
+
+            else{
+
+            AddToCart(userId,itemId);
+            QuantityDecrement(itemId,1);
+
+            }
+           
+        })
+       
+        
+    }
+
 
 
     arrayBufferToBase64(buffer) {
@@ -126,8 +174,9 @@ export default class DisplayProduct extends Component {
 							<span class="color">{this.state.qty}</span>
                                     </h5>
                                     <div class="action">
-                                        <button class="add-to-cart btn btn-default" type="button">add to cart</button>
-                                        <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                                    {isUserAuthenticated() ?  <button class="add-to-cart btn btn-default" type="button" onClick={() => { this.addToCart(this.state.userID,this.props.match.params.id) }} >add to cart</button> : " "}
+                                    {isUserAuthenticated() ? <button class="like btn btn-default" type="button" onClick={() => { this.addToWishList(this.state.userID,this.props.match.params.id) }}><span class="fa fa-heart"></span></button> : " "}
+                      
                                     </div>
                                 </div>
                             </div>
