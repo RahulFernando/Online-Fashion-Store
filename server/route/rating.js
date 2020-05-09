@@ -67,8 +67,8 @@ router.get('/find',(req,res) => {
     var productId = req.body.productId;
 
     Model.find({userId : userId, productId : productId})
-        .then(result => {res.status(200).json(result)})
-        .error(error => {res.status(400).json(error)});
+        .then(result => res.status(200).json(result))
+        .error(error => res.status(400).json(error))
 });
 
 module.exports = router;

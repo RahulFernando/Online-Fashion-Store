@@ -41,10 +41,12 @@ class RatingMain extends React.Component
 
             let ratinglist = res.data;
             this.setState({rateList : ratinglist});
+            alert(ratinglist.length);
 
         })
         .catch(error => {
             console.log("Error while getting ratings " + error);
+            alert(error);
         });
     }
 }
