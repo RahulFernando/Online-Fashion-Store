@@ -22,6 +22,8 @@ class RatingMain extends React.Component
                     {this.props.userId != null &&
                         <input type="text" onChange={(e) => this.onStartTyping(e)} value={this.state.comment}/>
                     }
+
+
                 </div>
 
             </div>
