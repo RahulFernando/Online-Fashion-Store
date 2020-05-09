@@ -10,31 +10,53 @@ export default class EditItem extends Component {
         super(props)
         this.state = {
             id: '',
-            itemName: ''
+            itemname: '',
+            mainCategory: '',
+            subCategory: '',
+            size: '',
+            qty: '',
+            description: '',
+            price: ''
           }
 
-        this.onItemNameChange = this.onItemNameChange.bind(this);
+        this.onChange = this.onChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         
     }
 
     componentWillReceiveProps(nextProps) {
       this.setState({
-        id: nextProps.id,
-        itemName: nextProps.itemName
+        id: nextProps.selected._id,
+        itemname: nextProps.selected.itemName,
+        mainCategory: nextProps.selected.mainCategory,
+        subCategory: nextProps.selected.subCategory,
+        size: nextProps.selected.size,
+        qty: nextProps.selected.qty,
+        description: nextProps.selected.description,
+        price: nextProps.selected.price,        
       })
     }
 
-    onItemNameChange = (e) =>{
+    onChange = (e) =>{
+      let target = e.target
+      let name = e.name
+      let value = e.value
+
       this.setState({
-        itemName: e.target.value
+        [name]: value
       })
     }
 
     handleSubmit = (e) => {
       e.preventDefault()
       const data = {
-        itemName: this.state.itemName
+        itemname: this.state.itemname,
+        mainCategory: this.state.mainCategory,
+        subCategory: this.state.subCategory,
+        size: this.state.size,
+        qty: this.state.qty,
+        description: this.state.description,
+        price: this.state.price
       }
       updateItemDetails(this.state.id, data)
     }
@@ -57,9 +79,33 @@ export default class EditItem extends Component {
     <Container>
          <Form onSubmit={this.handleSubmit} encType="multipart/form-data">
             <br/>
-            <Form.Group controlId="formItemName">
-              <Form.Label></Form.Label>
-                <Form.Control type="text" name="itemName" placeholder="Enter Item Name" defaultValue={this.state.itemName} onChange={this.onItemNameChange} />
+            <Form.Group>
+              <Form.Label>Item Name</Form.Label>
+                <Form.Control type="text" name="itemName" placeholder="Enter Item Name" defaultValue={this.state.itemname} onChange={this.onChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Main Category</Form.Label>
+                <Form.Control type="text" name="maincategory" placeholder="Enter Main Category" defaultValue={this.state.mainCategory} onChange={this.onChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Sub Category</Form.Label>
+                <Form.Control type="text" name="subcategory" placeholder="Enter Sub Category" defaultValue={this.state.subCategory} onChange={this.onChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Size</Form.Label>
+                <Form.Control type="text" name="size" placeholder="Enter Size" defaultValue={this.state.size} onChange={this.onChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Quantity</Form.Label>
+                <Form.Control type="number" name="quantity" placeholder="Enter Quantity" defaultValue={this.state.qty} onChange={this.onChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Description</Form.Label>
+                <Form.Control type="text" name="description" placeholder="Enter Description" defaultValue={this.state.description} onChange={this.onChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Price</Form.Label>
+                <Form.Control type="number" name="price" placeholder="Enter Price" defaultValue={this.state.price} onChange={this.onChange} />
             </Form.Group>
             <Modal.Footer>
               <Button variant="success" type="submit">Save</Button>
