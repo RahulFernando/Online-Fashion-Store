@@ -176,8 +176,8 @@ export default class DisplayProduct extends Component {
 							<span class="color">{this.state.qty}</span>
                                     </h5>
                                     <div class="action">
-                                    {isUserAuthenticated() ?  <button class="add-to-cart btn btn-default" type="button" onClick={() => { this.addToCart(this.state.userID,this.props.match.params.id) }} >add to cart</button> : " "}
-                                    {isUserAuthenticated() ? <button class="like btn btn-default" type="button" onClick={() => { this.addToWishList(this.state.userID,this.props.match.params.id) }}><span class="fa fa-heart"></span></button> : " "}
+                                    {isUserAuthenticated() ?  <button class="add-to-cart btn btn-default" type="button" onClick={() => { this.addToCart(this.state.userId,this.props.match.params.id) }} >add to cart</button> : " "}
+                                    {isUserAuthenticated() ? <button class="like btn btn-default" type="button" onClick={() => { this.addToWishList(this.state.userId,this.props.match.params.id) }}><span class="fa fa-heart"></span></button> : " "}
                       
                                     </div>
                                 </div>
