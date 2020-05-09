@@ -1,6 +1,5 @@
 //modules
 const mongoose = require('mongoose')
-
 mongoose.set('debug', true)
 mongoose.Promise = global.Promise // asynchronize handling
 mongoose.connect(process.env.DATABASE, (err) => {
@@ -10,5 +9,6 @@ mongoose.connect(process.env.DATABASE, (err) => {
         console.log('Error in MongoDB connection: ' + JSON.stringify(err,undefined,2))
     }
 });
+
 
 

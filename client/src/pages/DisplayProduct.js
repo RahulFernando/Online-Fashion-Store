@@ -9,6 +9,12 @@ import {AddToCart} from '../service/function'
 import {QuantityDecrement} from '../service/function'
 import {isUserAuthenticated} from '../service/function'
 
+import {getUserId} from '../service/function'
+import {wishList} from '../service/function'
+import {AddToCart} from '../service/function'
+import {QuantityDecrement} from '../service/function'
+import {isUserAuthenticated} from '../service/function'
+
 export default class DisplayProduct extends Component {
 
     constructor(props) {
@@ -183,6 +189,9 @@ export default class DisplayProduct extends Component {
                         </div>
                     </div>
                 </div>
+
+
+
             </>
         )
     }

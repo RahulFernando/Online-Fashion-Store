@@ -31,8 +31,9 @@ const storeManager = require('./route/storeManager');
 const product = require('./route/product');
 const wishlist = require('./route/wishList');
 const cart = require('./route/cart');
-const payment = require('./route/payment')
-const reciept = require('./route/reciept')
+const payment = require('./route/payment');
+const reciept = require('./route/reciept');
+const rating = require('./route/rating');
 
 // routes
 app.use('/api/admin', admin);
@@ -44,7 +45,8 @@ app.use('/api/product', product);
 app.use('/api/users/wishList',wishlist);
 app.use('/api/users/cart',cart);
 app.use('/api/users/payment',payment);
-app.use('/api/users/reciept',reciept)
+app.use('/api/users/reciept',reciept);
+app.use('/api/users/rating',rating);
 
 
 
