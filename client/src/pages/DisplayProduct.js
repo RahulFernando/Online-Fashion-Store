@@ -16,7 +16,8 @@ export default class DisplayProduct extends Component {
             subCategory: '',
             qty: 0,
             description: '',
-            price: 0
+            price: 0,
+            img:''
 
 
 
@@ -27,6 +28,10 @@ export default class DisplayProduct extends Component {
 
         FindItem(this.props.match.params.id)
             .then(response => {
+
+                var base64Flag = 'data:image/jpeg;base64,';
+                var imageStr = this.arrayBufferToBase64(response.data.image.data.data);
+
                 this.setState({
 
                     itemName: response.data.itemName,
@@ -34,7 +39,8 @@ export default class DisplayProduct extends Component {
                     subCategory: response.data.subCategory,
                     qty: response.data.qty,
                     description: response.data.description,
-                    price: response.data.price
+                    price: response.data.price,
+                    img: base64Flag + imageStr
 
                 })
             })
@@ -43,6 +49,15 @@ export default class DisplayProduct extends Component {
             })
 
     }
+
+
+    arrayBufferToBase64(buffer) {
+        var binary = '';
+        var bytes = [].slice.call(new Uint8Array(buffer));
+        bytes.forEach((b) => binary += String.fromCharCode(b));
+        return window.btoa(binary);
+    };
+
 
     render() {
         return (
@@ -71,7 +86,7 @@ export default class DisplayProduct extends Component {
                             <div class="wrapper row">
                                 <div class="preview col-md-6">
                                     <div class="preview-pic tab-content">
-                                        <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" /></div>
+                                        <div class="tab-pane active" id="pic-1"><img src={this.state.img} /></div>
                                         {/* <div class="tab-pane" id="pic-2"><img src="http://placekitten.com/400/252" /></div>
 						  <div class="tab-pane" id="pic-3"><img src="http://placekitten.com/400/252" /></div>
 						  <div class="tab-pane" id="pic-4"><img src="http://placekitten.com/400/252" /></div>
