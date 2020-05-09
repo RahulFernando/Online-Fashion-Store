@@ -8,6 +8,7 @@ import {displayWishList} from '../../service/function'
 import {DeleteWishListItem} from '../../service/function'
 import {AddToCart,QuantityDecrement} from '../../service/function'
 import {FaHeartBroken} from 'react-icons/fa'
+import {FindItem} from '../../service/function'
 
 export default class Wishlist extends Component {
 
@@ -66,15 +67,35 @@ export default class Wishlist extends Component {
           })
     }
 
+
     addToCart(userId,itemId){
 
-        AddToCart(userId,itemId);
-        QuantityDecrement(itemId,1);
-        DeleteWishListItem(userId,itemId);
+        FindItem(itemId)
+        .then(res=>{
 
-        this.setState({
-            Items: this.state.Items.filter(item => item.id !== itemId)
-          })
+            if(res.data.qty == 0){
+
+               
+
+                alert( `${res.data.itemName} is out of stock`);
+            }
+
+            else{
+
+                AddToCart(userId,itemId);
+                QuantityDecrement(itemId,1);
+                DeleteWishListItem(userId,itemId);
+        
+                this.setState({
+                    Items: this.state.Items.filter(item => item.id !== itemId)
+                  })
+
+            }
+           
+        })
+        
+
+      
 
     }
 

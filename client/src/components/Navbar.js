@@ -14,12 +14,67 @@ import {displayWishList} from '../service/function'
 import {DisplayCart, logoutUser} from '../service/function'
 
 export default class Navbar extends Component {
-    state={
-        isOpen:false,
-        cart:[],
-        wishList:[],
-        purchaseHistory:[]
-    }
+
+  constructor(props){
+    super(props)
+
+    setInterval(() => {
+      console.log('1200')
+    this.state.userID = getUserId();
+         
+    DisplayPurchaseHistory(this.state.userID)
+    .then(res => {
+        console.log(res.data)
+        this.setState({
+          purchaseHistory: res.data
+           
+        })    
+})
+.catch(err => { console.log(err) })
+
+
+
+DisplayCart(this.state.userID)
+.then(res => {
+    console.log(res.data.Cart)
+    this.setState({
+      cart: res.data.Cart
+       
+    })
+})
+    .catch(function(error){
+   
+        console.log(error);
+    })
+
+
+    displayWishList(this.state.userID)
+    .then(res => {
+        this.setState({
+          wishList: res.data.WishList
+           
+        })
+
+        
+       
+    })
+    .catch(function(error){
+       
+        console.log(error);
+    })
+
+   
+
+  }, 2500);
+  this.state={
+    isOpen:false,
+    cart:[],
+    wishList:[],
+    purchaseHistory:[]
+}
+  }
+
+
     handleToggle = () =>{
         this.setState({isOpen:!this.state.isOpen})
     }
@@ -48,107 +103,8 @@ export default class Navbar extends Component {
       ]
 
       componentDidMount(){
-
-        setInterval(() => {
-
-          this.state.userID = getUserId();
-          console.log(this.state.userID);
-  
-          if(this.state.userID){
-  
-            
-          DisplayPurchaseHistory(this.state.userID)
-          .then(res => {
-              console.log(res.data)
-              this.setState({
-                purchaseHistory: res.data
-                 
-              })    
-      })
-      .catch(err => { console.log(err) })
-  
-  
-  
-      DisplayCart(this.state.userID)
-      .then(res => {
-          console.log(res.data.Cart)
-          this.setState({
-            cart: res.data.Cart
-             
-          })
-      })
-          .catch(function(error){
-         
-              console.log(error);
-          })
-  
-  
-          displayWishList(this.state.userID)
-          .then(res => {
-              this.setState({
-                wishList: res.data.WishList
-                 
-              })
-  
-              
-             
-          })
-          .catch(function(error){
-             
-              console.log(error);
-          })
-  
-          }
-
-        }, 500);
-    //     this.state.userID = getUserId();
-    //     console.log(this.state.userID);
-
-    //     if(this.state.userID){
-
-          
-    //     DisplayPurchaseHistory(this.state.userID)
-    //     .then(res => {
-    //         console.log(res.data)
-    //         this.setState({
-    //           purchaseHistory: res.data
-               
-    //         })    
-    // })
-    // .catch(err => { console.log(err) })
-
-
-
-    // DisplayCart(this.state.userID)
-    // .then(res => {
-    //     console.log(res.data.Cart)
-    //     this.setState({
-    //       cart: res.data.Cart
-           
-    //     })
-    // })
-    //     .catch(function(error){
+        
        
-    //         console.log(error);
-    //     })
-
-
-    //     displayWishList(this.state.userID)
-    //     .then(res => {
-    //         this.setState({
-    //           wishList: res.data.WishList
-               
-    //         })
-
-            
-           
-    //     })
-    //     .catch(function(error){
-           
-    //         console.log(error);
-    //     })
-
-    //     }
 
 
       }
