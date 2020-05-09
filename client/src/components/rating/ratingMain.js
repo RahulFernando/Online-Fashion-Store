@@ -33,20 +33,15 @@ class RatingMain extends React.Component
     };
     getRatingsFromApi = (userId,productId) => {
 
-        axios.get('http://localhost:4000/api/users/rating/find', {
-            productId: productId,
-            userId: userId
-        })
+        axios.get('http://localhost:4000/api/users/rating/find?userId=' + userId + "&productId=" + productId)
         .then(res => {
 
             let ratinglist = res.data;
             this.setState({rateList : ratinglist});
-            alert(ratinglist.length);
 
         })
         .catch(error => {
             console.log("Error while getting ratings " + error);
-            alert(error);
         });
     }
 }
