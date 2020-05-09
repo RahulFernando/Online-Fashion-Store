@@ -13,7 +13,7 @@ export default class EditItem extends Component {
       // img: null,
       // file: null,
       id: '',
-      itemName: '',
+      itemname: '',
       mainCategory: '',
       subCategory: '',
       size: false,
@@ -25,13 +25,14 @@ export default class EditItem extends Component {
     }
 
     // this.onFileChange = this.onFileChange.bind(this);
-    this.onItemNameChange = this.onItemNameChange.bind(this);
-    this.onMainCategoryChange = this.onMainCategoryChange.bind(this);
-    this.onSubCategoryChange = this.onSubCategoryChange.bind(this);
-    this.onSizeChange = this.onSizeChange.bind(this);
-    this.onQuantityChange = this.onQuantityChange.bind(this);
-    this.onDescriptionChange = this.onDescriptionChange.bind(this);
-    this.onPriceChange = this.onPriceChange.bind(this);
+    // this.onItemNameChange = this.onItemNameChange.bind(this);
+    // this.onMainCategoryChange = this.onMainCategoryChange.bind(this);
+    // this.onSubCategoryChange = this.onSubCategoryChange.bind(this);
+    // this.onSizeChange = this.onSizeChange.bind(this);
+    // this.onQuantityChange = this.onQuantityChange.bind(this);
+    // this.onDescriptionChange = this.onDescriptionChange.bind(this);
+    // this.onPriceChange = this.onPriceChange.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
   }
@@ -53,14 +54,14 @@ export default class EditItem extends Component {
   componentWillReceiveProps(nextProps) {
     console.log(nextProps)
     this.setState({
-      id: nextProps.id,
-      itemName: nextProps.itemname,
-      mainCategory: nextProps.maincategory,
-      subCategory: nextProps.subcategory,
-      size: nextProps.size,
-      quantity: nextProps.quantity,
-      description: nextProps.description,
-      price: nextProps.price,
+      id: nextProps.selected._id,
+      itemname: nextProps.selected.itemName,
+      mainCategory: nextProps.selected.mainCategory,
+      subCategory: nextProps.selected.subCategory,
+      size: nextProps.selected.size,
+      qty: nextProps.selected.qty,
+      description: nextProps.selected.description,
+      price: nextProps.selected.price,    
     })
   }
 
@@ -74,63 +75,67 @@ export default class EditItem extends Component {
   //     })
   // }
 
-  onItemNameChange = (e) => {
+  onChange = (e) => {
+
+    let target = e.target
+      let name = e.name
+      let value = e.value
 
     this.setState({
-      itemName: e.target.value
+      [name]: value
     })
   }
 
-  onMainCategoryChange = (e) => {
+  // onMainCategoryChange = (e) => {
 
-    this.setState({
-      mainCategory: e.target.value
-    })
-  }
+  //   this.setState({
+  //     mainCategory: e.target.value
+  //   })
+  // }
 
-  onSubCategoryChange = (e) => {
+  // onSubCategoryChange = (e) => {
 
-    this.setState({
-      subCategory: e.target.value
-    })
-  }
+  //   this.setState({
+  //     subCategory: e.target.value
+  //   })
+  // }
 
-  onSizeChange = (e) => {
-    // let target = e.target;
-    // let value = target.value;
+  // onSizeChange = (e) => {
+  //   // let target = e.target;
+  //   // let value = target.value;
 
-    this.setState(prevState => ({
-      // [e.target.label]: e.target.checked
-      size: !prevState.size
-    }))
-  }
+  //   this.setState(prevState => ({
+  //     // [e.target.label]: e.target.checked
+  //     size: !prevState.size
+  //   }))
+  // }
 
-  onQuantityChange = (e) => {
+  // onQuantityChange = (e) => {
 
-    this.setState({
-      quantity: e.target.value
-    })
-  }
+  //   this.setState({
+  //     quantity: e.target.value
+  //   })
+  // }
 
-  onDescriptionChange = (e) => {
+  // onDescriptionChange = (e) => {
 
-    this.setState({
-      description: e.target.value
-    })
-  }
+  //   this.setState({
+  //     description: e.target.value
+  //   })
+  // }
 
-  onPriceChange = (e) => {
+  // onPriceChange = (e) => {
 
-    this.setState({
-      price: e.target.value
-    })
-  }
+  //   this.setState({
+  //     price: e.target.value
+  //   })
+  // }
 
   handleSubmit = (e) => {
     e.preventDefault()
 
     const data = {
-      itemName: this.state.itemName,
+      itemName: this.state.itemname,
       mainCategory: this.state.mainCategory,
       subCategory: this.state.subCategory,
       size: this.state.size,
@@ -163,11 +168,11 @@ export default class EditItem extends Component {
               <br />
               <Form.Group controlId="formItemName">
                 <Form.Label></Form.Label>
-                <Form.Control type="text"  name="itemName" placeholder="Enter Item Name" defaultValue={this.state.itemName} onChange={this.onItemNameChange} />
+                <Form.Control type="text"  name="itemName" placeholder="Enter Item Name" defaultValue={this.state.itemName} onChange={this.onChange} />
               </Form.Group>
               <Form.Group controlId="formMainCategory">
                 <Form.Label>Main Category</Form.Label>
-                <Form.Control as="select" defaultValue={this.state.mainCategory} onChange={this.onMainCategoryChange}>
+                <Form.Control as="select" defaultValue={this.state.mainCategory} onChange={this.onChange}>
                   <option>Select Main Category</option>
                   {this.state.mainCategories.map(mainCategory => {
                     return <option key={mainCategory._id}>{mainCategory.mainCategoryName}</option>
@@ -176,7 +181,7 @@ export default class EditItem extends Component {
               </Form.Group>
               <Form.Group controlId="formSubCategory">
                 <Form.Label>Sub Category</Form.Label>
-                <Form.Control as="select" defaultValue={this.state.subCategory} onChange={this.onSubCategoryChange}>
+                <Form.Control as="select" defaultValue={this.state.subCategory} onChange={this.onChange}>
                   <option>Select Sub Category</option>
                   {this.state.subCategories.map(subCategory => {
                     return <option key={subCategory._id}>{subCategory.subCategoryName}</option>
@@ -184,7 +189,7 @@ export default class EditItem extends Component {
                 </Form.Control>
               </Form.Group>
               {['checkbox'].map((type) => (
-                <div key={`custom-inline-${type}`} className="mb-3" checked={this.state.size} defaultValue={this.state.size} onChange={this.onSizeChange}>
+                <div key={`custom-inline-${type}`} className="mb-3" checked={this.state.size} defaultValue={this.state.size} onChange={this.onChange}>
                   <Form.Check
                     custom
                     inline
@@ -224,15 +229,15 @@ export default class EditItem extends Component {
               ))}
               <Form.Group controlId="formQuantity">
                 <Form.Label>Quantity</Form.Label>
-                <Form.Control type="number"  name="quantity" defaultValue={this.state.quantity} onChange={this.onQuantityChange} />
+                <Form.Control type="number"  name="quantity" defaultValue={this.state.quantity} onChange={this.onChange} />
               </Form.Group>
               <Form.Group controlId="formDescription">
                 <Form.Label>Description</Form.Label>
-                <Form.Control as="textarea" rows="3" defaultValue={this.state.description} onChange={this.onDescriptionChange} />
+                <Form.Control as="textarea" rows="3" defaultValue={this.state.description} onChange={this.onChange} />
               </Form.Group>
               <Form.Group controlId="formPrice">
                 <Form.Label>Price(Rs)</Form.Label>
-                <Form.Control type="number"  name="price" defaultValue={this.state.price} onChange={this.onPriceChange} />
+                <Form.Control type="number"  name="price" defaultValue={this.state.price} onChange={this.onChange} />
               </Form.Group>
               <Modal.Footer>
                 <Button variant="success" type="submit">Save</Button>

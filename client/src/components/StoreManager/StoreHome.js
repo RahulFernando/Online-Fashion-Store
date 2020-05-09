@@ -13,10 +13,12 @@ export default class StoreHome extends Component {
         menItems: [], 
         womenItems: [],
         kidsItems: [],
+        selected: [],
+        requiredItem: '',
         addModalShow: false,
     }
 
-    this.addModalClose = this.addModalClose.bind(this)
+    this.replaceModalItem = this.replaceModalItem.bind(this);
 }
 
   componentDidMount = () => {
@@ -55,6 +57,26 @@ export default class StoreHome extends Component {
   })
 
   }
+
+  replaceModalItem = (index, type) => {
+    if (type === 'women') {
+        this.setState({
+            addModalShow: true,
+            selected: this.state.women[index]
+        })
+    } else if(type === 'men') {
+        this.setState({
+            addModalShow: true,
+            selected: this.state.men[index]
+        })
+    } else {
+        this.setState({
+            addModalShow: true,
+            selected: this.state.kids[index]
+        })
+    }
+
+}
 
 
   addModalClose = () => {
@@ -128,8 +150,8 @@ export default class StoreHome extends Component {
           </tr>
         </thead>
         <tbody>
-        {this.state.menItems.map(men => {
-          return <tr key={men._id}>
+        {this.state.menItems.map((men, index) => {
+          return <tr key={index}>
             <td><Col xs={6} md={4}>
                 <Image src={men.image} alt='' />
                 </Col>
@@ -142,19 +164,11 @@ export default class StoreHome extends Component {
             <td>{men.description}</td>
             <td>{`Rs.${men.price}`}</td>
             <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success" onClick={() => this.setState({addModalShow: true})}>
+                <Button variant="success" onClick={() => this.replaceModalItem(index, 'men')}>
                   <i className="fas fa-pen"></i>
                   </Button>
                   <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
-                  id={men._id}
-                  itemname={men.itemName}
-                  maincategory = {men.mainCategory}
-                  subcategory = {men.subCategory}
-                  size = {men.size}
-                  quantity = {men.qty}
-                  description = {men.description}
-                  price = {men.price}
-                  />
+                  selected={this.state.selected}/>
                 <Button onClick={() => this.handleDelete(men._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
@@ -182,8 +196,8 @@ export default class StoreHome extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.womenItems.map(women => {
-          return <tr key={women._id}>
+          {this.state.womenItems.map((women, index) => {
+          return <tr key={index}>
               <td><Col xs={6} md={4}>
                 <Image src={women.image} alt='' />
                 </Col>
@@ -196,19 +210,11 @@ export default class StoreHome extends Component {
               <td>{women.description}</td>
               <td>{`Rs.${women.price}`}</td>
               <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success" onClick={() => this.setState({addModalShow: true})}>
+                <Button variant="success" onClick={() => this.replaceModalItem(index, 'women')}>
                   <i className="fas fa-pen"></i>
                   </Button>
                   <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
-                  id={women._id}
-                  itemname={women.itemName}
-                  maincategory = {women.mainCategory}
-                  subcategory = {women.subCategory}
-                  size = {women.size}
-                  quantity = {women.qty}
-                  description = {women.description}
-                  price = {women.price}
-                  />
+                  selected={this.state.selected}/>
                 <Button onClick={() => this.handleDelete(women._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
@@ -236,8 +242,8 @@ export default class StoreHome extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.kidsItems.map(kids => {
-          return <tr key={kids._id}>
+          {this.state.kidsItems.map((kids, index) => {
+          return <tr key={index}>
               <td><Col xs={6} md={4}>
                 <Image src={kids.image} alt='' />
                 </Col>
@@ -250,19 +256,11 @@ export default class StoreHome extends Component {
               <td>{kids.description}</td>
               <td>{`Rs.${kids.price}`}</td>
               <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success" onClick={() => this.setState({addModalShow: true})}>
+                <Button variant="success" onClick={() => this.replaceModalItem(index, '')}>
                   <i className="fas fa-pen"></i>
                   </Button>
                   <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
-                  id={kids._id}
-                  itemname={kids.itemName}
-                  maincategory = {kids.mainCategory}
-                  subcategory = {kids.subCategory}
-                  size = {kids.size}
-                  quantity = {kids.qty}
-                  description = {kids.description}
-                  price = {kids.price}
-                  />
+                  selected={this.state.selected}/>
                 <Button onClick={() => this.handleDelete(kids._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
             </td>
