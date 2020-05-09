@@ -62,11 +62,10 @@ router.delete('/',(req,res) => {
 router.get('/find',(req,res) => {
 
     //gathering all the required parameters to find for a rating
-    var userId = req.query.userId;
     var productId = req.query.productId;
 
 
-    rateModel.find({userId : userId, productId : productId})
+    rateModel.find({productId : productId})
         .then(list => {
             //sending the list
             res.status(200).json(list)

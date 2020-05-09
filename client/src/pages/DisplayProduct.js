@@ -8,7 +8,6 @@ import {wishList} from '../service/function'
 import {AddToCart} from '../service/function'
 import {QuantityDecrement} from '../service/function'
 import {isUserAuthenticated} from '../service/function'
-
 import RatingComponent from '../components/rating/ratingMain';
 
 export default class DisplayProduct extends Component {
@@ -183,13 +182,14 @@ export default class DisplayProduct extends Component {
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            <RatingComponent productId = {this.props.match.params.id} userId = {this.state.userId}/>
+                        </div>
                     </div>
                 </div>
 
 
-                <div id="ratingContainer" className="container-fliud">
-                     <RatingComponent productId = {this.props.match.params.id} userId = {this.state.userId}/>
-                </div>
+
 
             </>
         )
