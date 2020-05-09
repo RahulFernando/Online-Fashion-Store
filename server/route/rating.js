@@ -44,7 +44,7 @@ router.patch('/',(req,res) => {
     var comment = req.body.comment;
     var numberOfStars = req.body.numberOfStars;
 
-    //update the sensor with the specfied rating id in the HTTP request
+    //update the sensor with the specified rating id in the HTTP request
     Model.updateOne({_id : ratingId},{comment : comment,numberOfStars : numberOfStars})
         .then(result => {res.status(200).json(result)})
         .error(error => {res.status(400).json(error)});
@@ -54,9 +54,21 @@ router.delete('/',(req,res) => {
     //gathering all the required parameters to delete a rating
     var ratingId = req.body.ratingId;
 
+    //delete the rating with the specified ratingId in the HTTP request
     Model.deleteOne({_id : ratingId})
-        .then(result => {res.status(400).json(result)})
-        .error(error => {res.status(200).json(error)});
+        .then(result => {res.status(200).json(result)})
+        .error(error => {res.status(400).json(error)});
+});
+
+router.get('/find',(req,res) => {
+
+    //gathering all the required parameters to find for a rating
+    var userId = req.body.userId;
+    var productId = req.body.productId;
+
+    Model.find({userId : userId, productId : productId})
+        .then(result => {res.status(200).json(result)})
+        .error(error => {res.status(400).json(error)});
 });
 
 module.exports = router;
