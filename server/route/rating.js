@@ -37,4 +37,17 @@ router.post('/',(req,res) => {
 
 });
 
+router.patch('/',(req,res) => {
+
+    //gathering all the required parameters to update a rating
+    var ratingId = req.body.ratingId;
+    var comment = req.body.comment;
+    var numberOfStars = req.body.numberOfStars;
+
+    //update the sensor with the specfied rating id in the HTTP request
+    Model.updateOne({_id : ratingId},{comment : comment,numberOfStars : numberOfStars})
+        .then(result => {res.status(200).json(result)})
+        .error(error => {res.status(400).json(error)});
+});
+
 module.exports = router;
