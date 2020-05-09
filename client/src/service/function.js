@@ -38,7 +38,6 @@ export const loginAdmin = admin => {
         password: admin.password
     })
     .then(res => {
-        console.log(res)
         if (res.data.type === 'admin') {
             admintoken = res.data.token
         }
@@ -53,7 +52,6 @@ export const loginStoreManager = manager => {
         password: manager.password
     })
     .then(res => {
-        console.log(res.data)
         if (res.data.type === 'storeManager') {
             storeManagertoken = res.data.token
         }
@@ -82,18 +80,12 @@ export const getMainCategory = (id) => {
 export const updateMainCategories = (id, mainCategory) => {
     return axios.put("/admin/mainCategory/mainCategories/"+id, {
         mainCategoryName: mainCategory.mainCategoryName
-    }, { headers: {"Authorization":admintoken}}).then(res => {
-        console.log(res.data.message)
-    }).catch(err => {
-        console.log(err)
-    })
+    }, { headers: {"Authorization":admintoken}})
 }
 
 // delete main category by an id
 export const deleteMainCategories = (id) => {
     return axios.delete("/admin/mainCategory/mainCategories/"+id, { headers: {"Authorization":admintoken}})
-    .then(res => { console.log(res.data.message) })
-    .catch(err => { console.log(err) })
 }
 
 // add new sub category
@@ -115,19 +107,11 @@ export const updateSubCategory = (id, subCategory) => {
         subCategoryName: subCategory.subCategoryName,
         main_category_id: subCategory.main_category_id
     }, { headers: {"Authorization":admintoken}})
-    .then(res => {
-        console.log(res.data.message);
-    })
-    .catch(err => {
-        console.log(err)
-    })
 }
 
 // delete sub category by an id
 export const deleteSubCategories = (id) => {
     return axios.delete("/admin/subCategory/subCategories/"+id, { headers: {"Authorization":admintoken}})
-    .then(res => { console.log(res.data.message) })
-    .catch(err => { console.log(err) })
 }
 
 // add new store manager 
@@ -151,9 +135,6 @@ export const updateStoreManager = (id, storeManager) => {
         email: storeManager.email,
         password: storeManager.password
     }, { headers: {"Authorization":admintoken}})
-    .then(res => {
-        console.log(res)
-    })
 }
 
 // delete store managers
