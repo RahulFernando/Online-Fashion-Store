@@ -159,7 +159,7 @@ export default class Mybag extends Component {
 
                 {this.state.Items.length >0 ? <Button onClick={this.changePaymentState}>Proceed</Button> : ""}
 
-                {this.state.payment  && this.state.Items.length ? <Payment userId={this.state.userID} Items={this.state.Items} bringBackToInitialState={this.bringBackToInitialState}/> : ""}
+                {this.state.payment  && this.state.Items.length > 0 ? <Payment userId={this.state.userID} Items={this.state.Items} bringBackToInitialState={this.bringBackToInitialState}/> : ""}
                    
                    </Container>
 
