@@ -49,5 +49,14 @@ router.patch('/',(req,res) => {
         .then(result => {res.status(200).json(result)})
         .error(error => {res.status(400).json(error)});
 });
+router.delete('/',(req,res) => {
+
+    //gathering all the required parameters to delete a rating
+    var ratingId = req.body.ratingId;
+
+    Model.deleteOne({_id : ratingId})
+        .then(result => {res.status(400).json(result)})
+        .error(error => {res.status(200).json(error)});
+});
 
 module.exports = router;
