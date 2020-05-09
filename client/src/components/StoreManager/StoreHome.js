@@ -108,8 +108,6 @@ export default class StoreHome extends Component {
 
   render() {
 
-    const {_id, itemname, maincategory, subcategory, size, qty, description, price} = this.state;
-
     return (
       <>
       {/* Men */}
@@ -144,20 +142,18 @@ export default class StoreHome extends Component {
             <td>{men.description}</td>
             <td>{`Rs.${men.price}`}</td>
             <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id:men._id, itemname:men.itemName, 
-                  maincategory:men.mainCategory, subcategory:men.subCategory, size:men.size, qty:men.qty, 
-                  description:men.description, price:men.price}) }>
+                <Button variant="success" onClick={() => this.setState({addModalShow: true})}>
                   <i className="fas fa-pen"></i>
                   </Button>
                   <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
-                  _id = {_id}
-                  itemname = {itemname}
-                  maincategory = {maincategory}
-                  subcategory = {subcategory}
-                  size = {size}
-                  qty = {qty}
-                  description = {description}
-                  price = {price}
+                  id={men._id}
+                  itemname={men.itemName}
+                  maincategory = {men.mainCategory}
+                  subcategory = {men.subCategory}
+                  size = {men.size}
+                  quantity = {men.qty}
+                  description = {men.description}
+                  price = {men.price}
                   />
                 <Button onClick={() => this.handleDelete(men._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
@@ -200,20 +196,18 @@ export default class StoreHome extends Component {
               <td>{women.description}</td>
               <td>{`Rs.${women.price}`}</td>
               <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id:women._id, itemname:women.itemName, 
-                  maincategory:women.mainCategory, subcategory:women.subCategory, size:women.size, qty:women.qty, 
-                  description:women.description, price:women.price}) }>
+                <Button variant="success" onClick={() => this.setState({addModalShow: true})}>
                   <i className="fas fa-pen"></i>
                   </Button>
                   <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
-                  _id = {_id}
-                  itemname = {itemname}
-                  maincategory = {maincategory}
-                  subcategory = {subcategory}
-                  size = {size}
-                  qty = {qty}
-                  description = {description}
-                  price = {price}
+                  id={women._id}
+                  itemname={women.itemName}
+                  maincategory = {women.mainCategory}
+                  subcategory = {women.subCategory}
+                  size = {women.size}
+                  quantity = {women.qty}
+                  description = {women.description}
+                  price = {women.price}
                   />
                 <Button onClick={() => this.handleDelete(women._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
@@ -256,20 +250,18 @@ export default class StoreHome extends Component {
               <td>{kids.description}</td>
               <td>{`Rs.${kids.price}`}</td>
               <td><ButtonGroup aria-label="Basic example" size="sm">
-                <Button variant="success" onClick={() => this.setState({addModalShow: true, _id:kids._id, itemname:kids.itemName, 
-                  maincategory:kids.mainCategory, subcategory:kids.subCategory, size:kids.size, qty:kids.qty, 
-                  description:kids.description, price:kids.price}) }>
+                <Button variant="success" onClick={() => this.setState({addModalShow: true})}>
                   <i className="fas fa-pen"></i>
                   </Button>
                   <EditItem show={this.state.addModalShow} onHide={this.addModalClose}
-                  _id = {_id}
-                  itemname = {itemname}
-                  maincategory = {maincategory}
-                  subcategory = {subcategory}
-                  size = {size}
-                  qty = {qty}
-                  description = {description}
-                  price = {price}
+                  id={kids._id}
+                  itemname={kids.itemName}
+                  maincategory = {kids.mainCategory}
+                  subcategory = {kids.subCategory}
+                  size = {kids.size}
+                  quantity = {kids.qty}
+                  description = {kids.description}
+                  price = {kids.price}
                   />
                 <Button onClick={() => this.handleDelete(kids._id)} variant="danger"><i className="fas fa-trash"></i></Button>
                 </ButtonGroup>
