@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar'
 import { Container, Card, ListGroup } from 'react-bootstrap'
 import { FindItem } from '../service/function'
 import './product.css'
-// import RatingComponent from '../components/rating/ratingMain';
+
 import {getUserId} from '../service/function'
 import {wishList} from '../service/function'
 import {AddToCart} from '../service/function'
@@ -127,9 +127,7 @@ export default class DisplayProduct extends Component {
                 </div>
 
 
-                <div id="ratingContainer" className="container-fliud">
-                    <RatingComponent productId = {this.props.match.params.id} userId = {this.state.userId}/>
-                </div>
+
             </>
         )
     }
