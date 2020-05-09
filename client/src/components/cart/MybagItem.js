@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {FindItem} from '../../service/function'
+import {Row,Col,Image} from 'react-bootstrap'
 
 export default class MybagItem extends Component {
 
@@ -10,22 +11,39 @@ export default class MybagItem extends Component {
 
         this.state ={
             name : "",
-            unitPrice: 0
+            unitPrice: 0,
+            img: '',
+            id:''
         }
     }
+
+
+    arrayBufferToBase64(buffer) {
+        var binary = '';
+        var bytes = [].slice.call(new Uint8Array(buffer));
+        bytes.forEach((b) => binary += String.fromCharCode(b));
+        return window.btoa(binary);
+    };
 
     getItemDetails(id) {
 
        
         FindItem(id)
         .then(response =>{
-            if(this.state.name && this.state.unitPrice){
+
+            var base64Flag = 'data:image/jpeg;base64,';
+            var imageStr = this.arrayBufferToBase64(response.data.image.data.data);
+
+            if(this.state.id === id){
                 return;
             }
+
         this.setState({
               
             name: response.data.itemName,
-            unitPrice:response.data.price
+            unitPrice:response.data.price,
+            id:response.data._id,
+            img: base64Flag + imageStr
               
           })
         })
@@ -40,7 +58,11 @@ export default class MybagItem extends Component {
            
                 <tr>
                     {this.getItemDetails(cartItem.id)}
-                    <td></td>
+                    <td>
+
+                    <img src={this.state.img} style={{width:50 ,height :50}} />
+                   
+                    </td>
                     <td>{this.state.name}</td>
                     <td>{this.state.unitPrice}</td>
                     <td>{cartItem.quantity}</td>
