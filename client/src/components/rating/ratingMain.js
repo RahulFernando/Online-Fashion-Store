@@ -22,8 +22,6 @@ class RatingMain extends React.Component
                     {this.props.userId != null &&
                         <input type="text" onChange={(e) => this.onStartTyping(e)} value={this.state.comment}/>
                     }
-
-
                 </div>
 
             </div>
@@ -32,7 +30,7 @@ class RatingMain extends React.Component
     onStartTyping = (e) => {
 
         this.setState({comment : e.target.value});
-    }
+    };
     getRatingsFromApi = (userId,productId) => {
 
         axios.get('http://localhost:4000/api/users/rating/find', {
