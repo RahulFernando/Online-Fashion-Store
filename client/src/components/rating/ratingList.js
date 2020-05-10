@@ -1,5 +1,7 @@
 import React from "react";
-
+import { Container, Card, ListGroup } from 'react-bootstrap'
+import activeStar from '../../images/activestar.png';
+import inactiveStar from '../../images/inactivestar.png';
 class RatingList extends React.Component
 {
     constructor(props) {
@@ -16,16 +18,16 @@ class RatingList extends React.Component
 
             const item = this.state.uniqueRates.map(value => {
                 return (
-                    <div>
-                        {rate.numberOfStars >= value && <h3>active star</h3>}
-                        {rate.numberOfStars < value && <h3>Inactive star</h3>}
+                    <div class="col-sm">
+                        {rate.numberOfStars >= value && <img className="" src={activeStar}/>}
+                        {rate.numberOfStars < value && <img src={inactiveStar}/>}
                     </div>
                 )
 
             });
 
             return(
-                <div className="ddvdxv">
+                <div className="row">
                     {item}
                 </div>
 
@@ -34,7 +36,7 @@ class RatingList extends React.Component
 
 
         return(
-           <div>
+           <div classname="container">
                {list}
            </div>
         )
