@@ -27,7 +27,7 @@ class RatingMain extends React.Component
                             <input type="button" value="Delete"/>
                         </div>
                     }
-                    <div className="container">
+                    <div className="details col-md-6">
                         <RatingList ratings = {this.state.rateList}/>
                     </div>
                 </div>

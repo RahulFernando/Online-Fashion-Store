@@ -1,7 +1,5 @@
 import React from "react";
 import { Container, Card, ListGroup } from 'react-bootstrap'
-import activeStar from '../../images/activestar.png';
-import inactiveStar from '../../images/inactivestar.png';
 class RatingList extends React.Component
 {
     constructor(props) {
@@ -18,13 +16,24 @@ class RatingList extends React.Component
 
             const item = this.state.uniqueRates.map(value => {
                 return (
-                    <div class="col-sm">
-                        {rate.numberOfStars >= value && <img className="" src={activeStar}/>}
-                        {rate.numberOfStars < value && <img src={inactiveStar}/>}
+                    <div>
+                        {rate.numberOfStars >= value && <span className="fa fa-star checked"></span>}
+                        {rate.numberOfStars < value &&  <span className="fa fa-star"></span>}
                     </div>
                 )
 
             });
+
+            // <div className="rating">
+            //     <div className="stars">
+            //         <span className="fa fa-star checked"></span>
+            //         <span className="fa fa-star checked"></span>
+            //         <span className="fa fa-star checked"></span>
+            //         <span className="fa fa-star"></span>
+            //         <span className="fa fa-star"></span>
+            //     </div>
+            //     <span className="review-no">41 reviews</span>
+            // </div>
 
             return(
                 <div className="row">
@@ -36,7 +45,7 @@ class RatingList extends React.Component
 
 
         return(
-           <div classname="container">
+           <div>
                {list}
            </div>
         )
