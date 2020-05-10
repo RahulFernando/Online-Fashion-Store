@@ -56,7 +56,7 @@ export default class EditItem extends Component {
     console.log(nextProps)
     this.setState({
       id: nextProps.selected._id,
-      itemname: nextProps.selected.itemName,
+      itemName: nextProps.selected.itemName,
       mainCategory: nextProps.selected.mainCategory,
       subCategory: nextProps.selected.subCategory,
       size: nextProps.selected.size,
@@ -78,8 +78,8 @@ export default class EditItem extends Component {
 
   onChange = (e) =>{
     let target = e.target
-    let name = e.name
-    let value = e.value
+    let name = target.name
+    let value = target.value
 
     this.setState({
       [name]: value
@@ -135,7 +135,7 @@ export default class EditItem extends Component {
     e.preventDefault()
 
     const data = {
-      itemname: this.state.itemname,
+      itemName: this.state.itemName,
       mainCategory: this.state.mainCategory,
       subCategory: this.state.subCategory,
       size: this.state.size,
@@ -168,11 +168,11 @@ export default class EditItem extends Component {
               <br />
               <Form.Group controlId="formItemName">
                 <Form.Label></Form.Label>
-                <Form.Control type="text"  name="itemName" placeholder="Enter Item Name" defaultValue={this.state.itemname} onChange={this.onChange} />
+                <Form.Control type="text"  name="itemName" placeholder="Enter Item Name" defaultValue={this.state.itemName} onChange={this.onChange} />
               </Form.Group>
               <Form.Group controlId="formMainCategory">
                 <Form.Label>Main Category</Form.Label>
-                <Form.Control as="select" defaultValue={this.state.mainCategory} onChange={this.onChange}>
+                <Form.Control as="select" name="mainCategory" defaultValue={this.state.mainCategory} onChange={this.onChange}>
                   <option>Select Main Category</option>
                   {this.state.mainCategories.map(mainCategory => {
                     return <option key={mainCategory._id}>{mainCategory.mainCategoryName}</option>
@@ -181,7 +181,7 @@ export default class EditItem extends Component {
               </Form.Group>
               <Form.Group controlId="formSubCategory">
                 <Form.Label>Sub Category</Form.Label>
-                <Form.Control as="select" defaultValue={this.state.subCategory} onChange={this.onChange}>
+                <Form.Control as="select" name="subCategory" defaultValue={this.state.subCategory} onChange={this.onChange}>
                   <option>Select Sub Category</option>
                   {this.state.subCategories.map(subCategory => {
                     return <option key={subCategory._id}>{subCategory.subCategoryName}</option>
@@ -233,7 +233,7 @@ export default class EditItem extends Component {
               </Form.Group>
               <Form.Group controlId="formDescription">
                 <Form.Label>Description</Form.Label>
-                <Form.Control as="textarea" rows="3" defaultValue={this.state.description} onChange={this.onChange} />
+                <Form.Control as="textarea" name="description" rows="3" defaultValue={this.state.description} onChange={this.onChange} />
               </Form.Group>
               <Form.Group controlId="formPrice">
                 <Form.Label>Price(Rs)</Form.Label>

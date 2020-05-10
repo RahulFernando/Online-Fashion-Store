@@ -25,7 +25,6 @@ export default class Men extends Component {
     
         this.state = {
             
-            img: '',
             menItems: [],
             userId:''
         }
@@ -35,23 +34,22 @@ export default class Men extends Component {
 
 
     arrayBufferToBase64(buffer) {
+
+        var base64Flag = 'data:image/jpeg;base64,';
         var binary = '';
         var bytes = [].slice.call(new Uint8Array(buffer));
         bytes.forEach((b) => binary += String.fromCharCode(b));
-        return window.btoa(binary);
+        return base64Flag + window.btoa(binary);
     };
+
 
     componentDidMount = () => {
         
         getMenDetails()
         .then(res => {
 
-            var base64Flag = 'data:image/jpeg;base64,';
-            var imageStr = this.arrayBufferToBase64(res.data.men[0].image.data.data);
-
             this.setState({
                 menItems: res.data.men,
-                img: base64Flag + imageStr
             })
 
         })
@@ -128,7 +126,7 @@ export default class Men extends Component {
                     return <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={product._id}>
                     <div className="card card-block" style={useStyles.background}>
                         <div className="overflow">
-                            <img src={this.state.img} alt="" className="card-img-top"/>
+                            <img src={this.arrayBufferToBase64(product.image.data.data)} alt="" className="card-img-top"/>
                         </div>
                         <div className="card-body text-dark">
                         <Link to={"/displayProduct/"+product._id}> <h5 className="card-title">{product.itemName}</h5> </Link>

@@ -189,7 +189,7 @@ class AddItem extends Component {
                   <Form.Check
                     custom
                     inline
-                    label="XS"
+                    label="M"
                     type={type}
                     id={`custom-inline-${type}-1`}
                   />
