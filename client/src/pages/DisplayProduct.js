@@ -177,7 +177,6 @@ export default class DisplayProduct extends Component {
                                     <div class="action">
                                     {isUserAuthenticated() ?  <button class="add-to-cart btn btn-default" type="button" onClick={() => { this.addToCart(this.state.userId,this.props.match.params.id) }} >add to cart</button> : " "}
                                     {isUserAuthenticated() ? <button class="like btn btn-default" type="button" onClick={() => { this.addToWishList(this.state.userId,this.props.match.params.id) }}><span class="fa fa-heart"></span></button> : " "}
-                      
                                     </div>
                                 </div>
                             </div>
@@ -187,9 +186,9 @@ export default class DisplayProduct extends Component {
                         </div>
                     </div>
                 </div>
-
-
-
+                <div id="ratingContainer" className="container-fliud">
+                    <RatingComponent productId = {this.props.match.params.id} userId = {this.state.userId}/>
+                </div>
 
             </>
         )
