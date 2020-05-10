@@ -65,7 +65,7 @@ class RatingMain extends React.Component
 
                             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" onChange={(e) => this.onStartTyping(e)} value={this.state.comment}/>
                             {this.state.userRating.ratingId === null && <input type="button" className="btn btn-primary" value="Post" onClick={()=> this.submit(this.props.userId,this.props.productId,this.state.comment,this.state.numberOfStars)}/>}
-                            {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-primary" value="Update" onClick={()=> this.update(this.props.userId,this.props.productId,this.state.comment,this.state.numberOfStars)}/>}
+                            {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-primary" value="Update" onClick={()=> this.update(this.state.comment,this.state.numberOfStars)}/>}
                             {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-danger" value="Delete"/>}
 
                         </div>
@@ -125,11 +125,21 @@ class RatingMain extends React.Component
         }
 
     };
-    update = (userId,productId,comment,numberOfStars) => {
+    update = (comment,numberOfStars) => {
 
         if(comment !== null && comment !== '')
         {
+           axios.patch('http://localhost:4000/api/users/rating?ratingId=' + this.state.userRating.ratingId + "&comment=" + comment + "&numberOfStars=" + numberOfStars)
+               .then(res => {
+                   if(res.status === 200)
+                   {
+                       this.getRatingsFromApi(this.props.prductId,this.state.userId);
+                   }
 
+               })
+               .catch(error => {
+                   console.log("Error while updating the rating " + error);
+               });
         }
         else
         {
