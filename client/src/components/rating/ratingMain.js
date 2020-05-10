@@ -66,7 +66,7 @@ class RatingMain extends React.Component
                             <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" onChange={(e) => this.onStartTyping(e)} value={this.state.comment}/>
                             {this.state.userRating.ratingId === null && <input type="button" className="btn btn-primary" value="Post" onClick={()=> this.submit(this.props.userId,this.props.productId,this.state.comment,this.state.numberOfStars)}/>}
                             {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-primary" value="Update" onClick={()=> this.update(this.state.comment,this.state.numberOfStars)}/>}
-                            {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-danger" value="Delete"/>}
+                            {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-danger" value="Delete" onClick={() => this.delete()}/>}
 
                         </div>
                     }
@@ -133,7 +133,7 @@ class RatingMain extends React.Component
                .then(res => {
                    if(res.status === 200)
                    {
-                       this.getRatingsFromApi(this.props.prductId,this.state.userId);
+                       this.getRatingsFromApi(this.props.productId,this.state.userId);
                    }
 
                })
@@ -150,6 +150,34 @@ class RatingMain extends React.Component
     onStarClicked = (i) => {
 
         this.setState({numberOfStars : i});
+    };
+    delete = () => {
+        alert("called");
+        const ratingId = this.state.userRating.ratingId;
+        if(ratingId === null)
+        {
+            alert("Cant delete,Rating Id is missing!");
+        }
+        else
+        {
+            axios.delete('http://localhost:4000/api/users/rating?ratingId=' + ratingId)
+                .then(res => {
+
+                })
+                .catch(error => {
+                    console.log("Error while deleting the rating " + error);
+                });
+
+                this.setState({
+                    userRating :
+                        {
+                            ratingId : null,
+                            comment : '',
+                            numberOfStars : 1
+                        },numberOfStars : 1,comment : ''});
+
+                this.getRatingsFromApi(this.props.productId,this.state.userId);
+        }
     };
     setUsersRating = (allratings,userId) => {
 
