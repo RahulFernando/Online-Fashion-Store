@@ -11,7 +11,7 @@ import {isUserAuthenticated} from '../service/function'
 import {getUserId} from '../service/function'
 import {DisplayPurchaseHistory} from '../service/function'
 import {displayWishList} from '../service/function'
-import {DisplayCart, logoutUser} from '../service/function'
+import {DisplayCart, logoutUser, getMainCategories} from '../service/function'
 
 export default class Navbar extends Component {
 
@@ -70,7 +70,8 @@ DisplayCart(this.state.userID)
     isOpen:false,
     cart:[],
     wishList:[],
-    purchaseHistory:[]
+    purchaseHistory:[],
+    categories: []
 }
   }
 
@@ -103,10 +104,11 @@ DisplayCart(this.state.userID)
       ]
 
       componentDidMount(){
-        
-       
-
-
+        getMainCategories().then(res => {
+          this.setState({
+            categories: res.data
+          })
+        })
       }
 
     // logout user
@@ -128,7 +130,17 @@ DisplayCart(this.state.userID)
               </div>
               <ul className={this.state.isOpen ? 
               "nav-links show-nav" : "nav-links"}>
-                  <li>
+                <li>
+                  <Link to="/">HOME</Link>
+                </li>
+                {this.state.categories.map(category => {
+                  return (
+                    <li>
+                        <Link to={category.mainCategoryName} className="text-uppercase">{category.mainCategoryName}</Link>
+                    </li>
+                  )
+                })}
+                  {/* <li>
                       <Link to="/">HOME</Link>
                   </li>
                   <li>
@@ -139,8 +151,8 @@ DisplayCart(this.state.userID)
                   </li>
                   <li>
                       <Link to="/kids">KIDS</Link>
-                  </li>
-                  <li>
+                  </li>*/}
+                  <li> 
                   <ReactSearchBox placeholder="Search"
                     value=""
                     data={this.data}
