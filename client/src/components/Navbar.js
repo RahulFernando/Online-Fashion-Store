@@ -140,18 +140,6 @@ DisplayCart(this.state.userID)
                     </li>
                   )
                 })}
-                  {/* <li>
-                      <Link to="/">HOME</Link>
-                  </li>
-                  <li>
-                      <Link to="/men">MEN</Link>
-                  </li>
-                  <li>
-                      <Link to="/women">WOMEN</Link>
-                  </li>
-                  <li>
-                      <Link to="/kids">KIDS</Link>
-                  </li>*/}
                   <li> 
                   <ReactSearchBox placeholder="Search"
                     value=""

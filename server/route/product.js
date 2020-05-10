@@ -26,34 +26,42 @@ var upload = multer({storage: storage}).single("file")
 
 
 
-router.post('/uploadItem', (req, res) => {
-    upload(req, res, err => {
-        if (err) return res.json({success: false, err})
-        const product = new Item()
-        console.log(req.file.path)
-        product.image.data = fs.readFileSync(req.file.path)
-        product.image.contentType = "image/png"
-        product.itemName = req.body.itemName
-        product.mainCategory = req.body.mainCategory
-        product.subCategory = req.body.subCategory
-        product.size = req.body.size
-        product.qty = req.body.qty
-        product.description = req.body.description
-        product.price = req.body.price
+router.post('/uploadItem', async (req, res) => {
+   try {
+        await upload(req, res, err => {
+            if (err) return res.json({success: false, err})
+            const product = new Item()
+            console.log(req.file.path)
+            product.image.data = fs.readFileSync(req.file.path)
+            product.image.contentType = "image/png"
+            product.itemName = req.body.itemName
+            product.mainCategory = req.body.mainCategory
+            product.subCategory = req.body.subCategory
+            product.size = req.body.size
+            product.qty = req.body.qty
+            product.description = req.body.description
+            product.price = req.body.price
 
-        product.save((err) => {
-            if (err) return res.status(400).json({success: false, err})
-            return res.status(200).json({success: true})
-        })
+            product.save((err) => {
+                if (err) return res.status(400).json({success: false, err})
+                return res.status(200).json({success: true})
+            })
     })
+   } catch (error) {
+       console.log(error)
+   }
 });
 
-router.get('/getItem', (req, res) => {
-    Item.find()
-    .exec((err, products) => {
-        if (err) return res.status(400).json({success: false, err})
-        res.status(200).json({success: true, products})
-    })
+router.get('/getItem', async (req, res) => {
+    try {
+        await Item.find()
+        .exec((err, products) => {
+            if (err) return res.status(400).json({success: false, err})
+            res.status(200).json({success: true, products})
+        })
+    } catch (error) {
+       console.log(error) 
+    }
 });
 
 // router.get('/getImage', (req, res) => {
@@ -64,90 +72,112 @@ router.get('/getItem', (req, res) => {
 //     })
 // });
 
-router.get('/getMen', (req, res) => {
+router.get('/getMen', async (req, res) => {
+    try {
+        const query = { "mainCategory": "Men" }
 
-    const query = { "mainCategory": "Men" }
-
-    Item.find(query)
-    .exec((err, men) => {
-        if (err) return res.status(400).json({success: false, err})
-        res.status(200).json({success: true, men})
-    })
+        await Item.find(query)
+        .exec((err, men) => {
+            if (err) return res.status(400).json({success: false, err})
+            res.status(200).json({success: true, men})
+        })
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 
-router.get('/getWomen', (req, res) => {
+router.get('/getWomen', async (req, res) => {
+    try {
+        const query = { "mainCategory": "Women" }
 
-    const query = { "mainCategory": "Women" }
-
-    Item.find(query)
-    .exec((err, women) => {
-        if (err) return res.status(400).json({success: false, err})
-        res.status(200).json({success: true, women})
-    })
+        await Item.find(query)
+        .exec((err, women) => {
+            if (err) return res.status(400).json({success: false, err})
+            res.status(200).json({success: true, women})
+        })
+    } catch (error) {
+        console.log(error)
+    }
 });
 
 
-router.get('/getKids', (req, res) => {
+router.get('/getKids', async (req, res) => {
+    try {
+        const query = { "mainCategory": "Kid" }
 
-    const query = { "mainCategory": "Kid" }
-
-    Item.find(query)
-    .exec((err, kids) => {
-        if (err) return res.status(400).json({success: false, err})
-        res.status(200).json({success: true, kids})
-    })
+        await Item.find(query)
+        .exec((err, kids) => {
+            if (err) return res.status(400).json({success: false, err})
+            res.status(200).json({success: true, kids})
+        })
+    } catch (error) {
+        console.log(error)
+    }
 });
 
-router.route('/editItem/:id').get((req,res) => {
-   
-    Item.findById(req.params.id)
+router.route('/editItem/:id').get( async (req,res) => {
+   try {
+        await Item.findById(req.params.id)
         .then(product => res.json(product))
         .catch(err => res.status(400).json('Error : '  +err));
+   } catch (error) {
+       console.log(error)
+   }
 });
 
 
-router.route('/updateItem/:id').put((req, res) => {
-  console.log(req.body)
-    Item.findById(req.params.id, function(error, item){
-        if(!item)
-        res.status(404).send("data is not found");
-        else {
-        // item.image = req.file.path,
-        item.itemName = req.body.itemName,
-        item.mainCategory = req.body.mainCategory,
-        item.subCategory = req.body.subCategory,
-        item.size = req.body.size,
-        item.qty = req.body.qty,
-        item.description = req.body.description,
-        item.price = req.body.price
-
-        item.save().then(item => {
-            res.json('Update complete');
+router.route('/updateItem/:id').put(async (req, res) => {
+    try {
+        await Item.findById(req.params.id, function(error, item){
+            if(!item)
+            res.status(404).send("data is not found");
+            else {
+            // item.image = req.file.path,
+            item.itemName = req.body.itemName,
+            item.mainCategory = req.body.mainCategory,
+            item.subCategory = req.body.subCategory,
+            item.size = req.body.size,
+            item.qty = req.body.qty,
+            item.description = req.body.description,
+            item.price = req.body.price
+    
+            item.save().then(item => {
+                res.json('Update complete');
+            })
+            .catch(err => {
+                res.status(400).send("unable to update the database");
+            })
+            }
         })
-        .catch(err => {
-            res.status(400).send("unable to update the database");
-        })
-        }
-    })
+    } catch (error) {
+        console.log(error)
+    }
 })
 
-router.route('/deleteItem/:id').get((req,res) => {
-    Item.findByIdAndRemove({_id: req.params.id}, function(err, item) {
-        if (err) {
-            res.json(err)
-        } else {
-            res.json('Successfully removed')
-        }
-    })
+router.route('/deleteItem/:id').get(async (req,res) => {
+    try {
+        await Item.findByIdAndRemove({_id: req.params.id}, function(err, item) {
+            if (err) {
+                res.json(err)
+            } else {
+                res.json('Successfully removed')
+            }
+        })
+    } catch (error) {
+        console.log(error)   
+    }
 })
 
 
-router.route('/getItem/:id').get((req,res) => {
-   
-    Item.findById(req.params.id)
+router.route('/getItem/:id').get(async (req,res) => {
+   try {
+        await Item.findById(req.params.id)
         .then(product => res.json(product))
         .catch(err => res.status(400).json('Error : '  +err));
+   } catch (error) {
+       console.log(error)
+   }
 });
 
 router.route('/decrement/:id').post((req,res) => {

@@ -65,7 +65,7 @@ class SignInForm extends Component {
       loginUser(user).then(res => { 
         const auth = isUserAuthenticated()
         if (auth) {
-          this.props.history.push('/men');
+          this.props.history.push('/Men');
         } else {
             this.setState({
               serverError: 'Username or Password incorrect!'
