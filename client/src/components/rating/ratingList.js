@@ -12,27 +12,33 @@ class RatingList extends React.Component
 
         var ratingList = [];
         ratingList = this.props.ratings;
+        const userId = this.props.userId;
 
         const list = ratingList.map(rate => {
 
             let comment = rate.comment;
-            const item = this.state.uniqueRates.map(value => {
-                return (
-                    <div>
-                        {rate.numberOfStars >= value && <span className="fa fa-star checked"></span>}
-                        {rate.numberOfStars < value &&  <span className="fa fa-star"></span>}
-                    </div>
-                )
+            let ratingUserId = rate.userId;
 
+            const item = this.state.uniqueRates.map(value => {
+                    return (
+                        <div>
+                            {rate.numberOfStars >= value && <span className="fa fa-star checked"></span>}
+                            {rate.numberOfStars < value &&  <span className="fa fa-star"></span>}
+                        </div>
+                    )
             });
 
-            return(
-                <div className="row">
-                    {comment}
-                    {item}
-                </div>
+            if(ratingUserId !== userId)
+            {
+                return(
+                    <div className="row">
+                        {comment}
+                        {item}
+                    </div>
 
-            )
+                )
+            }
+
         });
 
 
