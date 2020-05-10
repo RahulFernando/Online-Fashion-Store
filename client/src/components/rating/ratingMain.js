@@ -8,7 +8,7 @@ class RatingMain extends React.Component
     constructor(props) {
         super(props);
 
-        this.state = ({rateList : [],comment : ''});
+        this.state = ({rateList : [],comment : '',numberOfStars : 1});
 
         //getting required props to proceed
         const userId = this.props.userId;
@@ -17,11 +17,41 @@ class RatingMain extends React.Component
         this.getRatingsFromApi(productId);
     }
     render() {
+
+
+        var arr=[1,2,3,4,5];
+        var elements=[];
+
+        arr.map(i => {
+
+            if(this.state.numberOfStars >= i)
+            {
+                elements.push(<span className="fa fa-star checked"  onClick={() => this.onStarClicked(i)}/>);
+            }
+            else
+            {
+                elements.push(<span className="fa fa-star"  onClick={() => this.onStarClicked(i)}/>);
+            }
+        });
+        // for(var i = 1; i <= arr.length; i++)
+        // {
+        //
+        //
+        //
+        // }
+
+
         return(
             <div>
                 <div className="input">
                     {this.props.userId === null &&
                         <div>
+
+                            <div>
+                                {elements}
+                            </div>
+
+
                             <input type="text" onChange={(e) => this.onStartTyping(e)} value={this.state.comment}/>
                             <input type="button" value="Submit" onClick={()=> this.submit(this.props.userId,this.props.productId)}/>
                             <input type="button" value="Delete"/>
@@ -45,6 +75,8 @@ class RatingMain extends React.Component
         .then(res => {
 
             let ratinglist = res.data;
+            //reversing the list to get the recent comments to the top
+            ratinglist.reverse();
             this.setState({rateList : ratinglist});
 
         })
@@ -54,15 +86,22 @@ class RatingMain extends React.Component
     };
     submit = (userId,productId) => {
 
-        axios.post('http://localhost:4000/api/users/rating?userId='+userId+"&productId="+productId+"&comment="+this.state.comment+"&numberOfStars="+5 )
+        axios.post('http://localhost:4000/api/users/rating?userId='+userId+"&productId="+productId+"&comment="+this.state.comment+"&numberOfStars="+this.state.numberOfStars )
             .then(res => {
-                let ratinglist = res.data;
-                this.setState({rateList : ratinglist});
+
+                //get newly added rating to the list
+                this.getRatingsFromApi(this.props.productId);
+
+                this.setState({comment : ''})
 
             })
             .catch(error => {
                 console.log("Error while getting ratings " + error);
             });
     };
+    onStarClicked = (i) => {
+
+        this.setState({numberOfStars : i});
+    }
 }
 export default RatingMain;

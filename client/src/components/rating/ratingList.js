@@ -10,10 +10,12 @@ class RatingList extends React.Component
 
     render() {
 
-        const ratingList = this.props.ratings;
+        var ratingList = [];
+        ratingList = this.props.ratings;
 
         const list = ratingList.map(rate => {
 
+            let comment = rate.comment;
             const item = this.state.uniqueRates.map(value => {
                 return (
                     <div>
@@ -24,19 +26,9 @@ class RatingList extends React.Component
 
             });
 
-            // <div className="rating">
-            //     <div className="stars">
-            //         <span className="fa fa-star checked"></span>
-            //         <span className="fa fa-star checked"></span>
-            //         <span className="fa fa-star checked"></span>
-            //         <span className="fa fa-star"></span>
-            //         <span className="fa fa-star"></span>
-            //     </div>
-            //     <span className="review-no">41 reviews</span>
-            // </div>
-
             return(
                 <div className="row">
+                    {comment}
                     {item}
                 </div>
 
