@@ -14,7 +14,8 @@ import {QuantityDecrement} from '../service/function'
 import {isUserAuthenticated} from '../service/function'
 import { Link } from 'react-router-dom';
 import {FindItem} from '../service/function'
-
+import CheckBox from './sections/CheckBox'
+ 
 
 
 export default class Home extends Component {
@@ -124,6 +125,9 @@ export default class Home extends Component {
         <div className="container-fluid">
             <section className="popular-products">
                 <Title title="Popular Products"/>
+                <CheckBox/>
+                <br/>
+                <br/>
             <div className="row flex-row flex-rap">
                 
                 {this.state.items.map(product => {

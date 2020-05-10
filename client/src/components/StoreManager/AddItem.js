@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {Container,Form,Button, Image, Col} from 'react-bootstrap';
-import {upload} from '../../service/function';
-import { getMainCategories, getSubCategories } from '../../service/function'
+import { upload, getMainCategories, getSubCategories } from '../../service/function'
 
 
 class AddItem extends Component {

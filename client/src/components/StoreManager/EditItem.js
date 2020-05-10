@@ -10,8 +10,6 @@ export default class EditItem extends Component {
     super(props)
 
     this.state = {
-      // img: null,
-      // file: null,
       id: '',
       itemname: '',
       itemName: '',
@@ -25,14 +23,6 @@ export default class EditItem extends Component {
       subCategories: []
     }
 
-    // this.onFileChange = this.onFileChange.bind(this);
-    // this.onItemNameChange = this.onItemNameChange.bind(this);
-    // this.onMainCategoryChange = this.onMainCategoryChange.bind(this);
-    // this.onSubCategoryChange = this.onSubCategoryChange.bind(this);
-    // this.onSizeChange = this.onSizeChange.bind(this);
-    // this.onQuantityChange = this.onQuantityChange.bind(this);
-    // this.onDescriptionChange = this.onDescriptionChange.bind(this);
-    // this.onPriceChange = this.onPriceChange.bind(this);
     this.onChange = this.onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
@@ -53,7 +43,6 @@ export default class EditItem extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
     this.setState({
       id: nextProps.selected._id,
       itemName: nextProps.selected.itemName,
@@ -66,15 +55,6 @@ export default class EditItem extends Component {
     })
   }
 
-  // onFileChange = (e) => {
-  //     let target = e.target;
-  //     let value = target.files[0];
-
-  //     this.setState({
-  //       img: URL.createObjectURL(value),
-  //       file: e.target.value
-  //     })
-  // }
 
   onChange = (e) =>{
     let target = e.target
@@ -86,50 +66,6 @@ export default class EditItem extends Component {
     })
   }
 
-  // onMainCategoryChange = (e) => {
-
-  //   this.setState({
-  //     mainCategory: e.target.value
-  //   })
-  // }
-
-  // onSubCategoryChange = (e) => {
-
-  //   this.setState({
-  //     subCategory: e.target.value
-  //   })
-  // }
-
-  // onSizeChange = (e) => {
-  //   // let target = e.target;
-  //   // let value = target.value;
-
-  //   this.setState(prevState => ({
-  //     // [e.target.label]: e.target.checked
-  //     size: !prevState.size
-  //   }))
-  // }
-
-  // onQuantityChange = (e) => {
-
-  //   this.setState({
-  //     quantity: e.target.value
-  //   })
-  // }
-
-  // onDescriptionChange = (e) => {
-
-  //   this.setState({
-  //     description: e.target.value
-  //   })
-  // }
-
-  // onPriceChange = (e) => {
-
-  //   this.setState({
-  //     price: e.target.value
-  //   })
-  // }
 
   handleSubmit = (e) => {
     e.preventDefault()
@@ -153,6 +89,7 @@ export default class EditItem extends Component {
 
       <Modal
         {...this.props}
+        style={{maxHeight:"100%"}}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
