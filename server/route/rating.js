@@ -1,12 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const Model = require('../models/rating');
+const rateModel = require('../models/rating');
 
 
 router.get('/', (req, res) => {
     //getting all the ratings
-    Model
-        .find()
+    rateModel.find()
         .then(list => {
             //sending the list
             res.status(200).json(list)
@@ -19,12 +18,12 @@ router.get('/', (req, res) => {
 
 router.post('/',(req,res) => {
     //gathering all the required parameters to create a new rating
-    var userId = req.body.userId;
-    var productId = req.body.productId;
-    var comment = req.body.comment;
-    var numberOfStars = req.body.numberOfStars;
+    var userId = req.query.userId;
+    var productId = req.query.productId;
+    var comment = req.query.comment;
+    var numberOfStars = req.query.numberOfStars;
 
-    var rate = new Model();
+    var rate = new rateModel();
     rate.userId = userId;
     rate.productId = productId;
     rate.comment = comment;
@@ -40,22 +39,22 @@ router.post('/',(req,res) => {
 router.patch('/',(req,res) => {
 
     //gathering all the required parameters to update a rating
-    var ratingId = req.body.ratingId;
-    var comment = req.body.comment;
-    var numberOfStars = req.body.numberOfStars;
+    var ratingId = req.query.ratingId;
+    var comment = req.query.comment;
+    var numberOfStars = req.query.numberOfStars;
 
     //update the sensor with the specified rating id in the HTTP request
-    Model.updateOne({_id : ratingId},{comment : comment,numberOfStars : numberOfStars})
+    rateModel.updateOne({_id : ratingId},{comment : comment,numberOfStars : numberOfStars})
         .then(result => {res.status(200).json(result)})
         .error(error => {res.status(400).json(error)});
 });
 router.delete('/',(req,res) => {
 
     //gathering all the required parameters to delete a rating
-    var ratingId = req.body.ratingId;
+    var ratingId = req.query.ratingId;
 
     //delete the rating with the specified ratingId in the HTTP request
-    Model.deleteOne({_id : ratingId})
+    rateModel.deleteOne({_id : ratingId})
         .then(result => {res.status(200).json(result)})
         .error(error => {res.status(400).json(error)});
 });
@@ -63,12 +62,20 @@ router.delete('/',(req,res) => {
 router.get('/find',(req,res) => {
 
     //gathering all the required parameters to find for a rating
-    var userId = req.body.userId;
-    var productId = req.body.productId;
+    var productId = req.query.productId;
 
-    Model.find({userId : userId, productId : productId})
-        .then(result => res.status(200).json(result))
-        .error(error => res.status(400).json(error))
+
+    rateModel.find({productId : productId})
+        .then(list => {
+            //sending the list
+            res.status(200).json(list)
+        })
+        .catch(error => {
+            //sending error code 400 and attach the error occured as a json to the response.
+            res.status(400).json(error)
+        });
+
+
 });
 
 module.exports = router;
