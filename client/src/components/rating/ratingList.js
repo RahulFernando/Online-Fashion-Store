@@ -10,8 +10,8 @@ class RatingList extends React.Component
 
     render() {
 
-        var ratingList = [];
-        ratingList = this.props.ratings;
+        const ratingList = this.props.ratings;
+
         const userId = this.props.userId;
 
         const list = ratingList.map(rate => {
@@ -31,10 +31,18 @@ class RatingList extends React.Component
             if(ratingUserId !== userId)
             {
                 return(
-                    <div className="row">
-                        {comment}
-                        {item}
+                    <div>
+                        <div>
+                            {comment}
+                        </div>
+                        <div className="row">
+                            {item}
+                        </div>
                     </div>
+
+
+
+
 
                 )
             }

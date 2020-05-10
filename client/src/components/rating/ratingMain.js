@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 import RatingList from '../rating/ratingList';
+import {getUserId} from '../../service/function';
 
 class RatingMain extends React.Component
 {
@@ -8,14 +9,30 @@ class RatingMain extends React.Component
     constructor(props) {
         super(props);
 
-        this.state = ({rateList : [],comment : '',numberOfStars : 1});
+        this.state = (
+            {
+                userId : getUserId(),
+                rateList : [],
+                comment : '',
+                numberOfStars : 1,
+                userRating : {
+                    ratingId : null,
+                    comment : null,
+                    numberOfStars : null
+                }
+            });
 
         //getting required props to proceed
-        const userId = this.props.userId;
+       // const userId = this.props.userId;
         const productId = this.props.productId;
+
         //getting ratings from API
-        this.getRatingsFromApi(productId);
+        this.getRatingsFromApi(this.props.productId,this.state.userId);
+
+
+
     }
+
     render() {
 
 
@@ -38,7 +55,7 @@ class RatingMain extends React.Component
         return(
             <div>
                 <div className="input">
-                    {this.props.userId === null &&
+                    {this.props.userId !== null &&
                         <div>
 
                             <div>
@@ -46,14 +63,17 @@ class RatingMain extends React.Component
                             </div>
 
 
-                            <input type="text" onChange={(e) => this.onStartTyping(e)} value={this.state.comment}/>
-                            <input type="button" value="Post" onClick={()=> this.submit(this.props.userId,this.props.productId,this.state.comment,this.state.numberOfStars)}/>
-                            <input type="button" value="Delete"/>
+                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" onChange={(e) => this.onStartTyping(e)} value={this.state.comment}/>
+                            {this.state.userRating.ratingId === null && <input type="button" className="btn btn-primary" value="Post" onClick={()=> this.submit(this.props.userId,this.props.productId,this.state.comment,this.state.numberOfStars)}/>}
+                            {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-primary" value="Update" onClick={()=> this.update(this.props.userId,this.props.productId,this.state.comment,this.state.numberOfStars)}/>}
+                            {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-danger" value="Delete"/>}
+
                         </div>
                     }
                     <div className="details col-md-6">
                         <RatingList ratings = {this.state.rateList} userId = {this.props.userId}/>
                     </div>
+
                 </div>
 
             </div>
@@ -63,7 +83,7 @@ class RatingMain extends React.Component
 
         this.setState({comment : e.target.value});
     };
-    getRatingsFromApi = (productId) => {
+    getRatingsFromApi = (productId,userId) => {
 
         axios.get('http://localhost:4000/api/users/rating/find?productId=' + productId)
         .then(res => {
@@ -73,6 +93,11 @@ class RatingMain extends React.Component
             ratinglist.reverse();
             this.setState({rateList : ratinglist});
 
+            //alert(userId);
+            this.setUsersRating(ratinglist,userId);
+
+
+
         })
         .catch(error => {
             console.log("Error while getting ratings " + error);
@@ -80,15 +105,15 @@ class RatingMain extends React.Component
     };
     submit = (userId,productId,comment,numberOfStars) => {
 
-        if(comment != null)
+        if(comment !== null && comment !== '')
         {
             axios.post('http://localhost:4000/api/users/rating?userId='+userId+"&productId="+productId+"&comment="+comment+"&numberOfStars="+numberOfStars )
                 .then(res => {
 
+                    //clearing the input filed value
+                    this.setState({comment : ''});
                     //get newly added rating to the list
-                    this.getRatingsFromApi(this.props.productId);
-
-                    this.setState({comment : ''})
+                    this.getRatingsFromApi(this.props.productId,this.state.userId);
 
                 })
                 .catch(error => {
@@ -100,9 +125,38 @@ class RatingMain extends React.Component
         }
 
     };
+    update = (userId,productId,comment,numberOfStars) => {
+
+        if(comment !== null && comment !== '')
+        {
+
+        }
+        else
+        {
+            alert("Please Enter a comment to update")
+        }
+
+    };
     onStarClicked = (i) => {
 
         this.setState({numberOfStars : i});
-    }
+    };
+    setUsersRating = (allratings,userId) => {
+
+        allratings.map(item => {
+            if(userId === item.userId)
+            {
+                this.setState({
+                     userRating :
+                     {
+                        ratingId : item._id,
+                        comment : item.comment,
+                        numberOfStars : item.numberOfStars
+                    },numberOfStars : item.numberOfStars,comment : item.comment});
+            }
+        });
+
+    };
+
 }
 export default RatingMain;
