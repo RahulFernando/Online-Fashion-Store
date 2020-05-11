@@ -26,6 +26,7 @@ export default class DisplayProduct extends Component {
             qty: 0,
             description: '',
             price: 0,
+            discount: 0,
             img:'',
             userId:''
 
@@ -50,6 +51,7 @@ export default class DisplayProduct extends Component {
                     qty: response.data.qty,
                     description: response.data.description,
                     price: response.data.price,
+                    discount: response.data.discount,
                     img: base64Flag + imageStr
 
                 })
@@ -163,7 +165,8 @@ export default class DisplayProduct extends Component {
                                         <span class="review-no">41 reviews</span>
                                     </div>
                                     <p class="product-description">{this.state.description}</p>
-                                    <h4 class="price">price: <span> {`Rs.${this.state.price}`}</span></h4>
+                                    <h4 class="price">current price: <span> {`Rs.${this.state.price}`}</span></h4>
+                                    <h4 class="discount">discount: <span> {`${this.state.discount}%`}</span></h4>
                                     <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
                                     <h5 class="sizes">sizes:
 							{/* <span class="size" data-toggle="tooltip" title="small">s</span> */}

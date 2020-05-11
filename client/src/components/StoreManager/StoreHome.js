@@ -155,6 +155,7 @@ arrayBufferToBase64(buffer) {
             <th>Qty</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Discount</th>
             <th>Option</th>
           </tr>
         </thead>
@@ -172,6 +173,7 @@ arrayBufferToBase64(buffer) {
             <td>{men.qty}</td>
             <td>{men.description}</td>
             <td>{`Rs.${men.price}`}</td>
+            <td>{`${men.discount}%`}</td>
             <td><ButtonGroup aria-label="Basic example" size="sm">
                 <Button variant="success" onClick={() => this.replaceModalItem(index, 'men')}>
                   <i className="fas fa-pen"></i>
@@ -201,6 +203,7 @@ arrayBufferToBase64(buffer) {
             <th>Qty</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Discount</th>
             <th>Option</th>
           </tr>
         </thead>
@@ -218,6 +221,7 @@ arrayBufferToBase64(buffer) {
               <td>{women.qty}</td>
               <td>{women.description}</td>
               <td>{`Rs.${women.price}`}</td>
+              <td>{`${women.discount}%`}</td>
               <td><ButtonGroup aria-label="Basic example" size="sm">
                 <Button variant="success" onClick={() => this.replaceModalItem(index, 'women')}>
                   <i className="fas fa-pen"></i>
@@ -247,6 +251,7 @@ arrayBufferToBase64(buffer) {
             <th>Qty</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Discount</th>
             <th>Option</th>
           </tr>
         </thead>
@@ -264,6 +269,7 @@ arrayBufferToBase64(buffer) {
               <td>{kids.qty}</td>
               <td>{kids.description}</td>
               <td>{`Rs.${kids.price}`}</td>
+              <td>{`${kids.discount}%`}</td>
               <td><ButtonGroup aria-label="Basic example" size="sm">
                 <Button variant="success" onClick={() => this.replaceModalItem(index, '')}>
                   <i className="fas fa-pen"></i>

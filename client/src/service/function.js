@@ -232,6 +232,7 @@ export const updateItemDetails = (id, data) => {
         qty: data.qty,
         description: data.description,
         price: data.price,
+        discount: data.discount,
     }, data)
         .then(res => {
             alert("successfully updated product")

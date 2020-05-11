@@ -19,6 +19,7 @@ export default class EditItem extends Component {
       quantity: '',
       description: '',
       price: '',
+      discount: '',
       mainCategories: [],
       subCategories: []
     }
@@ -51,7 +52,8 @@ export default class EditItem extends Component {
       size: nextProps.selected.size,
       quantity: nextProps.selected.qty,
       description: nextProps.selected.description,
-      price: nextProps.selected.price,    
+      price: nextProps.selected.price,
+      discount: nextProps.selected.discount,    
     })
   }
 
@@ -77,7 +79,8 @@ export default class EditItem extends Component {
       size: this.state.size,
       qty: this.state.quantity,
       description: this.state.description,
-      price: this.state.price
+      price: this.state.price,
+      discount: this.state.discount
     }
 
     updateItemDetails(this.state.id, data)
@@ -175,6 +178,10 @@ export default class EditItem extends Component {
               <Form.Group controlId="formPrice">
                 <Form.Label>Price(Rs)</Form.Label>
                 <Form.Control type="number"  name="price" defaultValue={this.state.price} onChange={this.onChange} />
+              </Form.Group>
+              <Form.Group controlId="formDiscount">
+                <Form.Label>Discount</Form.Label>
+                <Form.Control type="number"  name="discount" defaultValue={this.state.discount} onChange={this.onChange} />
               </Form.Group>
               <Modal.Footer>
                 <Button variant="success" type="submit">Save</Button>
