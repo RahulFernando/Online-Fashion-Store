@@ -18,60 +18,14 @@ export default class Navbar extends Component {
   constructor(props){
     super(props)
 
-    setInterval(() => {
-      console.log('1200')
-    this.state.userID = getUserId();
-         
-    DisplayPurchaseHistory(this.state.userID)
-    .then(res => {
-        console.log(res.data)
-        this.setState({
-          purchaseHistory: res.data
-           
-        })    
-})
-.catch(err => { console.log(err) })
-
-
-
-DisplayCart(this.state.userID)
-.then(res => {
-    console.log(res.data.Cart)
-    this.setState({
-      cart: res.data.Cart
-       
-    })
-})
-    .catch(function(error){
-   
-        console.log(error);
-    })
-
-
-    displayWishList(this.state.userID)
-    .then(res => {
-        this.setState({
-          wishList: res.data.WishList
-           
-        })
-
-        
-       
-    })
-    .catch(function(error){
-       
-        console.log(error);
-    })
-
-   
-
-  }, 2500);
+    
   this.state={
     isOpen:false,
     cart:[],
     wishList:[],
     purchaseHistory:[],
-    categories: []
+    categories: [],
+    userID:''
 }
   }
 
@@ -109,6 +63,58 @@ DisplayCart(this.state.userID)
             categories: res.data
           })
         })
+        setInterval(() => {
+     
+          this.state.userID = getUserId();
+         
+          DisplayPurchaseHistory(this.state.userID)
+          .then(res => {
+              console.log(res.data)
+              this.setState({
+                purchaseHistory: res.data
+                 
+              })    
+      })
+      .catch(err => { console.log(err) })
+      
+      
+      
+      DisplayCart(this.state.userID)
+      .then(res => {
+          console.log(res.data.Cart)
+          this.setState({
+            cart: res.data.Cart
+             
+          })
+      })
+          .catch(function(error){
+         
+              console.log(error);
+          })
+      
+      
+          displayWishList(this.state.userID)
+          .then(res => {
+              this.setState({
+                wishList: res.data.WishList
+                 
+              })
+      
+              
+             
+          })
+          .catch(function(error){
+             
+              console.log(error);
+          })
+      
+         
+  
+  
+
+        }, 4500);
+
+        
       }
 
     // logout user
