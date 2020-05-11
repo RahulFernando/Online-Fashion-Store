@@ -223,6 +223,7 @@ export const getKidsDetails = () => {
 
 // update Item Details 
 export const updateItemDetails = (id, data) => {
+    console.log(data)
     return axios.put("/product/updateItem/" + id, {
         itemName: data.itemName,
         mainCategory: data.mainCategory,

@@ -29,6 +29,15 @@ export default class Kids extends Component {
         }
     }
 
+    arrayBufferToBase64(buffer) {
+
+        var base64Flag = 'data:image/jpeg;base64,';
+        var binary = '';
+        var bytes = [].slice.call(new Uint8Array(buffer));
+        bytes.forEach((b) => binary += String.fromCharCode(b));
+        return base64Flag + window.btoa(binary);
+    };
+
     componentDidMount = () => {
         
         getKidsDetails()
@@ -111,7 +120,7 @@ export default class Kids extends Component {
                     return <div className="col-12 col-sm-6 col-md-4 col-lg-3" key={product._id}>
                     <div className="card card-block" style={useStyles.background}>
                         <div className="overflow">
-                            <img src={null} alt="" className="card-img-top"/>
+                            <img src={this.arrayBufferToBase64(product.image.data.data)} alt="" className="card-img-top"/>
                         </div>
                         <div className="card-body text-dark">
                         <Link to={"/displayProduct/"+product._id}> <h5 className="card-title">{product.itemName}</h5> </Link>

@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Container, Card, ListGroup } from 'react-bootstrap'
 class RatingList extends React.Component
 {
     constructor(props) {
@@ -12,24 +12,41 @@ class RatingList extends React.Component
 
         const ratingList = this.props.ratings;
 
+        const userId = this.props.userId;
+
         const list = ratingList.map(rate => {
 
-            const item = this.state.uniqueRates.map(value => {
-                return (
-                    <div>
-                        {rate.numberOfStars >= value && <h3>active star</h3>}
-                        {rate.numberOfStars < value && <h3>Inactive star</h3>}
-                    </div>
-                )
+            let comment = rate.comment;
+            let ratingUserId = rate.userId;
 
+            const item = this.state.uniqueRates.map(value => {
+                    return (
+                        <div>
+                            {rate.numberOfStars >= value && <span className="fa fa-star checked"></span>}
+                            {rate.numberOfStars < value &&  <span className="fa fa-star"></span>}
+                        </div>
+                    )
             });
 
-            return(
-                <div className="ddvdxv">
-                    {item}
-                </div>
+            if(ratingUserId !== userId)
+            {
+                return(
+                    <div>
+                        <div>
+                            {comment}
+                        </div>
+                        <div className="row">
+                            {item}
+                        </div>
+                    </div>
 
-            )
+
+
+
+
+                )
+            }
+
         });
 
 

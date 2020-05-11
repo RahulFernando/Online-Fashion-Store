@@ -21,6 +21,15 @@ export default class StoreHome extends Component {
     this.replaceModalItem = this.replaceModalItem.bind(this);
 }
 
+arrayBufferToBase64(buffer) {
+
+  var base64Flag = 'data:image/jpeg;base64,';
+  var binary = '';
+  var bytes = [].slice.call(new Uint8Array(buffer));
+  bytes.forEach((b) => binary += String.fromCharCode(b));
+  return base64Flag + window.btoa(binary);
+};
+
   componentDidMount = () => {
         
     getMenDetails()
@@ -152,8 +161,8 @@ export default class StoreHome extends Component {
         <tbody>
         {this.state.menItems.map((men, index) => {
           return <tr key={index}>
-            <td><Col xs={6} md={4}>
-                <Image src={men.image} alt='' />
+            <td><Col xs={14} md={12}>
+                <Image src={this.arrayBufferToBase64(men.image.data.data)} alt='' />
                 </Col>
             </td>
             <td>{men.itemName}</td>
@@ -198,8 +207,8 @@ export default class StoreHome extends Component {
         <tbody>
           {this.state.womenItems.map((women, index) => {
           return <tr key={index}>
-              <td><Col xs={6} md={4}>
-                <Image src={women.image} alt='' />
+              <td><Col xs={14} md={12}>
+                <Image src={this.arrayBufferToBase64(women.image.data.data)} alt='' />
                 </Col>
               </td>
               <td>{women.itemName}</td>
@@ -244,8 +253,8 @@ export default class StoreHome extends Component {
         <tbody>
           {this.state.kidsItems.map((kids, index) => {
           return <tr key={index}>
-              <td><Col xs={6} md={4}>
-                <Image src={kids.image} alt='' />
+              <td><Col xs={14} md={12}>
+                <Image src={this.arrayBufferToBase64(kids.image.data.data)} alt='' />
                 </Col>
               </td>
               <td>{kids.itemName}</td>

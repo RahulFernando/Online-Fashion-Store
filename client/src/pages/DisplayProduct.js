@@ -181,13 +181,10 @@ export default class DisplayProduct extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div>
+                        <div id="ratingContainer" className="container-fliud">
                             <RatingComponent productId = {this.props.match.params.id} userId = {this.state.userId}/>
                         </div>
                     </div>
-                </div>
-                <div id="ratingContainer" className="container-fliud">
-                    <RatingComponent productId = {this.props.match.params.id} userId = {this.state.userId}/>
                 </div>
 
             </>

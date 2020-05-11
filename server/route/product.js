@@ -64,13 +64,6 @@ router.get('/getItem', async (req, res) => {
     }
 });
 
-// router.get('/getImage', (req, res) => {
-//     Item.find()
-//     .exec((err, images) => {
-//         if (err) return res.status(400).json({success: false, err})
-//         res.status(200).json({success: true, images})
-//     })
-// });
 
 router.get('/getMen', async (req, res) => {
     try {
@@ -133,7 +126,6 @@ router.route('/updateItem/:id').put(async (req, res) => {
             if(!item)
             res.status(404).send("data is not found");
             else {
-            // item.image = req.file.path,
             item.itemName = req.body.itemName,
             item.mainCategory = req.body.mainCategory,
             item.subCategory = req.body.subCategory,
