@@ -10,14 +10,25 @@ class RatingList extends React.Component
 
     render() {
 
-        const ratingList = this.props.ratings;
-
+        const ratings = this.props.ratings;
         const userId = this.props.userId;
+        var ratingList = [];
+
+        //removing the user added rating since it has been loaded already
+        ratings.map(item => {
+
+            if(userId !== item.userId)
+            {
+                ratingList.push(item);
+            }
+        });
+
+
+
 
         const list = ratingList.map(rate => {
 
             let comment = rate.comment;
-            let ratingUserId = rate.userId;
 
             const item = this.state.uniqueRates.map(value => {
                     return (
@@ -28,31 +39,41 @@ class RatingList extends React.Component
                     )
             });
 
-            if(ratingUserId !== userId)
-            {
+
                 return(
-                    <div>
+                    <div className="mt-1">
                         <div>
                             {comment}
                         </div>
-                        <div className="row">
-                            {item}
+                        <div className="pl-3">
+                            <div className="row">
+                                {item}
+                            </div>
                         </div>
+
                     </div>
-
-
-
-
-
                 )
-            }
 
         });
 
 
         return(
            <div>
-               {list}
+               {userId !== null && ratingList.length > 0 &&
+                   <div>
+                       <span><strong>Other Ratings</strong></span>
+                       {list}
+                   </div>
+               }
+
+               {userId === null && ratingList.length > 0 &&
+               <div>
+                   <span><strong>Ratings</strong></span>
+                   {list}
+               </div>
+               }
+
+
            </div>
         )
     }

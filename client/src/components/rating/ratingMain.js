@@ -57,20 +57,21 @@ class RatingMain extends React.Component
                 <div className="input">
                     {this.props.userId !== null &&
                         <div>
+                            <div className="pt-3">
+                                <div>{elements}</div>
+                                <input type="text" placeholder="Enter your comment" className="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" onChange={(e) => this.onStartTyping(e)} value={this.state.comment}/>
+                                <div className="pt-2">
+                                    {this.state.userRating.ratingId === null && <input type="button" className="btn btn-primary" value="Post" onClick={()=> this.submit(this.props.userId,this.props.productId,this.state.comment,this.state.numberOfStars)}/>}
+                                    {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-primary" value="Update"  onClick={()=> this.update(this.state.comment,this.state.numberOfStars)}/>}
+                                    {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-primary ml-1" value="Delete" onClick={() => this.delete()}/>}
 
-                            <div>
-                                {elements}
+
+                                </div>
                             </div>
-
-
-                            <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" onChange={(e) => this.onStartTyping(e)} value={this.state.comment}/>
-                            {this.state.userRating.ratingId === null && <input type="button" className="btn btn-primary" value="Post" onClick={()=> this.submit(this.props.userId,this.props.productId,this.state.comment,this.state.numberOfStars)}/>}
-                            {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-primary" value="Update" onClick={()=> this.update(this.state.comment,this.state.numberOfStars)}/>}
-                            {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-danger" value="Delete" onClick={() => this.delete()}/>}
 
                         </div>
                     }
-                    <div className="details col-md-6">
+                    <div className="pt-2">
                         <RatingList ratings = {this.state.rateList} userId = {this.props.userId}/>
                     </div>
 
