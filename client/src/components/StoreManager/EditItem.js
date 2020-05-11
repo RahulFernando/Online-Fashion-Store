@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Button, Row, Col, Form, Container, Image, Modal } from 'react-bootstrap'
 import { getMainCategories, getSubCategories, updateItemDetails } from '../../service/function'
 
-
 export default class EditItem extends Component {
 
 
@@ -69,19 +68,30 @@ export default class EditItem extends Component {
   }
 
 
+
   handleSubmit = (e) => {
     e.preventDefault()
 
-    const data = {
-      itemName: this.state.itemName,
-      mainCategory: this.state.mainCategory,
-      subCategory: this.state.subCategory,
-      size: this.state.size,
-      qty: this.state.quantity,
-      description: this.state.description,
-      price: this.state.price,
-      discount: this.state.discount
-    }
+    // const data = {
+    //   itemName: this.state.itemName,
+    //   mainCategory: this.state.mainCategory,
+    //   subCategory: this.state.subCategory,
+    //   size: this.state.size,
+    //   qty: this.state.quantity,
+    //   description: this.state.description,
+    //   price: this.state.price
+    // }
+
+    const data = new FormData()
+
+    data.append("itemName", this.state.itemName)
+    data.append("mainCategory", this.state.mainCategory)
+    data.append("subCategory", this.state.subCategory)
+    data.append("size", this.state.size)
+    data.append("qty", this.state.quantity)
+    data.append("price", this.state.price)
+    data.append("discount", this.state.discount)
+    console.log(data.get("size"))
 
     updateItemDetails(this.state.id, data)
 
@@ -129,52 +139,25 @@ export default class EditItem extends Component {
                 </Form.Control>
               </Form.Group>
               {['checkbox'].map((type) => (
-                <div key={`custom-inline-${type}`} className="mb-3" checked={this.state.size} defaultValue={this.state.size} onChange={this.onChange}>
+                <div key={`custom-inline-${type}`} className="mb-3" onChange={this.onChange}>
                   <Form.Check
                     custom
                     inline
                     label="XS"
                     type={type}
                     id={`custom-inline-${type}-1`}
+                    defaultChecked={this.state.size}
                   />
-                  {/* <Form.Check
-                    custom
-                    inline
-                    label="S"
-                    type={type}
-                    id={`custom-inline-${type}-2`}
-                  />
-                  <Form.Check
-                    custom
-                    inline
-                    label="M"
-                    type={type}
-                    id={`custom-inline-${type}-3`}
-                  />
-                  <Form.Check
-                    custom
-                    inline
-                    label="L"
-                    type={type}
-                    id={`custom-inline-${type}-4`}
-                  />
-                  <Form.Check
-                    custom
-                    inline
-                    label="XL"
-                    type={type}
-                    id={`custom-inline-${type}-5`}
-                  /> */}
                 </div>
               ))}
               <Form.Group controlId="formQuantity">
                 <Form.Label>Quantity</Form.Label>
                 <Form.Control type="number"  name="quantity" defaultValue={this.state.quantity} onChange={this.onChange} />
               </Form.Group>
-              <Form.Group controlId="formDescription">
+              {/* <Form.Group controlId="formDescription">
                 <Form.Label>Description</Form.Label>
                 <Form.Control as="textarea" name="description" rows="3" defaultValue={this.state.description} onChange={this.onChange} />
-              </Form.Group>
+              </Form.Group> */}
               <Form.Group controlId="formPrice">
                 <Form.Label>Price(Rs)</Form.Label>
                 <Form.Control type="number"  name="price" defaultValue={this.state.price} onChange={this.onChange} />

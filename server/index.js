@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const passport = require('passport');
+const path = require('path')
 
 //database
 const db = require('./models');
@@ -48,7 +49,17 @@ app.use('/api/users/payment',payment);
 app.use('/api/users/reciept',reciept);
 app.use('/api/users/rating',rating);
 
+console.log(process.env.NODE_ENV);
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(__dirname + "/../client/build"))
+}
+
+app.get('*', (req, res) => {
+    res.sendFile(
+        path.resolve(__dirname + "/../", "client", "build", "index.html")
+    )
+})
 
 
 //listening to port

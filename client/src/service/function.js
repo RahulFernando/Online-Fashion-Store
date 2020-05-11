@@ -223,20 +223,19 @@ export const getKidsDetails = () => {
 
 // update Item Details 
 export const updateItemDetails = (id, data) => {
-    console.log(data)
+    console.log(data.get("qty"))
     return axios.put("/product/updateItem/" + id, {
-        itemName: data.itemName,
-        mainCategory: data.mainCategory,
-        subCategory: data.subCategory,
-        size: data.size,
-        qty: data.qty,
-        description: data.description,
-        price: data.price,
-        discount: data.discount,
-    }, data)
+        itemName: data.get("itemName"),
+        mainCategory: data.get("mainCategory"),
+        subCategory: data.get("subCategory"),
+        size: data.get("size"),
+        qty: data.get("qty"),
+        description: data.get("description"),
+        price: data.get("price"),
+        discount: data.get("discount")
+    })
         .then(res => {
             alert("successfully updated product")
-            console.log(res.data.itemName);
         })
         .catch(err => {
             console.log(err)

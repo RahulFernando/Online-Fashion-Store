@@ -2,7 +2,7 @@
 const mongoose = require('mongoose')
 mongoose.set('debug', true)
 mongoose.Promise = global.Promise // asynchronize handling
-mongoose.connect(process.env.DATABASE, (err) => {
+mongoose.connect(process.env.MONGODB_URI, (err) => {
     if (!err) {
         console.log('db connected...')
     } else {
