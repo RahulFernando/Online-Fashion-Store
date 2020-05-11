@@ -131,7 +131,7 @@ router.route('/updateItem/:id').put(async (req, res) => {
             item.subCategory = req.body.subCategory,
             item.size = req.body.size,
             item.qty = req.body.qty,
-            item.description = req.body.description,
+            // item.description = req.body.description,
             item.price = req.body.price
     
             item.save().then(item => {
