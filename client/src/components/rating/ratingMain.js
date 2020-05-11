@@ -152,7 +152,6 @@ class RatingMain extends React.Component
         this.setState({numberOfStars : i});
     };
     delete = () => {
-        alert("called");
         const ratingId = this.state.userRating.ratingId;
         if(ratingId === null)
         {

@@ -23,6 +23,7 @@ router.post('/',(req,res) => {
     var comment = req.query.comment;
     var numberOfStars = req.query.numberOfStars;
 
+    //creating new rating object
     var rate = new rateModel();
     rate.userId = userId;
     rate.productId = productId;
