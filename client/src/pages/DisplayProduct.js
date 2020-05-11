@@ -166,6 +166,8 @@ export default class DisplayProduct extends Component {
                                     </div>
                                     <p class="product-description">{this.state.description}</p>
                                     <h4 class="price">current price: <span> {`Rs.${this.state.price}`}</span></h4>
+                                    {/* <h4 class="price">original price: <span> {`Rs.${this.state.price + (this.state.discount/100)}`}</span></h4> */}
+                                    {this.state.discount !== 0 ? <h4 class="price">Original price: <span> {`Rs.${this.state.price *100/this.state.discount}`}</span></h4> : " "}
                                     <h4 class="discount">discount: <span> {`${this.state.discount}%`}</span></h4>
                                     <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
                                     <h5 class="sizes">sizes:

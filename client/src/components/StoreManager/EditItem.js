@@ -79,9 +79,9 @@ export default class EditItem extends Component {
     data.append("subCategory", this.state.subCategory)
     data.append("size", this.state.size)
     data.append("qty", this.state.quantity)
+    data.append("description", this.state.description)
     data.append("price", this.state.price)
     data.append("discount", this.state.discount)
-    console.log(data.get("size"))
 
     updateItemDetails(this.state.id, data)
 
@@ -144,10 +144,10 @@ export default class EditItem extends Component {
                 <Form.Label>Quantity</Form.Label>
                 <Form.Control type="number"  name="quantity" defaultValue={this.state.quantity} onChange={this.onChange} />
               </Form.Group>
-              {/* <Form.Group controlId="formDescription">
+              <Form.Group controlId="formDescription">
                 <Form.Label>Description</Form.Label>
                 <Form.Control as="textarea" name="description" rows="3" defaultValue={this.state.description} onChange={this.onChange} />
-              </Form.Group> */}
+              </Form.Group>
               <Form.Group controlId="formPrice">
                 <Form.Label>Price(Rs)</Form.Label>
                 <Form.Control type="number"  name="price" defaultValue={this.state.price} onChange={this.onChange} />
