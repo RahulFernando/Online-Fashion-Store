@@ -72,16 +72,6 @@ export default class EditItem extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    // const data = {
-    //   itemName: this.state.itemName,
-    //   mainCategory: this.state.mainCategory,
-    //   subCategory: this.state.subCategory,
-    //   size: this.state.size,
-    //   qty: this.state.quantity,
-    //   description: this.state.description,
-    //   price: this.state.price
-    // }
-
     const data = new FormData()
 
     data.append("itemName", this.state.itemName)
