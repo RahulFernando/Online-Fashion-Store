@@ -30,6 +30,10 @@ const itemSchema = mongoose.Schema({
     price: {
         type: Number,
         default: 0
+    },
+    discount: {
+        type: Number,
+        default: 0
     }
     
 }, {timestamps: true})

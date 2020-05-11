@@ -131,8 +131,10 @@ router.route('/updateItem/:id').put(async (req, res) => {
             item.subCategory = req.body.subCategory,
             item.size = req.body.size,
             item.qty = req.body.qty,
-            // item.description = req.body.description,
-            item.price = req.body.price
+            item.description = req.body.description,
+            item.price = req.body.price,
+            item.price = req.body.price,
+            item.discount = req.body.discount,
     
             item.save().then(item => {
                 res.json('Update complete');

@@ -18,6 +18,7 @@ export default class EditItem extends Component {
       quantity: '',
       description: '',
       price: '',
+      discount: '',
       mainCategories: [],
       subCategories: []
     }
@@ -50,7 +51,8 @@ export default class EditItem extends Component {
       size: nextProps.selected.size,
       quantity: nextProps.selected.qty,
       description: nextProps.selected.description,
-      price: nextProps.selected.price,    
+      price: nextProps.selected.price,
+      discount: nextProps.selected.discount,    
     })
   }
 
@@ -70,16 +72,6 @@ export default class EditItem extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
 
-    // const data = {
-    //   itemName: this.state.itemName,
-    //   mainCategory: this.state.mainCategory,
-    //   subCategory: this.state.subCategory,
-    //   size: this.state.size,
-    //   qty: this.state.quantity,
-    //   description: this.state.description,
-    //   price: this.state.price
-    // }
-
     const data = new FormData()
 
     data.append("itemName", this.state.itemName)
@@ -88,6 +80,7 @@ export default class EditItem extends Component {
     data.append("size", this.state.size)
     data.append("qty", this.state.quantity)
     data.append("price", this.state.price)
+    data.append("discount", this.state.discount)
     console.log(data.get("size"))
 
     updateItemDetails(this.state.id, data)
@@ -158,6 +151,10 @@ export default class EditItem extends Component {
               <Form.Group controlId="formPrice">
                 <Form.Label>Price(Rs)</Form.Label>
                 <Form.Control type="number"  name="price" defaultValue={this.state.price} onChange={this.onChange} />
+              </Form.Group>
+              <Form.Group controlId="formDiscount">
+                <Form.Label>Discount</Form.Label>
+                <Form.Control type="number"  name="discount" defaultValue={this.state.discount} onChange={this.onChange} />
               </Form.Group>
               <Modal.Footer>
                 <Button variant="success" type="submit">Save</Button>

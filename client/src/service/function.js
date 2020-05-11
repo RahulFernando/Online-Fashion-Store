@@ -230,8 +230,9 @@ export const updateItemDetails = (id, data) => {
         subCategory: data.get("subCategory"),
         size: data.get("size"),
         qty: data.get("qty"),
-        // description: data.get("description"),
-        price: data.get("price")
+        description: data.get("description"),
+        price: data.get("price"),
+        discount: data.get("discount")
     })
         .then(res => {
             alert("successfully updated product")
