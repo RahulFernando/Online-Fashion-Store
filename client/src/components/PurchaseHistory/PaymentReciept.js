@@ -38,7 +38,7 @@ export default class PaymentReciept extends Component {
             this.state.Items.forEach((item) => {
                 
                     this.setState({
-                        Total : this.state.Total + (item.price*item.quantity)
+                        Total : this.state.Total + ((item.price*(100-item.discount)/100)*item.quantity)
                     })
                 })
             })
