@@ -36,7 +36,8 @@ router.post('/addPurchaseHistory/:id', (req, res) => {
                     id: req.body.itemID,
                     quantity: req.body.quantity,
                     itemname:req.body.itemName,
-                    price: req.body.price
+                    price: req.body.price,
+                    discount:req.body.discount
                 }
             }
         },

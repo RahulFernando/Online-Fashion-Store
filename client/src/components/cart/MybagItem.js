@@ -13,7 +13,8 @@ export default class MybagItem extends Component {
             name : "",
             unitPrice: 0,
             img: '',
-            id:''
+            id:'',
+            discount:0
         }
     }
 
@@ -43,7 +44,8 @@ export default class MybagItem extends Component {
             name: response.data.itemName,
             unitPrice:response.data.price,
             id:response.data._id,
-            img: base64Flag + imageStr
+            img: base64Flag + imageStr,
+            discount:response.data.discount
               
           })
         })
@@ -65,8 +67,10 @@ export default class MybagItem extends Component {
                     </td>
                     <td>{this.state.name}</td>
                     <td>{this.state.unitPrice}</td>
+                    <td>{`${this.state.discount}%`}</td>
+                    <td>{this.state.unitPrice*(100-this.state.discount)/100}</td>
                     <td>{cartItem.quantity}</td>
-                    <td>{this.state.unitPrice * cartItem.quantity}</td>
+                    <td>{(this.state.unitPrice*(100-this.state.discount)/100)* cartItem.quantity}</td>
                     <td><span  className="mx-2 text-danger" onClick={() => {deleteItem(userId,cartItem.id,cartItem.quantity) }}><i className="fa fa-trash"></i></span></td>
                  </tr>
 

@@ -83,6 +83,8 @@ export default class PaymentReciept extends Component {
                                 <tr>
                                     <th>Item Name</th>
                                     <th>Unit Price</th>
+                                    <th>Discount</th>
+                                    <th>Discounted Unit Price</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
                                 </tr>

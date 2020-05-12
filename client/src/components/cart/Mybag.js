@@ -59,7 +59,7 @@ export default class Mybag extends Component {
             FindItem(item.id)
             .then(response =>{
                 this.setState({
-                    Total : this.state.Total + (response.data.price*item.quantity)
+                    Total : this.state.Total + ((response.data.price*(100-response.data.discount)/100)*item.quantity)
                 });
             })
         })
@@ -106,7 +106,7 @@ export default class Mybag extends Component {
                     FindItem(itemId)
                     .then(response =>{
                         this.setState({
-                            Total : this.state.Total - (response.data.price*quantity)
+                            Total : this.state.Total - ((response.data.price*(100-response.data.discount)/100)*quantity)
                         });
                     })
                
@@ -137,6 +137,8 @@ export default class Mybag extends Component {
                                     <th>Image</th>
                                     <th>Name</th>
                                     <th>Unit Price</th>
+                                    <th>Discount</th>
+                                    <th>Discounted Unit Price</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
                                     <th></th>

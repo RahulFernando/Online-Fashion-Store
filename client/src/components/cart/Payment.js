@@ -60,7 +60,7 @@ export default class Payment extends Component {
             this.props.Items.forEach((item) => {
                 FindItem(item.id)
                 .then(response => {
-                    AddToPurchaseHistory(res.data._id,item.id,item.quantity,response.data.itemName,response.data.price)
+                    AddToPurchaseHistory(res.data._id,item.id,item.quantity,response.data.itemName,response.data.price,response.data.discount)
                     DeleteCartListItem(this.props.userId,item.id)
                 })
                 
