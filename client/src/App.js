@@ -27,6 +27,7 @@ import PurchaseHistory from "./components/PurchaseHistory/PurchaseHistory";
 import Error from "./pages/Error";
 import PaymentReciept from "./components/PurchaseHistory/PaymentReciept";
 import DisplayProduct from "./pages/DisplayProduct"
+import SizeGuide from "./pages/SizeGuide"
 
 // protected route
 import { AdminProtectedRoute } from "./service/adminprotected.route";
@@ -50,6 +51,7 @@ function App() {
       <Route exact path="/wishlist" component={Wishlist}/>
       <Route exact path="/mybag" component={Mybag}/>
       <Route exact path="/purchasehistory" component={PurchaseHistory}/>
+      <Route exact path="/sizeGuide" component={SizeGuide}/>
       <Route path="/user/sign-in" component={UserLogin}/>
       <Route path="/user/sign-up" component={UserLogin}/>
       <Route exact path="/admin" component={AdminLogin}/>

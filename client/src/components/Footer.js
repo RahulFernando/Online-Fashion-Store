@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom';
 import './footer.css'
 
 export default class Footer extends Component {
@@ -26,14 +27,7 @@ export default class Footer extends Component {
                                 <div class="footer-pad">
                                     <h5>QUICK LINKS</h5>
                                     <ul class="list-unstyled">
-                                        <li><a href="#">Size Guide</a></li>
-                                        {/* <li><a href="#">Public Works</a></li>
-                                        <li><a href="#">Police Department</a></li>
-                                        <li><a href="#">Fire</a></li>
-                                        <li><a href="#">Mayor and City Council</a></li>
-                                        <li>
-                                            <a href="#"></a>
-                                        </li> */}
+                                        <li><Link to="/sizeGuide">Size Guide</Link></li>
                                     </ul>
                                 </div>
                             </div>
