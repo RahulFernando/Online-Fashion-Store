@@ -6,6 +6,7 @@ const {Item} = require("../models/Item");
 const fs = require('fs')
 
 
+//Save Images in the Server
 var storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'uploads/')
@@ -25,7 +26,7 @@ var storage = multer.diskStorage({
 var upload = multer({storage: storage}).single("file")
 
 
-
+//Upload Item Details
 router.post('/uploadItem', async (req, res) => {
    try {
         await upload(req, res, err => {
@@ -52,6 +53,8 @@ router.post('/uploadItem', async (req, res) => {
    }
 });
 
+
+//Get Item Details
 router.get('/getItem', async (req, res) => {
     try {
         await Item.find()
@@ -65,6 +68,7 @@ router.get('/getItem', async (req, res) => {
 });
 
 
+//Get Men Details
 router.get('/getMen', async (req, res) => {
     try {
         const query = { "mainCategory": "Men" }
@@ -80,6 +84,7 @@ router.get('/getMen', async (req, res) => {
 });
 
 
+//Get Women Details
 router.get('/getWomen', async (req, res) => {
     try {
         const query = { "mainCategory": "Women" }
@@ -95,6 +100,7 @@ router.get('/getWomen', async (req, res) => {
 });
 
 
+//Get Kids Details
 router.get('/getKids', async (req, res) => {
     try {
         const query = { "mainCategory": "Kid" }
@@ -109,6 +115,8 @@ router.get('/getKids', async (req, res) => {
     }
 });
 
+
+//Edit Item Details
 router.route('/editItem/:id').get( async (req,res) => {
    try {
         await Item.findById(req.params.id)
@@ -120,6 +128,7 @@ router.route('/editItem/:id').get( async (req,res) => {
 });
 
 
+//Update Item Details
 router.route('/updateItem/:id').put(async (req, res) => {
     try {
         await Item.findById(req.params.id, function(error, item){
@@ -134,7 +143,6 @@ router.route('/updateItem/:id').put(async (req, res) => {
             item.description = req.body.description,
             item.price = req.body.price,
             item.discount = req.body.discount,
-    
             item.save().then(item => {
                 res.json('Update complete');
             })
@@ -148,6 +156,8 @@ router.route('/updateItem/:id').put(async (req, res) => {
     }
 })
 
+
+//Delete Item Details
 router.route('/deleteItem/:id').get(async (req,res) => {
     try {
         await Item.findByIdAndRemove({_id: req.params.id}, function(err, item) {

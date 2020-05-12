@@ -187,7 +187,7 @@ export const logoutStoreManager = () => {
 }
 
 
-//add Item Details
+//Add Item Details
 export const upload = (data) => {
     return axios.post('/product/uploadItem', data)
         .then(res => {
@@ -200,30 +200,29 @@ export const upload = (data) => {
 
 }
 
-//get Item Details
+//Get Item Details
 export const getItemDetails = () => {
     return axios.get("/product/getItem")
 }
 
-//get Men Details
+//Get Men Details
 export const getMenDetails = () => {
     return axios.get("/product/getMen")
 }
 
-//get Women Details
+//Get Women Details
 export const getWomenDetails = () => {
     return axios.get("/product/getWomen")
 }
 
-//get Kids Details
+//Get Kids Details
 export const getKidsDetails = () => {
     return axios.get("/product/getKids")
 }
 
 
-// update Item Details 
+// Update Item Details 
 export const updateItemDetails = (id, data) => {
-    console.log(data.get("qty"))
     return axios.put("/product/updateItem/" + id, {
         itemName: data.get("itemName"),
         mainCategory: data.get("mainCategory"),
@@ -243,7 +242,7 @@ export const updateItemDetails = (id, data) => {
         })
 }
 
-// delete Item Details
+// Delete Item Details
 export const deleteItemDetails = (id) => {
     return axios.get("/product/deleteItem/" + id)
         .then(res => { console.log(res.data.message) })

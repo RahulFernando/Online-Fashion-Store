@@ -52,12 +52,12 @@ export default class EditItem extends Component {
       quantity: nextProps.selected.qty,
       description: nextProps.selected.description,
       price: nextProps.selected.price,
-      discount: nextProps.selected.discount,    
+      discount: nextProps.selected.discount,
     })
   }
 
 
-  onChange = (e) =>{
+  onChange = (e) => {
     let target = e.target
     let name = target.name
     let value = target.value
@@ -92,7 +92,7 @@ export default class EditItem extends Component {
 
       <Modal
         {...this.props}
-        style={{maxHeight:"100%"}}
+        style={{ maxHeight: "100%" }}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -108,7 +108,7 @@ export default class EditItem extends Component {
               <br />
               <Form.Group controlId="formItemName">
                 <Form.Label></Form.Label>
-                <Form.Control type="text"  name="itemName" placeholder="Enter Item Name" defaultValue={this.state.itemName} onChange={this.onChange} />
+                <Form.Control type="text" name="itemName" placeholder="Enter Item Name" defaultValue={this.state.itemName} onChange={this.onChange} />
               </Form.Group>
               <Form.Group controlId="formMainCategory">
                 <Form.Label>Main Category</Form.Label>
@@ -133,7 +133,7 @@ export default class EditItem extends Component {
                   <Form.Check
                     custom
                     inline
-                    label="XS"
+                    label="M"
                     type={type}
                     id={`custom-inline-${type}-1`}
                     defaultChecked={this.state.size}
@@ -142,7 +142,7 @@ export default class EditItem extends Component {
               ))}
               <Form.Group controlId="formQuantity">
                 <Form.Label>Quantity</Form.Label>
-                <Form.Control type="number"  name="quantity" defaultValue={this.state.quantity} onChange={this.onChange} />
+                <Form.Control type="number" name="quantity" min="0" defaultValue={this.state.quantity} onChange={this.onChange} />
               </Form.Group>
               <Form.Group controlId="formDescription">
                 <Form.Label>Description</Form.Label>
@@ -150,11 +150,11 @@ export default class EditItem extends Component {
               </Form.Group>
               <Form.Group controlId="formPrice">
                 <Form.Label>Price(Rs)</Form.Label>
-                <Form.Control type="number"  name="price" defaultValue={this.state.price} onChange={this.onChange} />
+                <Form.Control type="number" name="price" min="0" defaultValue={this.state.price} onChange={this.onChange} />
               </Form.Group>
               <Form.Group controlId="formDiscount">
                 <Form.Label>Discount</Form.Label>
-                <Form.Control type="number"  name="discount" defaultValue={this.state.discount} onChange={this.onChange} />
+                <Form.Control type="number" name="discount" min="0" max="100" defaultValue={this.state.discount} onChange={this.onChange} />
               </Form.Group>
               <Modal.Footer>
                 <Button variant="success" type="submit">Save</Button>

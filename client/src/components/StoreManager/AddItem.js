@@ -192,39 +192,11 @@ class AddItem extends Component {
                     type={type}
                     id={`custom-inline-${type}-1`}
                   />
-                  {/* <Form.Check
-                    custom
-                    inline
-                    label="S"
-                    type={type}
-                    id={`custom-inline-${type}-2`}
-                  />
-                  <Form.Check
-                    custom
-                    inline
-                    label="M"
-                    type={type}
-                    id={`custom-inline-${type}-3`}
-                  />
-                  <Form.Check
-                    custom
-                    inline
-                    label="L"
-                    type={type}
-                    id={`custom-inline-${type}-4`}
-                  />
-                  <Form.Check
-                    custom
-                    inline
-                    label="XL"
-                    type={type}
-                    id={`custom-inline-${type}-5`}
-                  /> */}
                 </div>
               ))}
               <Form.Group controlId="formQuantity">
                 <Form.Label>Quantity</Form.Label>
-                  <Form.Control type="number" id="quantity" name="quantity" onChange={this.onQuantityChange} placeholder="" />
+                  <Form.Control type="number" id="quantity" name="quantity" min="0" onChange={this.onQuantityChange} placeholder="" />
               </Form.Group>
               <Form.Group controlId="formDescription">
                 <Form.Label>Description</Form.Label>
@@ -232,7 +204,7 @@ class AddItem extends Component {
               </Form.Group>
               <Form.Group controlId="formPrice">
                 <Form.Label>Price(Rs)</Form.Label>
-                  <Form.Control type="number" id="price" name="price" onChange={this.onPriceChange} placeholder="Rs.xxxx" />
+                  <Form.Control type="number" id="price" name="price" min="0" onChange={this.onPriceChange} placeholder="Rs.xxxx" />
               </Form.Group>
               <Button className="btn btn-primary btn-large centerButton" type="submit">Submit</Button>
           </Form>

@@ -35,10 +35,10 @@ const itemSchema = mongoose.Schema({
         type: Number,
         default: 0
     }
-    
-}, {timestamps: true})
+
+}, { timestamps: true })
 
 
 const Item = mongoose.model('Item', itemSchema);
 
-module.exports = {Item}
+module.exports = { Item }
