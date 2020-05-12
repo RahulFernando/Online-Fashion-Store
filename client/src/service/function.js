@@ -245,8 +245,6 @@ export const updateItemDetails = (id, data) => {
 // Delete Item Details
 export const deleteItemDetails = (id) => {
     return axios.get("/product/deleteItem/" + id)
-        .then(res => { console.log(res.data.message) })
-        .catch(err => { console.log(err) })
 }
 
 

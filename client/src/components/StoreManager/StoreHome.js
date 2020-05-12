@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Container, Table, ButtonGroup, Button, Col, Image } from "react-bootstrap";
+import { Container, Table, ButtonGroup, Button, Col, Image, Alert } from "react-bootstrap";
 import { getMenDetails, getWomenDetails, getKidsDetails, deleteItemDetails } from '../../service/function'
 import EditItem from './EditItem'
 
@@ -99,6 +99,7 @@ export default class StoreHome extends Component {
   handleDelete = (_id) => {
     if (window.confirm("Do you need to remove this item?")) {
       deleteItemDetails(_id).then(res => {
+        alert(res.data.message)
         getMenDetails()
           .then(res => {
             this.setState({
