@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const {Item} = require("../models/Item");
+const User = require('../models/user')
 const fs = require('fs')
 
 
@@ -160,13 +161,39 @@ router.route('/updateItem/:id').put(async (req, res) => {
 //Delete Item Details
 router.route('/deleteItem/:id').get(async (req,res) => {
     try {
-        await Item.findByIdAndRemove({_id: req.params.id}, function(err, item) {
-            if (err) {
-                res.json(err)
-            } else {
-                res.json('Successfully removed')
+        await  User.find({
+            Cart: {
+                $elemMatch: {id: req.params.id}
             }
-        })
+        }, function(err, match) {
+            if (match) {
+                return res.json({
+                    status: 403,
+                    message: "This item in cart"
+                })
+            } else if(!match) {
+                User.find({
+                    WishList: {
+                        $elemMatch: {id: req.params.id}
+                    }
+                }, function(err, match){
+                    if(match) {
+                        return res.json({
+                            status: 403,
+                            message: "This item in whishlist"
+                        })
+                    }
+                })
+            } else {
+                Item.findByIdAndRemove({_id: req.params.id}, function(err, item) {
+                    if (err) {
+                        res.json(err)
+                    } else {
+                        res.json('Successfully removed')
+                    }
+                })
+            }
+        })  
     } catch (error) {
         console.log(error)   
     }
