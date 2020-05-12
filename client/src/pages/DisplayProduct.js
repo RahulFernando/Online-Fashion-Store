@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Navbar from '../components/Navbar'
-import { Container, Card, ListGroup } from 'react-bootstrap'
 import { FindItem } from '../service/function'
 import './product.css'
 import { getUserId } from '../service/function'
@@ -96,7 +95,6 @@ export default class DisplayProduct extends Component {
                 }
 
             })
-
 
     }
 

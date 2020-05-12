@@ -4,8 +4,7 @@ import Banner from "../components/Banner"
 import Services from "../components/Services"
 import Navbar from "../components/Navbar";
 import Title from "../components/Title"
-import CardImage from '../images/cardimage1.jpg'
-import Axios from 'axios';
+import Footer from "../components/Footer"
 import { getItemDetails } from '../service/function'
 import { getUserId } from '../service/function'
 import { wishList } from '../service/function'
@@ -151,7 +150,7 @@ export default class Home extends Component {
                         </div>
                     </section>
                 </div>
-
+                <Footer/>
             </>
 
         )

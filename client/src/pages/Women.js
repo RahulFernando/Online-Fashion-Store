@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import Navbar from "../components/Navbar";
 import Banner from "../components/Banner"
 import Title from "../components/Title"
+import Footer from "../components/Footer"
 import {getWomenDetails} from '../service/function'
 import {getUserId} from '../service/function'
 import {wishList} from '../service/function'
@@ -141,6 +142,7 @@ export default class Women extends Component {
             </div>
             </section>
         </div>
+        <Footer/>
         </>
         )
     }
