@@ -41,7 +41,7 @@ function App() {
       <Route exact path="/displayProduct/Women" component={Women}/>
       <Route exact path="/displayProduct/Kid" component={Kids}/>
       <Route exact path="/Women" component={Women}/>
-      <Route exact path="/Kid" component={Kids}/>
+      <Route exact path="/Kids" component={Kids}/>
       <Route exact path="/user" component={User}/>
       <Route exact path="/wishlist" component={Wishlist}/>
       <Route exact path="/mybag" component={Mybag}/>
