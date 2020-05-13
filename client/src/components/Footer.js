@@ -37,7 +37,6 @@ export default class Footer extends Component {
                                     <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
                                     <li><a href="#" class="icoInstagram" title="Instagram"><i class="fa fa-instagram"></i></a></li>
                                     <li><a href="#" class="icoPinterest" title="Pinterest"><i class="fa fa-pinterest-p"></i></a></li>
-                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
                                 </ul>
                             </div>
                         </div>
