@@ -19,7 +19,7 @@ export default class Navbar extends Component {
 
 
     this.state = {
-      isOpen: false,
+      isOpen: true,
       cart: [],
       wishList: [],
       purchaseHistory: [],
