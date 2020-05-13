@@ -178,19 +178,12 @@ h6 {
 }
 .menHero {
   background-image: url("./images/image2.jpg");
-  /* background-size: contain; */
-  /* background-position: top center; */
-  
 }
 .womenHero {
   background-image: url("./images/image3.jpg");
-  /* background-size: contain; */
-  /* background-position: top center; */
 }
 .kidsHero {
   background-image: url("./images/image4.jpg");
-  background-size: contain;
-  background-position: top center;
 }
 /* End of Hero */
 /* Banner */
