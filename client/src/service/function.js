@@ -8,7 +8,7 @@ let paymentId = ''
 
 // register new user
 export const registerUser = newUser => {
-    return axios.post("/users/register", {
+    return axios.post("/api/users/register", {
         username: newUser.username,
         email: newUser.email,
         password: newUser.password
@@ -17,7 +17,7 @@ export const registerUser = newUser => {
 
 // log user
 export const loginUser = user => {
-    return axios.post("/users/login", {
+    return axios.post("/api/users/login", {
         username: user.username,
         password: user.password
     })
@@ -47,7 +47,7 @@ export const loginAdmin = admin => {
 
 // log store manager
 export const loginStoreManager = manager => {
-    return axios.post("admin/storeManager/login", {
+    return axios.post("/api/admin/storeManager/login", {
         username: manager.username,
         password: manager.password
     })
@@ -61,36 +61,36 @@ export const loginStoreManager = manager => {
 
 // add new main category
 export const createMainCategory = mainCategory => {
-    return axios.post("/admin/mainCategory/mainCategory", {
+    return axios.post("/api/admin/mainCategory/mainCategory", {
         mainCategoryName: mainCategory.mainCategoryName
     }, { headers: { "Authorization": admintoken } })
 }
 
 // get all main categories
 export const getMainCategories = () => {
-    return axios.get("/admin/mainCategory/mainCategories")
+    return axios.get("/api/admin/mainCategory/mainCategories")
 }
 
 // get main category by id
 export const getMainCategory = (id) => {
-    return axios.get("/admin/mainCategory/mainCategories/" + id, { headers: { "Authorization": admintoken } })
+    return axios.get("/api/admin/mainCategory/mainCategories/" + id, { headers: { "Authorization": admintoken } })
 }
 
 // update main category by an id
 export const updateMainCategories = (id, mainCategory) => {
-    return axios.put("/admin/mainCategory/mainCategories/" + id, {
+    return axios.put("/api/admin/mainCategory/mainCategories/" + id, {
         mainCategoryName: mainCategory.mainCategoryName
     }, { headers: { "Authorization": admintoken } })
 }
 
 // delete main category by an id
 export const deleteMainCategories = (id) => {
-    return axios.delete("/admin/mainCategory/mainCategories/" + id, { headers: { "Authorization": admintoken } })
+    return axios.delete("/api/admin/mainCategory/mainCategories/" + id, { headers: { "Authorization": admintoken } })
 }
 
 // add new sub category
 export const createSubCategory = (subCategory) => {
-    return axios.post("/admin/subCategory/newSubCategory", {
+    return axios.post("/api/admin/subCategory/newSubCategory", {
         subCategoryName: subCategory.subCategoryName,
         main_category_id: subCategory.main_category_id
     }, { headers: { "Authorization": admintoken } })
@@ -98,12 +98,12 @@ export const createSubCategory = (subCategory) => {
 
 // get sub categories
 export const getSubCategories = () => {
-    return axios.get("/admin/subCategory/subCategories")
+    return axios.get("/api/admin/subCategory/subCategories")
 }
 
 // update sub category by an id 
 export const updateSubCategory = (id, subCategory) => {
-    return axios.put("/admin/subCategory/subCategories/" + id, {
+    return axios.put("/api/admin/subCategory/subCategories/" + id, {
         subCategoryName: subCategory.subCategoryName,
         main_category_id: subCategory.main_category_id
     }, { headers: { "Authorization": admintoken } })
@@ -111,12 +111,12 @@ export const updateSubCategory = (id, subCategory) => {
 
 // delete sub category by an id
 export const deleteSubCategories = (id) => {
-    return axios.delete("/admin/subCategory/subCategories/" + id, { headers: { "Authorization": admintoken } })
+    return axios.delete("/api/admin/subCategory/subCategories/" + id, { headers: { "Authorization": admintoken } })
 }
 
 // add new store manager 
 export const addNewStoreManager = (storeManager) => {
-    return axios.post("/admin/storeManager/register", {
+    return axios.post("/api/admin/storeManager/register", {
         username: storeManager.username,
         email: storeManager.email,
         password: storeManager.password
@@ -125,12 +125,12 @@ export const addNewStoreManager = (storeManager) => {
 
 // get all store managers
 export const getAllStoreManagers = () => {
-    return axios.get("/admin/storeManager/storeManagers", { headers: { "Authorization": admintoken } })
+    return axios.get("/api/admin/storeManager/storeManagers", { headers: { "Authorization": admintoken } })
 }
 
 // update store managers
 export const updateStoreManager = (id, storeManager) => {
-    return axios.put("/admin/storeManager/storeManagers/" + id, {
+    return axios.put("/api/admin/storeManager/storeManagers/" + id, {
         username: storeManager.username,
         email: storeManager.email,
         password: storeManager.password
@@ -139,7 +139,7 @@ export const updateStoreManager = (id, storeManager) => {
 
 // delete store managers
 export const deleteStoreManagers = (id) => {
-    return axios.delete("/admin/storeManager/storeManagers/" + id, { headers: { "Authorization": admintoken } }).then(res => console.log(res))
+    return axios.delete("/api/admin/storeManager/storeManagers/" + id, { headers: { "Authorization": admintoken } }).then(res => console.log(res))
 }
 
 // check authentication
@@ -189,7 +189,7 @@ export const logoutStoreManager = () => {
 
 //Add Item Details
 export const upload = (data) => {
-    return axios.post('/product/uploadItem', data)
+    return axios.post('/api/product/uploadItem', data)
         .then(res => {
             if (res.data.success) {
                 alert('Product Successfully Uploaded')
@@ -202,28 +202,28 @@ export const upload = (data) => {
 
 //Get Item Details
 export const getItemDetails = () => {
-    return axios.get("/product/getItem")
+    return axios.get("/api/product/getItem")
 }
 
 //Get Men Details
 export const getMenDetails = () => {
-    return axios.get("/product/getMen")
+    return axios.get("/api/product/getMen")
 }
 
 //Get Women Details
 export const getWomenDetails = () => {
-    return axios.get("/product/getWomen")
+    return axios.get("/api/product/getWomen")
 }
 
 //Get Kids Details
 export const getKidsDetails = () => {
-    return axios.get("/product/getKids")
+    return axios.get("/api/product/getKids")
 }
 
 
 // Update Item Details 
 export const updateItemDetails = (id, data) => {
-    return axios.put("/product/updateItem/" + id, {
+    return axios.put("/api/product/updateItem/" + id, {
         itemName: data.get("itemName"),
         mainCategory: data.get("mainCategory"),
         subCategory: data.get("subCategory"),
@@ -244,7 +244,7 @@ export const updateItemDetails = (id, data) => {
 
 // Delete Item Details
 export const deleteItemDetails = (id) => {
-    return axios.get("/product/deleteItem/" + id)
+    return axios.get("/api/product/deleteItem/" + id)
 }
 
 
@@ -261,7 +261,7 @@ export const getUserId = () => {
 
 export const wishList = (id, itemid) => {
 
-    return axios.post("/users/wishlist/add/" + id, {
+    return axios.post("/api/users/wishlist/add/" + id, {
 
         itemID: itemid
 
@@ -275,7 +275,7 @@ export const wishList = (id, itemid) => {
 
 export const displayWishList = (id) => {
 
-    return axios.get("/users/wishlist/display/" + id)
+    return axios.get("/api/users/wishlist/display/" + id)
 
 }
 
@@ -284,7 +284,7 @@ export const displayWishList = (id) => {
 
 export const DeleteWishListItem = (userId, itemId) => {
 
-    return axios.post("/users/wishlist/delete/" + userId, {
+    return axios.post("/api/users/wishlist/delete/" + userId, {
 
         itemID: itemId
 
@@ -299,14 +299,14 @@ export const DeleteWishListItem = (userId, itemId) => {
 
 export const FindItem = (id) => {
 
-    return axios.get("/product/getItem/" + id)
+    return axios.get("/api/product/getItem/" + id)
 }
 
 //add to items to user' cart
 
 export const AddToCart = (id, itemid) => {
 
-    return axios.post("/users/cart/add/" + id, {
+    return axios.post("/api/users/cart/add/" + id, {
 
         itemID: itemid
 
@@ -320,7 +320,7 @@ export const AddToCart = (id, itemid) => {
 
 export const QuantityDecrement = (id, quantity) => {
 
-    return axios.post("/product/decrement/" + id, {
+    return axios.post("/api/product/decrement/" + id, {
         qty: quantity
     })
         .then(res => console.log(res.data)
@@ -332,7 +332,7 @@ export const QuantityDecrement = (id, quantity) => {
 
 export const DisplayCart = (id) => {
 
-    return axios.get("/users/cart/display/" + id)
+    return axios.get("/api/users/cart/display/" + id)
 
 }
 
@@ -340,7 +340,7 @@ export const DisplayCart = (id) => {
 
 export const DeleteCartListItem = (userId, itemId) => {
 
-    return axios.post("/users/cart/delete/" + userId, {
+    return axios.post("/api/users/cart/delete/" + userId, {
 
         itemID: itemId
 
@@ -355,7 +355,7 @@ export const DeleteCartListItem = (userId, itemId) => {
 
 export const QuantityIncrement = (id, quantity) => {
 
-    return axios.post("/product/increment/" + id, {
+    return axios.post("/api/product/increment/" + id, {
         qty: quantity
     })
         .then(res => console.log(res.data)
@@ -367,7 +367,7 @@ export const QuantityIncrement = (id, quantity) => {
 
 export const ConfirmPayment = (payment) => {
 
-    return axios.post("/users/payment/add", {
+    return axios.post("/api/users/payment/add", {
 
         paymentMethod: payment.paymentMethod,
         userId: payment.userId,
@@ -390,7 +390,7 @@ export const getPaymentId = () => {
 
 export const AddToPurchaseHistory = (id, itemid, qty, name, price,discount) => {
 
-    return axios.post("/users/payment/addPurchaseHistory/" + id, {
+    return axios.post("/api/users/payment/addPurchaseHistory/" + id, {
 
         itemID: itemid,
         quantity: qty,
@@ -409,7 +409,7 @@ export const AddToPurchaseHistory = (id, itemid, qty, name, price,discount) => {
 
 export const DisplayPurchaseHistory = (id) => {
 
-    return axios.get("/users/payment/displayPurchaseHistory/" + id)
+    return axios.get("/api/users/payment/displayPurchaseHistory/" + id)
 
 }
 
@@ -418,6 +418,6 @@ export const DisplayPurchaseHistory = (id) => {
 
 export const DisplayReciept = (id) => {
 
-    return axios.get("/users/reciept/displayReciept/" + id)
+    return axios.get("/api/users/reciept/displayReciept/" + id)
 
 }
