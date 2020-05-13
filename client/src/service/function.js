@@ -421,3 +421,8 @@ export const DisplayReciept = (id) => {
     return axios.get("/api/users/reciept/displayReciept/" + id)
 
 }
+
+// get ratings
+export const getRatings = (productId) => {
+    return axios.get("/api/users/rating/find?productId=" + productId)
+}

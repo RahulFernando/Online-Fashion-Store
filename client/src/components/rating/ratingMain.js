@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import RatingList from '../rating/ratingList';
-import {getUserId} from '../../service/function';
+import {getUserId, getRatings} from '../../service/function';
 
 class RatingMain extends React.Component
 {
@@ -86,7 +86,7 @@ class RatingMain extends React.Component
     };
     getRatingsFromApi = (productId,userId) => {
 
-        axios.get('http://localhost:4000/api/users/rating/find?productId=' + productId)
+        getRatings(productId)
         .then(res => {
 
             let ratinglist = res.data;
