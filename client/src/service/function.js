@@ -33,7 +33,7 @@ export const loginUser = user => {
 
 // log admin
 export const loginAdmin = admin => {
-    return axios.post("admin/login", {
+    return axios.post("/api/admin/login", {
         username: admin.username,
         password: admin.password
     })
