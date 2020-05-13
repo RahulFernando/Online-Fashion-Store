@@ -426,3 +426,9 @@ export const DisplayReciept = (id) => {
 export const getRatings = (productId) => {
     return axios.get("/api/users/rating/find?productId=" + productId)
 }
+
+// new rating 
+export const newRating = (userId, productId, comment, numberOfStars) => {
+    return axios.post('/api/users/rating?userId='+userId+"&productId="+productId+"&comment="+comment+"&numberOfStars="+numberOfStars )
+
+}

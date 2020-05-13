@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import RatingList from '../rating/ratingList';
-import {getUserId, getRatings} from '../../service/function';
+import {getUserId, getRatings, newRating} from '../../service/function';
 
 class RatingMain extends React.Component
 {
@@ -108,8 +108,8 @@ class RatingMain extends React.Component
 
         if(comment !== null && comment !== '')
         {
-            axios.post('http://localhost:4000/api/users/rating?userId='+userId+"&productId="+productId+"&comment="+comment+"&numberOfStars="+numberOfStars )
-                .then(res => {
+            newRating(userId, productId, comment, numberOfStars)
+            .then(res => {
 
                     //clearing the input filed value
                     this.setState({comment : ''});
