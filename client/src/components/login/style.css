@@ -160,13 +160,23 @@ img {
   display: relative;
 }
 
-@media all and (min-width: 360px) {
-    .Login {
-      padding: 60px 0;
+@media screen and (max-width: 600px) {
+    .Login, .Login form, .PageSwitcher, .Form__Button, .FormField__Input, .FormField__Label, .FormField__Link   {
+      width: 100%;
+      margin-top: 0;
+      font-size: 11px;
+    }
+
+    .PageSwitcher {
+      margin-bottom: 20%;
+    }
+
+    .Form__Button, .PageSwitcher__Item  {
+      padding: 5px 10px;
+    }
+
+    .Form__Logo {
+      display: none;
     }
   
-    .Login form {
-      margin: 0 auto;
-      max-width: 320px;
-    }
 }
