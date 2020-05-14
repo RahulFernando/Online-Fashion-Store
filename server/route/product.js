@@ -104,7 +104,7 @@ router.get('/getWomen', async (req, res) => {
 //Get Kids Details
 router.get('/getKids', async (req, res) => {
     try {
-        const query = { "mainCategory": "Kid" }
+        const query = { "mainCategory": "Kids" }
 
         await Item.find(query)
         .exec((err, kids) => {
