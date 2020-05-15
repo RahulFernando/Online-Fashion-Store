@@ -432,3 +432,13 @@ export const newRating = (userId, productId, comment, numberOfStars) => {
     return axios.post('/api/users/rating?userId='+userId+"&productId="+productId+"&comment="+comment+"&numberOfStars="+numberOfStars )
 
 }
+
+// upadate rating 
+export const upadateRating = (ratingId, comment, numberOfStars) => {
+    axios.patch('/api/users/rating?ratingId=' + ratingId + "&comment=" + comment + "&numberOfStars=" + numberOfStars)
+}
+
+// delete rating
+export const deleteRating = (ratingId) => {
+    axios.delete('/api/users/rating?ratingId='  + ratingId)
+}
