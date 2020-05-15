@@ -85,9 +85,24 @@ router.delete('/',(req,res) => {
     var ratingId = req.query.ratingId;
 
     //delete the rating with the specified ratingId in the HTTP request
-    rateModel.deleteOne({_id : ratingId})
-        .then(result => {res.status(200).json(result)})
-        .error(error => {res.status(400).json(error)});
+    // rateModel.deleteOne({_id : ratingId})
+    //     .then(() => {res.status(200).json('Deeleted!')})
+    //     .error(error => {res.status(400).json(error)});
+
+
+    rateModel.findOneAndDelete({_id : ratingId}, function (error, response)
+    {
+        if(error)
+        {
+            res.status(400).json(error);
+        }
+        else
+        {
+            res.status(200).json('Deleted!')
+        }
+
+    });
+
 });
 
 router.get('/find',(req,res) => {

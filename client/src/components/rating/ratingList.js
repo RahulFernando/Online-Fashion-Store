@@ -31,15 +31,16 @@ class RatingList extends React.Component
             const item = this.state.uniqueRates.map(value => {
                     return (
                         <div>
-                            {rate.numberOfStars >= value && <span className="fa fa-star checked"></span>}
-                            {rate.numberOfStars < value &&  <span className="fa fa-star"></span>}
+                            {rate.numberOfStars >= value && <span className="fa fa-star checked"/>}
+                            {rate.numberOfStars < value &&  <span className="fa fa-star"/>}
                         </div>
                     )
             });
 
 
+
                 return(
-                    <div className="mt-1">
+                    <div className="form-control h-25" aria-describedby="inputGroup-sizing-default" >
                         <div>
                             <strong>{username}</strong>
                         </div>
@@ -61,10 +62,12 @@ class RatingList extends React.Component
 
         return(
            <div>
+               {list.length > 0 &&
                <div className="details">
                    <span className="product-title"><strong>Other Ratings</strong></span>
                    {list}
                </div>
+               }
            </div>
         )
     }
