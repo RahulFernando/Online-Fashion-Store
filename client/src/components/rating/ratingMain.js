@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import RatingList from '../rating/ratingList';
-import {getUserId, getRatings, newRating, upadateRating, deleteRating} from '../../service/function';
+import {getUserId, getRatings, newRating} from '../../service/function';
 
 class RatingMain extends React.Component
 {
@@ -144,7 +144,8 @@ class RatingMain extends React.Component
 
         if(comment !== null && comment !== '')
         {
-            upadateRating(this.state.userRating.ratingId, comment, numberOfStars)            
+            
+           axios.patch('/api/users/rating?ratingId=' + this.state.userRating.ratingId + "&comment=" + comment + "&numberOfStars=" + numberOfStars)
                .then(res => {
                    if(res.status === 200)
                    {
@@ -174,7 +175,7 @@ class RatingMain extends React.Component
         }
         else
         {
-            deleteRating(ratingId)
+            axios.delete('/api/users/rating?ratingId='  + ratingId)
                 .then(res =>
                 {
                    if(res.status === 200)
