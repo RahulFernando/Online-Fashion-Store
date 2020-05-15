@@ -30,7 +30,7 @@ export default class DisplayProduct extends Component {
             img: '',
             userId: '',
             ratingAvarage : 0,
-            noOfReviews : 0
+            noOfReviews : 0.00
 
         };
 
@@ -188,8 +188,20 @@ export default class DisplayProduct extends Component {
                                             {/*<span class="fa fa-star"></span>*/}
                                             {elements}
                                         </div>
-                                        <span class="review-no">{this.state.noOfReviews} reviews</span>
+
+
+                                        <div className="container">
+                                            <div className="row">
+                                                <span className="review-no">{this.state.ratingAvarage.toFixed(2)} out of 5</span>
+                                            </div>
+                                            <div className="row">
+                                                <span className="review-no">{this.state.noOfReviews} reviews</span>
+                                            </div>
+                                        </div>
+
+
                                     </div>
+
 
 
                                     <p class="product-description">{this.state.description}</p>
