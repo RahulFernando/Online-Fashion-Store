@@ -23,12 +23,10 @@ class RatingList extends React.Component
             }
         });
 
-
-
-
         const list = ratingList.map(rate => {
 
             let comment = rate.comment;
+            let username = rate.userName;
 
             const item = this.state.uniqueRates.map(value => {
                     return (
@@ -43,13 +41,17 @@ class RatingList extends React.Component
                 return(
                     <div className="mt-1">
                         <div>
-                            {comment}
+                            <strong>{username}</strong>
                         </div>
                         <div className="pl-3">
                             <div className="row">
                                 {item}
                             </div>
                         </div>
+                        <div>
+                            {comment}
+                        </div>
+
 
                     </div>
                 )
@@ -59,21 +61,10 @@ class RatingList extends React.Component
 
         return(
            <div>
-               {userId !== null && ratingList.length > 0 &&
-                   <div>
-                       <span><strong>Other Ratings</strong></span>
-                       {list}
-                   </div>
-               }
-
-               {userId === null && ratingList.length > 0 &&
-               <div>
-                   <span><strong>Ratings</strong></span>
+               <div className="details">
+                   <span className="product-title"><strong>Other Ratings</strong></span>
                    {list}
                </div>
-               }
-
-
            </div>
         )
     }

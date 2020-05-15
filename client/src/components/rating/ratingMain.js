@@ -55,7 +55,6 @@ class RatingMain extends React.Component
         return(
             <div>
                 <div className="input">
-                    {this.props.userId !== null &&
                         <div>
                             <div className="pt-3">
                                 <div>{elements}</div>
@@ -70,7 +69,6 @@ class RatingMain extends React.Component
                             </div>
 
                         </div>
-                    }
                     <div className="pt-2">
                         <RatingList ratings = {this.state.rateList} userId = {this.props.userId}/>
                     </div>
@@ -106,7 +104,7 @@ class RatingMain extends React.Component
     };
     submit = (userId,productId,comment,numberOfStars) => {
 
-        if(comment !== null && comment !== '')
+        if(comment !== null && comment !== '' && (userId !== '' || userId !== null))
         {
             axios.post('http://localhost:4000/api/users/rating?userId='+userId+"&productId="+productId+"&comment="+comment+"&numberOfStars="+numberOfStars )
                 .then(res => {
@@ -121,8 +119,16 @@ class RatingMain extends React.Component
                     console.log("Error while getting ratings " + error);
                 });
         }
-        else {
-            alert("Please Enter a comment!")
+        else
+        {
+            if(comment === null && comment === '')
+            {
+                alert("Please Enter a comment!");
+            }
+            else if((userId === '' || userId === null))
+            {
+                alert("Please login!");
+            }
         }
 
     };
