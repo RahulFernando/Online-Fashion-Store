@@ -92,6 +92,11 @@ export default class DisplayProduct extends Component {
                     AddToCart(userId, itemId);
                     QuantityDecrement(itemId, 1);
 
+                    this.setState({
+                        qty:this.state.qty - 1
+                    })
+                    
+
                 }
 
             })
