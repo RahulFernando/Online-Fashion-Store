@@ -109,14 +109,17 @@ class SubCategory extends Component {
                     getSubCategories().then(res => {
                         this.setState({
                             subCategories: res.data,
-                            subCategoryName: '',
-                            main_category_id: '',
                             edit: false 
                         })
                     })
                 })
             }
         }
+
+        this.setState({
+            subCategoryName: '',
+            main_category_id: ''
+        })
 
     }
 

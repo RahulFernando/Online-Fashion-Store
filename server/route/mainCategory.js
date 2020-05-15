@@ -78,8 +78,10 @@ router.delete('/mainCategories/:id', passport.authenticate('jwt', { session: fal
                 message: 'You have sub categories for this main category'
             })
         } else {
-            MainCategory.findByIdAndDelete(req.params.id, res => {
-                console.log('deleted')
+            MainCategory.deleteMainCategory(req.params.id, (err) => {
+                if (!err) {
+                    res.send({ message: 'deleted' })
+                }
             })
         }
     })

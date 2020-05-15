@@ -39,7 +39,5 @@ module.exports.updateMainCategory = function (id,mainCategory, callback) {
 
 // delete main category by id
 module.exports.deleteMainCategory = function (id, callback) {
-    MainCategory.findByIdAndDelete(id, res => {
-        SubCategory.findOneAndDelete({ main_category: id}, callback)
-    });
+    MainCategory.findByIdAndDelete(id, callback)
 }
