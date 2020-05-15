@@ -1,16 +1,22 @@
 const express = require('express');
 const router = express.Router();
 const rateModel = require('../models/rating');
+const userModel = require('../models/user');
 
 
 router.get('/', (req, res) => {
+
+    let count = 0;
+
     //getting all the ratings
     rateModel.find()
-        .then(list => {
+        .then(list =>
+        {
             //sending the list
-            res.status(200).json(list)
+           res.status(200).json(list)
         })
-        .catch(error => {
+        .catch(error =>
+        {
             //sending error code 400 and attach the error occured as a json to the response.
             res.status(400).json(error)
         });
@@ -30,10 +36,34 @@ router.post('/',(req,res) => {
     rate.comment = comment;
     rate.numberOfStars = numberOfStars;
 
-    //saving in the database
-    rate.save()
-        .then(result => {res.status(200).json(result)})
-        .catch(error =>{ res.status(400).json(error)});
+    userModel.find({_id : userId})
+        .then(user => {
+
+            if(user.length <= 0)
+            {
+                res.status(400).json("User Id is not valid");
+            }
+            else
+            {
+                user.map(usr => {
+
+                    rate.userName = usr.username;
+                    //saving in the database
+                    rate.save()
+                        .then(result => {res.status(200).json(result)})
+                        .catch(error =>{ res.status(400).json(error)});
+                });
+
+            }
+
+
+        })
+        .catch(error => {
+            res.status(400).json(error);
+        });
+
+
+
 
 });
 
@@ -55,9 +85,24 @@ router.delete('/',(req,res) => {
     var ratingId = req.query.ratingId;
 
     //delete the rating with the specified ratingId in the HTTP request
-    rateModel.deleteOne({_id : ratingId})
-        .then(result => {res.status(200).json(result)})
-        .error(error => {res.status(400).json(error)});
+    // rateModel.deleteOne({_id : ratingId})
+    //     .then(() => {res.status(200).json('Deeleted!')})
+    //     .error(error => {res.status(400).json(error)});
+
+
+    rateModel.findOneAndDelete({_id : ratingId}, function (error, response)
+    {
+        if(error)
+        {
+            res.status(400).json(error);
+        }
+        else
+        {
+            res.status(200).json('Deleted!')
+        }
+
+    });
+
 });
 
 router.get('/find',(req,res) => {

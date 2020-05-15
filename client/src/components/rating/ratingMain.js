@@ -55,22 +55,28 @@ class RatingMain extends React.Component
         return(
             <div>
                 <div className="input">
-                    {this.props.userId !== null &&
-                        <div>
-                            <div className="pt-3">
-                                <div>{elements}</div>
-                                <input type="text" placeholder="Enter your comment" className="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" onChange={(e) => this.onStartTyping(e)} value={this.state.comment}/>
-                                <div className="pt-2">
-                                    {this.state.userRating.ratingId === null && <input type="button" className="btn btn-primary" value="Post" onClick={()=> this.submit(this.props.userId,this.props.productId,this.state.comment,this.state.numberOfStars)}/>}
-                                    {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-primary" value="Update"  onClick={()=> this.update(this.state.comment,this.state.numberOfStars)}/>}
-                                    {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-primary ml-1" value="Delete" onClick={() => this.delete()}/>}
+                        <div className="pt-3">
+                            <div>{elements}</div>
+                            <div className="input-group mb-4">
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    placeholder="Enter your comment"
+                                    aria-label="Recipient's username"
+                                    aria-describedby="basic-addon2"
+                                    onChange={(e) => this.onStartTyping(e)}
+                                    value={this.state.comment}/>
 
-
-                                </div>
+                                    <div className="input-group-append">
+                                        <div>
+                                            {this.state.userRating.ratingId === null && <input type="button" className="btn btn-primary" value="Post" onClick={()=> this.submit(this.props.userId,this.props.productId,this.state.comment,this.state.numberOfStars)}/>}
+                                            {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-primary" value="Update"  onClick={()=> this.update(this.state.comment,this.state.numberOfStars)}/>}
+                                            {this.state.userRating.ratingId !== null && <input type="button" className="btn btn-primary ml-1" value="Delete" onClick={() => this.delete()}/>}
+                                        </div>
+                                    </div>
                             </div>
 
                         </div>
-                    }
                     <div className="pt-2">
                         <RatingList ratings = {this.state.rateList} userId = {this.props.userId}/>
                     </div>
@@ -106,7 +112,7 @@ class RatingMain extends React.Component
     };
     submit = (userId,productId,comment,numberOfStars) => {
 
-        if(comment !== null && comment !== '')
+        if((comment !== null && comment !== '') && (userId !== '' && userId !== null))
         {
             newRating(userId, productId, comment, numberOfStars)
             .then(res => {
@@ -121,8 +127,16 @@ class RatingMain extends React.Component
                     console.log("Error while getting ratings " + error);
                 });
         }
-        else {
-            alert("Please Enter a comment!")
+        else
+        {
+            if(comment === null || comment === '')
+            {
+                alert("Please Enter a comment!");
+            }
+            else if((userId === '' || userId === null))
+            {
+                alert("Please login!");
+            }
         }
 
     };
@@ -156,27 +170,29 @@ class RatingMain extends React.Component
         const ratingId = this.state.userRating.ratingId;
         if(ratingId === null)
         {
-            alert("Cant delete,Rating Id is missing!");
+            alert("Cant delete because the Rating Id is missing!");
         }
         else
         {
-            axios.delete('http://localhost:4000/api/users/rating?ratingId=' + ratingId)
-                .then(res => {
+            axios.delete('http://localhost:4000/api/users/rating?ratingId='  + ratingId)
+                .then(res =>
+                {
+                   if(res.status === 200)
+                   {
+                       this.setState({
+                                       userRating :
+                                           {
+                                               ratingId : null,
+                                               comment : '',
+                                               numberOfStars : 1
+                                           },numberOfStars : 1,comment : ''});
 
+                        this.getRatingsFromApi(this.props.productId,this.state.userId);
+                   }
                 })
                 .catch(error => {
-                    console.log("Error while deleting the rating " + error);
+
                 });
-
-                this.setState({
-                    userRating :
-                        {
-                            ratingId : null,
-                            comment : '',
-                            numberOfStars : 1
-                        },numberOfStars : 1,comment : ''});
-
-                this.getRatingsFromApi(this.props.productId,this.state.userId);
         }
     };
     setUsersRating = (allratings,userId) => {

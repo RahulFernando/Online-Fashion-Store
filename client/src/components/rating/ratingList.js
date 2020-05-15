@@ -23,33 +23,36 @@ class RatingList extends React.Component
             }
         });
 
-
-
-
         const list = ratingList.map(rate => {
 
             let comment = rate.comment;
+            let username = rate.userName;
 
             const item = this.state.uniqueRates.map(value => {
                     return (
                         <div>
-                            {rate.numberOfStars >= value && <span className="fa fa-star checked"></span>}
-                            {rate.numberOfStars < value &&  <span className="fa fa-star"></span>}
+                            {rate.numberOfStars >= value && <span className="fa fa-star checked"/>}
+                            {rate.numberOfStars < value &&  <span className="fa fa-star"/>}
                         </div>
                     )
             });
 
 
+
                 return(
-                    <div className="mt-1">
+                    <div className="form-control h-25" aria-describedby="inputGroup-sizing-default" >
                         <div>
-                            {comment}
+                            <strong>{username}</strong>
                         </div>
                         <div className="pl-3">
                             <div className="row">
                                 {item}
                             </div>
                         </div>
+                        <div>
+                            {comment}
+                        </div>
+
 
                     </div>
                 )
@@ -59,21 +62,12 @@ class RatingList extends React.Component
 
         return(
            <div>
-               {userId !== null && ratingList.length > 0 &&
-                   <div>
-                       <span><strong>Other Ratings</strong></span>
-                       {list}
-                   </div>
-               }
-
-               {userId === null && ratingList.length > 0 &&
-               <div>
-                   <span><strong>Ratings</strong></span>
+               {list.length > 0 &&
+               <div className="details">
+                   <span className="product-title"><strong>Other Ratings</strong></span>
                    {list}
                </div>
                }
-
-
            </div>
         )
     }

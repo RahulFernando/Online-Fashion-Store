@@ -8,6 +8,7 @@ import { AddToCart } from '../service/function'
 import { QuantityDecrement } from '../service/function'
 import { isUserAuthenticated } from '../service/function'
 import RatingComponent from '../components/rating/ratingMain';
+import axios from "axios";
 
 export default class DisplayProduct extends Component {
 
@@ -27,11 +28,13 @@ export default class DisplayProduct extends Component {
             price: 0,
             discount: 0,
             img: '',
-            userId: ''
-
-
+            userId: '',
+            ratingAvarage : 0,
+            noOfReviews : 0.00
 
         };
+
+        this.findAverageOfRatings(this.props.match.params.id);
     }
 
     componentDidMount() {
@@ -92,6 +95,11 @@ export default class DisplayProduct extends Component {
                     AddToCart(userId, itemId);
                     QuantityDecrement(itemId, 1);
 
+                    this.setState({
+                        qty:this.state.qty - 1
+                    })
+                    
+
                 }
 
             })
@@ -106,9 +114,52 @@ export default class DisplayProduct extends Component {
         bytes.forEach((b) => binary += String.fromCharCode(b));
         return window.btoa(binary);
     };
+    findAverageOfRatings = (productId) => {
+
+        axios.get('http://localhost:4000/api/users/rating/find?productId=' + productId)
+            .then(res => {
+
+                let ratinglist = res.data;
+                var stars = 0;
+                var count = 0;
+                ratinglist.map(rate => {
+
+                    stars += rate.numberOfStars;
+                    count++;
+
+                    //set the final average
+                    if(count === ratinglist.length)
+                    {
+                        const avg = stars / count;
+                        this.setState({ratingAvarage : avg,noOfReviews : count});
+                    }
+                });
+
+            })
+            .catch(error => {
+                console.log("Error while getting ratings " + error);
+            });
+
+    };
 
 
     render() {
+
+        //calculating number of checked stars and unchecked starts in the average
+        var arr =[1.0,2.0,3.0,4.0,5.0];
+        var elements = [];
+        arr.map(i => {
+
+            if(this.state.ratingAvarage >= i)
+            {
+                elements.push(<span className="fa fa-star checked"  onClick={() => this.onStarClicked(i)}/>);
+            }
+            else
+            {
+                elements.push(<span className="fa fa-star"  onClick={() => this.onStarClicked(i)}/>);
+            }
+        });
+
         return (
 
             <>
@@ -124,16 +175,35 @@ export default class DisplayProduct extends Component {
                                 </div>
                                 <div class="details col-md-6">
                                     <h3 class="product-title">{this.state.itemName}</h3>
+
+
+
+
                                     <div class="rating">
                                         <div class="stars">
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
+                                            {/*<span class="fa fa-star checked"></span>*/}
+                                            {/*<span class="fa fa-star checked"></span>*/}
+                                            {/*<span class="fa fa-star checked"></span>*/}
+                                            {/*<span class="fa fa-star"></span>*/}
+                                            {/*<span class="fa fa-star"></span>*/}
+                                            {elements}
                                         </div>
-                                        <span class="review-no">41 reviews</span>
+
+
+                                        <div className="container">
+                                            <div className="row">
+                                                <span className="review-no">{this.state.ratingAvarage.toFixed(2)} out of 5</span>
+                                            </div>
+                                            <div className="row">
+                                                <span className="review-no">{this.state.noOfReviews} reviews</span>
+                                            </div>
+                                        </div>
+
+
                                     </div>
+
+
+
                                     <p class="product-description">{this.state.description}</p>
                                     {this.state.discount !== 0 ? <strike><h4 class="price">Old price: <span> {`Rs.${this.state.price}`}</span></h4></strike> : <h4 class="price">Unit Price: <span> {`Rs.${this.state.price}`}</span></h4>}
                                     {this.state.discount !== 0 ? <h4 class="price">Discounted New price: <span> {`Rs.${this.state.price * (100 - this.state.discount) / 100}`}</span></h4> : " "}

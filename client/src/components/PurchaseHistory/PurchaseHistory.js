@@ -54,9 +54,9 @@ export default class PurchaseHistory extends Component {
             <Navbar/>
             <Container>
 
-            <Card border="primary"  header><center><h1>Payment History</h1></center></Card>
+            <Card border="primary"  header style={{"marginTop": 50}}><center><h2>Payment History</h2></center></Card>
 
-            <Table striped bordered hover size="sm">
+            <Table striped bordered hover size="sm" style={{"marginTop": 10}}>
                     <thead>
                             <tr>
                                 <th>Payment ID</th>
@@ -70,6 +70,8 @@ export default class PurchaseHistory extends Component {
                           </tbody>
                </Table>
 
+               {this.state.PaymentHistory.length ==  0  ? <h3 style={{textAlign: "center",color:"blue"}}><b>No any purchase history record ! </b></h3>  : ""}
+               
                </Container>
                </>
         )
