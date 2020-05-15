@@ -4,7 +4,7 @@ import { FaAlignRight, FaHistory, FaSignOutAlt } from 'react-icons/fa'
 import Badge from '@material-ui/core/Badge';
 import { FaUserAlt } from 'react-icons/fa'
 import { FaHeart } from 'react-icons/fa'
-import { FaShoppingBag } from 'react-icons/fa'
+import { FaCartPlus } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { isUserAuthenticated } from '../service/function'
 import { getUserId } from '../service/function'
@@ -139,7 +139,7 @@ export default class Navbar extends Component {
           <li>
             <Link to="/mybag">
               <Badge badgeContent={this.state.cart.length} color="primary">
-                <FaShoppingBag className="nav-bar-icon" color="secondary" />
+                <FaCartPlus className="nav-bar-icon" color="secondary" />
               </Badge>
             </Link>
           </li>

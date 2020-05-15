@@ -65,7 +65,7 @@ export default class PaymentReciept extends Component {
              
             <Container>
             
-            <Card border="primary">
+            <Card border="primary" style={{"marginTop": 60}}>
                 
             <Card.Header><center><h2><u>Reciept</u></h2></center></Card.Header>
 

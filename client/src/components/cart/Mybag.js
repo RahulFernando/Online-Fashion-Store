@@ -129,14 +129,14 @@ export default class Mybag extends Component {
 
         <Container>
 
-                <Card border="primary"  header><center><h2>My Cart</h2></center></Card>
+                <Card border="primary"  header style={{"marginTop": 50}}><center><h2>My Cart</h2></center></Card>
 
-                <Table striped bordered hover size="sm">
+                <Table striped bordered hover size="sm" style={{"marginTop": 10}}>
                         <thead>
                                 <tr>
                                     <th>Image</th>
                                     <th>Name</th>
-                                    <th>Unit Price</th>
+                                    <th>Unit Price</th> 
                                     <th>Discount</th>
                                     <th>Discounted Unit Price</th>
                                     <th>Quantity</th>
@@ -151,9 +151,9 @@ export default class Mybag extends Component {
 
                    
                    
-                {this.state.Items.length ==  0 && this.state.paymentHaveNotDoneYet ? <h1 style={{textAlign: "center",color:"red"}}><b>Cart is empty ! <FaShoppingCart/> </b></h1>  : ""}
+                {this.state.Items.length ==  0 && this.state.paymentHaveNotDoneYet ? <h3 style={{textAlign: "center",color:"red"}}><b>Cart is empty ! <FaShoppingCart/> </b></h3>  : ""}
 
-                {this.state.Items.length == 0 && this.state.paymentHaveCompleted ? <h1 style={{textAlign: "center",color:"green"}}><b>Payment has been Successfully Done! <FaCheckCircle/></b></h1>  : ""}
+                {this.state.Items.length == 0 && this.state.paymentHaveCompleted ? <h3 style={{textAlign: "center",color:"green"}}><b>Payment has been Successfully Done! <FaCheckCircle/></b></h3>  : ""}
 
                 {this.state.Items.length >0 ? `Total Price : Rs.${this.state.Total}` : ""}
 

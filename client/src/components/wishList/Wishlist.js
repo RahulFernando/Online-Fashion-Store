@@ -106,9 +106,9 @@ export default class Wishlist extends Component {
             <Navbar/>
             <Container>
 
-            <Card border="primary"  header><center><h1>Wish List</h1></center></Card>
+            <Card border="primary"  header style={{"marginTop": 50}}><center><h2>Wish List</h2></center></Card>
 
-            <Table striped bordered hover size="sm">
+            <Table striped bordered hover size="sm" style={{"marginTop": 10}}>
                     <thead>
                             <tr>
                                 <th>Image</th>
@@ -122,7 +122,7 @@ export default class Wishlist extends Component {
                           </tbody>
                </Table>
 
-               {this.state.Items.length == 0 ? <h1 style={{textAlign: "center", color:"red"}}><b> Wish List is Empty! <FaHeartBroken/> </b></h1>  : ""}
+               {this.state.Items.length == 0 ? <h3 style={{textAlign: "center", color:"red"}}><b> Wish List is Empty! <FaHeartBroken/> </b></h3>  : ""}
 
                </Container>
                </>
