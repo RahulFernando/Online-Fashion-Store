@@ -112,7 +112,7 @@ class Login extends Component {
 
           </FormGroup>
           
-          <Button block type="submit">
+          <Button block type="submit" className="">
             Login
           </Button>
         

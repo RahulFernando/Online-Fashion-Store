@@ -1,5 +1,10 @@
 .Login {
-  margin-top: 10%;
+  margin: auto;
+  width: 40%;
+}
+
+.FormFields {
+  margin-top: 30%;
 }
 
 .main-category, .manager, .sub-category, .home {

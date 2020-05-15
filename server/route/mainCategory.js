@@ -4,6 +4,7 @@ const router = express.Router();
 const passport = require('passport');
 
 const MainCategory = require('../models/mainCategory'); //main category schema
+const SubCategory = require('../models/subCategory') //sub category schema
 
 
 router.post('/mainCategory', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -67,9 +68,19 @@ router.put('/mainCategories/:id', passport.authenticate('jwt', { session: false 
 })
 
 router.delete('/mainCategories/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
-    MainCategory.deleteMainCategory(req.params.id, (err) => {
-        if (!err) {
-            res.send({ message: req.params.id + ' deleted' })
+    SubCategory.find({
+        main_category: req.params.id
+    }, function(err, match) {
+        if (match.length > 0 ) {
+            console.log(match)
+            res.json({
+                status: 403,
+                message: 'You have sub categories for this main category'
+            })
+        } else {
+            MainCategory.findByIdAndDelete(req.params.id, res => {
+                console.log('deleted')
+            })
         }
     })
 })

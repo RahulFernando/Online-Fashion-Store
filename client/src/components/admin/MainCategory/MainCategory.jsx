@@ -130,6 +130,10 @@ class MainCategory extends Component {
                         mainCategories: res.data
                     })
                 })
+                if (resp.data.message != null) {
+                    alert(resp.data.message)
+                }
+               
             });
         }
     }
