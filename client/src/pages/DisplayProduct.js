@@ -144,6 +144,22 @@ export default class DisplayProduct extends Component {
 
 
     render() {
+
+        //calculating number of checked stars and unchecked starts in the average
+        var arr =[1.0,2.0,3.0,4.0,5.0];
+        var elements = [];
+        arr.map(i => {
+
+            if(this.state.ratingAvarage >= i)
+            {
+                elements.push(<span className="fa fa-star checked"  onClick={() => this.onStarClicked(i)}/>);
+            }
+            else
+            {
+                elements.push(<span className="fa fa-star"  onClick={() => this.onStarClicked(i)}/>);
+            }
+        });
+
         return (
 
             <>
@@ -160,13 +176,17 @@ export default class DisplayProduct extends Component {
                                 <div class="details col-md-6">
                                     <h3 class="product-title">{this.state.itemName}</h3>
 
+
+
+
                                     <div class="rating">
                                         <div class="stars">
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span>
+                                            {/*<span class="fa fa-star checked"></span>*/}
+                                            {/*<span class="fa fa-star checked"></span>*/}
+                                            {/*<span class="fa fa-star checked"></span>*/}
+                                            {/*<span class="fa fa-star"></span>*/}
+                                            {/*<span class="fa fa-star"></span>*/}
+                                            {elements}
                                         </div>
                                         <span class="review-no">{this.state.noOfReviews} reviews</span>
                                     </div>
