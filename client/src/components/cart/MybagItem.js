@@ -66,11 +66,11 @@ export default class MybagItem extends Component {
                    
                     </td>
                     <td>{this.state.name}</td>
-                    <td>{this.state.unitPrice}</td>
+                    <td>{this.state.unitPrice.toFixed(2)}</td>
                     <td>{`${this.state.discount}%`}</td>
-                    <td>{this.state.unitPrice*(100-this.state.discount)/100}</td>
+                    <td>{(this.state.unitPrice*(100-this.state.discount)/100).toFixed(2)}</td>
                     <td>{cartItem.quantity}</td>
-                    <td>{(this.state.unitPrice*(100-this.state.discount)/100)* cartItem.quantity}</td>
+                    <td>{((this.state.unitPrice*(100-this.state.discount)/100)* cartItem.quantity).toFixed(2)}</td>
                     <td><span  className="mx-2 text-danger" onClick={() => {deleteItem(userId,cartItem.id,cartItem.quantity) }}><i className="fa fa-trash"></i></span></td>
                  </tr>
 

@@ -155,7 +155,7 @@ export default class Mybag extends Component {
 
                 {this.state.Items.length == 0 && this.state.paymentHaveCompleted ? <h3 style={{textAlign: "center",color:"green"}}><b>Payment has been Successfully Done! <FaCheckCircle/></b></h3>  : ""}
 
-                {this.state.Items.length >0 ? `Total Price : Rs.${this.state.Total}` : ""}
+                {this.state.Items.length >0 ? `Total Price : Rs.${this.state.Total.toFixed(2)}` : ""}
 
                 <br/>
 

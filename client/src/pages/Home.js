@@ -13,6 +13,7 @@ import { QuantityDecrement } from '../service/function'
 import { isUserAuthenticated } from '../service/function'
 import { Link } from 'react-router-dom';
 import { FindItem } from '../service/function'
+import NavbarCollapse from 'react-bootstrap/NavbarCollapse';
 
 
 
@@ -138,7 +139,9 @@ export default class Home extends Component {
                                         <div className="card-body text-dark">
                                             <Link to={"/displayProduct/" + product._id}> <h5 className="card-title">{product.itemName}</h5> </Link>
                                             <p className="card-text text-secondary">
-                                                {`Rs.${product.price}`}
+                                            {product.discount !==0 ?  <strike>{`Rs.${product.price.toFixed(2)}`}</strike> : product.price.toFixed(2)}
+                                            {" "}{" "}{" "}{" "}
+                                            {product.discount !==0 ?  `Rs.${(product.price*(100-product.discount)/100 ).toFixed(2)}` : " "}  
                                             </p>
                                             {isUserAuthenticated() ? <a href="#" onClick={() => { this.addToWishList(this.state.userID, product._id) }} className="btn btn-outline-success" role="button">Add to Wishlist</a> : " "}
                                             {isUserAuthenticated() ? <a href="#" onClick={() => { this.addToCart(this.state.userID, product._id) }} className="btn btn-outline-success" role="button" style={useStyles.btn}>Add to Cart</a> : " "}

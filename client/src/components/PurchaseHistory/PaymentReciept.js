@@ -96,7 +96,7 @@ export default class PaymentReciept extends Component {
 
                    </Card.Body>
 
-                   <Card.Footer> <b> { `Total Price : Rs.${this.state.Total}` }</b></Card.Footer>
+                   <Card.Footer> <b> { `Total Price : Rs.${this.state.Total.toFixed(2)}` }</b></Card.Footer>
                   
                    
                     </Card>

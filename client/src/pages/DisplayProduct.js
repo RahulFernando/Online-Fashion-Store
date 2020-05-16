@@ -205,10 +205,9 @@ export default class DisplayProduct extends Component {
 
 
                                     <p class="product-description">{this.state.description}</p>
-                                    {this.state.discount !== 0 ? <strike><h4 class="price">Old price: <span> {`Rs.${this.state.price}`}</span></h4></strike> : <h4 class="price">Unit Price: <span> {`Rs.${this.state.price}`}</span></h4>}
-                                    {this.state.discount !== 0 ? <h4 class="price">Discounted New price: <span> {`Rs.${this.state.price * (100 - this.state.discount) / 100}`}</span></h4> : " "}
+                                    {this.state.discount !== 0 ? <strike><h4 class="price">Old price: <span> {`Rs.${this.state.price.toFixed(2)}`}</span></h4></strike> : <h4 class="price">Unit Price: <span> {`Rs.${this.state.price.toFixed(2)}`}</span></h4>}
+                                    {this.state.discount !== 0 ? <h4 class="price">Discounted New price: <span> {`Rs.${(this.state.price * (100 - this.state.discount) / 100).toFixed(2)}`}</span></h4> : " "}
                                     <h4 class="discount">discount: <span> {`${this.state.discount}%`}</span></h4>
-                                    <p class="vote"><strong>91%</strong> of buyers enjoyed this product! <strong>(87 votes)</strong></p>
                                     <h5 class="sizes">sizes:
                                         <span class="size" data-toggle="tooltip" title="medium">m</span>
                                     </h5>
