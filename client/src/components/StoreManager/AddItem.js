@@ -190,8 +190,8 @@ class AddItem extends Component {
                 <Form.Check
                   type="radio"
                   label="Small"
-                  name="formHorizontalRadios"
-                  id="formHorizontalRadios1"
+                  name="size"
+                  id="size"
                   checked={this.state.size === 'S'}
                   value="S"
                   onChange={this.onSizeChange}
@@ -199,8 +199,8 @@ class AddItem extends Component {
                 <Form.Check
                   type="radio"
                   label="Medium"
-                  name="formHorizontalRadios"
-                  id="formHorizontalRadios2"
+                  name="size"
+                  id="size"
                   checked={this.state.size === 'M'}
                   value="M"
                   onChange={this.onSizeChange}
@@ -208,8 +208,8 @@ class AddItem extends Component {
                 <Form.Check
                   type="radio"
                   label="Large"
-                  name="formHorizontalRadios"
-                  id="formHorizontalRadios2"
+                  name="size"
+                  id="size"
                   checked={this.state.size === 'L'}
                   value="L"
                   onChange={this.onSizeChange}
