@@ -166,7 +166,8 @@ router.route('/deleteItem/:id').get(async (req,res) => {
                 $elemMatch: {id: req.params.id}
             }
         }, function(err, match) {
-            if (match) {
+            if (match.length > 0) {
+                console.log(match)
                 return res.json({
                     status: 403,
                     message: "This item in cart"
@@ -177,7 +178,7 @@ router.route('/deleteItem/:id').get(async (req,res) => {
                         $elemMatch: {id: req.params.id}
                     }
                 }, function(err, match){
-                    if(match) {
+                    if(match.length > 0) {
                         return res.json({
                             status: 403,
                             message: "This item in whishlist"
@@ -189,7 +190,10 @@ router.route('/deleteItem/:id').get(async (req,res) => {
                     if (err) {
                         res.json(err)
                     } else {
-                        res.json('Successfully removed')
+                        return res.json({
+                            status: 200,
+                            message: "Deleted !"
+                        })
                     }
                 })
             }
