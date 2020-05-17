@@ -14,7 +14,7 @@ export default class EditItem extends Component {
       itemName: '',
       mainCategory: '',
       subCategory: '',
-      size: false,
+      size: 'S',
       quantity: '',
       description: '',
       price: '',
@@ -128,18 +128,37 @@ export default class EditItem extends Component {
                   })}
                 </Form.Control>
               </Form.Group>
-              {['checkbox'].map((type) => (
-                <div key={`custom-inline-${type}`} className="mb-3" onChange={this.onChange}>
+              <Form.Group>
+                <Form.Label>
+                  Size
+                </Form.Label>
+                <Col sm={10}>
                   <Form.Check
-                    custom
-                    inline
-                    label="M"
-                    type={type}
-                    id={`custom-inline-${type}-1`}
-                    defaultChecked={this.state.size}
+                    type="radio"
+                    label="Small"
+                    name="size"
+                    checked={this.state.size === 'S'}
+                    value="S"
+                    onChange={this.onChange}
                   />
-                </div>
-              ))}
+                  <Form.Check
+                    type="radio"
+                    label="Medium"
+                    name="size"
+                    checked={this.state.size === 'M'}
+                    value="M"
+                    onChange={this.onChange}
+                  />
+                  <Form.Check
+                    type="radio"
+                    label="Large"
+                    name="size"
+                    checked={this.state.size === 'L'}
+                    value="L"
+                    onChange={this.onChange}
+                  />
+                </Col>
+              </Form.Group>
               <Form.Group controlId="formQuantity">
                 <Form.Label>Quantity</Form.Label>
                 <Form.Control type="number" name="quantity" min="0" defaultValue={this.state.quantity} onChange={this.onChange} />

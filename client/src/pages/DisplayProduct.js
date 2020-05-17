@@ -23,6 +23,7 @@ export default class DisplayProduct extends Component {
             itemName: '',
             mainCategory: '',
             subCategory: '',
+            size: '',
             qty: 0,
             description: '',
             price: 0,
@@ -50,6 +51,7 @@ export default class DisplayProduct extends Component {
                     itemName: response.data.itemName,
                     mainCategory: response.data.mainCategory,
                     subCategory: response.data.subCategory,
+                    size: response.data.size,
                     qty: response.data.qty,
                     description: response.data.description,
                     price: response.data.price,
@@ -209,7 +211,7 @@ export default class DisplayProduct extends Component {
                                     {this.state.discount !== 0 ? <h4 class="price">Discounted New price: <span> {`Rs.${(this.state.price * (100 - this.state.discount) / 100).toFixed(2)}`}</span></h4> : " "}
                                     <h4 class="discount">discount: <span> {`${this.state.discount}%`}</span></h4>
                                     <h5 class="sizes">sizes:
-                                        <span class="size" data-toggle="tooltip" title="medium">m</span>
+                                        <span class="size" data-toggle="tooltip" title="medium">{this.state.size}</span>
                                     </h5>
                                     <h5 class="qtys">quantity:
                                         <span class="qty">{this.state.qty}</span>
