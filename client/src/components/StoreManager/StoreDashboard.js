@@ -49,14 +49,6 @@ class StoreDashboard extends Component {
                                         Add Product
                                 </NavText>
                                 </NavItem>
-                                <NavItem eventKey="storeupload">
-                                    <NavIcon>
-                                        <i className="fa fa-fw fa-upload" style={{ fontSize: '1.75em' }} />
-                                    </NavIcon>
-                                    <NavText>
-                                        Upload
-                                </NavText>
-                                </NavItem>
                                 <NavItem eventKey="logout">
                                     <NavIcon>
                                         <i className="fa fa-sign-out-alt" style={{ fontSize: '1.75em' }} onClick={this.handleLogout} />
@@ -65,7 +57,7 @@ class StoreDashboard extends Component {
                             </SideNav.Nav>
                         </SideNav>
                         <main>
-                            <Route path="/storedash" exact component={Home} />
+                            <Route path="/store" exact component={Home} />
                             <Route path="/storehome" exact component={Home} />
                             <Route path="/storeadd" exact component={AddItem} />
                         </main>

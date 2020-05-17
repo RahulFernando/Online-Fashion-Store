@@ -94,6 +94,39 @@ export default class StoreHome extends Component {
       addModalShow: false
     })
 
+    getMenDetails()
+      .then(res => {
+        this.setState({
+          menItems: res.data.men,
+        })
+
+      })
+      .catch(() => {
+        alert('Error retreving data')
+      })
+
+    getWomenDetails()
+      .then(res => {
+        this.setState({
+          womenItems: res.data.women,
+        })
+
+      })
+      .catch(() => {
+        alert('Error retreving data')
+      })
+
+    getKidsDetails()
+      .then(res => {
+        this.setState({
+          kidsItems: res.data.kids,
+        })
+
+      })
+      .catch(() => {
+        alert('Error retreving data')
+      })
+
   }
 
   handleDelete = (_id) => {
