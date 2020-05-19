@@ -109,6 +109,20 @@ router.route('/delete/:id').post(async (req,res) => {
     }
 })
 
+router.route('/decrementQtyInCart/:id').post((req,res) => {
+      
+         User.findOneAndUpdate(
+        { _id: req.params.id, "Cart.id": req.body.itemID},
+        { $inc: { "Cart.$.quantity": -1 } },
+        { new: true },
+        () => {
+            res.status(200).json({success: true})
+        }
+   )
+   
+
+})
+
 
 
 module.exports = router;

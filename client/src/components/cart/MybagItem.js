@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {FindItem} from '../../service/function'
-import {Row,Col,Image} from 'react-bootstrap'
+import {Button} from 'react-bootstrap'
 
 export default class MybagItem extends Component {
 
@@ -55,7 +55,7 @@ export default class MybagItem extends Component {
     }
 
     render() {
-        const {cartItem,deleteItem,userId} = this.props
+        const {cartItem,deleteItem,userId,decreaseCartQty} = this.props
         return (
            
                 <tr>
@@ -69,7 +69,7 @@ export default class MybagItem extends Component {
                     <td>{this.state.unitPrice.toFixed(2)}</td>
                     <td>{`${this.state.discount}%`}</td>
                     <td>{(this.state.unitPrice*(100-this.state.discount)/100).toFixed(2)}</td>
-                    <td>{cartItem.quantity}</td>
+                    <td>{cartItem.quantity} <span  style={{"marginLeft": 5}} className="mx-2 text-primary" onClick={() => {decreaseCartQty(userId,cartItem.id,cartItem.quantity) }}><i className="fa fa-arrow-down"></i></span></td>
                     <td>{((this.state.unitPrice*(100-this.state.discount)/100)* cartItem.quantity).toFixed(2)}</td>
                     <td><span  className="mx-2 text-danger" onClick={() => {deleteItem(userId,cartItem.id,cartItem.quantity) }}><i className="fa fa-trash"></i></span></td>
                  </tr>

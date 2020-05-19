@@ -14,6 +14,7 @@ import {DisplayCart} from '../../service/function'
 import {FindItem} from '../../service/function'
 import {DeleteCartListItem} from '../../service/function'
 import {QuantityIncrement} from '../../service/function'
+import {DecrementQtyFromCart} from '../../service/function'
 
 
 
@@ -27,6 +28,7 @@ export default class Mybag extends Component {
         this.changePaymentState = this.changePaymentState.bind(this);
         this.deleteCartItem = this.deleteCartItem.bind(this);
         this.bringBackToInitialState = this.bringBackToInitialState.bind(this);
+        this.decreaseCartQty = this.decreaseCartQty.bind(this);
       
 
         this.state = {
@@ -83,7 +85,7 @@ export default class Mybag extends Component {
     cartItemList() {
 
         return this.state.Items.map(cartListItem => {
-            return <MybagItem cartItem={cartListItem} deleteItem={this.deleteCartItem} userId={this.state.userID} />;
+            return <MybagItem cartItem={cartListItem} deleteItem={this.deleteCartItem} userId={this.state.userID} decreaseCartQty={this.decreaseCartQty}/>;
           })
     }
 
@@ -118,6 +120,52 @@ export default class Mybag extends Component {
           QuantityIncrement(itemId,quantity)
 
     }
+
+    decreaseCartQty(userId,itemId,quantity){
+
+        if (quantity == 1){
+            DeleteCartListItem(userId,itemId)
+            .then(
+                    FindItem(itemId)
+                    .then(response =>{
+                        this.setState({
+                            Total : this.state.Total - ((response.data.price*(100-response.data.discount)/100)*1)
+                        });
+                    })
+               
+            )
+        this.setState({
+            Items: this.state.Items.filter(item => item.id !== itemId)
+          })
+
+          QuantityIncrement(itemId,1)
+        }
+
+        else{
+
+            DecrementQtyFromCart(userId,itemId)
+        .then(
+            FindItem(itemId)
+            .then(response =>{
+                DisplayCart(userId)
+                .then(res =>{
+                    this.setState({
+                        Total : this.state.Total - ((response.data.price*(100-response.data.discount)/100)*1),
+                        Items: res.data.Cart
+                    })
+                })
+            })
+               
+            )
+            QuantityIncrement(itemId,1)
+      
+        }
+        
+        
+
+  
+      
+}
 
     render() {
 
