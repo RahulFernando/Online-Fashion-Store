@@ -55,7 +55,7 @@ export default class MybagItem extends Component {
     }
 
     render() {
-        const {cartItem,deleteItem,userId,decreaseCartQty} = this.props
+        const {cartItem,deleteItem,userId,decreaseCartQty,increaseCartQty} = this.props
         return (
            
                 <tr>
@@ -69,7 +69,7 @@ export default class MybagItem extends Component {
                     <td>{this.state.unitPrice.toFixed(2)}</td>
                     <td>{`${this.state.discount}%`}</td>
                     <td>{(this.state.unitPrice*(100-this.state.discount)/100).toFixed(2)}</td>
-                    <td>{cartItem.quantity} <span  style={{"marginLeft": 5}} className="mx-2 text-primary" onClick={() => {decreaseCartQty(userId,cartItem.id,cartItem.quantity) }}><i className="fa fa-arrow-down"></i></span></td>
+                    <td>{cartItem.quantity} <span  style={{"marginLeft": 5}} className="mx-2 text-primary" onClick={() => {decreaseCartQty(userId,cartItem.id,cartItem.quantity) }}><i className="fa fa-arrow-down"></i></span> <span  style={{"marginLeft": 5}} className="mx-2 text-primary" onClick={() => {increaseCartQty(userId,cartItem.id,cartItem.quantity) }}><i className="fa fa-arrow-up"></i></span></td>
                     <td>{((this.state.unitPrice*(100-this.state.discount)/100)* cartItem.quantity).toFixed(2)}</td>
                     <td><span  className="mx-2 text-danger" onClick={() => {deleteItem(userId,cartItem.id,cartItem.quantity) }}><i className="fa fa-trash"></i></span></td>
                  </tr>

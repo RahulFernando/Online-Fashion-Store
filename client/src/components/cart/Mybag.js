@@ -14,7 +14,7 @@ import {DisplayCart} from '../../service/function'
 import {FindItem} from '../../service/function'
 import {DeleteCartListItem} from '../../service/function'
 import {QuantityIncrement} from '../../service/function'
-import {DecrementQtyFromCart} from '../../service/function'
+import {DecrementQtyFromCart,IncrementQtyFromCart,QuantityDecrement} from '../../service/function'
 
 
 
@@ -29,7 +29,7 @@ export default class Mybag extends Component {
         this.deleteCartItem = this.deleteCartItem.bind(this);
         this.bringBackToInitialState = this.bringBackToInitialState.bind(this);
         this.decreaseCartQty = this.decreaseCartQty.bind(this);
-      
+        this.increaseCartQty  = this.increaseCartQty.bind(this);
 
         this.state = {
 
@@ -85,7 +85,7 @@ export default class Mybag extends Component {
     cartItemList() {
 
         return this.state.Items.map(cartListItem => {
-            return <MybagItem cartItem={cartListItem} deleteItem={this.deleteCartItem} userId={this.state.userID} decreaseCartQty={this.decreaseCartQty}/>;
+            return <MybagItem cartItem={cartListItem} deleteItem={this.deleteCartItem} userId={this.state.userID} decreaseCartQty={this.decreaseCartQty} increaseCartQty={this.increaseCartQty}/>;
           })
     }
 
@@ -160,11 +160,35 @@ export default class Mybag extends Component {
             QuantityIncrement(itemId,1)
       
         }
-        
-        
+             
+}
 
-  
-      
+increaseCartQty(userId,itemId,quantity){
+ 
+    FindItem(itemId)
+    .then(response =>{
+        if(response.data.qty == 0){
+            alert(`${response.data.itemName} is out of stock`);
+        }
+        else{
+            IncrementQtyFromCart(userId,itemId)
+            .then(
+                DisplayCart(userId)
+                .then(res => {
+                    this.setState({
+                        Total : this.state.Total + ((response.data.price*(100-response.data.discount)/100)*1),
+                        Items: res.data.Cart
+                    })
+
+                })
+            )
+
+            QuantityDecrement(itemId, 1);
+        }
+        
+    })
+   
+
 }
 
     render() {

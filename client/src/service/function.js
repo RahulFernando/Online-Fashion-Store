@@ -368,6 +368,26 @@ export const DecrementQtyFromCart = (userId, itemId) => {
 
 }
 
+//Increment Quantity from user's cart
+
+export const IncrementQtyFromCart = (userId, itemId) => {
+
+    //  console.log(userId , itemId );
+
+    return axios.post("/api/users/cart/incrementQtyInCart/" + userId, {
+
+        itemID: itemId
+
+    })
+        .then(res => console.log(res.data)
+        )
+        .catch(err => { console.log(err) })
+
+}
+
+
+
+
 
 //Increment Item store quantity
 
