@@ -92,7 +92,7 @@ class RatingMain extends React.Component
     };
     getRatingsFromApi = (productId,userId) => {
 
-        getRatings(productId)
+        axios.get('/api/users/rating/find?productId=' + productId)
         .then(res => {
             console.log(res.data)
             let ratinglist = res.data;
