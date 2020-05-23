@@ -94,7 +94,7 @@ class RatingMain extends React.Component
 
         axios.get('/api/users/rating/find?productId=' + productId)
         .then(res => {
-
+            console.log(res.data)
             let ratinglist = res.data;
             //reversing the list to get the recent comments to the top
             ratinglist.reverse();
